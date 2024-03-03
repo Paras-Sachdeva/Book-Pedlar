@@ -26,8 +26,8 @@
             if(isset($_SESSION['userid'])){
                 echo('<a href="logout.php" id="logout" class="linkAni">Logout</a>');
             }else{
-                echo('<a href="new_login.php" id="login" class="linkAni">Login</a>
-                <a href="new_signup.php" id="register" class="linkAni">Register</a>');
+                echo('<a href="loginPage.php" id="login" class="linkAni">Login</a>
+                <a href="signupPage.php" id="register" class="linkAni">Register</a>');
             }
         ?>
     </div>
@@ -36,7 +36,7 @@
 <!-- Navigation List -->
 <div class="navList">
     <a href="#" class="linkAni">Home</a>
-    <a href="new_login.php" class="linkAni">Buy Books</a>
-    <a href="new_login.php" class="linkAni">Sell Books</a>
+    <a href="loginPage.php" class="linkAni">Buy Books</a>
+    <a href="loginPage.php" class="linkAni">Sell Books</a>
     <a href="about.html" class="linkAni">About Us</a>
 </div>
