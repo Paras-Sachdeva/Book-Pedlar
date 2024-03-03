@@ -1,0 +1,161 @@
+*{
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+/* Home Page */
+body{
+    font-family: 'roboto', sans-serif;
+    font-size: 1.2rem;
+    background-color:#F5F5F5;
+}
+
+.content {
+    display: none;
+    height: auto;
+}
+
+.loader{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* display: flex;
+    flex-direction: column;
+    align-items: center; */
+    /* background: rgba(255, 255, 255, 0.9);  */
+    padding: 20px;
+    border-radius: 50%;
+    z-index: 99; 
+}
+
+.loader img{
+    width: 100px;
+    height: 100px;
+}
+
+.navbar{
+    /* z-index: 1; */
+    background-color: #333333;
+    height: 7rem;
+    color: #ffffff;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    font-weight: 600;
+    /* display: none; */
+    /* visibility: hidden; */
+}
+
+#bars{
+    font-size: 2rem;
+}
+
+.nameLogo, .listItems:hover{
+    cursor: pointer;
+}
+
+#logo{
+    margin-left: 30px;
+    height:3rem;
+    width: 3rem;
+}
+
+#name{
+    font-weight: 900;
+}
+
+a{
+    color: white;
+    text-decoration: none;
+}
+
+.searchBar{
+    display: flex;
+    border-radius: 15px;
+    border: none;
+    width: 40%;
+    background-color: rgb(71, 19, 28);
+}
+
+#searchBy{
+    border-top-left-radius: 11px;
+    border-bottom-left-radius: 11px;
+    text-align: center;
+    font-weight:700;
+    font-size: 0.90rem;
+}
+
+#searchBy:focus{
+    outline: none;
+}
+
+#search{
+    width: 100%;
+    border-left: 10px;
+    font-size: 0.90rem;
+    padding-left: 1rem;
+    height: 2.4rem;
+}
+
+#search:focus{
+    outline: none;
+}
+
+.searchIcon{
+    background-color: green;
+    border-top-right-radius: 11px;
+    border-bottom-right-radius: 11px;
+    padding: 6px;
+    width: 2.8rem;
+    padding-left: 16px;
+    padding-top: 9px;
+}
+
+.searchIcon:hover{
+    cursor:pointer;
+}
+
+.searchBar:hover{
+    border:3px solid darkblue;
+}
+
+#register{
+    margin-left: 18px;
+}
+
+.navList{
+    margin-top: 7rem;
+    background-color: #111111;
+    height: 3rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-weight: 500;
+    visibility:hidden;
+}
+
+.linkAni:hover{
+    transform: scale(1.2);
+}
+
+/* .hero img{
+    margin-left: 2rem;
+    height: 15rem;
+    width: 25vw;
+} */
+
+/* .footer{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 7rem;
+    width: 100%;
+    background-color:#333333;
+    display: none;
+
+} */
