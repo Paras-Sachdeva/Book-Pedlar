@@ -10,12 +10,11 @@
 </head>
 <body>
     <?php
-        echo('<div class="loader">
-            <img src="Images/page-turning-book-animation-17.gif" alt="loading Image">
-            </div>
-            <div class="content">');
+        require("./Components/loader.php");  //Loader Component
 
-        require("./Components/header.php");
+        echo('<div class="content">');
+
+        require("./Components/header.php");  //Header Component
 
         $host = "localhost";
         $username = "root";
