@@ -159,3 +159,149 @@ a{
     display: none;
 
 } */
+
+/* Dashboard.php */
+.out-profile-books{
+    display: flex;
+    flex-direction: row;
+    /* flex-wrap: wrap; */
+}
+.profile{
+    width: 40%;
+    /* margin-top: rem; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #333333;
+}
+
+.profile h1{
+    text-align: center;
+    margin-top: 1rem;
+    color: white;
+}
+
+.user-info p{
+    font-weight: 600;
+    margin-left: 1rem;
+    margin-top: 1rem;
+    color: white;
+}
+
+.no-books{
+    margin-left: 10rem;
+    margin-top: 13rem;
+    font-size: 2rem;
+}
+
+#upload-btn{
+    width: 4rem;
+    height: 2.6rem;
+    background-color: white;
+    font-weight: 600;
+    border-radius: 15%;
+    border: 0.2rem solid black;
+}
+
+#upload-btn:hover{
+    cursor: pointer;
+    transform: scale(1.2);
+    border: 0.3rem solid black;
+}
+
+.pic-form{
+    color: white;
+    margin-top: 2rem;
+}
+
+.add-book button{
+    padding: 0.6rem;
+    width: 6rem;
+    height: 4.5rem;
+    margin: 2rem;
+    font-weight: 900;
+    border-radius: 20px; 
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.add-book button:hover{
+    background-color: #2980b9;
+}
+
+.user-books{
+    width: 60%;
+    display:flex;
+    flex-direction:row;
+    flex-wrap: wrap;
+    margin-left: 80px;
+}
+
+.book-outer{
+    width: 35rem;
+    height: 20rem;
+    margin:1rem;
+    display: flex;
+    border: 0.2rem solid black;
+}
+
+.book-outer:hover{
+    border:0.2rem solid darkblue;
+}
+
+.book-inner1{
+    width: 50%;
+    height: 100%;
+    background-image: url("Images/no-image-available.jpeg");
+    background-size:contain;
+    background-repeat: no-repeat;
+} 
+
+.book-inner2{
+    padding: 0.3rem;
+    width: 50%;
+    height: 98%;
+    display: flex;
+    flex-direction: column;
+    border-left: 0.3rem solid black;
+}
+
+.details-book{
+    margin: 1rem 0.2rem 1rem 0.2rem;
+}
+
+.heading-book{
+    margin: 0.2rem 0.2rem 0 0.2rem;
+}
+
+.remove-book{
+    width:6.5rem;
+    height:1.8rem;
+    background-color:#aa6276;
+    color:black;
+    font-weight:700;
+    border:0.2rem solid black;
+}
+
+.edit-book{
+    width:4.5rem;
+    height:1.8rem;
+    background-color:rgb(54, 218, 54);
+    color:black;
+    font-weight:600;
+    border:0.2rem solid black;
+    margin-left: 20%;
+}
+
+.edit-book:hover{
+    background-color: green;
+    cursor: pointer;
+}
+
+.remove-book:hover{
+    background-color: red;
+    cursor: pointer;
+}
+
+.price-book{
+    margin-left: 2rem;
+}
