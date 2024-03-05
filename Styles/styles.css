@@ -305,3 +305,55 @@ a{
 .price-book{
     margin-left: 2rem;
 }
+
+/* addBook.php */
+
+.container{
+    width: 80%;
+    max-width: 400px;
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#book-h2{
+    text-align: center;
+    color: #333;
+}
+
+#book-form{
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.book-input, .book-select{
+    width: 100%;
+    height: auto;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#book-btn{
+    background-color: #3498db;
+    height: auto;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#book-btn:hover{
+    background-color: #2980b9;
+}
