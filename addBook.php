@@ -14,7 +14,7 @@
     ?>    
     <div class="content">
     <?php
-        require("./Components/header.php");
+        require("./Components/header.php");  //Header Component
     ?>
     <div class="container">
         <h2 id="book-h2">Book Details Form</h2>
