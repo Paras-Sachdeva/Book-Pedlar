@@ -125,8 +125,8 @@
                 <label for="loginPassword">Password:</label>
                 <div class="password-container" style="display:flex;">
                     <input type="password" id="loginPassword" name="loginPassword" required>
-                    <i class="fa-solid fa-eye-slash" id="closed-eye" style="margin-left:0.7rem;padding-top:0.6rem;cursor:pointer;"></i>
-                    <i class="fa-solid fa-eye" id="open-eye" style="margin-left:0.85rem;padding-top:0.6rem;display:none;cursor:pointer;"></i>
+                    <i class="fa-solid fa-eye-slash" id="closed-eye-login" style="margin-left:0.7rem;padding-top:0.6rem;cursor:pointer;"></i>
+                    <i class="fa-solid fa-eye" id="open-eye-login" style="margin-left:0.85rem;padding-top:0.6rem;display:none;cursor:pointer;"></i>
                 </div>
 
                 <button type="submit">Login</button>
@@ -147,8 +147,8 @@
                 <label for="signupPassword">Password:</label>
                 <div class="password-container" style="display:flex;">
                     <input type="password" id="signupPassword" name="signupPassword" required>
-                    <i class="fa-solid fa-eye-slash" id="closed-eye" style="margin-left:0.7rem;padding-top:0.6rem;cursor:pointer;"></i>
-                    <i class="fa-solid fa-eye" id="open-eye" style="margin-left:0.85rem;padding-top:0.6rem;display:none;cursor:pointer;"></i>
+                    <i class="fa-solid fa-eye-slash" id="closed-eye-signup" style="margin-left:0.7rem;padding-top:0.6rem;cursor:pointer;"></i>
+                    <i class="fa-solid fa-eye" id="open-eye-signup" style="margin-left:0.85rem;padding-top:0.6rem;display:none;cursor:pointer;"></i>
                 </div>
 
                 <button type="submit">Sign Up</button>
@@ -188,18 +188,34 @@
         }
 
         // Eye Toggle Password
-        let eyeOpen=document.getElementById("closed-eye");
-        let eyeClose=document.getElementById("open-eye");
-        let passwordBox=document.getElementById("loginPassword");
-        eyeOpen.addEventListener("click",function(){
-            eyeOpen.style.display="none";
-            eyeClose.style.display="block";
-            passwordBox.type="text";
+        let eyeCloseLogin=document.getElementById("closed-eye-login");
+        let eyeCloseSignup=document.getElementById("closed-eye-signup");
+
+        let eyeOpenLogin=document.getElementById("open-eye-login");
+        let eyeOpenSignup=document.getElementById("open-eye-signup");
+
+        let passwordBoxLogin=document.getElementById("loginPassword");
+        let passwordBoxSignup=document.getElementById("signupPassword");
+
+        eyeOpenLogin.addEventListener("click",function(){
+            eyeOpenLogin.style.display="none";
+            eyeCloseLogin.style.display="block";
+            passwordBoxLogin.type="password";
         });
-        eyeClose.addEventListener("click",function(){
-            eyeClose.style.display="none";
-            eyeOpen.style.display="block";
-            passwordBox.type="password";
+        eyeCloseLogin.addEventListener("click",function(){
+            eyeCloseLogin.style.display="none";
+            eyeOpenLogin.style.display="block";
+            passwordBoxLogin.type="text";
+        });
+        eyeOpenSignup.addEventListener("click",function(){
+            eyeOpenSignup.style.display="none";
+            eyeCloseSignup.style.display="block";
+            passwordBoxSignup.type="password";
+        });
+        eyeCloseSignup.addEventListener("click",function(){
+            eyeOpenSignup.style.display="block";
+            eyeCloseSignup.style.display="none";
+            passwordBoxSignup.type="text";
         });
     </script>
     <script src="JS/script.js"></script>       

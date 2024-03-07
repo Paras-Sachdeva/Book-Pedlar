@@ -188,28 +188,31 @@
         // Eye Toggle Password
         let eyeCloseLogin=document.getElementById("closed-eye-login");
         let eyeCloseSignup=document.getElementById("closed-eye-signup");
+
         let eyeOpenLogin=document.getElementById("open-eye-login");
         let eyeOpenSignup=document.getElementById("open-eye-signup");
+
         let passwordBoxLogin=document.getElementById("loginPassword");
         let passwordBoxSignup=document.getElementById("signupPassword");
+
         eyeOpenLogin.addEventListener("click",function(){
             eyeOpenLogin.style.display="none";
             eyeCloseLogin.style.display="block";
-            passwordBoxLogin.type="text";
+            passwordBoxLogin.type="password";
         });
         eyeCloseLogin.addEventListener("click",function(){
             eyeCloseLogin.style.display="none";
             eyeOpenLogin.style.display="block";
-            passwordBoxLogin.type="password";
+            passwordBoxLogin.type="text";
         });
         eyeOpenSignup.addEventListener("click",function(){
             eyeOpenSignup.style.display="none";
             eyeCloseSignup.style.display="block";
-            passwordBoxSignup.type="text";
+            passwordBoxSignup.type="password";
         });
         eyeCloseSignup.addEventListener("click",function(){
-            eyeOpenSignup.style.display="none";
-            eyeCloseSignup.style.display="block";
+            eyeOpenSignup.style.display="block";
+            eyeCloseSignup.style.display="none";
             passwordBoxSignup.type="text";
         });
     </script>
