@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Pedlar- Login/Register</title>
     <link rel="icon" href="Images/Icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -122,7 +123,11 @@
                 <input type="text" id="loginUserName" name="loginUserName" required>
 
                 <label for="loginPassword">Password:</label>
-                <input type="password" id="loginPassword" name="loginPassword" required>
+                <div class="password-container" style="display:flex;">
+                    <input type="password" id="loginPassword" name="loginPassword" required>
+                    <i class="fa-solid fa-eye-slash" id="closed-eye" style="margin-left:0.7rem;padding-top:0.6rem;cursor:pointer;"></i>
+                    <i class="fa-solid fa-eye" id="open-eye" style="margin-left:0.85rem;padding-top:0.6rem;display:none;cursor:pointer;"></i>
+                </div>
 
                 <button type="submit">Login</button>
             </form>
@@ -140,7 +145,11 @@
                 <input type="email" id="signupEmail" name="signupEmail" required>
 
                 <label for="signupPassword">Password:</label>
-                <input type="password" id="signupPassword" name="signupPassword" required>
+                <div class="password-container" style="display:flex;">
+                    <input type="password" id="signupPassword" name="signupPassword" required>
+                    <i class="fa-solid fa-eye-slash" id="closed-eye" style="margin-left:0.7rem;padding-top:0.6rem;cursor:pointer;"></i>
+                    <i class="fa-solid fa-eye" id="open-eye" style="margin-left:0.85rem;padding-top:0.6rem;display:none;cursor:pointer;"></i>
+                </div>
 
                 <button type="submit">Sign Up</button>
             </form>
@@ -177,6 +186,21 @@
         if (error == 'EmailAlreadytaken') {
             alert('Email Already Exists');
         }
+
+        // Eye Toggle Password
+        let eyeOpen=document.getElementById("closed-eye");
+        let eyeClose=document.getElementById("open-eye");
+        let passwordBox=document.getElementById("loginPassword");
+        eyeOpen.addEventListener("click",function(){
+            eyeOpen.style.display="none";
+            eyeClose.style.display="block";
+            passwordBox.type="text";
+        });
+        eyeClose.addEventListener("click",function(){
+            eyeClose.style.display="none";
+            eyeOpen.style.display="block";
+            passwordBox.type="password";
+        });
     </script>
     <script src="JS/script.js"></script>       
 </body>

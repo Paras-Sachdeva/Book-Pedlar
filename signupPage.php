@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Pedlar- Login/Register</title>
     <link rel="icon" href="Images/Icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -124,7 +125,11 @@
                 <input type="email" id="signupEmail" name="signupEmail" required>
 
                 <label for="signupPassword">Password:</label>
-                <input type="password" id="signupPassword" name="signupPassword" required>
+                <div class="password-container" style="display:flex;">
+                    <input type="password" id="signupPassword" name="signupPassword" required>
+                    <i class="fa-solid fa-eye-slash" id="closed-eye-signup" style="margin-left:0.7rem;padding-top:0.6rem;cursor:pointer;"></i>
+                    <i class="fa-solid fa-eye" id="open-eye-signup" style="margin-left:0.85rem;padding-top:0.6rem;display:none;cursor:pointer;"></i>
+                </div>
 
                 <button type="submit">Sign Up</button>
             </form>
@@ -138,7 +143,11 @@
                 <input type="text" id="loginUserName" name="loginUserName" required>
 
                 <label for="loginPassword">Password:</label>
-                <input type="password" id="loginPassword" name="loginPassword" required>
+                <div class="password-container" style="display:flex;">
+                    <input type="password" id="loginPassword" name="loginPassword" required>
+                    <i class="fa-solid fa-eye-slash" id="closed-eye-login" style="margin-left:0.7rem;padding-top:0.6rem;cursor:pointer;"></i>
+                    <i class="fa-solid fa-eye" id="open-eye-login" style="margin-left:0.85rem;padding-top:0.6rem;display:none;cursor:pointer;"></i>
+                </div>
 
                 <button type="submit">Login</button>
             </form>
@@ -175,6 +184,34 @@
         if (error == 'InvalidUsername') {
             alert('Incorrect User Name');
         }
+
+        // Eye Toggle Password
+        let eyeCloseLogin=document.getElementById("closed-eye-login");
+        let eyeCloseSignup=document.getElementById("closed-eye-signup");
+        let eyeOpenLogin=document.getElementById("open-eye-login");
+        let eyeOpenSignup=document.getElementById("open-eye-signup");
+        let passwordBoxLogin=document.getElementById("loginPassword");
+        let passwordBoxSignup=document.getElementById("signupPassword");
+        eyeOpenLogin.addEventListener("click",function(){
+            eyeOpenLogin.style.display="none";
+            eyeCloseLogin.style.display="block";
+            passwordBoxLogin.type="text";
+        });
+        eyeCloseLogin.addEventListener("click",function(){
+            eyeCloseLogin.style.display="none";
+            eyeOpenLogin.style.display="block";
+            passwordBoxLogin.type="password";
+        });
+        eyeOpenSignup.addEventListener("click",function(){
+            eyeOpenSignup.style.display="none";
+            eyeCloseSignup.style.display="block";
+            passwordBoxSignup.type="text";
+        });
+        eyeCloseSignup.addEventListener("click",function(){
+            eyeOpenSignup.style.display="none";
+            eyeCloseSignup.style.display="block";
+            passwordBoxSignup.type="text";
+        });
     </script>
     <script src="JS/script.js"></script>      
 </body>

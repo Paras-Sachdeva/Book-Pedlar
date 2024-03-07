@@ -10,5 +10,6 @@
     if (!$conn) {
         die("Connection failed");}
     
+    // Storing User Coordinates
     $sql7="UPDATE user_data SET latitude='$jsObject1->lati', longitude='$jsObject1->longi' WHERE id='$jsObject1->id'";
     mysqli_query($conn,$sql7);
