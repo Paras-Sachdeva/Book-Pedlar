@@ -3,18 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
     <title>Book Pedlar - Book Details</title>
-    <link rel="stylesheet" href="styles.css?v=4">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-<div class="loader">
-            <img src="Images/page-turning-book-animation-17.gif" alt="loading Image">
-    </div>
-
-<?php
-            require("./Components/header.php");
+     <?php
             $host = "localhost";
             $username = "root";
             $password = "";
@@ -42,7 +34,6 @@
                     $capitalize_publisher=ucwords($publisher);
                     $mrp=$_REQUEST["mrp"];
                     $selling_price=$_REQUEST["sellingPrice"];
-                    // $status=$_REQUEST["status"];
                     $genre=$_REQUEST["genre"];
                     $condition=$_REQUEST["condition"];
                     $additional_info=$_REQUEST["additionalInfo"];
@@ -51,11 +42,6 @@
 
                     mysqli_query($conn,$sql);
                     header("Location: Dashboard.php");
-?>
-<?php
-        require("./Components/footer.php");
     ?>
-</div>
-<script src="script.js"></script>
 </body>
 </html>
