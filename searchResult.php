@@ -15,18 +15,22 @@
             echo('<div class="content">');
     
             require("./Components/header.php");  //Header Component
+
             $host = "localhost";
             $username = "root";
             $password = "";
             $database = "book_pedlar";
             $userid=$_SESSION['userid'];
+
             $conn = mysqli_connect($host, $username, $password, $database);
             if (!$conn) {
                 die("Connection failed");}
+
             $type=$_REQUEST["selectValue"];
             $value=$_REQUEST["searchInput"];
             $capitalize_value=ucwords($value);
             $keywords = explode(' ', $capitalize_value);
+
             if($value==""){
                 $sql="SELECT * FROM book_data where userid!=$userid";
             }else if($type=="All"){
@@ -68,6 +72,7 @@
             CASE
                 WHEN publisher='$capitalize_value' THEN 1 else 2 end";
             }
+            
             $query_result=mysqli_query($conn,$sql);
             $count=mysqli_num_rows($query_result);
             $arr1=array();

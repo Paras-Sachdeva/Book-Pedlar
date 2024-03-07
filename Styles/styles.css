@@ -357,3 +357,14 @@ label {
 #book-btn:hover{
     background-color: #2980b9;
 }
+
+/* searchResults.php */
+.search-results{
+    background-color: black;
+    height: 3.7rem;
+    width: 100%;
+    text-align: center;
+    font-size: 2.5rem;
+    color: white;
+    padding: 1rem;
+}
