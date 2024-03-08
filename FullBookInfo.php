@@ -83,28 +83,38 @@
             echo("<div class='search-results'>$book_name7</div><div class='outside-book-info' style='width=100%;padding-bottom:5em;display: flex;flex-wrap: wrap;padding-left: 10rem;padding-right: 10rem;padding-top: 2rem;justify-content:space-around'>");
             echo("<div id='book-photo-alone' style='width: 272px;height:320px;margin-top:2rem;border:0.6rem solid black;'></div>
             <div id='book-full-info'>
-                <h2 style='text-decoration:none;'>Book Details</h2>
+                <h2 style='text-decoration:none;'>Book Details</h2><br>
                 <ul>
                     <li>Author: <b>$author7</b></li><br>
                     <li>Publisher: <b>$publisher7</b></li><br>
                     <li>Genre: <b>$genre7</b></li><br>
                     <li>Condition of Book: <b>$book_condition7</b></li><br>
-                    <li>MRP on Book: <b style='color:red;'>&#x20b9; $actual_price7</b></li><br>
+                    <li>MRP on Book: <b style='color:red;'><s>&#x20b9; $actual_price7</s></b></li><br>
                     <li>Second-Hand Price: <b style='color:green;font-size:2rem'>&#x20b9; $sell_price7</b></li><br>
                     <li>Discount: <b style='color:green;'>$discount7%</b></li><br>
                     <li>Additional Info: <b>$add_info7</b></li><br>
-                    <li>Status: <b>$book_status7</b></li><br>
+                    <li>Status: <b>$book_status7</b></li>
                 </ul>
-            </div><div id='book-seller-info' style='padding-left:70px'>
-                <div><h2 style='text-align:left;margin-left:38px;text-decoration:none'>Seller</h2></div>
-                <div id='seller-pic' style='margin-top: 0.5rem;margin-left:1.5rem;height: 8.75rem;width: 8.75rem;border: 0.2rem solid black;border-radius: 50%;background-color: black; background-image:url('Images/ProfileImg.jpg'); background-size: 140px 140px;'></div>
+                <div>
+                    <button class='book-info-buttons' id='interested-btn' Title='Notify the seller you are interested in this book'>INTERESTED</button>
+                </div>
+            </div>
+            <div id='book-seller-info' style='padding-left:70px'>
+                <div>
+                    <h2 style='text-align:left;margin-left:3.5rem;text-decoration:none'>Seller</h2>
+                    <br>
+                </div>
+                <div id='seller-pic' style='margin-top: 0.5rem;margin-left:1.5rem;height: 8.75rem;width: 8.75rem;border: 0.2rem solid black;border-radius: 50%;background-color: black; background-image:url('Images/ProfileImg.jpg'); background-size: 140px 140px;'>
+                </div>
                 <div style='margin-top:2rem;line-height:1rem;align-self:baseline;'>
-    
                     <ul >
                         <li>Username: <b>$seller_username9</b></li><br>
                         <li>Email: <b>$seller_email9</b></li><br>
                         <li>Location: <b>$Final_distance</b></li>
                     </ul>
+                </div>
+                <div>
+                    <button class='book-info-buttons' id='visit-seller-btn'>Visit Seller Profile</button>
                 </div>
             </div>");
             mysqli_close($conn);

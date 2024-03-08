@@ -368,3 +368,20 @@ label {
     color: white;
     padding: 1rem;
 }
+
+/* FullBookInfo.php */
+.book-info-buttons{
+    background-color: #333333;
+    color: white;
+    padding:0.7rem;
+    margin:2rem;
+    cursor:pointer;
+    font-weight:700;
+    font-size:1rem;
+    border:0.2rem solid black;
+}
+
+.book-info-buttons:hover{
+    border:0.35rem solid black;
+    scale: 1.1;
+}
