@@ -46,7 +46,7 @@
             }
             mysqli_close($conn);
         } else {
-            header("Location: new_signup.php?error=InvalidEmail");
+            header("Location: signup.php?error=InvalidEmail");
         } 
     }
     validateEmail($email);

@@ -140,11 +140,10 @@
                 uploading.style.backgroundSize="140px 140px";
             }
 
+            // Store Notification Details When User clicks Interested Button
             let InterestedBtn=document.getElementById("interested-btn");
-            let InterestedBtnClick=localStorage.getItem('scriptExecuted');
             InterestedBtn.addEventListener("click",function(){
                 alert("The Seller has been Notified, They will Contact You Shortly.\nCheck Your Message Box For Updates.");
-                if(!InterestedBtnClick){
                     let jsInterestedBook=<?php echo json_decode($selected_bookid); ?>;
                     let jsInterestedSeller=<?php echo json_decode($user_id7); ?>;
                     let jsInterestedBuyer=<?php echo json_decode($userid); ?>;
@@ -160,8 +159,6 @@
                                 console.log(response);
                             }
                     });
-                }
-                localStorage.setItem('scriptExecuted', true);
             }); 
         </script>
         <script src="JS/script.js"></script>

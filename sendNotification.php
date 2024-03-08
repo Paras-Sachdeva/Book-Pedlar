@@ -12,5 +12,10 @@
         die("Connection failed");
     }
 
-    $sql="INSERT INTO user_notification (userid, senderid, bookid) VALUES ($jsObject->bookSeller, $jsObject->bookBuyer, $jsObject->bookId)";
-    mysqli_query($conn,$sql);
+    $sql1="SELECT * FROM user_notification WHERE userid='$jsObject->bookSeller' && senderid='$jsObject->bookBuyer' && bookid='$jsObject->bookId'";
+    $result=mysqli_query($conn,$sql1);
+
+    if(mysqli_num_rows($result)==0){
+        $sql="INSERT INTO user_notification (userid, senderid, bookid) VALUES ($jsObject->bookSeller, $jsObject->bookBuyer, $jsObject->bookId)";
+        mysqli_query($conn,$sql);
+    }
