@@ -66,7 +66,16 @@
             <div class="add-book">
                 <button id="openPageButton">ADD BOOK</button>
             </div>
-            <img src="Images/" alt="">
+            <div class="outside-notifications">
+                <div class="notifications"><H2>NOTIFICATIONS</H2></div>
+                <div class="new-notification">
+                    <div class="notify">
+                        <div class="small-buyer-pic"></div>
+                        <div class="buyer-notification"></div>
+                    </div>
+                    <div class="notify">I am a notification</div>
+                </div>
+            </div>
         </div>
         <!-- User Uploaded Book Section -->
         <div class="user-books">

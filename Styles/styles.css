@@ -228,6 +228,37 @@ a{
     background-color: #2980b9;
 }
 
+.outside-notifications{
+    height:auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.notifications{
+    color:white;
+    text-align: center;
+}
+
+.notify{
+    height: 3.5rem;
+    width: 25rem;
+    background-color: white;
+    padding: 1rem;
+    margin-top: 1rem;
+    margin-left: 3rem;
+    display: flex;
+    flex-direction: row;
+}
+
+.small-buyer-pic{
+    background-color: pink;
+    width:3.5rem;
+    height:3.5rem;
+    border-radius: 50%;
+    background-image: url("-6077607787787040695_121.jpg");
+    background-size: 60px 60px;
+}
+
 .user-books{
     width: 60%;
     display:flex;

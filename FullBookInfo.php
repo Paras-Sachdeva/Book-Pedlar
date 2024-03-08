@@ -135,11 +135,34 @@
                     uploading.style.backgroundImage="url('uploads/"+jsCheckPhoto+"')";
                     uploading.style.backgroundSize="140px 140px";
             }else{
-                console.log("hello");
                 let uploading=document.getElementById("seller-pic");
                 uploading.style.backgroundImage="url('Images/ProfileImg.jpg')";
                 uploading.style.backgroundSize="140px 140px";
             }
+
+            let InterestedBtn=document.getElementById("interested-btn");
+            let InterestedBtnClick=localStorage.getItem('scriptExecuted');
+            InterestedBtn.addEventListener("click",function(){
+                alert("The Seller has been Notified, They will Contact You Shortly.\nCheck Your Message Box For Updates.");
+                if(!InterestedBtnClick){
+                    let jsInterestedBook=<?php echo json_decode($selected_bookid); ?>;
+                    let jsInterestedSeller=<?php echo json_decode($user_id7); ?>;
+                    let jsInterestedBuyer=<?php echo json_decode($userid); ?>;
+                    let jsObject={};
+                    jsObject.bookId=jsInterestedBook;
+                    jsObject.bookSeller=jsInterestedSeller;
+                    jsObject.bookBuyer=jsInterestedBuyer;
+                    $.ajax({
+                        url:"sendNotification.php",
+                        method:"POST",
+                        data:{ jsObject: JSON.stringify(jsObject)},
+                            success:function(response){
+                                console.log(response);
+                            }
+                    });
+                }
+                localStorage.setItem('scriptExecuted', true);
+            }); 
         </script>
         <script src="JS/script.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
