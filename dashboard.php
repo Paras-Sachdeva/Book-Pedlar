@@ -69,11 +69,30 @@
             <div class="outside-notifications">
                 <div class="notifications"><H2>NOTIFICATIONS</H2></div>
                 <div class="new-notification">
-                    <div class="notify">
-                        <div class="small-buyer-pic"></div>
-                        <div class="buyer-notification"></div>
-                    </div>
-                    <div class="notify">I am a notification</div>
+                    <?php
+                        $arr4=array();
+                        $arr5=array();
+                        $i=0;
+                        $sql2 = "SELECT * FROM user_notification WHERE userid='$userid'";
+                        $result2 = mysqli_query($conn,$sql2);
+                        if(mysqli_num_rows($result2)>0){
+                            while($row2=mysqli_fetch_assoc($result2)){
+                                $senderId=$row2['senderid'];
+                                $sql3="SELECT * FROM user_data WHERE id='$senderId'";
+                                $result3=mysqli_query($conn,$sql3);
+                                $row3=mysqli_fetch_assoc($result3);
+                                array_push($arr4,$row3['profileImage']);
+                                array_push($arr5,$senderId);
+                                $bookId=$row2['bookid'];
+                                $bookName=$row5['bookname'];
+                                echo("  <div class='notify' id='$i'>
+                                            <div class='small-buyer-pic' id='$senderId-$i'>
+                                            </div>
+                                        </div>");
+                                $i++;
+                            }
+                        }
+                    ?>
                 </div>
             </div>
         </div>
@@ -273,6 +292,18 @@
                 let FormData=document.getElementById("inputForm");
                 FormData.submit();
             });
+
+            // Upload Notification Pics
+            let jsSmallPhoto=<?php echo json_encode($arr4); ?>;
+            console.log(jsSmallPhoto);
+            let jsSmallSenderId=<?php echo json_encode($arr5); ?>;
+            for(let i=0;i<jsSmallPhoto.length;i++){
+                let jsSmallPhotoTag=document.getElementById(jsSmallSenderId[i]+'-'+i);
+                console.log(jsSmallSenderId[i]+'-'+i);
+                console.log(jsSmallPhotoTag);
+                jsSmallPhotoTag.style.backgroundImage="url('Uploads/"+jsSmallPhoto[i]+"')";
+                jsSmallPhotoTag.style.backgroundSize="60px 60px";    
+            }
     </script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>

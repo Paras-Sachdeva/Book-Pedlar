@@ -250,13 +250,17 @@ a{
     flex-direction: row;
 }
 
+.notify:hover{
+    scale:1.1;
+}
+
 .small-buyer-pic{
     background-color: pink;
     width:3.5rem;
     height:3.5rem;
     border-radius: 50%;
-    background-image: url("-6077607787787040695_121.jpg");
-    background-size: 60px 60px;
+    /* background-image: url("-6077607787787040695_121.jpg");
+    background-size: 60px 60px; */
 }
 
 .user-books{
