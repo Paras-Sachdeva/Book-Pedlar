@@ -83,6 +83,7 @@
                         $sql3="SELECT * FROM user_data WHERE id='$senderId'";
                         $result3=mysqli_query($conn,$sql3);
                         $row3=mysqli_fetch_assoc($result3);
+                        $senderName=$row3['username'];
                         array_push($arr4,$row3['profileImage']);
                         array_push($arr5,$senderId);
                         $bookId=$row2['bookid'];
@@ -93,7 +94,7 @@
                         echo("  <div class='notify' id='$i'>
                                     <div class='small-buyer-pic' id='$senderId-$i'>
                                     </div>
-                                    <div class='notification-content'>$bookName</div> 
+                                    <div class='notification-content'><b>$senderName</b> is interested to buy <b>\"$bookName\"</b></div> 
                                 </div>");
                         $i++;
                     }
@@ -300,16 +301,16 @@
             });
 
             // Upload Notification Pics
-                let jsSmallPhoto=<?php echo json_encode($arr4); ?>;
-                console.log(jsSmallPhoto);
-                let jsSmallSenderId=<?php echo json_encode($arr5); ?>;
-                for(let i=0;i<jsSmallPhoto.length;i++){
-                    let jsSmallPhotoTag=document.getElementById(jsSmallSenderId[i]+'-'+i);
-                    console.log(jsSmallSenderId[i]+'-'+i);
-                    console.log(jsSmallPhotoTag);
-                    jsSmallPhotoTag.style.backgroundImage="url('Uploads/"+jsSmallPhoto[i]+"')";
-                    jsSmallPhotoTag.style.backgroundSize="60px 60px";    
-                }
+            let jsSmallPhoto=<?php echo json_encode($arr4); ?>;
+            console.log(jsSmallPhoto);
+            let jsSmallSenderId=<?php echo json_encode($arr5); ?>;
+            for(let i=0;i<jsSmallPhoto.length;i++){
+                let jsSmallPhotoTag=document.getElementById(jsSmallSenderId[i]+'-'+i);
+                console.log(jsSmallSenderId[i]+'-'+i);
+                console.log(jsSmallPhotoTag);
+                jsSmallPhotoTag.style.backgroundImage="url('Uploads/"+jsSmallPhoto[i]+"')";
+                jsSmallPhotoTag.style.backgroundSize="60px 60px";    
+            }
     </script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>

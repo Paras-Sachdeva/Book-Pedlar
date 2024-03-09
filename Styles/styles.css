@@ -249,10 +249,16 @@ a{
     margin-bottom: 1rem;
     display: flex;
     flex-direction: row;
+    justify-content: center;
 }
 
 .notify:hover{
     scale:1.02;
+}
+
+.notification-content{
+    margin-left: 1rem;
+    padding: 0.5rem;
 }
 
 .small-buyer-pic{
