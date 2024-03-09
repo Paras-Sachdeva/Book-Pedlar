@@ -84,10 +84,14 @@
                                 array_push($arr4,$row3['profileImage']);
                                 array_push($arr5,$senderId);
                                 $bookId=$row2['bookid'];
+                                $sql5="SELECT * FROM book_data WHERE id='$bookId'";
+                                $result5=mysqli_query($conn,$sql5);
+                                $row5=mysqli_fetch_assoc($result5);
                                 $bookName=$row5['bookname'];
                                 echo("  <div class='notify' id='$i'>
                                             <div class='small-buyer-pic' id='$senderId-$i'>
                                             </div>
+                                            <div class='notification-content'>$bookName</div> 
                                         </div>");
                                 $i++;
                             }
