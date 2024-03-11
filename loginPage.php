@@ -108,6 +108,29 @@
         .switch-form a:hover {
             text-decoration: underline;
         }
+
+        #closed-eye-signup, #closed-eye-login {
+            margin-top: 0.15rem;
+            margin-left:0.7rem;
+            padding-top:0.6rem;
+            cursor:pointer;
+            position: absolute;
+            left: 54rem;
+        }
+
+        #open-eye-signup, #open-eye-login{
+            margin-top: 0.15rem;
+            margin-left:0.85rem;
+            padding-top:0.6rem;
+            display:none;
+            cursor:pointer;
+            position: absolute;
+            left: 54rem;
+        }
+
+        #loginPassword, #signupPassword{
+            padding-right: 2.5rem;
+        }
     </style>
 </head>
 <body>
@@ -125,8 +148,8 @@
                 <label for="loginPassword">Password:</label>
                 <div class="password-container" style="display:flex;">
                     <input type="password" id="loginPassword" name="loginPassword" required>
-                    <i class="fa-solid fa-eye-slash" id="closed-eye-login" style="margin-left:0.7rem;padding-top:0.6rem;cursor:pointer;"></i>
-                    <i class="fa-solid fa-eye" id="open-eye-login" style="margin-left:0.85rem;padding-top:0.6rem;display:none;cursor:pointer;"></i>
+                    <i class="fa-solid fa-eye-slash" id="closed-eye-login"></i>
+                    <i class="fa-solid fa-eye" id="open-eye-login"></i>
                 </div>
 
                 <button type="submit">Login</button>
@@ -147,8 +170,8 @@
                 <label for="signupPassword">Password:</label>
                 <div class="password-container" style="display:flex;">
                     <input type="password" id="signupPassword" name="signupPassword" required>
-                    <i class="fa-solid fa-eye-slash" id="closed-eye-signup" style="margin-left:0.7rem;padding-top:0.6rem;cursor:pointer;"></i>
-                    <i class="fa-solid fa-eye" id="open-eye-signup" style="margin-left:0.85rem;padding-top:0.6rem;display:none;cursor:pointer;"></i>
+                    <i class="fa-solid fa-eye-slash" id="closed-eye-signup"></i>
+                    <i class="fa-solid fa-eye" id="open-eye-signup"></i>
                 </div>
 
                 <button type="submit">Sign Up</button>
