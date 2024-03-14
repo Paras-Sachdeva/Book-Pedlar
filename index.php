@@ -16,6 +16,23 @@
     <div class="content">
         <?php
             require("./Components/header.php");  //Header Component
+
+            // <!-- Navigation List -->
+            if(isset($_SESSION['userid'])){
+                echo("<div class='navList'>
+                <a href='dashboard.php' class='linkAni'>Profile</a>
+                <a href='addBook' class='linkAni'>Add Book</a>
+                    <a href='#' class='linkAni'>Messages</a>
+                    <a href='about.html' class='linkAni'>About Us</a>
+                </div>");
+            }else{
+                echo("<div class='navList'>
+                        <a href='signupPage.php' class='linkAni'>Create Profile</a>
+                        <a href='loginPage.php' class='linkAni'>Buy Books</a>
+                        <a href='loginPage.php' class='linkAni'>Sell Books</a>
+                        <a href='about.html' class='linkAni'>About Us</a>
+                    </div>");
+            }
         ?>   
     
         <?php

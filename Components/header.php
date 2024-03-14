@@ -32,11 +32,3 @@
         ?>
     </div>
 </div>
-
-<!-- Navigation List -->
-<div class="navList">
-    <a href="#" class="linkAni">Home</a>
-    <a href="loginPage.php" class="linkAni">Buy Books</a>
-    <a href="loginPage.php" class="linkAni">Sell Books</a>
-    <a href="about.html" class="linkAni">About Us</a>
-</div>

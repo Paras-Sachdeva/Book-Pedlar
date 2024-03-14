@@ -16,6 +16,14 @@
 
         require("./Components/header.php");  //Header Component
 
+        // <!-- Navigation List -->
+        echo("<div class='navList'>
+                    <a href='index.php' class='linkAni'>Home</a>
+                    <a href='addBook.php' class='linkAni'>Add Book</a>
+                    <a href='#' class='linkAni'>Messages</a>
+                    <a href='about.html' class='linkAni'>About Us</a>
+                </div>");
+
         $host = "localhost";
         $username = "root";
         $password = "";
