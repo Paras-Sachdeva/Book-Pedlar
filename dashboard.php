@@ -40,6 +40,18 @@
             <h1>YOUR PROFILE</h1>
             <div class="pic" id="picture" style="margin-top: 2rem;height: 18.75rem;width: 18.75rem;border: 0.2rem solid white;border-radius: 50%;background-color: black; background-image:url('Images/ProfileImg.jpg'); background-size: 300px 300px;">
             </div>
+            <div class="user-info">
+                <?php
+                    $sql1 = "SELECT * FROM user_data WHERE id='$userid'";
+                    $result1 = mysqli_query($conn,$sql1);
+                    $row1 = mysqli_fetch_assoc($result1);
+                    $user_name=$row1['username'];
+                    $e_mail=$row1['email'];
+                    echo("<p style='text-align:center;'>".$user_name."<br>".$e_mail."</p>");
+                    echo("<p id='place-details' style='text-align:center;'></p>");
+                    $uploadedFileName=$row1['profileImage'];
+                ?>
+            </div>
             <div class="pic-form">
                 <form action="" method="POST" enctype="multipart/form-data" id="uploadForm">
                     <label for="profilePicture">Upload Profile Picture</label><br>
@@ -56,19 +68,6 @@
                         mysqli_query($conn,$sql);
                     }else{
                     }
-                ?>
-            </div>
-            <div class="user-info">
-                <?php
-                    $sql1 = "SELECT * FROM user_data WHERE id='$userid'";
-                    $result1 = mysqli_query($conn,$sql1);
-                    $row1 = mysqli_fetch_assoc($result1);
-                    $user_name=$row1['username'];
-                    $e_mail=$row1['email'];
-                    echo("<p style='text-align:center;'>Username: ".$user_name."<br>
-                    Email: ".$e_mail."</p>");
-                    echo("<p id='place-details' style='text-align:center;'></p>");
-                    $uploadedFileName=$row1['profileImage'];
                 ?>
             </div>
             <div class="add-book">
