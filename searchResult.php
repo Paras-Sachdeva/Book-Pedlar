@@ -17,68 +17,132 @@
             require("./Components/header.php");  //Header Component
 
             // <!-- Navigation List -->
-            echo("<div class='navList'>
-                        <a href='dashboard.php' class='linkAni'>Profile</a>
-                        <a href='addBook.php' class='linkAni'>Add Book</a>
-                        <a href='#' class='linkAni'>Messages</a>
-                        <a href='about.html' class='linkAni'>About Us</a>
-                   </div>");
-
-            $host = "localhost";
-            $username = "root";
-            $password = "";
-            $database = "book_pedlar";
-            $userid=$_SESSION['userid'];
-
-            $conn = mysqli_connect($host, $username, $password, $database);
-            if (!$conn) {
-                die("Connection failed");}
-
-            $type=$_REQUEST["selectValue"];
-            $value=$_REQUEST["searchInput"];
-            $capitalize_value=ucwords($value);
-            $keywords = explode(' ', $capitalize_value);
-
-            if($value==""){
-                $sql="SELECT * FROM book_data where userid!=$userid";
-            }else if($type=="All"){
-                foreach ($keywords as $keyword) {
-                    $whereConditions[] = "bookname LIKE '%$keyword%'
-                                         OR author LIKE '%$keyword%'
-                                         OR publisher LIKE '%$keyword%'";
-                }
-                $whereClause = "(bookname='$capitalize_value' OR author='$capitalize_value' OR publisher='$capitalize_value' OR ".implode(' OR ', $whereConditions).")";
-                $sql = "SELECT * FROM book_data WHERE $whereClause && userid!=$userid ORDER BY
-                CASE
-                    WHEN (bookname='$capitalize_value') THEN 1
-                    WHEN (author='$capitalize_value') THEN 2
-                    WHEN (publisher='$capitalize_value') THEN 3
-                    else 4
-                    END";
-            }else if($type=="Book Name"){
-                foreach ($keywords as $keyword) {
-                    $whereConditions[] = "bookname LIKE '%$keyword%'";
-                }
-                $whereClause = "(bookname='$capitalize_value' OR ".implode(' OR ', $whereConditions).")";
-                $sql = "SELECT * FROM book_data WHERE $whereClause && userid!='$userid' ORDER BY
-            CASE
-                WHEN bookname='$capitalize_value' THEN 1 ELSE 2 END";
-            }else if($type=="Author Name"){
-                foreach ($keywords as $keyword) {
-                    $whereConditions[] = "author LIKE '%$keyword%'";
-                }
-                $whereClause = "(author='$capitalize_value' OR ".implode(' OR ', $whereConditions).")";
-                $sql = "SELECT * FROM book_data WHERE $whereClause && userid!='$userid' ORDER BY
-            CASE
-                WHEN author='$capitalize_value' THEN 1 else 2 end";
-            }else if($type=="Publisher"){
-                foreach ($keywords as $keyword) {
-                    $whereConditions[] = "publisher LIKE '%$keyword%'";
-                }
-                $whereClause = "(publisher='$capitalize_value' OR ".implode(' OR ', $whereConditions).")";
-                $sql = "SELECT * FROM book_data WHERE $whereClause && userid!='$userid' ORDER BY
-            CASE
-                WHEN publisher='$capitalize_value' THEN 1 else 2 end";
+            if(isset($_SESSION['userid'])){
+                echo("<div class='navList'>
+                            <a href='dashboard.php' class='linkAni'>Profile</a>
+                            <a href='addBook.php' class='linkAni'>Add Book</a>
+                            <a href='#' class='linkAni'>Messages</a>
+                            <a href='about.html' class='linkAni'>About Us</a>
+                        </div>");
+                        $host = "localhost";
+                        $username = "root";
+                        $password = "";
+                        $database = "book_pedlar";
+                        $userid=$_SESSION['userid'];
+            
+                        $conn = mysqli_connect($host, $username, $password, $database);
+                        if (!$conn) {
+                            die("Connection failed");}
+            
+                        $type=$_REQUEST["selectValue"];
+                        $value=$_REQUEST["searchInput"];
+                        $capitalize_value=ucwords($value);
+                        $keywords = explode(' ', $capitalize_value);
+            
+                        if($value==""){
+                            $sql="SELECT * FROM book_data where userid!=$userid";
+                        }else if($type=="All"){
+                            foreach ($keywords as $keyword) {
+                                $whereConditions[] = "bookname LIKE '%$keyword%'
+                                                     OR author LIKE '%$keyword%'
+                                                     OR publisher LIKE '%$keyword%'";
+                            }
+                            $whereClause = "(bookname='$capitalize_value' OR author='$capitalize_value' OR publisher='$capitalize_value' OR ".implode(' OR ', $whereConditions).")";
+                            $sql = "SELECT * FROM book_data WHERE $whereClause && userid!=$userid ORDER BY
+                            CASE
+                                WHEN (bookname='$capitalize_value') THEN 1
+                                WHEN (author='$capitalize_value') THEN 2
+                                WHEN (publisher='$capitalize_value') THEN 3
+                                else 4
+                                END";
+                        }else if($type=="Book Name"){
+                            foreach ($keywords as $keyword) {
+                                $whereConditions[] = "bookname LIKE '%$keyword%'";
+                            }
+                            $whereClause = "(bookname='$capitalize_value' OR ".implode(' OR ', $whereConditions).")";
+                            $sql = "SELECT * FROM book_data WHERE $whereClause && userid!='$userid' ORDER BY
+                        CASE
+                            WHEN bookname='$capitalize_value' THEN 1 ELSE 2 END";
+                        }else if($type=="Author Name"){
+                            foreach ($keywords as $keyword) {
+                                $whereConditions[] = "author LIKE '%$keyword%'";
+                            }
+                            $whereClause = "(author='$capitalize_value' OR ".implode(' OR ', $whereConditions).")";
+                            $sql = "SELECT * FROM book_data WHERE $whereClause && userid!='$userid' ORDER BY
+                        CASE
+                            WHEN author='$capitalize_value' THEN 1 else 2 end";
+                        }else if($type=="Publisher"){
+                            foreach ($keywords as $keyword) {
+                                $whereConditions[] = "publisher LIKE '%$keyword%'";
+                            }
+                            $whereClause = "(publisher='$capitalize_value' OR ".implode(' OR ', $whereConditions).")";
+                            $sql = "SELECT * FROM book_data WHERE $whereClause && userid!='$userid' ORDER BY
+                        CASE
+                            WHEN publisher='$capitalize_value' THEN 1 else 2 end";
+                        }
+            }else{
+                echo("<div class='navList'>
+                            <a href='index.php' class='linkAni'>Home</a>
+                            <a href='loginPage.php' class='linkAni'>Create Profile</a>
+                            <a href='loginPage.php' class='linkAni'>Buy/Sell Books</a>
+                            <a href='about.html' class='linkAni'>About Us</a>
+                        </div>");
+                        $host = "localhost";
+                        $username = "root";
+                        $password = "";
+                        $database = "book_pedlar";
+                        // $userid=$_SESSION['userid'];
+            
+                        $conn = mysqli_connect($host, $username, $password, $database);
+                        if (!$conn) {
+                            die("Connection failed");}
+            
+                        $type=$_REQUEST["selectValue"];
+                        $value=$_REQUEST["searchInput"];
+                        $capitalize_value=ucwords($value);
+                        $keywords = explode(' ', $capitalize_value);
+            
+                        if($value==""){
+                            $sql="SELECT * FROM book_data";
+                        }else if($type=="All"){
+                            foreach ($keywords as $keyword) {
+                                $whereConditions[] = "bookname LIKE '%$keyword%'
+                                                     OR author LIKE '%$keyword%'
+                                                     OR publisher LIKE '%$keyword%'";
+                            }
+                            $whereClause = "(bookname='$capitalize_value' OR author='$capitalize_value' OR publisher='$capitalize_value' OR ".implode(' OR ', $whereConditions).")";
+                            $sql = "SELECT * FROM book_data WHERE $whereClause ORDER BY
+                            CASE
+                                WHEN (bookname='$capitalize_value') THEN 1
+                                WHEN (author='$capitalize_value') THEN 2
+                                WHEN (publisher='$capitalize_value') THEN 3
+                                else 4
+                                END";
+                        }else if($type=="Book Name"){
+                            foreach ($keywords as $keyword) {
+                                $whereConditions[] = "bookname LIKE '%$keyword%'";
+                            }
+                            $whereClause = "(bookname='$capitalize_value' OR ".implode(' OR ', $whereConditions).")";
+                            $sql = "SELECT * FROM book_data WHERE $whereClause ORDER BY
+                        CASE
+                            WHEN bookname='$capitalize_value' THEN 1 ELSE 2 END";
+                        }else if($type=="Author Name"){
+                            foreach ($keywords as $keyword) {
+                                $whereConditions[] = "author LIKE '%$keyword%'";
+                            }
+                            $whereClause = "(author='$capitalize_value' OR ".implode(' OR ', $whereConditions).")";
+                            $sql = "SELECT * FROM book_data WHERE $whereClauseORDER BY
+                        CASE
+                            WHEN author='$capitalize_value' THEN 1 else 2 end";
+                        }else if($type=="Publisher"){
+                            foreach ($keywords as $keyword) {
+                                $whereConditions[] = "publisher LIKE '%$keyword%'";
+                            }
+                            $whereClause = "(publisher='$capitalize_value' OR ".implode(' OR ', $whereConditions).")";
+                            $sql = "SELECT * FROM book_data WHERE $whereClause ORDER BY
+                        CASE
+                            WHEN publisher='$capitalize_value' THEN 1 else 2 end";
+                        }
             }
             
             $query_result=mysqli_query($conn,$sql);
@@ -184,13 +248,6 @@
             jsSearchType.innerHTML="<option value='All'>All</option><option value='Book Name'>Book Name</option><option value='Author Name'>Author Name</option><option value='Publisher' selected>Publisher</option>";
         }
         jsSearchValue.setAttribute("value",jsValue);
-
-        let iconClick=document.getElementById("searchingIcon");
-        iconClick.addEventListener("click",function(){
-            console.log("Search Icon is clicked");
-            let FormData=document.getElementById("inputForm");
-            FormData.submit();
-        });
     </script>
 </body>
 </HTML>

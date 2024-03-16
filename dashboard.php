@@ -300,13 +300,6 @@
                 });
             }
 
-            // Book Search
-            let iconClick=document.getElementById("searchingIcon");
-            iconClick.addEventListener("click",function(){
-                let FormData=document.getElementById("inputForm");
-                FormData.submit();
-            });
-
             // Upload Notification Pics
             let jsSmallPhoto=<?php echo json_encode($arr4); ?>;
             console.log(jsSmallPhoto);

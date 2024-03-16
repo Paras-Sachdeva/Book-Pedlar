@@ -21,3 +21,11 @@ icon.addEventListener("click",()=>{
 
     } 
 });
+
+
+let iconClick=document.getElementById("searchingIcon");
+        iconClick.addEventListener("click",function(){
+            console.log("Search Icon is clicked");
+            let FormData=document.getElementById("inputForm");
+            FormData.submit();
+        });
