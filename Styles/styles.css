@@ -409,6 +409,5 @@ label {
 }
 
 .book-info-buttons:hover{
-    border:0.35rem solid black;
     scale: 1.1;
 }
