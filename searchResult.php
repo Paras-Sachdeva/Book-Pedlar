@@ -172,7 +172,7 @@
                 }else{
                     array_push($arr3,true);
                 }
-                echo("<div class='book-outer' id='book-outer-$book_id4' onmouseover='this.style.cursor=`pointer`'>
+                echo("<div class='book-outer' id='book-outer-$book_id4'>
                                 <div class='book-inner1' id='book-$book_id4'></div>
                                 <div class='book-inner2'style='padding: 0.3rem;
                                 width: 50%;

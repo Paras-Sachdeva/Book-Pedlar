@@ -265,13 +265,14 @@ a{
 .book-outer{
     width: 35rem;
     height: 20rem;
-    /* margin-left: 3rem; */
+    margin-left: 1.5rem;
     margin-top: 3rem;
     display: flex;
     border: 0.2rem solid black;
 }
 
 .book-outer:hover{
+    cursor: pointer;
     border:0.2rem solid darkblue;
 }
 
