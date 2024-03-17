@@ -15,7 +15,16 @@
     <div class="content">
     <?php
         require("./Components/header.php");  //Header Component
+
+    //<!-- Navigation List -->
+    echo("<div class='navList'>
+                <a href='index.php' class='linkAni'>Home</a>
+                <a href='dashboard.php' class='linkAni'>Profile</a>
+                <a href='#' class='linkAni'>Messages</a>
+                <a href='about.html' class='linkAni'>About Us</a>
+            </div>");
     ?>
+
     <div class="container">
         <h2 id="book-h2">Book Details Form</h2>
         <form action="book_process.php" method="post" enctype="multipart/form-data" id="book-form">
