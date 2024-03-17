@@ -151,7 +151,7 @@
                                         </div>
                                         <div class='deleteEdit-book'>
                                             <br>
-                                            <button name='editbook' class='edit-book'>Edit Book</button>
+                                            <button name='editbook' class='edit-book' id='$book_id4!'>Edit Book</button>
                                             <button name='removebook' class='remove-book' id='$book_id4'>Remove Book</button>
                                         </div> 
                                     </div>
@@ -297,6 +297,28 @@
                     });
                     setTimeout(function(){
                         location.reload()},2500);
+                });
+            }
+
+            // Edit Book Details
+            let editbookbtn=document.getElementsByClassName("edit-book");
+            for(let i=0; i<editbookbtn.length;i++){
+                editbookbtn[i].addEventListener("click",function() {
+                    let jsbookid=editbookbtn[i].getAttribute("id");
+                    console.log("Book id to edit:"+jsbookid);
+                    let newjsbookid = jsbookid.substring(0, jsbookid.length - 1);
+                    console.log("Book id to edit:"+newjsbookid);
+                    let jsObject={};
+                    jsObject.id=newjsbookid;
+                    $.ajax({
+                        url:"editBook.php",
+                        method:"POST",
+                        data:{ jsObject: JSON.stringify(jsObject)},
+                        success:function(response){
+                            console.log(response);
+                        }
+                    });
+                    window.location.href = "https://example.com/page2.html";
                 });
             }
 
