@@ -13,7 +13,7 @@ let icon=document.querySelector('#icons');
 icon.addEventListener("click",()=>{
     if(navLis.style.visibility==""||navLis.style.visibility=="hidden"){
         navLis.style.visibility="visible";
-        icon.innerHTML='<i class="fa-solid fa-xmark" id="bars"></i>';
+        icon.innerHTML='<i class="fa-solid fa-xmark" id="bars-cross"></i>';
     }
     else{
         navLis.style.visibility="hidden";
@@ -22,7 +22,7 @@ icon.addEventListener("click",()=>{
     } 
 });
 
-
+// Search Book Functionality
 let iconClick=document.getElementById("searchingIcon");
         iconClick.addEventListener("click",function(){
             console.log("Search Icon is clicked");
