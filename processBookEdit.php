@@ -1,2 +1,3 @@
 <?php
-    header("Location: dashboard.php");  
+    echo($_REQUEST['BookName']);
+    // header("Location: dashboard.php");  

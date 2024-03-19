@@ -56,13 +56,13 @@
             <h2 style="text-align:center; font-weight:700;">BOOK EDIT</h2>
             <br><br>
             <form action="processBookEdit.php" method="POST" id="form2">
-            <label for="BookName">Book Name: </label><input type="text" id="BookName" class="book-input" placeholder="<?php echo($row['bookname']); ?>"><br>
-            <label for="Author">Author: </label><input type="text" id="Author" class="book-input" placeholder="<?php echo($row['author']); ?>"><br>
-            <label for="Publisher">Publisher: </label><input type="text" id="Publisher" class="book-input" placeholder="<?php echo($row['publisher']); ?>"><br>
-            <label for="mrp">MRP on Book: </label><input type="number" id="mrp" class="book-input" placeholder="<?php echo($row['actualprice']); ?>"><br>
-            <label for="sellPrice">Your Seling Price: </label><input type="number" id="sellPrice" class="book-input" placeholder="<?php echo($row['sellprice']); ?>"><br>
+            <label for="BookName">Book Name: </label><input type="text" id="BookName" name="BookName" class="book-input" value="<?php echo($row['bookname']); ?>"><br>
+            <label for="Author">Author: </label><input type="text" id="Author" class="book-input" value="<?php echo($row['author']); ?>"><br>
+            <label for="Publisher">Publisher: </label><input type="text" id="Publisher" class="book-input" value="<?php echo($row['publisher']); ?>"><br>
+            <label for="mrp">MRP on Book: </label><input type="number" id="mrp" class="book-input" value="<?php echo($row['actualprice']); ?>"><br>
+            <label for="sellPrice">Your Seling Price: </label><input type="number" id="sellPrice" class="book-input" value="<?php echo($row['sellprice']); ?>"><br>
             <label for="genre">Genre: </label><select id="genre" name="genre" class="book-select">
-            <option value="oggenre" selected><?php echo($row['genre']); ?></option>
+            <option value="<?php echo($row['genre']); ?>" selected><?php echo($row['genre']); ?></option>
                 <option value="Fiction">Fiction</option>
                 <option value="Non-Fiction">Non-Fiction</option>
                 <option value="Romance">Romance</option>
@@ -101,7 +101,7 @@
                 <option value="Available" selected>Available</option>
                 <option value="Sold">Sold</option>
             </select><br>
-            <label for="addInfo">Additional Info: </label><textarea id="addInfo" name="addInfo" rows="4" class="book-textarea" placeholder="<?php echo($row['addinfo']); ?>"></textarea><br>
+            <label for="addInfo">Additional Info: </label><textarea id="addInfo" name="addInfo" rows="4" class="book-textarea"><?php echo($row['addinfo']); ?></textarea><br>
             <button id="submitEditBook" style="margin-left:20rem;">Save Changes</button>
             </form>
         </div>
