@@ -274,7 +274,6 @@
             document.addEventListener("DOMContentLoaded", function() {
                 var openPageButton = document.getElementById("openPageButton");
                 openPageButton.addEventListener("click", function() {
-                    console.log("hey ho gya click");
                     window.location.href = "addBook.php";
                 });
             });
@@ -308,17 +307,7 @@
                     console.log("Book id to edit:"+jsbookid);
                     let newjsbookid = jsbookid.substring(0, jsbookid.length - 1);
                     console.log("Book id to edit:"+newjsbookid);
-                    let jsObject={};
-                    jsObject.id=newjsbookid;
-                    $.ajax({
-                        url:"editBook.php",
-                        method:"POST",
-                        data:{ jsObject: JSON.stringify(jsObject)},
-                        success:function(response){
-                            console.log(response);
-                        }
-                    });
-                    window.location.href = "https://example.com/page2.html";
+                    window.location.href = "editBook.php?id="+newjsbookid;
                 });
             }
 

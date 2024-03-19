@@ -16,16 +16,36 @@
     <?php
         require("./Components/header.php");  //Header Component
 
-    //<!-- Navigation List -->
-    echo("<div class='navList'>
-                <a href='index.php' class='linkAni'>Home</a>
-                <a href='dashboard.php' class='linkAni'>Profile</a>
-                <a href='#' class='linkAni'>Messages</a>
-                <a href='about.html' class='linkAni'>About Us</a>
-            </div>");
+        //<!-- Navigation List -->
+        echo("<div class='navList'>
+                    <a href='index.php' class='linkAni'>Home</a>
+                    <a href='dashboard.php' class='linkAni'>Profile</a>
+                    <a href='#' class='linkAni'>Messages</a>
+                    <a href='about.html' class='linkAni'>About Us</a>
+                </div>");
+
+        $host = "localhost";
+        $username = "root";
+        $password = "";
+        $database = "book_pedlar";
+
+        $conn = mysqli_connect($host, $username, $password, $database);
+            
+        if (!$conn) {
+            die("Connection failed");}
+
+        $sql="SELECT * FROM book_data WHERE id='$_GET[id]'";
+        $result=mysqli_query($conn, $sql);
+        $row=mysqli_fetch_assoc($result);
     ?>
 
     <div class="container">
+        <div class="photo-section">
+            <div id='book-photo-alone' style='width: 272px;height:320px;margin-top:2rem;border:0.6rem solid black;'>
+            </div>
+        </div>
+        <div class="edit-section1"></div>
+        <div class="edit-section2"></div>
     </div>
 
     <script src="JS/script.js"></script>
