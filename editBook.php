@@ -39,13 +39,18 @@
         $row=mysqli_fetch_assoc($result);
     ?>
 
-    <div class="container">
-        <div class="photo-section">
+    <div class="container" style="display:flex;background-color: #fff;border-radius: 8px;box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);overflow: hidden;width: 350rem;max-width: 90%;padding: 2rem;box-sizing: border-box;justify-content:space-evenly;">
+        <div class="photo-section" style='margin:2rem;margin-right:6rem;'>
             <div id='book-photo-alone' style='width: 272px;height:320px;margin-top:2rem;border:0.6rem solid black;'>
             </div>
         </div>
-        <div class="edit-section1"></div>
-        <div class="edit-section2"></div>
+        <div class="edit-section1">
+            <h2 style="text-align:center;">BOOK EDIT</h2>
+            <br><br>
+            <label for="BookName">Book Name: </label><input type="text" name="BookName" class="book-input" placeholder="<?php echo($row['bookname']); ?>"><br>
+            <label for="AuthorName">Author Name: </label><input type="text" name="AuthorName" class="book-input" placeholder="<?php echo($row['author']); ?>"><br>
+        </div>
+        <!-- <div class="edit-section2"></div> -->
     </div>
 
     <script src="JS/script.js"></script>
