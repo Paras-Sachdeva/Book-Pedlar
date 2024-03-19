@@ -37,9 +37,10 @@
         $sql="SELECT * FROM book_data WHERE id='$_GET[id]'";
         $result=mysqli_query($conn, $sql);
         $row=mysqli_fetch_assoc($result);
+        $photo=$row['photo'];
     ?>
 
-    <div class="container" style="display:flex;background-color: #fff;border-radius: 8px;box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);overflow: hidden;width: 350rem;max-width: 90%;padding: 2rem;box-sizing: border-box;justify-content:space-evenly;">
+    <div class="container" style="display:flex;background-color: #fff;border-radius: 8px;box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);overflow: hidden;width: 60rem;max-width: 90%;padding: 2rem;box-sizing: border-box;justify-content:space-evenly;">
         <div class="photo-section" style='margin:2rem;margin-right:6rem;'>
             <div id='book-photo-alone' style='width: 272px;height:320px;margin-top:2rem;border:0.6rem solid black;'>
             </div>
@@ -47,12 +48,60 @@
         <div class="edit-section1">
             <h2 style="text-align:center;">BOOK EDIT</h2>
             <br><br>
-            <label for="BookName">Book Name: </label><input type="text" name="BookName" class="book-input" placeholder="<?php echo($row['bookname']); ?>"><br>
-            <label for="AuthorName">Author Name: </label><input type="text" name="AuthorName" class="book-input" placeholder="<?php echo($row['author']); ?>"><br>
+            <form action="processBookEdit.php" method="POST">
+            <label for="BookName">Book Name: </label><input type="text" id="BookName" class="book-input" placeholder="<?php echo($row['bookname']); ?>"><br>
+            <label for="Author">Author: </label><input type="text" id="Author" class="book-input" placeholder="<?php echo($row['author']); ?>"><br>
+            <label for="Publisher">Publisher: </label><input type="text" id="Publisher" class="book-input" placeholder="<?php echo($row['publisher']); ?>"><br>
+            <label for="mrp">MRP on Book: </label><input type="number" id="mrp" class="book-input" placeholder="<?php echo($row['actualprice']); ?>"><br>
+            <label for="sellPrice">Your Seling Price: </label><input type="number" id="sellPrice" class="book-input" placeholder="<?php echo($row['sellprice']); ?>"><br>
+            <label for="genre">Genre: </label><select id="genre" name="genre" required class="book-select">
+            <option value="oggenre" selected><?php echo($row['genre']); ?></option>
+                <option value="Fiction">Fiction</option>
+                <option value="Non-Fiction">Non-Fiction</option>
+                <option value="Romance">Romance</option>
+                <option value="Science-Fiction (Sci-Fi)">Science Fiction (Sci-Fi)</option>
+                <option value="Educational">Educational</option>
+                <option value="Current Affairs">Current Affairs</option>
+                <option value="Technology">Technology</option>
+                <option value="Fantasy">Fantasy</option>
+                <option value="Horror">Horror</option>
+                <option value="Thriller">Thriller</option>
+                <option value="Historical Fiction">Historical Fiction</option>
+                <option value="Biography">Biography</option>
+                <option value="Autobiography">Autobiography</option>
+                <option value="Poetry">Poetry</option>
+                <option value="Self Help">Self-Help</option>
+                <option value="Business & Economics">Business & Economics</option>
+                <option value="Science">Science</option>
+                <option value="Philosophy">Philosophy</option>
+                <option value="Travel">Travel</option>
+                <option value="Children">Children's</option>
+                <option value="Young Adult">Young Adult</option>
+                <option value="Classics">Classics</option>
+            </select><br>
+            <label for="condition">Book Condition: </label><select id="condition" name="condition" class="book-select">
+                <option value="ogcondition" selected><?php echo($row['bookcondition']); ?></option>
+                <option value="New">New</option>
+                <option value="Like New">Like New</option>
+                <option value="Very Good">Very Good</option>
+                <option value="Good">Good</option>
+                <option value="Acceptable">Acceptable</option>
+                <option value="Fair">Fair</option>
+                <option value="Poor">Poor</option>
+            </select><br>
+            <label for="addInfo">Additional Info: </label><textarea id="addInfo" name="addInfo" rows="4" class="book-textarea" placeholder="<?php echo($row['addinfo']); ?>"></textarea><br>
+            <input type="submit" name="submit" id="submitEditBook" value="Save Changes">
+            </form>
         </div>
         <!-- <div class="edit-section2"></div> -->
     </div>
 
+    <script>
+        let jsBookPhoto="uploads/"+<?php echo json_encode($photo); ?>;
+        let divPhoto=document.getElementById("book-photo-alone");
+        divPhoto.style.backgroundImage="url('"+jsBookPhoto+"')";
+        divPhoto.style.backgroundSize="325px 350px";
+    </script>
     <script src="JS/script.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </body>

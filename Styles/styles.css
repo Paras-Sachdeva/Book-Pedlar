@@ -202,7 +202,7 @@ a{
     margin-top: 2rem;
 }
 
-.add-book button{
+.add-book button, #submitEditBook{
     padding: 0.6rem;
     width: 10rem;
     height: 3rem;
@@ -213,7 +213,7 @@ a{
     cursor: pointer;
     transition: background-color 0.3s;
 }
-.add-book button:hover{
+.add-book button:hover, #submitEditBook:hover{
     background-color: #2980b9;
 }
 
@@ -376,6 +376,18 @@ label {
     box-sizing: border-box;
     border: 1px solid #ccc;
     border-radius: 4px;
+}
+
+.book-textarea{
+    width: 100%;
+    height: auto;
+    padding: 0.6rem;
+    margin-top: 5px;
+    margin-bottom: 1rem;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-weight:500
 }
 
 #book-btn{

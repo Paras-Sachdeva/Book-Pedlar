@@ -100,7 +100,7 @@
 
             <!-- Additional Info (Textarea) -->
             <label for="additionalInfo">Additional Info:</label>
-            <textarea id="additionalInfo" name="additionalInfo" rows="4" id="book-textarea" style="width: 100%;height: auto;padding: 0.6rem;margin-top: 5px;margin-bottom: 1rem;box-sizing: border-box;border: 1px solid #ccc;border-radius: 4px;font-weight:500"></textarea>
+            <textarea id="additionalInfo" name="additionalInfo" rows="4" class="book-textarea"></textarea>
 
             <!-- Submit Button -->
             <input type="submit" id="book-btn"></input>
