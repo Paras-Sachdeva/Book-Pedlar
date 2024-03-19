@@ -41,20 +41,27 @@
     ?>
 
     <div class="container" style="display:flex;background-color: #fff;border-radius: 8px;box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);overflow: hidden;width: 60rem;max-width: 90%;padding: 2rem;box-sizing: border-box;justify-content:space-evenly;">
-        <div class="photo-section" style='margin:2rem;margin-right:6rem;'>
-            <div id='book-photo-alone' style='width: 272px;height:320px;margin-top:2rem;border:0.6rem solid black;'>
+        <div class="photo-section" style='margin:2rem; margin-right:6rem; width:30%'>
+            <div id='book-photo-alone' style='width: 272px;height:320px;margin-top:2rem;border:0.6rem solid black;'></div>
+            <div class="form-section" style="margin-top:2rem;">
+                <form action="processEDitBook" id="form1">
+                    <label for="changeBookPic">Change Book Picture</label><br>
+                    <input type="file" name="changeBookPic" id="changeBookPic" accept=".jpg, .jpeg, .png, .gif">
+                    <div id="image-preview" style="margin: 1rem;"></div>
+                    
+                </form>
             </div>
         </div>
         <div class="edit-section1">
-            <h2 style="text-align:center;">BOOK EDIT</h2>
+            <h2 style="text-align:center; font-weight:700;">BOOK EDIT</h2>
             <br><br>
-            <form action="processBookEdit.php" method="POST">
+            <form action="processBookEdit.php" method="POST" id="form2">
             <label for="BookName">Book Name: </label><input type="text" id="BookName" class="book-input" placeholder="<?php echo($row['bookname']); ?>"><br>
             <label for="Author">Author: </label><input type="text" id="Author" class="book-input" placeholder="<?php echo($row['author']); ?>"><br>
             <label for="Publisher">Publisher: </label><input type="text" id="Publisher" class="book-input" placeholder="<?php echo($row['publisher']); ?>"><br>
             <label for="mrp">MRP on Book: </label><input type="number" id="mrp" class="book-input" placeholder="<?php echo($row['actualprice']); ?>"><br>
             <label for="sellPrice">Your Seling Price: </label><input type="number" id="sellPrice" class="book-input" placeholder="<?php echo($row['sellprice']); ?>"><br>
-            <label for="genre">Genre: </label><select id="genre" name="genre" required class="book-select">
+            <label for="genre">Genre: </label><select id="genre" name="genre" class="book-select">
             <option value="oggenre" selected><?php echo($row['genre']); ?></option>
                 <option value="Fiction">Fiction</option>
                 <option value="Non-Fiction">Non-Fiction</option>
@@ -89,11 +96,15 @@
                 <option value="Fair">Fair</option>
                 <option value="Poor">Poor</option>
             </select><br>
+            <label for="status">Status of Book:</label>
+            <select id="status" name="status" class="book-select">
+                <option value="Available" selected>Available</option>
+                <option value="Sold">Sold</option>
+            </select><br>
             <label for="addInfo">Additional Info: </label><textarea id="addInfo" name="addInfo" rows="4" class="book-textarea" placeholder="<?php echo($row['addinfo']); ?>"></textarea><br>
-            <input type="submit" name="submit" id="submitEditBook" value="Save Changes">
+            <button id="submitEditBook" style="margin-left:20rem;">Save Changes</button>
             </form>
         </div>
-        <!-- <div class="edit-section2"></div> -->
     </div>
 
     <script>
@@ -101,6 +112,23 @@
         let divPhoto=document.getElementById("book-photo-alone");
         divPhoto.style.backgroundImage="url('"+jsBookPhoto+"')";
         divPhoto.style.backgroundSize="325px 350px";
+
+        document.getElementById('changeBookPic').addEventListener('change', function() {
+            var file = this.files[0];
+            if (file) {
+                var reader = new FileReader();
+                reader.onload = function(event) {
+                    var imgElement = document.createElement('img');
+                    imgElement.src = event.target.result;
+                    imgElement.style.maxWidth = '100%';
+                    imgElement.style.maxHeight = '100%';
+                    var previewContainer = document.getElementById('image-preview');
+                    previewContainer.innerHTML = '';
+                    previewContainer.appendChild(imgElement);
+                };
+                reader.readAsDataURL(file);
+            }
+        });
     </script>
     <script src="JS/script.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
