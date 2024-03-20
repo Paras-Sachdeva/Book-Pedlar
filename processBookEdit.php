@@ -17,10 +17,16 @@
     $genre=$_REQUEST["genre"];
     $condition=$_REQUEST["condition"];
     $additional_info=$_REQUEST["addInfo"];
+    $bookStatus=$_REQUEST['status'];
     $changeBookPic=$_REQUEST["changeBookPic"];
+    $bookId=$_GET['id'];
 
     if($_REQUEST['changeBookPic']==""){
-        echo "No file uploaded or an error occurred during upload.";
+        $sql1="UPDATE book_data SET bookname='$book_name',author='$author_name',publisher='$publisher',actualprice=$mrp,sellprice=$selling_price,bookstatus='$bookStatus',genre='$genre',bookcondition='$condition',addinfo='$additional_info' WHERE id='$bookId'";
+        mysqli_query($conn,$sql1);
     }else{
-        echo($_REQUEST['changeBookPic']);
+        $sql2="UPDATE book_data SET bookname='$book_name',author='$author_name',publisher='$publisher',actualprice=$mrp,sellprice=$selling_price,bookstatus='$bookStatus',genre='$genre',bookcondition='$condition',addinfo='$additional_info', photo='$changeBookPic' WHERE id='$bookId'";
+        mysqli_query($conn,$sql2);
     }
+
+    header("Location: dashboard.php");

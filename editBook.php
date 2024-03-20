@@ -86,7 +86,7 @@
                 <option value="Classics">Classics</option>
             </select><br>
             <label for="condition">Book Condition: </label><select id="condition" name="condition" class="book-select">
-                <option value="ogcondition" selected><?php echo($row['bookcondition']); ?></option>
+                <option value="<?php echo($row['bookcondition']); ?>" selected><?php echo($row['bookcondition']); ?></option>
                 <option value="New">New</option>
                 <option value="Like New">Like New</option>
                 <option value="Very Good">Very Good</option>
@@ -97,7 +97,8 @@
             </select><br>
             <label for="status">Status of Book:</label>
             <select id="status" name="status" class="book-select">
-                <option value="Available" selected>Available</option>
+                <option value="<?php echo($row['bookcondition']); ?>" selected><?php echo($row['bookcondition']); ?></option>
+                <option value="Available">Available</option>
                 <option value="Sold">Sold</option>
             </select><br>
             <label for="addInfo">Additional Info: </label><textarea id="addInfo" name="addInfo" rows="4" class="book-textarea"><?php echo($row['addinfo']); ?></textarea><br>
