@@ -44,23 +44,21 @@
         <div class="photo-section" style='margin:2rem; margin-right:6rem; width:30%'>
             <div id='book-photo-alone' style='width: 272px;height:320px;margin-top:2rem;border:0.6rem solid black;'></div>
             <div class="form-section" style="margin-top:2rem;">
-                <form action="processEDitBook" id="form1">
+            <?php
+                echo("<form action='processBookEdit.php method='POST' id='form1'>"); ?>
                     <label for="changeBookPic">Change Book Picture</label><br>
                     <input type="file" name="changeBookPic" id="changeBookPic" accept=".jpg, .jpeg, .png, .gif">
                     <div id="image-preview" style="margin: 1rem;"></div>
-                    
-                </form>
             </div>
         </div>
         <div class="edit-section1">
             <h2 style="text-align:center; font-weight:700;">BOOK EDIT</h2>
             <br><br>
-            <form action="processBookEdit.php" method="POST" id="form2">
             <label for="BookName">Book Name: </label><input type="text" id="BookName" name="BookName" class="book-input" value="<?php echo($row['bookname']); ?>"><br>
-            <label for="Author">Author: </label><input type="text" id="Author" class="book-input" value="<?php echo($row['author']); ?>"><br>
-            <label for="Publisher">Publisher: </label><input type="text" id="Publisher" class="book-input" value="<?php echo($row['publisher']); ?>"><br>
-            <label for="mrp">MRP on Book: </label><input type="number" id="mrp" class="book-input" value="<?php echo($row['actualprice']); ?>"><br>
-            <label for="sellPrice">Your Seling Price: </label><input type="number" id="sellPrice" class="book-input" value="<?php echo($row['sellprice']); ?>"><br>
+            <label for="Author">Author: </label><input type="text" id="Author" name="Author" class="book-input" value="<?php echo($row['author']); ?>"><br>
+            <label for="Publisher">Publisher: </label><input type="text" id="Publisher" name="Publisher" class="book-input" value="<?php echo($row['publisher']); ?>"><br>
+            <label for="mrp">MRP on Book: </label><input type="number" id="mrp" name="mrp" class="book-input" value="<?php echo($row['actualprice']); ?>"><br>
+            <label for="sellPrice">Your Seling Price: </label><input type="number" id="sellPrice" name="sellPrice" class="book-input" value="<?php echo($row['sellprice']); ?>"><br>
             <label for="genre">Genre: </label><select id="genre" name="genre" class="book-select">
             <option value="<?php echo($row['genre']); ?>" selected><?php echo($row['genre']); ?></option>
                 <option value="Fiction">Fiction</option>
@@ -102,17 +100,19 @@
                 <option value="Sold">Sold</option>
             </select><br>
             <label for="addInfo">Additional Info: </label><textarea id="addInfo" name="addInfo" rows="4" class="book-textarea"><?php echo($row['addinfo']); ?></textarea><br>
-            <button id="submitEditBook" style="margin-left:20rem;">Save Changes</button>
             </form>
+            <button id="submitEditBook" style="margin-left:20rem;">Save Changes</button>
         </div>
     </div>
 
     <script>
+        // Display Original Book Pic
         let jsBookPhoto="uploads/"+<?php echo json_encode($photo); ?>;
         let divPhoto=document.getElementById("book-photo-alone");
         divPhoto.style.backgroundImage="url('"+jsBookPhoto+"')";
         divPhoto.style.backgroundSize="325px 350px";
 
+        // Book Pic Preview
         document.getElementById('changeBookPic').addEventListener('change', function() {
             var file = this.files[0];
             if (file) {
@@ -129,7 +129,15 @@
                 reader.readAsDataURL(file);
             }
         });
-    </script>
+
+        // Submit Book Edit Form
+        let submitBtn=document.getElementById("submitEditBook");
+        submitBtn.addEventListener("click",function(){
+            let form1=document.getElementById("form1");
+            let form=document.getElementById("form2");
+            form1.submit();
+        })
+        </script>
     <script src="JS/script.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </body>
