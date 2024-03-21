@@ -78,6 +78,8 @@
                 $result2 = mysqli_query($conn,$sql2);
                 $arr4=array();
                 $arr5=array();
+                $arr6=array();
+                $arr7=array();
                 if(mysqli_num_rows($result2)>0){            
                     echo("<div class='outside-notifications'>
                                 <div class='notifications'>
@@ -86,6 +88,8 @@
                                 <div class='new-notification'>");
                     $i=0;
                     while($row2=mysqli_fetch_assoc($result2)){
+                        array_push($arr6,$row2['id']);
+                        array_push($arr7,$i);
                         $senderId=$row2['senderid'];
                         $sql3="SELECT * FROM user_data WHERE id='$senderId'";
                         $result3=mysqli_query($conn,$sql3);
@@ -321,6 +325,18 @@
                 console.log(jsSmallPhotoTag);
                 jsSmallPhotoTag.style.backgroundImage="url('Uploads/"+jsSmallPhoto[i]+"')";
                 jsSmallPhotoTag.style.backgroundSize="60px 60px";    
+            }
+
+            // Notification Click Event
+            let jsNotifyClick = <?php echo json_encode($arr6); ?>;
+            let jsNotifyId = <?php echo json_encode($arr7); ?>;
+            // console.log("Hey"+jsNotifyClick[0]);
+            // console.log("Hey"+jsNotifyId[0]);
+            for(let i=0; i<jsNotifyId.length;i++){
+                let jsNotifyBar=document.getElementById(jsNotifyId[i]);
+                jsNotifyBar.addEventListener("click",function(){
+                    console.log(i+"clicked");
+                });
             }
     </script>
 
