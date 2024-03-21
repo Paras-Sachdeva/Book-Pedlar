@@ -415,6 +415,24 @@ label {
     padding: 1rem;
 }
 
+#notify-btn{
+    padding: 1rem;
+    width: 10rem;
+    color: white;
+    background-color: #2980b9;
+    border-radius: 2%;
+    font-weight: 750;
+    font-size: 1.3rem;
+    margin: 3.5rem;
+    margin-left: 35rem;
+}
+
+#notify-btn:hover{
+    cursor: pointer;
+    scale: 1.1;
+    background-color: darkblue;
+}
+
 /* FullBookInfo.php */
 .book-info-buttons{
     background-color: #333333;

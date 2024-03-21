@@ -197,7 +197,8 @@
                             </div>");
               }
             }else{
-                echo("No Books match your search. Tap on \"NOTIFY ME\" to get personalized e-mail whenever this book becomes available.");
+                echo("<div id='notify-text' style='width:100%;'><h4 style='text-align:center;'>No Books match your search.<br><br> Tap on \"NOTIFY ME\" to get personalized e-mail whenever this book becomes available.</h4></div>");
+                echo("<div><button id='notify-btn'>Notify Me</button></div>");
                 // $to_email = "paras140902@gmail.com";
                 // $subject = "Simple Email Test via PHP";
                 // $body = "Hi, This is test email send by PHP Script";

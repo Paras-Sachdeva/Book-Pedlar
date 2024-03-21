@@ -97,7 +97,7 @@
             </select><br>
             <label for="status">Status of Book:</label>
             <select id="status" name="status" class="book-select">
-                <option value="<?php echo($row['bookcondition']); ?>" selected><?php echo($row['bookcondition']); ?></option>
+                <option value="<?php echo($row['bookstatus']); ?>" selected><?php echo($row['bookstatus']); ?></option>
                 <option value="Available">Available</option>
                 <option value="Sold">Sold</option>
             </select><br>
