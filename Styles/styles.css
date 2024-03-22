@@ -148,6 +148,13 @@ a{
     transform: scale(1.2);
 }
 
+.footer{
+    width: 100%;
+    height: 10rem;
+    background-color: #333333;
+    margin-top: 3rem;
+}
+
 /* Dashboard.php */
 .blur{
     filter: blur(5px);
@@ -156,7 +163,7 @@ a{
 #box{
     width: 25rem;
     height: 20rem;
-    border-radius: 5%;
+    border-radius: 0.5%;
     background-color: #fff;
     transition: transform 0.3s ease-in-out;
     z-index: 2;
@@ -256,6 +263,7 @@ a{
 
 .notify:hover{
     scale:1.02;
+    cursor:pointer;
 }
 
 .notification-content{
@@ -268,6 +276,7 @@ a{
     width:3.5rem;
     height:3.5rem;
     border-radius: 50%;
+    flex-shrink: 0;
     /* background-image: url("-6077607787787040695_121.jpg");
     background-size: 60px 60px; */
 }

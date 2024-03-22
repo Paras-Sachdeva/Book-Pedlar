@@ -52,13 +52,6 @@
             <label for="sellingPrice">Your Selling Price:</label>
             <input type="number" id="sellingPrice" name="sellingPrice" required class="book-input">
 
-            <!-- Status of Book (Select Tag) -->
-            <!-- <label for="status">Status of Book:</label>
-            <select id="status" name="status" required class="book-select">
-                <option value="Available">Available</option>
-                <option value="Sold">Sold</option>
-            </select> -->
-
             <!-- Genre of Book (Select Tag) -->
             <label for="genre">Genre of Book:</label>
             <select id="genre" name="genre" required class="book-select">

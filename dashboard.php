@@ -178,8 +178,8 @@
             ?>
         </div>
         <?php
-            require("./Components/footer.php");
             echo("</div>");
+            require("./Components/footer.php");
         ?>
         </div> <!--  Content Div -->
 

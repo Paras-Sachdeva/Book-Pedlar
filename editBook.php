@@ -106,6 +106,8 @@
             <button id="submitEditBook" style="margin-left:20rem;">Save Changes</button>
         </div>
     </div>
+    <?php require("./Components/footer.php"); ?>
+    </div>
 
     <script>
         // Display Original Book Pic

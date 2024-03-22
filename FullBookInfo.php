@@ -204,8 +204,10 @@
             }
 
             mysqli_close($conn);
+            echo("</div>");
             require("./Components/footer.php");  
-            echo("</div></div>");
+            echo("</div>");
+
     ?> 
         <script>
             let jsBookId=<?php echo json_encode($selected_bookid); ?>;
