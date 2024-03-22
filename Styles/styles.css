@@ -149,6 +149,18 @@ a{
 }
 
 /* Dashboard.php */
+.blur{
+    filter: blur(5px);
+}
+
+#box{
+    width: 100px;
+    height: 100px;
+    background-color: #fff;
+    transition: transform 0.3s ease-in-out;
+    z-index: 2;
+}
+
 .out-profile-books{
     display: flex;
     flex-direction: row;

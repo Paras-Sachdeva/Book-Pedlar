@@ -12,7 +12,7 @@
     <?php
         require("./Components/loader.php");  //Loader Component
 
-        echo('<div class="content">');
+        echo('<div id="box" style="display:none;"></div><div class="content">');
 
         require("./Components/header.php");  //Header Component
 
@@ -330,12 +330,22 @@
             // Notification Click Event
             let jsNotifyClick = <?php echo json_encode($arr6); ?>;
             let jsNotifyId = <?php echo json_encode($arr7); ?>;
-            // console.log("Hey"+jsNotifyClick[0]);
-            // console.log("Hey"+jsNotifyId[0]);
+            let content = document.querySelector('.content');
             for(let i=0; i<jsNotifyId.length;i++){
                 let jsNotifyBar=document.getElementById(jsNotifyId[i]);
-                jsNotifyBar.addEventListener("click",function(){
+                jsNotifyBar.addEventListener("click",function(event){
+                    var clickX = event.clientX;
+                    var clickY = event.clientY;
+                    console.log(clickX+"  "+clickY);
                     console.log(i+"clicked");
+                    content.classList.add('blur');
+                    content.style.pointerEvents = 'none';
+                    let box=document.getElementById("box");
+                    box.style.display="block";
+                    box.style.transform = 'scale(2)';
+                    box.style.position = 'fixed';
+                    box.style.left = clickX - box.offsetWidth / 2 + 'px';
+                    box.style.top = clickY - box.offsetHeight / 2 + 'px';
                 });
             }
     </script>
