@@ -12,7 +12,7 @@
     <?php
         require("./Components/loader.php");  //Loader Component
 
-        echo('<div id="box" style="display:none;"></div><div class="content">');
+        echo('<div id="box" style="display:none;"><i class="fa-solid fa-square-xmark close-icon"></i></div><div class="content">');
 
         require("./Components/header.php");  //Header Component
 
@@ -338,15 +338,25 @@
                     var viewportHeight = window.innerHeight;
                     var centerX = viewportWidth / 2;
                     var centerY = viewportHeight / 2;
+
                     content.classList.add('blur');
                     content.style.pointerEvents = 'none';
                     document.body.style.overflow = 'hidden';
+
                     let box=document.getElementById("box");
                     box.style.display="block";
                     box.style.transform = 'scale(2)';
                     box.style.position = 'fixed';
                     box.style.left = centerX - box.offsetWidth / 2 + 'px';
                     box.style.top = centerY - box.offsetHeight / 2 + 'px';
+
+                    let closeIcon=document.querySelector(".close-icon");
+                    closeIcon.addEventListener("click",function(){
+                        box.style.display="none";
+                        content.classList.remove('blur');
+                        content.style.pointerEvents = 'auto';
+                        document.body.style.overflow = 'auto';
+                    });
                 });
             }
     </script>

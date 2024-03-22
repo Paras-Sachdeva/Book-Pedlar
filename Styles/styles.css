@@ -169,6 +169,10 @@ a{
     z-index: 2;
 }
 
+.close-icon:hover{
+    cursor: pointer;
+}
+
 .out-profile-books{
     display: flex;
     flex-direction: row;
