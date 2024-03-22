@@ -154,8 +154,9 @@ a{
 }
 
 #box{
-    width: 100px;
-    height: 100px;
+    width: 25rem;
+    height: 20rem;
+    border-radius: 5%;
     background-color: #fff;
     transition: transform 0.3s ease-in-out;
     z-index: 2;

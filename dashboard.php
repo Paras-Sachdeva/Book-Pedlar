@@ -334,18 +334,19 @@
             for(let i=0; i<jsNotifyId.length;i++){
                 let jsNotifyBar=document.getElementById(jsNotifyId[i]);
                 jsNotifyBar.addEventListener("click",function(event){
-                    var clickX = event.clientX;
-                    var clickY = event.clientY;
-                    console.log(clickX+"  "+clickY);
-                    console.log(i+"clicked");
+                    var viewportWidth = window.innerWidth;
+                    var viewportHeight = window.innerHeight;
+                    var centerX = viewportWidth / 2;
+                    var centerY = viewportHeight / 2;
                     content.classList.add('blur');
                     content.style.pointerEvents = 'none';
+                    document.body.style.overflow = 'hidden';
                     let box=document.getElementById("box");
                     box.style.display="block";
                     box.style.transform = 'scale(2)';
                     box.style.position = 'fixed';
-                    box.style.left = clickX - box.offsetWidth / 2 + 'px';
-                    box.style.top = clickY - box.offsetHeight / 2 + 'px';
+                    box.style.left = centerX - box.offsetWidth / 2 + 'px';
+                    box.style.top = centerY - box.offsetHeight / 2 + 'px';
                 });
             }
     </script>
