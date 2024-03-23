@@ -177,6 +177,71 @@ a{
     cursor: pointer;
 }
 
+#notify-head{
+    display:flex;
+}
+
+#notify-text{
+    padding:1rem;
+    margin-left:7rem;
+}
+
+#notify-close-icon{
+    margin-left:6rem;
+    margin-top:0.2rem;
+}
+
+#notify-content{
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-evenly; */
+    align-items: center;
+}
+
+#user-interested{
+    /* margin-left: 1.5rem; */
+    display: flex;
+    /* flex-direction: column; */
+    align-items: center;
+    flex-grow: 0;
+}
+
+#user-interested-pic{
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    background-color: pink;
+    border: 0.2rem solid black;
+}
+
+#user-interested-name{
+    margin-left: 0.5rem;
+}
+
+#interested-text{
+    margin: 1rem;
+    flex-shrink: 0;
+    /* align-self: center; */
+}
+
+#interested-book{
+    /* margin-left: 1.5rem; */
+    display: flex;
+    /* flex-direction: column; */
+    align-items: center;
+}
+
+#interested-book-pic{
+    width: 5rem;
+    height: 5rem;
+    background-color: pink;
+    border: 0.2rem solid black;
+}
+
+#interested-book-name{
+    margin-left: 0.5rem;
+}
+
 .out-profile-books{
     display: flex;
     flex-direction: row;
