@@ -161,10 +161,14 @@ a{
 }
 
 #box{
+    display: none;
+    border: 0.1rem solid black;
+    font-family: 'roboto', sans-serif;
+    font-size: 1.2rem;
+    background-color:#F5F5F5;
     width: 25rem;
     height: 20rem;
     border-radius: 0.5%;
-    background-color: #fff;
     transition: transform 0.3s ease-in-out;
     z-index: 2;
 }

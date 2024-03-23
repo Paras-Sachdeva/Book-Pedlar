@@ -367,7 +367,8 @@
                     document.body.style.overflow = 'hidden';
 
                     let box=document.getElementById("box");
-                    box.style.display="block";
+                    box.style.display="flex";
+                    box.style.flexDirection="column";
                     box.style.transform = 'scale(2)';
                     box.style.position = 'fixed';
                     box.style.left = centerX - box.offsetWidth / 2 + 'px';
