@@ -12,7 +12,30 @@
     <?php
         require("./Components/loader.php");  //Loader Component
 
-        echo('<div id="box" style="display:none;"><i class="fa-solid fa-square-xmark close-icon"></i></div><div class="content">');
+        echo('<div id="box">
+                    <div id="notify-head">
+                        <div id="notify-text"><h4>NOTIFICATION</h4></div>
+                        <div id="notify-close-icon">
+                            <i class="fa-solid fa-square-xmark close-icon" title="Close Notification"></i>
+                        </div>
+                    </div>
+                    <div id="notify-content">
+                        <div id="user-interested">
+                            <div id="user-interested-pic"></div>
+                            <div id="user-interested-name"><h6>Sagar</h6></div>
+                        </div>
+                        <div id="interested-text"><p style="font-size:0.85rem;">Is looking forward to buy your Book</p></div>
+                        <div id="interested-book">
+                            <div id="interested-book-pic"></div>
+                            <div id="interested-book-name"><h6>Sample Book Name</h6></div>
+                        </div>
+                    </div>
+                    <div id="notify-btns">
+                        <button id="notify-btn-approve">Approve Request & Start Chat</button>                    
+                        <button id="notify-btn-delete">Delete Notification</button>                    
+                    </div>
+                </div>
+                <div class="content">');
 
         require("./Components/header.php");  //Header Component
 
