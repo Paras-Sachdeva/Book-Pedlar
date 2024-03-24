@@ -12,7 +12,9 @@
     <?php
         require("./Components/loader.php");  //Loader Component
 
-        echo('<div id="box">
+        $j=0;
+    ?>   
+                <div id="box">
                     <div id="notify-head">
                         <div id="notify-text"><h4>NOTIFICATION</h4></div>
                         <div id="notify-close-icon">
@@ -26,7 +28,7 @@
                         </div>
                         <div id="interested-text"><p style="font-size:0.85rem;">Is looking forward to buy your Book</p></div>
                         <div id="interested-book">
-                            <div id="interested-book-pic"></div>
+                            <div class="interested-book-pic"></div>
                             <div id="interested-book-name"><h6>Sample Book Name</h6></div>
                         </div>
                     </div>
@@ -35,7 +37,8 @@
                         <button id="notify-btn-delete">Delete Notification</button>                    
                     </div>
                 </div>
-                <div class="content">');
+                <div class="content">
+    <?php
 
         require("./Components/header.php");  //Header Component
 
@@ -103,6 +106,9 @@
                 $arr5=array();
                 $arr6=array();
                 $arr7=array();
+                $arr8=array();
+                $arr9=array();
+                $arr10=array();
                 if(mysqli_num_rows($result2)>0){            
                     echo("<div class='outside-notifications'>
                                 <div class='notifications'>
@@ -125,6 +131,10 @@
                         $result5=mysqli_query($conn,$sql5);
                         $row5=mysqli_fetch_assoc($result5);
                         $bookName=$row5['bookname'];
+                        $bookPhoto=$row5['photo'];
+                        array_push($arr8,$bookName);
+                        array_push($arr9,$senderName);
+                        array_push($arr10,$bookPhoto);
                         echo("  <div class='notify' id='$i'>
                                     <div class='small-buyer-pic' id='$senderId-$i'>
                                     </div>
