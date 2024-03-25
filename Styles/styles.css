@@ -574,3 +574,136 @@ label {
 .book-info-buttons:hover{
     scale: 1.1;
 }
+
+/* messages.php */
+.message-container{
+    max-width: 90%;
+    width: 60rem;
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-sizing: border-box;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+}
+
+.message-ppl{
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+    border-right: 0.1rem solid grey;
+    padding: 2rem;
+}
+
+.message-search-ppl{}
+
+.message-search-container{
+    border: 0.1rem solid grey;
+    border-radius: 5%;
+    display: flex;
+    flex-direction: row;
+}
+
+.message-search{
+}
+
+#message-search-input{
+    width: 7rem;
+    padding: 0.6rem;
+    outline: none;
+    font-size: 1rem;
+}
+
+.message-search-icon{
+    background-color: #acb5a994;
+    width: 2rem;
+    height: 2rem;
+    padding: 0.35rem;
+}
+
+.search-ppl-icon{
+    margin-left: 0.3rem;
+    margin-top: 0.3rem;
+}
+
+.message-ppl-list{
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0.6rem;
+    border-radius: 5%;
+    width: 12rem;
+}
+
+.message-ppl-list:hover{
+    cursor: pointer;
+    background-color: rgb(202, 197, 197);
+}
+
+.message-ppl-pic{
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    border: 0.1rem solid black;
+    background-color: pink;
+}
+
+.message-ppl-name{
+    margin-left: 1rem;
+}
+
+.message-box{
+    display: flex;
+    flex-direction: column;
+}
+
+.message-current-info{
+    height: 7rem;
+    width: 35rem;
+    border-bottom: 0.1rem solid grey;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+#message-current-pic{
+    width: 7rem;
+    height: 7rem;
+    border-radius: 50%;
+}
+
+#message-current-name{
+    margin-left: 1rem;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.message-box-display{
+    overflow-y: auto;
+    height: 26rem;
+    padding: 2rem;
+}
+
+.message-textarea{
+    width: 35rem;
+    height: 2.5rem;
+    border: 0.3rem solid black;
+    display: flex;
+    margin-left: 2rem;
+}
+
+.send-icon{
+    padding: 0.5rem;
+}
+
+#message-input-box{
+    padding: 0.3rem;
+    margin-left: 0.5rem;
+    outline: none;
+    margin-top: 0.4rem;
+    font-weight: 600;
+}
