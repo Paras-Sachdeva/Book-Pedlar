@@ -233,32 +233,32 @@ a{
     margin-left: 0.5rem;
 }
 
-#notify-btns{
+.notify-btns{
     display: flex;
     justify-content: space-evenly;
     padding: 0.8rem;
 }
 
-#notify-btns button{
+.notify-btns button{
     font-size: 0.6rem;
     padding: 0.2rem;
     font-weight: 600;
     border: 0.1rem solid black;
 }
 
-#notify-btn-approve{
+.notify-btn-approve{
     background-color: rgb(54, 218, 54);
 }
 
-#notify-btn-approve:hover{
+.notify-btn-approve:hover{
     background-color: green;
 }
 
-#notify-btn-delete{
+.notify-btn-delete{
     background-color: #aa6276;
 }
 
-#notify-btn-delete:hover{
+.notify-btn-delete:hover{
     background-color: red;
 }
 

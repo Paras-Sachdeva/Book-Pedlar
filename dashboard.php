@@ -82,6 +82,7 @@
                 $arr8=array();
                 $arr9=array();
                 $arr10=array();
+                $arr11=array();
                 if(mysqli_num_rows($result2)>0){            
                     echo("<div class='outside-notifications'>
                                 <div class='notifications'>
@@ -92,6 +93,7 @@
                     while($row2=mysqli_fetch_assoc($result2)){
                         array_push($arr6,$row2['id']);
                         array_push($arr7,$i);
+                        array_push($arr11,$row2['id']);
                         $senderId=$row2['senderid'];
                         $sql3="SELECT * FROM user_data WHERE id='$senderId'";
                         $result3=mysqli_query($conn,$sql3);
@@ -210,9 +212,9 @@
                         <div class="interested-book-name" id="<?php echo($j.'3'); ?>"><h6>Sample Book Name</h6></div>
                     </div>
                 </div>
-                <div id="notify-btns">
-                    <button id="notify-btn-approve">Approve Request & Start Chat</button>                    
-                    <button id="notify-btn-delete">Delete Notification</button>                    
+                <div class="notify-btns">
+                    <button class="notify-btn-approve" id="<?php echo('ApproveBtn'.$j); ?>">Approve Request & Start Chat</button>                    
+                    <button class="notify-btn-delete" id="<?php echo('DelBtn'.$j); ?>">Delete Notification</button>                    
                 </div>
             </div>
         <?php
@@ -418,7 +420,27 @@
                     content.style.pointerEvents = 'auto';
                     document.body.style.overflow = 'auto';
                 });
-            }
+
+                // Notification Delete Button
+                let notifyDelIds = <?php echo json_encode($arr11); ?>;
+                let DelBtn=document.getElementById("DelBtn"+i);
+                DelBtn.addEventListener("click",function(){
+                    console.log("Delete Button Pressed");
+                    let jsNotifyObject={};
+                    jsNotifyObject.id=notifyDelIds[i];
+                    $.ajax({
+                        url:"deleteNotification.php",
+                        method:"POST",
+                        data:{ jsNotifyObject: JSON.stringify(jsNotifyObject)},
+                        success:function(response){
+                            console.log(response);
+                        }
+                    });
+                    setTimeout(function(){
+                        location.reload()},2000);
+                    });
+                }
+
     </script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
