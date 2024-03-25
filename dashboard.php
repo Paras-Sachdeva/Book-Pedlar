@@ -12,34 +12,7 @@
     <?php
         require("./Components/loader.php");  //Loader Component
 
-        $j=0;
-    ?>   
-                <div id="box">
-                    <div id="notify-head">
-                        <div id="notify-text"><h4>NOTIFICATION</h4></div>
-                        <div id="notify-close-icon">
-                            <i class="fa-solid fa-square-xmark close-icon" title="Close Notification"></i>
-                        </div>
-                    </div>
-                    <div id="notify-content">
-                        <div id="user-interested">
-                            <div id="user-interested-pic"></div>
-                            <div id="user-interested-name"><h6>Sagar</h6></div>
-                        </div>
-                        <div id="interested-text"><p style="font-size:0.85rem;">Is looking forward to buy your Book</p></div>
-                        <div id="interested-book">
-                            <div class="interested-book-pic"></div>
-                            <div id="interested-book-name"><h6>Sample Book Name</h6></div>
-                        </div>
-                    </div>
-                    <div id="notify-btns">
-                        <button id="notify-btn-approve">Approve Request & Start Chat</button>                    
-                        <button id="notify-btn-delete">Delete Notification</button>                    
-                    </div>
-                </div>
-                <div class="content">
-    <?php
-
+        echo("<div class='content'>");
         require("./Components/header.php");  //Header Component
 
         // <!-- Navigation List -->
@@ -207,15 +180,46 @@
                                 You have not added any books<br>Click on <h2 style='text-decoration:none;text-align:center'>ADD BOOK</h2>
                             </div>");
                 }        
-                mysqli_close($conn);
             ?>
         </div>
         <?php
             echo("</div>");
             require("./Components/footer.php");
-        ?>
-        </div> <!--  Content Div -->
+            echo("</div>"); //content div
 
+            $sql6 = "SELECT * FROM user_notification WHERE userid='$userid'";
+            $result6 = mysqli_query($conn,$sql6);
+            $j=0;
+            while($row6=mysqli_fetch_assoc($result6)){
+        ?>
+            <div class="box" id="<?php echo($j.'j'); ?>">
+                <div id="notify-head">
+                    <div id="notify-text"><h4>NOTIFICATION</h4></div>
+                    <div class="notify-close-icon" id="<?php echo('j'.$j); ?>">
+                        <i class="fa-solid fa-square-xmark close-icon" title="Close Notification"></i>
+                    </div>
+                </div>
+                <div id="notify-content">
+                    <div id="user-interested">
+                        <div class="user-interested-pic" id="<?php echo($j.'0'); ?>"></div>
+                        <div class="user-interested-name" id="<?php echo($j.'1'); ?>"><h6>Sample Name</h6></div>
+                    </div>
+                    <div id="interested-text"><p style="font-size:0.85rem;">Is looking forward to buy your Book</p></div>
+                    <div id="interested-book">
+                        <div class="interested-book-pic" id="<?php echo($j.'2'); ?>"></div>
+                        <div class="interested-book-name" id="<?php echo($j.'3'); ?>"><h6>Sample Book Name</h6></div>
+                    </div>
+                </div>
+                <div id="notify-btns">
+                    <button id="notify-btn-approve">Approve Request & Start Chat</button>                    
+                    <button id="notify-btn-delete">Delete Notification</button>                    
+                </div>
+            </div>
+        <?php
+                $j++;
+            }
+            mysqli_close($conn);
+        ?>
         <!-- JavaScript -->
         <script>
             // Upload Profile Photo
@@ -357,16 +361,31 @@
                 console.log(jsSmallSenderId[i]+'-'+i);
                 console.log(jsSmallPhotoTag);
                 jsSmallPhotoTag.style.backgroundImage="url('Uploads/"+jsSmallPhoto[i]+"')";
-                jsSmallPhotoTag.style.backgroundSize="60px 60px";    
+                jsSmallPhotoTag.style.backgroundSize="60px 60px";   
+                let userNotifyPic=document.getElementById(i+"0");
+                userNotifyPic.style.backgroundImage="url('Uploads/"+jsSmallPhoto[i]+"')";
+                userNotifyPic.style.backgroundSize="80px 80px";   
             }
 
             // Notification Click Event
             let jsNotifyClick = <?php echo json_encode($arr6); ?>;
             let jsNotifyId = <?php echo json_encode($arr7); ?>;
+            let bookNotifyNames=<?php echo json_encode($arr8); ?>;
+            let userNotifyNames=<?php echo json_encode($arr9); ?>;
+            let bookNotifyPics=<?php echo json_encode($arr10); ?>;
+
             let content = document.querySelector('.content');
             for(let i=0; i<jsNotifyId.length;i++){
                 let jsNotifyBar=document.getElementById(jsNotifyId[i]);
+
+                let userNotifyName=document.getElementById(i+"1");
+                let bookNotifyName=document.getElementById(i+"3");
+                let bookNotifyPic=document.getElementById(i+"2");
+
+                let box=document.getElementById(i+"j");
+
                 jsNotifyBar.addEventListener("click",function(event){
+                    console.log(i);
                     var viewportWidth = window.innerWidth;
                     var viewportHeight = window.innerHeight;
                     var centerX = viewportWidth / 2;
@@ -376,21 +395,23 @@
                     content.style.pointerEvents = 'none';
                     document.body.style.overflow = 'hidden';
 
-                    let box=document.getElementById("box");
                     box.style.display="flex";
                     box.style.flexDirection="column";
                     box.style.transform = 'scale(2)';
                     box.style.position = 'fixed';
                     box.style.left = centerX - box.offsetWidth / 2 + 'px';
                     box.style.top = centerY - box.offsetHeight / 2 + 'px';
-
-                    let closeIcon=document.querySelector(".close-icon");
-                    closeIcon.addEventListener("click",function(){
-                        box.style.display="none";
-                        content.classList.remove('blur');
-                        content.style.pointerEvents = 'auto';
-                        document.body.style.overflow = 'auto';
-                    });
+                    userNotifyName.innerHTML="<h6>"+userNotifyNames[i]+"</h6>";
+                    bookNotifyName.innerHTML="<h6>"+bookNotifyNames[i]+"</h6>";
+                    bookNotifyPic.style.backgroundImage="url('Uploads/"+bookNotifyPics[i]+"')";
+                    bookNotifyPic.style.backgroundSize="80px 80px";
+                }); 
+                let closeIcon=document.getElementById("j"+i);
+                closeIcon.addEventListener("click",function(){
+                    box.style.display="none";
+                    content.classList.remove('blur');
+                    content.style.pointerEvents = 'auto';
+                    document.body.style.overflow = 'auto';
                 });
             }
     </script>

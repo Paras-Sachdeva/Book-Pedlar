@@ -153,7 +153,7 @@ a{
     filter: blur(5px);
 }
 
-#box{
+.box{
     display: none;
     border: 0.1rem solid black;
     font-family: 'roboto', sans-serif;
@@ -179,9 +179,13 @@ a{
     margin-left:7rem;
 }
 
-#notify-close-icon{
+.notify-close-icon{
     margin-left:6rem;
     margin-top:0.2rem;
+}
+
+.notify-close-icon:hover{
+    scale: 0.9;
 }
 
 #notify-content{
@@ -196,7 +200,7 @@ a{
     flex-grow: 0;
 }
 
-#user-interested-pic{
+.user-interested-pic{
     width: 5rem;
     height: 5rem;
     border-radius: 50%;
@@ -204,7 +208,7 @@ a{
     border: 0.2rem solid black;
 }
 
-#user-interested-name{
+.user-interested-name{
     margin-left: 0.5rem;
 }
 
@@ -225,7 +229,7 @@ a{
     border: 0.2rem solid black;
 }
 
-#interested-book-name{
+.interested-book-name{
     margin-left: 0.5rem;
 }
 
