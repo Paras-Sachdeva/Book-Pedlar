@@ -256,10 +256,12 @@ a{
 
 .notify-btn-approve:hover{
     background-color: green;
+    cursor: pointer;
 }
 
 .notify-btn-delete{
     background-color: #aa6276;
+    cursor: pointer;
 }
 
 .notify-btn-delete:hover{
@@ -698,6 +700,10 @@ label {
 
 .send-icon{
     padding: 0.5rem;
+}
+
+.send-icon:hover{
+    cursor: pointer;
 }
 
 #message-input-box{

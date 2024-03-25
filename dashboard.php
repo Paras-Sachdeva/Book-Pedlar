@@ -84,6 +84,9 @@
                 $arr9=array();
                 $arr10=array();
                 $arr11=array();
+                $arr12=array();
+                $arr13=array();
+                $arr14=array();
                 if(mysqli_num_rows($result2)>0){            
                     echo("<div class='outside-notifications'>
                                 <div class='notifications'>
@@ -100,13 +103,16 @@
                         $result3=mysqli_query($conn,$sql3);
                         $row3=mysqli_fetch_assoc($result3);
                         $senderName=$row3['username'];
+                        array_push($arr13,$row3['id']);
                         array_push($arr4,$row3['profileImage']);
                         array_push($arr5,$senderId);
                         $bookId=$row2['bookid'];
                         $sql5="SELECT * FROM book_data WHERE id='$bookId'";
                         $result5=mysqli_query($conn,$sql5);
                         $row5=mysqli_fetch_assoc($result5);
+                        array_push($arr14,$row5['id']);
                         $bookName=$row5['bookname'];
+                        array_push($arr12,$row5['author']);
                         $bookPhoto=$row5['photo'];
                         array_push($arr8,$bookName);
                         array_push($arr9,$senderName);
@@ -439,9 +445,39 @@
                     });
                     setTimeout(function(){
                         location.reload()},2000);
-                    });
-                }
+                });
 
+                // Notification Approve Button
+                let senderid = <?php echo json_encode($userid); ?>;
+                let bookAuthors = <?php echo json_encode($arr12); ?>;
+                let userNotifyIds = <?php echo json_encode($arr13); ?>;
+                let BookIds = <?php echo json_encode($arr14); ?>;
+                let ApproveBtn=document.getElementById("ApproveBtn"+i);
+                ApproveBtn.addEventListener("click",function(){
+                    let notifyBox=document.getElementById(i);
+                    notifyBox.style.backgroundColor="Green";
+                    let jsNotifyObject2={};
+                    jsNotifyObject2.senderid=senderid;
+                    jsNotifyObject2.recieverid=userNotifyIds[i];
+                    jsNotifyObject2.bookName=bookNotifyNames[i];
+                    jsNotifyObject2.bookAuthor=bookAuthors[i];
+                    jsNotifyObject2.bookId=BookIds[i];
+                    $.ajax({
+                        url:"approveMessage.php",
+                        method:"POST",
+                        data:{ jsNotifyObject2: JSON.stringify(jsNotifyObject2)},
+                        success:function(response){
+                            console.log(response);
+                        }
+                    });
+                    setTimeout(function(){
+                        location.reload();
+                        alert("Check Messages for Further Updates");
+                    },2000);
+                });
+            }
+
+                
     </script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
