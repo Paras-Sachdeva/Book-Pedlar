@@ -9,6 +9,10 @@ body{
     font-family: 'roboto', sans-serif;
     font-size: 1.2rem;
     background-color:#F5F5F5;
+    overflow-x: hidden;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
 }
 
 .content {
