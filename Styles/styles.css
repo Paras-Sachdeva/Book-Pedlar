@@ -276,6 +276,17 @@ a{
     background-color: #333333;
 }
 
+#picture{
+    margin-top: 2rem;
+    height: 18.75rem;
+    width: 18.75rem;
+    border: 0.2rem solid white;
+    border-radius: 50%;
+    background-color: black;
+    background-image:url('Images/ProfileImg.jpg'); 
+    background-size: 300px 300px;
+}
+
 .profile h1{
     text-align: center;
     margin-top: 1rem;
@@ -351,7 +362,7 @@ a{
     margin-bottom: 1rem;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    align-items: center;
 }
 
 .notify:hover{
@@ -361,7 +372,7 @@ a{
 
 .notification-content{
     margin-left: 1rem;
-    padding: 0.5rem;
+    /* padding: 0.5rem; */
 }
 
 .small-buyer-pic{

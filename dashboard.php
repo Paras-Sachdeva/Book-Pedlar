@@ -37,7 +37,7 @@
         <div class="out-profile-books">
           <div class="profile" style="height:auto;">
             <h1>YOUR PROFILE</h1>
-            <div class="pic" id="picture" style="margin-top: 2rem;height: 18.75rem;width: 18.75rem;border: 0.2rem solid white;border-radius: 50%;background-color: black; background-image:url('Images/ProfileImg.jpg'); background-size: 300px 300px;">
+            <div class="pic" id="picture">
             </div>
             <div class="user-info">
                 <?php
@@ -358,13 +358,18 @@
             let jsSmallSenderId=<?php echo json_encode($arr5); ?>;
             for(let i=0;i<jsSmallPhoto.length;i++){
                 let jsSmallPhotoTag=document.getElementById(jsSmallSenderId[i]+'-'+i);
-                console.log(jsSmallSenderId[i]+'-'+i);
-                console.log(jsSmallPhotoTag);
-                jsSmallPhotoTag.style.backgroundImage="url('Uploads/"+jsSmallPhoto[i]+"')";
-                jsSmallPhotoTag.style.backgroundSize="60px 60px";   
                 let userNotifyPic=document.getElementById(i+"0");
-                userNotifyPic.style.backgroundImage="url('Uploads/"+jsSmallPhoto[i]+"')";
-                userNotifyPic.style.backgroundSize="80px 80px";   
+                if(jsSmallPhoto[i]!=''){    
+                    jsSmallPhotoTag.style.backgroundImage="url('Uploads/"+jsSmallPhoto[i]+"')";
+                    jsSmallPhotoTag.style.backgroundSize="56px 56px";
+                    userNotifyPic.style.backgroundImage="url('Uploads/"+jsSmallPhoto[i]+"')";
+                    userNotifyPic.style.backgroundSize="80px 80px";
+                }else{
+                    jsSmallPhotoTag.style.backgroundImage="url('Images/ProfileImg.jpg')";
+                    jsSmallPhotoTag.style.backgroundSize="56px 56px";
+                    userNotifyPic.style.backgroundImage="url('Images/ProfileImg.jpg')";
+                    userNotifyPic.style.backgroundSize="80px 80px";
+                }
             }
 
             // Notification Click Event
