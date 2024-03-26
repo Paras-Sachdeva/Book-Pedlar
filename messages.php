@@ -43,6 +43,10 @@
                 FROM user_chat WHERE senderid=$userid
             ) AS unique_users";
         $result1=mysqli_query($conn,$sql1);
+        $count=mysqli_num_rows($result1);
+        if($count==0){
+            header("Location: dashboard.php?noMessages=y");
+        }
     ?>
     <div class='search-results'>
         MESSAGES

@@ -476,6 +476,17 @@
                     },2000);
                 });
             }
+
+            // Alert for No Messages
+            var queryParams = new URLSearchParams(window.location.search);
+            var myVariable = queryParams.get('noMessages');
+            console.log(myVariable);   
+            if(myVariable=='y'){
+                alert("You Have No Messages Yet");
+                var urlParams = new URLSearchParams(window.location.search);
+                urlParams.delete('noMessages');
+                window.history.replaceState({}, '', `${window.location.pathname}?${urlParams}`);
+            }  
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </body>
