@@ -18,15 +18,22 @@
     $condition=$_REQUEST["condition"];
     $additional_info=$_REQUEST["addInfo"];
     $bookStatus=$_REQUEST['status'];
-    $changeBookPic=$_REQUEST["changeBookPic"];
+    // $changeBookPic=$_REQUEST["changeBookPic"];
     $bookId=$_GET['id'];
 
-    if($_REQUEST['changeBookPic']==""){
+    $fileName = $_FILES["changeBookPic"]["name"];
+    $fileTmpName = $_FILES["changeBookPic"]["tmp_name"];
+    $fileSize = $_FILES["changeBookPic"]["size"];
+    $fileType = $_FILES["changeBookPic"]["type"];
+
+    if($fileName==""){
         $sql1="UPDATE book_data SET bookname='$book_name',author='$author_name',publisher='$publisher',actualprice=$mrp,sellprice=$selling_price,bookstatus='$bookStatus',genre='$genre',bookcondition='$condition',addinfo='$additional_info' WHERE id='$bookId'";
         mysqli_query($conn,$sql1);
     }else{
-        $sql2="UPDATE book_data SET bookname='$book_name',author='$author_name',publisher='$publisher',actualprice=$mrp,sellprice=$selling_price,bookstatus='$bookStatus',genre='$genre',bookcondition='$condition',addinfo='$additional_info', photo='$changeBookPic' WHERE id='$bookId'";
+        $sql2="UPDATE book_data SET bookname='$book_name',author='$author_name',publisher='$publisher',actualprice=$mrp,sellprice=$selling_price,bookstatus='$bookStatus',genre='$genre',bookcondition='$condition',addinfo='$additional_info', photo='$fileName' WHERE id='$bookId'";
         mysqli_query($conn,$sql2);
+        $destination = "Uploads/" . $fileName;
+        move_uploaded_file($fileTmpName, $destination);
     }
 
     header("Location: dashboard.php");

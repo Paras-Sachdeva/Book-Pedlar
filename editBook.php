@@ -46,7 +46,7 @@
             <div id='book-photo-alone' style='width: 272px;height:320px;margin-top:2rem;border:0.6rem solid black;'></div>
             <div class="form-section" style="margin-top:2rem;">
             <?php
-                echo("<form action='processBookEdit.php?id=$bookIdChange' method='POST' id='form1'>"); ?>
+                echo("<form action='processBookEdit.php?id=$bookIdChange' method='POST' id='form1' enctype='multipart/form-data'>"); ?>
                     <label for="changeBookPic">Change Book Picture</label><br>
                     <input type="file" name="changeBookPic" id="changeBookPic" accept=".jpg, .jpeg, .png, .gif">
                     <div id="image-preview" style="margin: 1rem;"></div>
