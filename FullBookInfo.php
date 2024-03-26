@@ -214,7 +214,7 @@
             let jsBookPhoto=<?php echo json_encode($photo7); ?>;
             let divPhoto=document.getElementById("book-photo-alone");
             divPhoto.style.backgroundImage="url('"+jsBookPhoto+"')";
-            divPhoto.style.backgroundSize="325px 350px";    
+            divPhoto.style.backgroundSize="275px 320px";    
 
             let jsCheckPhoto = <?php echo json_encode($seller_image9); ?>;
             console.log(jsCheckPhoto);

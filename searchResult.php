@@ -222,7 +222,7 @@
         for(let i=0;i<jsBookId.length;i++){
             let divInner1=document.getElementById("book-"+jsBookId[i]);
             divInner1.style.backgroundImage="url('"+jsBookPhoto[i]+"')";
-            divInner1.style.backgroundSize="325px 350px";    
+            divInner1.style.backgroundSize="280px 325px";    
             let clickableDiv=document.getElementById("book-outer-"+jsBookId[i]);
             if(jsSoldBook[i]==true){
                 divInner1.innerHTML="<img src='Images/sold-rubber-stamp-free-png.webp' height='320px' width='280px'>";
