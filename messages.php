@@ -65,12 +65,39 @@
         $j=0;
         $arr1=array();
         $arr2=array();
+        $arr3=array();
+        $arr4=array();
+        if(isset($_GET['id'])){
+            $sql4="SELECT * FROM user_data WHERE id=$_GET[id]";
+            $result4=mysqli_query($conn,$sql4);
+            $row4=mysqli_fetch_assoc($result4);
+            array_push($arr4,$row4['profileImage']);
+            array_push($arr2,$row4['username']);
+        }else{
+            for($k=1;$k<2;$k++){
+                $sql5="SELECT DISTINCT user_id
+                        FROM (
+                            SELECT senderid AS user_id
+                            FROM user_chat WHERE recieverid=$userid
+                            UNION
+                            SELECT recieverid AS user_id
+                            FROM user_chat WHERE senderid=$userid
+                        ) AS unique_users LIMIT 1";
+                $result5=mysqli_query($conn,$sql5);
+                $row5=mysqli_fetch_assoc($result5);
+                $sql6="SELECT * FROM user_data WHERE id=$row5[user_id]";
+                $result6=mysqli_query($conn,$sql6);
+                $row6=mysqli_fetch_assoc($result6);
+                array_push($arr4,$row6['profileImage']);
+                array_push($arr2,$row6['username']);
+            }
+        }
         while($row1=mysqli_fetch_array($result1)){
             $sql2="SELECT * FROM user_data WHERE id=$row1[user_id]";
             $result2=mysqli_query($conn,$sql2);
             $row2=mysqli_fetch_assoc($result2);
             array_push($arr1,$row2['profileImage']);
-            array_push($arr2,$row2['username']);
+            array_push($arr3,$row2['id']);
     ?>
                 <div class="message-ppl-list">
                     <div class="message-ppl-pic" id="<?php echo($j.'1'); ?>"></div>
@@ -78,6 +105,11 @@
                 </div>
     <?php
             $j++;
+        }
+        $sql7="SELECT * FROM user_chat WHERE (senderid=(SELECT id FROM user_data WHERE username='$arr2[0]') && recieverid=$userid) || (senderid=$userid && recieverid=(SELECT id FROM user_data WHERE username='$arr2[0]'))";
+        $result7=mysqli_query($conn,$sql7);
+        while($row7=mysqli_fetch_assoc($result7)){
+            // echo($row7['message']);
         }
     ?>
             </div>
@@ -121,23 +153,28 @@
         }
 
         // User Click
-        let jsUserNames=<?php echo json_encode($arr2); ?>;
+        let jsUserIds=<?php echo json_encode($arr3); ?>;
         let messagePplList=document.getElementsByClassName("message-ppl-list");
-        for(let i=0;i<jsUserNames.length;i++){
+        for(let i=0;i<jsUserIds.length;i++){
             messagePplList[i].addEventListener("click",function(){
-                let messageCurrent=document.getElementById("message-current-name");
-                let jsBigPhoto=document.getElementById("message-current-pic");
-                messageCurrent.innerText=jsUserNames[i];
-                if(jsSmallPhotos[i]!=''){    
-                    jsBigPhoto.style.backgroundImage="url('Uploads/"+jsSmallPhotos[i]+"')";
-                    jsBigPhoto.style.border="0.1rem solid black";
-                    jsBigPhoto.style.backgroundSize="112px 112px";
-                }else{
-                    jsBigPhoto.style.backgroundImage="url('Images/ProfileImg.jpg')";
-                    jsBigPhoto.style.border="0.1rem solid black";
-                    jsBigPhoto.style.backgroundSize="112px 112px";
-                }
+                window.location.search = "id=" + encodeURIComponent(jsUserIds[i]);
             });
+        }
+
+        // Upload Current User Details & Messages
+        let jsUserNames=<?php echo json_encode($arr2); ?>;
+        let jsUserPhotos=<?php echo json_encode($arr4); ?>;
+        let messageCurrent=document.getElementById("message-current-name");
+        let jsBigPhoto=document.getElementById("message-current-pic");
+        messageCurrent.innerText=jsUserNames[0];
+        if(jsUserPhotos[0]!=''){    
+            jsBigPhoto.style.backgroundImage="url('Uploads/"+jsUserPhotos[0]+"')";
+            jsBigPhoto.style.border="0.1rem solid black";
+            jsBigPhoto.style.backgroundSize="112px 112px";
+        }else{
+            jsBigPhoto.style.backgroundImage="url('Images/ProfileImg.jpg')";
+            jsBigPhoto.style.border="0.1rem solid black";
+            jsBigPhoto.style.backgroundSize="112px 112px";
         }
     </script>
     <script src="JS/script.js"></script>    
