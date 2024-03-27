@@ -114,7 +114,7 @@
         let jsBookPhoto="uploads/"+<?php echo json_encode($photo); ?>;
         let divPhoto=document.getElementById("book-photo-alone");
         divPhoto.style.backgroundImage="url('"+jsBookPhoto+"')";
-        divPhoto.style.backgroundSize="325px 350px";
+        divPhoto.style.backgroundSize="280px 325px";
 
         // Book Pic Preview
         document.getElementById('changeBookPic').addEventListener('change', function() {

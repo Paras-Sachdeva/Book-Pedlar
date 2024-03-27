@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Pedlar - User Profile</title>
+    <title>Book Pedlar - Seller Profile</title>
     <link rel="icon" href="Images/Icon.png" type="image/x-icon">
-    <link rel="stylesheet" href="Styles/styles.css?v=2">
+    <link rel="stylesheet" href="Styles/styles.css?v=8">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
@@ -19,8 +19,8 @@
         // <!-- Navigation List -->
         echo("<div class='navList'>
                     <a href='index.php' class='linkAni'>Home</a>
+                    <a href='dashboard.php' class='linkAni'>Profile</a>
                     <a href='addBook.php' class='linkAni'>Add Book</a>
-                    <a href='messages.php' class='linkAni'>Messages</a>
                     <a href='about.html' class='linkAni'>About Us</a>
                 </div>");
 
@@ -28,7 +28,7 @@
         $username = "root";
         $password = "";
         $database = "book_pedlar";
-        $userid=$_SESSION['userid'];
+        $userid=$_GET['id'];
 
         $conn = mysqli_connect($host, $username, $password, $database);
         if (!$conn) {

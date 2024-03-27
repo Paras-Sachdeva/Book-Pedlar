@@ -254,7 +254,7 @@
             let visitSeller=document.getElementById("visit-seller-btn");
             visitSeller.addEventListener("click",function(){
                 let sellerId=<?php echo json_encode($sellerId); ?>;
-                window.location.href="visitSeller.php?id="+sellerId;
+                window.location.href="sellerProfile.php?id="+sellerId;
             });
         </script>
         <script src="JS/script.js"></script>
