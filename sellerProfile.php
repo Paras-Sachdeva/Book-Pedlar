@@ -20,7 +20,7 @@
         echo("<div class='navList'>
                     <a href='index.php' class='linkAni'>Home</a>
                     <a href='dashboard.php' class='linkAni'>Profile</a>
-                    <a href='addBook.php' class='linkAni'>Add Book</a>
+                    <a href='messages.php' class='linkAni'>Messages</a>
                     <a href='about.html' class='linkAni'>About Us</a>
                 </div>");
 
@@ -37,7 +37,7 @@
         <!-- User Profile Section -->
         <div class="out-profile-books">
           <div class="profile" style="height:auto;">
-            <h1>YOUR PROFILE</h1>
+            <h1>SELLER PROFILE</h1>
             <div class="pic" id="picture">
             </div>
             <div class="user-info">
@@ -45,6 +45,8 @@
                     $sql1 = "SELECT * FROM user_data WHERE id='$userid'";
                     $result1 = mysqli_query($conn,$sql1);
                     $row1 = mysqli_fetch_assoc($result1);
+                    $latitude=$row1['latitude'];
+                    $longitude=$row1['longitude'];
                     $user_name=$row1['username'];
                     $e_mail=$row1['email'];
                     echo("<p style='text-align:center;'>".$user_name."<br>".$e_mail."</p>");
@@ -52,84 +54,6 @@
                     $uploadedFileName=$row1['profileImage'];
                 ?>
             </div>
-            <div class="pic-form">
-                <form action="" method="POST" enctype="multipart/form-data" id="uploadForm">
-                    <label for="profilePicture">Upload Profile Picture</label><br>
-                    <input type="file" name="profilePicture" id="profilePicture" accept=".jpg, .jpeg, .png, .gif">
-                    <input type="submit" value="Upload" id="upload-btn">
-                </form>
-                <?php
-                    if (isset($_FILES["profilePicture"]) && $_FILES["profilePicture"]["error"] == 0) {
-                        $UploadsDirectory = 'Uploads/';
-                        $uploadedFileName = $_FILES["profilePicture"]["name"];
-                        $targetFilePath = $UploadsDirectory . $uploadedFileName;
-                        move_uploaded_file($_FILES["profilePicture"]["tmp_name"], $targetFilePath);
-                        $sql = "UPDATE user_data SET profileImage='$uploadedFileName' WHERE id='$userid'";
-                        mysqli_query($conn,$sql);
-                    }else{
-                    }
-                ?>
-            </div>
-            <div class="add-book">
-                <button id="openPageButton">ADD BOOK</button>
-            </div>
-            <div id="delete-account">
-                <button>Delete Account</button>
-            </div>
-            <?php
-                $sql2 = "SELECT * FROM user_notification WHERE userid='$userid'";
-                $result2 = mysqli_query($conn,$sql2);
-                $arr4=array();
-                $arr5=array();
-                $arr6=array();
-                $arr7=array();
-                $arr8=array();
-                $arr9=array();
-                $arr10=array();
-                $arr11=array();
-                $arr12=array();
-                $arr13=array();
-                $arr14=array();
-                if(mysqli_num_rows($result2)>0){            
-                    echo("<div class='outside-notifications'>
-                                <div class='notifications'>
-                                    <H2>NOTIFICATIONS</H2>
-                                </div>
-                                <div class='new-notification'>");
-                    $i=0;
-                    while($row2=mysqli_fetch_assoc($result2)){
-                        array_push($arr6,$row2['id']);
-                        array_push($arr7,$i);
-                        array_push($arr11,$row2['id']);
-                        $senderId=$row2['senderid'];
-                        $sql3="SELECT * FROM user_data WHERE id='$senderId'";
-                        $result3=mysqli_query($conn,$sql3);
-                        $row3=mysqli_fetch_assoc($result3);
-                        $senderName=$row3['username'];
-                        array_push($arr13,$row3['id']);
-                        array_push($arr4,$row3['profileImage']);
-                        array_push($arr5,$senderId);
-                        $bookId=$row2['bookid'];
-                        $sql5="SELECT * FROM book_data WHERE id='$bookId'";
-                        $result5=mysqli_query($conn,$sql5);
-                        $row5=mysqli_fetch_assoc($result5);
-                        array_push($arr14,$row5['id']);
-                        $bookName=$row5['bookname'];
-                        array_push($arr12,$row5['author']);
-                        $bookPhoto=$row5['photo'];
-                        array_push($arr8,$bookName);
-                        array_push($arr9,$senderName);
-                        array_push($arr10,$bookPhoto);
-                        echo("  <div class='notify' id='$i'>
-                                    <div class='small-buyer-pic' id='$senderId-$i'>
-                                    </div>
-                                    <div class='notification-content'><b>$senderName</b> is interested to buy <b>\"$bookName\"</b></div> 
-                                </div>");
-                        $i++;
-                    }
-                    echo("</div></div>");
-                }
-            ?>
         </div>
             
         <!-- User Uploaded Book Section -->
@@ -164,6 +88,8 @@
                                         </div>
                                         <div class='details-book'>
                                             <h5>Author</h5> $author4<br><br>
+
+                                            <h5>Publisher</h5> $publisher4<br><br>
                                         
                                             <h5>Genre</h5> $genre4<br>
                                         </div>
@@ -172,11 +98,6 @@
                                             <h6 style='color:red;text-decoration:line-through;display:inline;'>&#x20b9;$actual_price4</h6>
                                             <h4 style='color:green;display:inline;'>$discount4%</h4><h4 style='display:inline;'>off</h4>
                                         </div>
-                                        <div class='deleteEdit-book'>
-                                            <br>
-                                            <button name='editbook' class='edit-book' id='$book_id4!'>Edit Book</button>
-                                            <button name='removebook' class='remove-book' id='$book_id4'>Remove Book</button>
-                                        </div> 
                                     </div>
                                 </div>");
                         if($book_status4=='Sold'){
@@ -190,7 +111,7 @@
                     }
                 } else {
                     echo("<div class='no-books' style='background-color:#f5f5f5'>
-                                You have not added any books<br>Click on <h2 style='text-decoration:none;text-align:center'>ADD BOOK</h2>
+                                Seller has not added any books
                             </div>");
                 }        
             ?>
@@ -232,26 +153,9 @@
                 }
             }
 
-            // Get User Coordinates
-            let userId=<?php echo json_encode($userid); ?>;
-            navigator.geolocation.getCurrentPosition((position)=>{
-            let latitude=position.coords.latitude;
-            let longitude=position.coords.longitude;
-            console.log(latitude+"  "+longitude);
-            let jsObject1={};
-            jsObject1.lati=latitude;
-            jsObject1.longi=longitude;
-            jsObject1.id=userId;
-            $.ajax({
-                url:"coordinates.php",
-                method:"POST",
-                data:{ jsObject1: JSON.stringify(jsObject1)},
-                success:function(response){
-                    console.log(response);
-                }
-            });
-
             // Get User Location Details
+            let jsLatitude=<?php echo json_encode($latitude); ?>;
+            let jsLongitude=<?php echo json_encode($longitude); ?>;
             function getPlaceDetails(latitude, longitude) {
                 const apiUrl = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`;
                 let placeDetailsDisplay = document.getElementById("place-details");
@@ -285,8 +189,7 @@
                     console.error('Error fetching place details:', error);
                 });
             }
-            getPlaceDetails(latitude,longitude);
-            });
+            getPlaceDetails(jsLatitude,jsLongitude);
         </script>
 
         <script src="JS/script.js"></script>
