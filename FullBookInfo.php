@@ -210,6 +210,7 @@
 
     ?> 
         <script>
+            // Display Seller Book Pic & Profile Pic
             let jsBookId=<?php echo json_encode($selected_bookid); ?>;
             let jsBookPhoto=<?php echo json_encode($photo7); ?>;
             let divPhoto=document.getElementById("book-photo-alone");
@@ -228,6 +229,25 @@
                 uploading.style.backgroundImage="url('Images/ProfileImg.jpg')";
                 uploading.style.backgroundSize="140px 140px";
             } 
+
+            // Interested Book Button
+            let jsSmallPhotos=<?php echo json_encode($selected_bookid); ?>;
+            let InterestedBtn=document.getElementById("interested-btn");
+            InterestedBtn.addEventListener("click",function(){
+                let jsObject={};
+                jsObject.bookSeller=<?php echo json_encode($user_id7); ?>;
+                jsObject.bookBuyer=<?php echo json_encode($userid); ?>;
+                jsObject.bookId=<?php echo json_encode($selected_bookid); ?>;
+                $.ajax({
+                    url:"sendNotification.php",
+                    method:"POST",
+                    data:{ jsObject: JSON.stringify(jsObject)},
+                    success:function(response){
+                        console.log(response);
+                    }
+                });
+                alert("The Book Seller has been notified.\nCheck Messages for further Updates.");
+            });
         </script>
         <script src="JS/script.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>

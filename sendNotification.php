@@ -19,3 +19,5 @@
         $sql="INSERT INTO user_notification (userid, senderid, bookid) VALUES ($jsObject->bookSeller, $jsObject->bookBuyer, $jsObject->bookId)";
         mysqli_query($conn,$sql);
     }
+
+    header("Location: FullBookInfo.php");
