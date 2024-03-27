@@ -389,6 +389,23 @@ a{
     flex-shrink: 0;
 }
 
+.delete-account button{
+    padding: 1rem;
+    background-color: #aa6276;
+    width: 7rem;
+    height: 5rem;
+    margin: 2rem;
+    font-weight: 900;
+    font-size: 1rem;
+    border-radius: 15px;
+    margin-left: 20rem;
+}
+
+.delete-account button:hover{
+    background-color: red;
+    cursor: pointer;
+}
+
 .user-books{
     width: 60%;
     display:flex;
@@ -651,7 +668,7 @@ label {
     height: 3.5rem;
     border-radius: 50%;
     border: 0.1rem solid black;
-    background-color: pink;
+    /* background-color: pink; */
 }
 
 .message-ppl-name{
@@ -686,7 +703,7 @@ label {
 
 .message-box-display{
     overflow-y: auto;
-    height: 26rem;
+    /* height: 26rem; */
     padding: 2rem;
 }
 

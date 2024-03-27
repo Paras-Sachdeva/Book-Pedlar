@@ -73,6 +73,9 @@
             <div class="add-book">
                 <button id="openPageButton">ADD BOOK</button>
             </div>
+            <div class="delete-account">
+                <button>Delete Account</button>
+            </div>
             <?php
                 $sql2 = "SELECT * FROM user_notification WHERE userid='$userid'";
                 $result2 = mysqli_query($conn,$sql2);
@@ -128,6 +131,7 @@
                 }
             ?>
         </div>
+            
         <!-- User Uploaded Book Section -->
         <div class="user-books">
             <?php

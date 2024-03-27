@@ -112,9 +112,6 @@
         }
         $sql7="SELECT * FROM user_chat WHERE (senderid=(SELECT id FROM user_data WHERE username='$arr2[0]') && recieverid=$userid) || (senderid=$userid && recieverid=(SELECT id FROM user_data WHERE username='$arr2[0]'))";
         $result7=mysqli_query($conn,$sql7);
-        while($row7=mysqli_fetch_assoc($result7)){
-            // echo($row7['message']);
-        }
     ?>
             </div>
             <div class="message-box">
@@ -123,7 +120,23 @@
                     <div id="message-current-name"></div>
                 </div>
                 <div class="message-box-content">
-                    <div class="message-box-display"></div>
+    <?php
+        $i=0;
+        $countS=0;
+        $countR=0;
+        while($row7=mysqli_fetch_assoc($result7)){
+            if($row7['senderid']==$userid){
+                echo("<div class='message-box-display' id='s.$i'>$row7[message]</div>");
+                $countS++;
+            }else{
+                echo("<div class='message-box-display' id='r.$i'>$row7[message]</div>");
+                $countR++;
+            }
+            $i++;
+        }
+        $cS=$countS;
+        $cR=$countR;
+    ?>
                     <div class="message-box-textarea">
                         <div class="message-textarea">
                             <i class="fa-solid fa-paper-plane send-icon"></i>

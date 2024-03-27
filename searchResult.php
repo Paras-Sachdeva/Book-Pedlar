@@ -21,7 +21,7 @@
                 echo("<div class='navList'>
                             <a href='dashboard.php' class='linkAni'>Profile</a>
                             <a href='addBook.php' class='linkAni'>Add Book</a>
-                            <a href='#' class='linkAni'>Messages</a>
+                            <a href='messages.php' class='linkAni'>Messages</a>
                             <a href='about.html' class='linkAni'>About Us</a>
                         </div>");
                         $host = "localhost";
