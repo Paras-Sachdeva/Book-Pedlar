@@ -73,7 +73,7 @@
             <div class="add-book">
                 <button id="openPageButton">ADD BOOK</button>
             </div>
-            <div class="delete-account">
+            <div id="delete-account">
                 <button>Delete Account</button>
             </div>
             <?php
@@ -491,6 +491,12 @@
                 urlParams.delete('noMessages');
                 window.history.replaceState({}, '', `${window.location.pathname}?${urlParams}`);
             }  
+
+            // Delete Account Button
+            let delAccBtn=document.getElementById("delete-account");
+            delAccBtn.addEventListener("click",function(){
+                window.location.href="deleteAccount.php";
+            });
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </body>

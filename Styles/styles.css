@@ -389,7 +389,7 @@ a{
     flex-shrink: 0;
 }
 
-.delete-account button{
+#delete-account button{
     padding: 1rem;
     background-color: #aa6276;
     width: 7rem;
@@ -401,7 +401,7 @@ a{
     margin-left: 20rem;
 }
 
-.delete-account button:hover{
+#delete-account button:hover{
     background-color: red;
     cursor: pointer;
 }
