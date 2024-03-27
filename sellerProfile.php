@@ -65,6 +65,7 @@
                 $arr1=array();
                 $arr2=array();
                 $arr3=array();
+                $arr4=array();
                 if (mysqli_num_rows($result4) > 0) {
                     while ($row4=mysqli_fetch_assoc($result4)) {
                         $book_name4=$row4['bookname'];
@@ -80,7 +81,7 @@
                         $book_id4=$row4['id'];
                         $flag=false;
                         $discount4=(int)((($actual_price4-$sell_price4)/$actual_price4)*100);
-                        echo("<div class='book-outer'>
+                        echo("<div class='book-outer'  id='book-outer-$book_id4'>
                                     <div class='book-inner1' id='book-$book_id4'></div>
                                     <div class='book-inner2'>
                                         <div class='heading-book' style='text-align:center;'>
@@ -108,6 +109,7 @@
                         array_push($arr2,$book_id4);
                         array_push($arr1,$photo4);
                         array_push($arr3,$flag); 
+                        array_push($arr4,$book_id4); 
                     }
                 } else {
                     echo("<div class='no-books' style='background-color:#f5f5f5'>
@@ -141,15 +143,23 @@
             let jsphoto=<?php echo json_encode($arr1); ?>;
             let jsphotoid=<?php echo json_encode($arr2); ?>;
             let jssoldphoto=<?php echo json_encode($arr3); ?>;
+            let jsBookId=<?php echo json_encode($arr4); ?>;
             console.log(jsphoto);
             console.log(jsphotoid);
             for(let i=0;i<jsphoto.length;i++){
                 let jsupload=document.getElementById("book-"+jsphotoid[i]);
-                console.log(jsupload);
                 jsupload.style.backgroundImage="url('Uploads/"+jsphoto[i]+"')";
-                jsupload.style.backgroundSize="280px 325px";    
+                jsupload.style.backgroundSize="280px 325px"; 
+                let clickableDiv=document.getElementById("book-outer-"+jsBookId[i]);
                 if(jssoldphoto[i]==true){
                     jsupload.innerHTML="<img src='Images/sold-rubber-stamp-free-png.webp' height='320px' width='280px'>";
+                    clickableDiv.addEventListener("click",function(){
+                        alert("Sorry, this book has been sold");
+                    });
+                }else{
+                    clickableDiv.addEventListener("click",function(){
+                        window.location.href = "FullBookInfo.php?book_id="+jsBookId[i]+"&again=1";
+                    });
                 }
             }
 

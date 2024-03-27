@@ -234,7 +234,7 @@
             }else{
                 clickableDiv.addEventListener("click",function(){
                 if(sessionVarCheck!=''){
-                    window.location.href = "FullBookInfo.php?book_id="+jsBookId[i];
+                    window.location.href = "FullBookInfo.php?book_id="+jsBookId[i]+"&again=0";
                 }else{
                     window.location.href="signupPage.php";
                 }
