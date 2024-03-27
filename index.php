@@ -36,7 +36,7 @@
         ?>   
     
         <?php
-            require("./Components/footer.php");  //Footer Component
+            // require("./Components/footer.php");  //Footer Component
         ?>
     </div>
 

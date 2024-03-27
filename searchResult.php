@@ -219,6 +219,8 @@
         let jsBookId=<?php echo json_encode($arr1); ?>;
         let jsBookPhoto=<?php echo json_encode($arr2); ?>;
         let jsSoldBook=<?php echo json_encode($arr3); ?>;
+        var sessionVarCheck = "<?php echo isset($_SESSION['userid']) ? $_SESSION['userid'] : ''; ?>";
+        console.log(sessionVarCheck); 
         for(let i=0;i<jsBookId.length;i++){
             let divInner1=document.getElementById("book-"+jsBookId[i]);
             divInner1.style.backgroundImage="url('"+jsBookPhoto[i]+"')";
@@ -231,7 +233,11 @@
             });
             }else{
                 clickableDiv.addEventListener("click",function(){
-                window.location.href = "FullBookInfo.php?book_id="+jsBookId[i];
+                if(sessionVarCheck!=''){
+                    window.location.href = "FullBookInfo.php?book_id="+jsBookId[i];
+                }else{
+                    window.location.href="signupPage.php";
+                }
             });
             }
         }
