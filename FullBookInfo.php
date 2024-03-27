@@ -56,6 +56,7 @@
                         $row8=mysqli_fetch_array($query_result8);
                         $query_result9=mysqli_query($conn,$sql9);
                         $row9=mysqli_fetch_array($query_result9);
+                        $sellerId=$row9['id'];
                         $seller_image9=$row9['profileImage'];
                         $seller_username9=$row9['username'];
                         $seller_email9=$row9['email'];
@@ -247,6 +248,13 @@
                     }
                 });
                 alert("The Book Seller has been notified.\nCheck Messages for further Updates.");
+            });
+
+            // Visit Seller Profile Button
+            let visitSeller=document.getElementById("visit-seller-btn");
+            visitSeller.addEventListener("click",function(){
+                let sellerId=<?php echo json_encode($sellerId); ?>;
+                window.location.href="visitSeller.php?id="+sellerId;
             });
         </script>
         <script src="JS/script.js"></script>
