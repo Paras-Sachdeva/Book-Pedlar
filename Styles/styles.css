@@ -688,6 +688,7 @@ label {
     padding: 1rem;
     display: flex;
     align-items: center;
+    margin-bottom: 2rem;
 }
 
 #message-current-pic{
@@ -700,13 +701,6 @@ label {
     margin-left: 1rem;
     font-size: 2rem;
     font-weight: 700;
-}
-
-.message-box-display{
-    overflow-y: auto;
-    /* height: 26rem; */
-    padding: 2rem;
-    background-color: palegoldenrod;
 }
 
 .message-textarea{

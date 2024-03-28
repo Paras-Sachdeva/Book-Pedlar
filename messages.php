@@ -124,12 +124,26 @@
         $i=0;
         $countS=0;
         $countR=0;
+        $arr5=array();
         while($row7=mysqli_fetch_assoc($result7)){
             if($row7['senderid']==$userid){
-                echo("<div class='message-box-display' id='s.$i'>$row7[message]</div>");
+                echo("<div class='message-box-display-sender'>
+                            <div class='message-outer-sender'>
+                              <div class='sender-name' id='s-$i-1'>Sender Name</div>
+                              <div class='message-content' id='s-$i-2'>$row7[message]</div>
+                              <div class='timestamp' id='s-$i-3'>Timestamp</div>
+                            </div>
+                        </div>");
                 $countS++;
+                array_push($arr5,$i);
             }else{
-                echo("<div class='message-box-display' id='r.$i'>$row7[message]</div>");
+                echo("<div class='message-box-display-reciever'>
+                            <div class='message-outer-reciever'>
+                              <div class='sender-name' id='r-$i-1'>Sender Name</div>
+                              <div class='message-content' id='r-$i-2'>$row7[message]</div>
+                              <div class='timestamp' id='r-$i-3'>Timestamp</div>
+                            </div>
+                        </div>");
                 $countR++;
             }
             $i++;
