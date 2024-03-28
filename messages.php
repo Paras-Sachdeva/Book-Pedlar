@@ -126,12 +126,19 @@
         $countR=0;
         $arr5=array();
         while($row7=mysqli_fetch_assoc($result7)){
+            $sql8="SELECT * FROM user_data WHERE id='$row7[senderid]'";
+            $result8=mysqli_query($conn,$sql8);
+            $row8=mysqli_fetch_assoc($result8);
+            $originalDate = $row7['chatTime'];
+            $newDate = date("d-m-Y", strtotime($originalDate));
+            $originalTime = strtotime($row7['chatTime']);
+            $newTime = date("h:i A", $originalTime);
             if($row7['senderid']==$userid){
                 echo("<div class='message-box-display-sender'>
                             <div class='message-outer-sender'>
-                              <div class='sender-name' id='s-$i-1'>Sender Name</div>
+                              <div class='sender-name' id='s-$i-1'>$row8[username]</div>
                               <div class='message-content' id='s-$i-2'>$row7[message]</div>
-                              <div class='timestamp' id='s-$i-3'>Timestamp</div>
+                              <div class='timestamp' id='s-$i-3'><br>$newDate $newTime</div>
                             </div>
                         </div>");
                 $countS++;
@@ -139,9 +146,9 @@
             }else{
                 echo("<div class='message-box-display-reciever'>
                             <div class='message-outer-reciever'>
-                              <div class='sender-name' id='r-$i-1'>Sender Name</div>
+                              <div class='sender-name' id='r-$i-1'>$row8[username]</div>
                               <div class='message-content' id='r-$i-2'>$row7[message]</div>
-                              <div class='timestamp' id='r-$i-3'>Timestamp</div>
+                              <div class='timestamp' id='r-$i-3'><br>$newDate $newTime</div>
                             </div>
                         </div>");
                 $countR++;
