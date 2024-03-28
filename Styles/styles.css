@@ -703,6 +703,47 @@ label {
     font-weight: 700;
 }
 
+.message-box-content{
+    display: flex;
+    flex-direction: column;
+}
+
+.message-box-display-sender{
+    width: 50%;
+    margin-bottom: 10px;
+    margin-right: 2rem;
+    clear: both;
+    overflow: auto;
+    text-align: right; /* Right-align sender messages */
+    align-self: flex-end;
+}
+
+.message-outer-sender{
+    background-color: #dcf8c6; /* Light green background for sender messages */
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 5px;
+    max-width: 100%; /* Adjust as needed */
+    word-wrap: break-word; /* Ensure long words break */
+}
+
+.message-box-display-reciever{
+    margin-left: 1rem;
+    width: 50%;
+    margin-bottom: 10px;
+    clear: both;
+    overflow: auto;
+}
+
+.message-outer-reciever{
+    background-color: #e5e5e5; /* Light gray background for receiver messages */
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 5px;
+    max-width: 100%; /* Adjust as needed */
+    word-wrap: break-word; /* Ensure long words break */
+}
+
 .message-textarea{
     width: 35rem;
     height: 2.5rem;

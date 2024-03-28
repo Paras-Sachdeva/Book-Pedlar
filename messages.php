@@ -207,6 +207,31 @@
             jsBigPhoto.style.border="0.1rem solid black";
             jsBigPhoto.style.backgroundSize="112px 112px";
         }
+
+        // Styling Messages
+        let jsSenderMessages=<?php echo json_encode($cS); ?>;
+        let jsRecieverMessages=<?php echo json_encode($cR); ?>;
+        let jsSenderPosition=<?php echo json_encode($arr5); ?>;
+        for(let i=0,j=0;i<(jsSenderMessages+jsRecieverMessages);i++){
+            if(i==jsSenderPosition[j]){
+                let sendername=document.getElementById("s-"+i+"-1");
+                let senderMessage=document.getElementById("s-"+i+"-2");
+                let senderTimeStamp=document.getElementById("s-"+i+"-3");
+                sendername.style.fontWeight="bold";
+                sendername.style.marginBottom="5px";
+                senderTimeStamp.style.fontSize="0.8em";
+                senderTimeStamp.style.color="#888";
+                j++;
+            }else{
+                let recievername=document.getElementById("r-"+i+"-1");
+                let recieverMessage=document.getElementById("r-"+i+"-2");
+                let recieverTimeStamp=document.getElementById("r-"+i+"-3");
+                recievername.style.fontWeight="bold";
+                recievername.style.marginBottom="5px";
+                recieverTimeStamp.style.fontSize="0.8em";
+                recieverTimeStamp.style.color="#888";
+            }
+        }
     </script>
     <script src="JS/script.js"></script>    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
