@@ -49,8 +49,8 @@
                     $longitude=$row1['longitude'];
                     $user_name=$row1['username'];
                     $e_mail=$row1['email'];
-                    echo("<p style='text-align:center;'>".$user_name."<br>".$e_mail."</p>");
-                    echo("<p id='place-details' style='text-align:center;'></p>");
+                    echo("<p style='text-align:center;'><br>".$user_name."<br>".$e_mail."</p>");
+                    echo("<br><p id='place-details' style='text-align:center;'></p>");
                     $uploadedFileName=$row1['profileImage'];
                 ?>
             </div>

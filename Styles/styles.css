@@ -617,7 +617,7 @@ label {
     padding: 2rem;
 }
 
-.message-search-ppl{}
+/* .message-search-ppl{} */
 
 .message-search-container{
     border: 0.1rem solid grey;
@@ -626,8 +626,8 @@ label {
     flex-direction: row;
 }
 
-.message-search{
-}
+/* .message-search{
+} */
 
 #message-search-input{
     width: 7rem;
@@ -668,6 +668,7 @@ label {
     height: 3.5rem;
     border-radius: 50%;
     border: 0.1rem solid black;
+    flex-shrink: 0;
     /* background-color: pink; */
 }
 
@@ -705,6 +706,7 @@ label {
     overflow-y: auto;
     /* height: 26rem; */
     padding: 2rem;
+    background-color: palegoldenrod;
 }
 
 .message-textarea{

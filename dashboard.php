@@ -29,6 +29,11 @@
         $password = "";
         $database = "book_pedlar";
         $userid=$_SESSION['userid'];
+        if(isset($_GET['DelId'])){
+            $delId=$_GET['DelId'];
+        }else{
+            $delId=0;
+        }
 
         $conn = mysqli_connect($host, $username, $password, $database);
         if (!$conn) {
@@ -493,10 +498,21 @@
             }  
 
             // Delete Account Button
+            let jsSessionDel=<?php echo json_encode($delId); ?>;
             let delAccBtn=document.getElementById("delete-account");
-            delAccBtn.addEventListener("click",function(){
-                window.location.href="deleteAccount.php";
-            });
+            if(jsSessionDel==0){
+                delAccBtn.addEventListener("click",function(){
+                    alert("Press Delete Account Again to Confirm");
+                    window.location.href="dashboard.php?DelId=1";
+                });
+            }else{
+                setTimeout(() => {
+                    window.location.href="dashboard.php?DelId=0";
+                }, 60000);
+                delAccBtn.addEventListener("click",function(){
+                    window.location.href="deleteAccount.php";
+                });
+            }
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </body>
