@@ -313,6 +313,12 @@
                 elem.scrollTop = elem.scrollHeight;
             }, 1000);
         };
+
+        // Darken Selected User
+        let recieverId = <?php echo json_encode($recieverId); ?>;
+        let selUserEle=document.getElementById(recieverId);
+        console.log(selUserEle);
+        selUserEle.style.backgroundColor="rgb(202, 197, 197)";
     </script>
     <script src="JS/script.js"></script>    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
