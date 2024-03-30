@@ -105,7 +105,7 @@
             array_push($arr1,$row2['profileImage']);
             array_push($arr3,$row2['id']);
     ?>
-                <div class="message-ppl-list">
+                <div class="message-ppl-list" id="<?php echo($row2['id']); ?>">
                     <div class="message-ppl-pic" id="<?php echo($j.'1'); ?>"></div>
                     <div class="message-ppl-name" id="<?php echo($j.'2'); ?>"><?php echo($row2['username']); ?></div>
                 </div>
@@ -309,6 +309,8 @@
                     window.scrollTo(0, scrollPosition);
                     sessionStorage.removeItem('scrollPosition');
                 } 
+                var elem = document.getElementById('scroll-messages');
+                elem.scrollTop = elem.scrollHeight;
             }, 1000);
         };
     </script>

@@ -208,7 +208,6 @@ a{
     width: 5rem;
     height: 5rem;
     border-radius: 50%;
-    background-color: pink;
     border: 0.2rem solid black;
 }
 
@@ -229,7 +228,6 @@ a{
 .interested-book-pic{
     width: 5rem;
     height: 5rem;
-    background-color: pink;
     border: 0.2rem solid black;
 }
 
@@ -382,7 +380,6 @@ a{
 }
 
 .small-buyer-pic{
-    background-color: pink;
     width:3.5rem;
     height:3.5rem;
     border-radius: 50%;

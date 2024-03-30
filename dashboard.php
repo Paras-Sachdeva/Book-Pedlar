@@ -508,7 +508,7 @@
             }else{
                 setTimeout(() => {
                     window.location.href="dashboard.php?DelId=0";
-                }, 60000);
+                }, 25000);
                 delAccBtn.addEventListener("click",function(){
                     window.location.href="deleteAccount.php";
                 });
