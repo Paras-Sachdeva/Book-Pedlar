@@ -744,6 +744,14 @@ label {
     word-wrap: break-word; /* Ensure long words break */
 }
 
+.message-content{
+    text-align: left;
+}
+
+.timestamp{
+    text-align: right;
+}
+
 .message-textarea{
     width: 35rem;
     height: 2.5rem;
@@ -764,6 +772,7 @@ label {
     padding: 0.3rem;
     margin-left: 0.5rem;
     outline: none;
-    margin-top: 0.4rem;
+    margin-top: 0.1rem;
     font-weight: 600;
+    width: 100%;
 }

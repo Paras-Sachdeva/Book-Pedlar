@@ -77,6 +77,7 @@
             $row4=mysqli_fetch_assoc($result4);
             array_push($arr4,$row4['profileImage']);
             array_push($arr2,$row4['username']);
+            $recieverId=$_GET['id'];
         }else{
             for($k=1;$k<2;$k++){
                 $sql5="SELECT DISTINCT user_id
@@ -94,6 +95,7 @@
                 $row6=mysqli_fetch_assoc($result6);
                 array_push($arr4,$row6['profileImage']);
                 array_push($arr2,$row6['username']);
+                $recieverId=$row6['id'];
             }
         }
         while($row1=mysqli_fetch_array($result1)){
@@ -119,7 +121,7 @@
                     <div id="message-current-pic"></div>
                     <div id="message-current-name"></div>
                 </div>
-                <div class="message-box-content">
+                <div class="message-box-content" id="messageContent">
     <?php
         $i=0;
         $countS=0;
@@ -158,12 +160,12 @@
         $cS=$countS;
         $cR=$countR;
     ?>
-                    <div class="message-box-textarea">
+                    <div class="message-box-textarea" id="messageTextArea">
                         <div class="message-textarea">
-                            <i class="fa-solid fa-paper-plane send-icon"></i>
-                            <form action="" method="POST">
-                                <input type="text" placeholder="Type Here..." id="message-input-box">
-                            </form>
+                            <i class="fa-solid fa-paper-plane send-icon" id="send-message"></i>
+                            <!-- <form action="" method="POST" id=""> -->
+                                <input type="text" name="messageInput" placeholder="Type Here..." id="message-input-box">
+                            <!-- </form> -->
                         </div>
                     </div>
                 </div>
@@ -239,6 +241,32 @@
                 recieverTimeStamp.style.color="#888";
             }
         }
+
+        // Send Message 
+        let sendMessage=document.getElementById("send-message");
+        sendMessage.addEventListener("click",function(){
+            let inputBox=document.getElementById("message-input-box");
+            let text=inputBox.value;
+            let senderid = <?php echo json_encode($userid); ?>;
+            let recieverId = <?php echo json_encode($recieverId); ?>;
+            if(text!=""){
+                let jsMessageObject={};
+                jsMessageObject.senderid=senderid;
+                jsMessageObject.recieverid=recieverId;
+                jsMessageObject.message=text;
+                $.ajax({
+                    url:"addMessage.php",
+                    method:"POST",
+                    data:{ jsMessageObject: JSON.stringify(jsMessageObject)},
+                    success:function(response){
+                            console.log(response);
+                    }
+                });
+                setTimeout(() => {
+                    location.reload();
+                }, 1000);
+            }
+        });
     </script>
     <script src="JS/script.js"></script>    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
