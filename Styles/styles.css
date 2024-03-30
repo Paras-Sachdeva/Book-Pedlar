@@ -669,7 +669,6 @@ label {
     border-radius: 50%;
     border: 0.1rem solid black;
     flex-shrink: 0;
-    /* background-color: pink; */
 }
 
 .message-ppl-name{
@@ -706,28 +705,39 @@ label {
 .message-box-content{
     display: flex;
     flex-direction: column;
+    height: auto;
+    /* overflow:; */
 }
 
+#scroll-messages{
+    display: flex;
+    flex-direction: column;
+    max-height: 23rem;
+    width: 100%;
+    overflow-y: auto;
+}
 .message-box-display-sender{
+    flex-shrink: 0;
     width: 50%;
     margin-bottom: 10px;
     margin-right: 2rem;
     clear: both;
     overflow: auto;
-    text-align: right; /* Right-align sender messages */
+    text-align: right;
     align-self: flex-end;
 }
 
 .message-outer-sender{
-    background-color: #dcf8c6; /* Light green background for sender messages */
+    background-color: #dcf8c6;
     border-radius: 10px;
     padding: 10px;
     margin-bottom: 5px;
-    max-width: 100%; /* Adjust as needed */
-    word-wrap: break-word; /* Ensure long words break */
+    max-width: 100%;
+    word-wrap: break-word;
 }
 
 .message-box-display-reciever{
+    flex-shrink: 0;
     margin-left: 1rem;
     width: 50%;
     margin-bottom: 10px;
@@ -736,12 +746,12 @@ label {
 }
 
 .message-outer-reciever{
-    background-color: #e5e5e5; /* Light gray background for receiver messages */
+    background-color: #e5e5e5;
     border-radius: 10px;
     padding: 10px;
     margin-bottom: 5px;
-    max-width: 100%; /* Adjust as needed */
-    word-wrap: break-word; /* Ensure long words break */
+    max-width: 100%;
+    word-wrap: break-word;
 }
 
 .message-content{
@@ -758,6 +768,7 @@ label {
     border: 0.3rem solid black;
     display: flex;
     margin-left: 2rem;
+    
 }
 
 .send-icon{

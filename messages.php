@@ -122,6 +122,7 @@
                     <div id="message-current-name"></div>
                 </div>
                 <div class="message-box-content" id="messageContent">
+                    <div id="scroll-messages">
     <?php
         $i=0;
         $countS=0;
@@ -160,12 +161,11 @@
         $cS=$countS;
         $cR=$countR;
     ?>
+                    </div>
                     <div class="message-box-textarea" id="messageTextArea">
                         <div class="message-textarea">
                             <i class="fa-solid fa-paper-plane send-icon" id="send-message"></i>
-                            <!-- <form action="" method="POST" id=""> -->
-                                <input type="text" name="messageInput" placeholder="Type Here..." id="message-input-box">
-                            <!-- </form> -->
+                                <input type="text" name="messageInput" placeholder="Type Here..." autocomplete="off" id="message-input-box">
                         </div>
                     </div>
                 </div>
@@ -267,9 +267,8 @@
                         console.log(response);
                     }
                 });
-                setTimeout(() => {
-                    location.reload();
-                }, 1000);
+                sessionStorage.setItem('scrollPosition', window.scrollY);
+                window.location.reload();
             }
         });
         inputBox.addEventListener("keypress",function(event){
@@ -295,12 +294,23 @@
                             console.log(response);
                         }
                     });
-                    setTimeout(() => {
-                        location.reload();
-                    }, 1000);
+                    sessionStorage.setItem('scrollPosition', window.scrollY);
+                    window.location.reload();
                 }
             }
         });
+
+        // Scroll to where the User left
+        window.onload = function() {
+            var scrollPosition = sessionStorage.getItem('scrollPosition');
+            console.log(scrollPosition);
+            setTimeout(() => {
+                if (scrollPosition !== null) {
+                    window.scrollTo(0, scrollPosition);
+                    sessionStorage.removeItem('scrollPosition');
+                } 
+            }, 1000);
+        };
     </script>
     <script src="JS/script.js"></script>    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
