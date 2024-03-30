@@ -244,8 +244,8 @@
 
         // Send Message 
         let sendMessage=document.getElementById("send-message");
+        let inputBox=document.getElementById("message-input-box");
         sendMessage.addEventListener("click",function(){
-            let inputBox=document.getElementById("message-input-box");
             let text1=inputBox.value;
             let str =text1;
             let replacedStr0 = str.replace(/'/g, "''");
@@ -264,12 +264,41 @@
                     method:"POST",
                     data:{ jsMessageObject: JSON.stringify(jsMessageObject)},
                     success:function(response){
-                            console.log(response);
+                        console.log(response);
                     }
                 });
                 setTimeout(() => {
                     location.reload();
                 }, 1000);
+            }
+        });
+        inputBox.addEventListener("keypress",function(event){
+            if (event.key === 'Enter') {
+                let text1=inputBox.value;
+                let str =text1;
+                let replacedStr0 = str.replace(/'/g, "''");
+                let replacedStr1 = replacedStr0.replace(/</g, "&lt;");
+                let replacedStr = replacedStr1.replace(/>/g, "&gt;");
+                let text = replacedStr.trim();
+                let senderid = <?php echo json_encode($userid); ?>;
+                let recieverId = <?php echo json_encode($recieverId); ?>;
+                if(text!=""){
+                    let jsMessageObject={};
+                    jsMessageObject.senderid=senderid;
+                    jsMessageObject.recieverid=recieverId;
+                    jsMessageObject.message=text;
+                    $.ajax({
+                        url:"addMessage.php",
+                        method:"POST",
+                        data:{ jsMessageObject: JSON.stringify(jsMessageObject)},
+                        success:function(response){
+                            console.log(response);
+                        }
+                    });
+                    setTimeout(() => {
+                        location.reload();
+                    }, 1000);
+                }
             }
         });
     </script>
