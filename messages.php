@@ -246,7 +246,12 @@
         let sendMessage=document.getElementById("send-message");
         sendMessage.addEventListener("click",function(){
             let inputBox=document.getElementById("message-input-box");
-            let text=inputBox.value;
+            let text1=inputBox.value;
+            let str =text1;
+            let replacedStr0 = str.replace(/'/g, "''");
+            let replacedStr1 = replacedStr0.replace(/</g, "&lt;");
+            let replacedStr = replacedStr1.replace(/>/g, "&gt;");
+            let text = replacedStr.trim();
             let senderid = <?php echo json_encode($userid); ?>;
             let recieverId = <?php echo json_encode($recieverId); ?>;
             if(text!=""){
