@@ -269,11 +269,10 @@ a{
 .out-profile-books{
     display: flex;
     flex-direction: row;
-    /* flex-wrap: wrap; */
 }
 .profile{
     width: 40%;
-    /* margin-top: rem; */
+    margin-top: rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -401,6 +400,11 @@ a{
 #delete-account button:hover{
     background-color: red;
     cursor: pointer;
+}
+
+.apply-filters{
+    display: flex;
+    flex-direction: row;
 }
 
 .user-books{

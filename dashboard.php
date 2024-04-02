@@ -136,7 +136,7 @@
                 }
             ?>
         </div>
-            
+        
         <!-- User Uploaded Book Section -->
         <div class="user-books">
             <?php

@@ -151,6 +151,62 @@
             $arr2=array();
             $arr3=array();
             echo("<div class='search-results'>Search Results</div><div class='outside-all-books' style='display: flex;flex-wrap: wrap;padding-left: 10rem;padding-right: 10rem;padding-top: 2rem;'>");
+        ?>
+            <div class="apply-filters">
+                    <div class="fliters-head">
+                        <h4>Apply Filters:</h4>
+                    </div>
+                    <div class="price-filter">
+                        <form action="applyFilters.php" method="post" id="filter-form">
+                        <label for="priceRange">Price Range:</label>
+                        <select id="priceRange" name="priceRange">
+                            <option value="usa">Below 500</option>
+                            <option value="canada">500-1000</option>
+                        </select>
+                    </div>
+                    <div class="genre-filter">
+                        <label for="genre">Genre:</label>
+                        <select id="genre" name="genre">
+                        <option value="Fiction">Fiction</option>
+                <option value="Non-Fiction">Non-Fiction</option>
+                <option value="Romance">Romance</option>
+                <option value="Science-Fiction (Sci-Fi)">Science Fiction (Sci-Fi)</option>
+                <option value="Educational">Educational</option>
+                <option value="Current Affairs">Current Affairs</option>
+                <option value="Technology">Technology</option>
+                <option value="Fantasy">Fantasy</option>
+                <option value="Horror">Horror</option>
+                <option value="Thriller">Thriller</option>
+                <option value="Historical Fiction">Historical Fiction</option>
+                <option value="Biography">Biography</option>
+                <option value="Autobiography">Autobiography</option>
+                <option value="Poetry">Poetry</option>
+                <option value="Self Help">Self-Help</option>
+                <option value="Business & Economics">Business & Economics</option>
+                <option value="Science">Science</option>
+                <option value="Philosophy">Philosophy</option>
+                <option value="Travel">Travel</option>
+                <option value="Children">Children's</option>
+                <option value="Young Adult">Young Adult</option>
+                <option value="Classics">Classics</option>
+                        </select>
+                    </div>
+                    <div class="condition-filter">
+                        <label for="bookCondition">Book Condition:</label>
+                        <select id="bookCondition" name="bookCondition">
+                        <option value="New">New</option>
+                <option value="Like New">Like New</option>
+                <option value="Very Good">Very Good</option>
+                <option value="Good">Good</option>
+                <option value="Acceptable">Acceptable</option>
+                <option value="Fair">Fair</option>
+                <option value="Poor">Poor</option>
+                        </select>
+                        </form>
+                    </div>
+                <!-- </form> -->
+            </div>   
+        <?php
             if($count>0){
               while($row4=mysqli_fetch_array($query_result)){
                 $book_name4=$row4['bookname'];
