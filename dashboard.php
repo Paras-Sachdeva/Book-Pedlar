@@ -489,7 +489,6 @@
             // Alert for No Messages
             var queryParams = new URLSearchParams(window.location.search);
             var myVariable = queryParams.get('noMessages');
-            console.log(myVariable);   
             if(myVariable=='y'){
                 alert("You Have No Messages Yet");
                 var urlParams = new URLSearchParams(window.location.search);

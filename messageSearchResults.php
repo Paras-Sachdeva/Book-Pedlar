@@ -61,6 +61,9 @@
             $whereClause= implode('OR',$whereCondition);
             $sql9="SELECT * FROM user_data WHERE $whereClause";
             $result9=mysqli_query($conn,$sql9);
+            if(mysqli_num_rows($result9)==0){
+                header("Location: messages.php?notFound=y&name=".$messageSearch);
+            }
             while($row9=mysqli_fetch_array($result9)){
                 $whereCondition2[]=" senderid = $row9[id] ";
                 $whereCondition3[]=" recieverid = $row9[id] ";
@@ -106,9 +109,10 @@
         }
         $result1=mysqli_query($conn,$sql1);
         $count=mysqli_num_rows($result1);
-        if($count==0){
-            // header("Location: dashboard.php?noMessages=y");
-        }
+        // if($count==0){
+        //     // header("Location: dashboard.php?noMessages=y");
+        //     // echo("hey");
+        // }else{
     ?>
     <div class='search-results'>
         MESSAGES
@@ -230,6 +234,7 @@
         require("./Components/footer.php");
         echo("</div>"); //content div
         mysqli_close($conn);
+    // }
     ?>
 
     <script>

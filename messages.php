@@ -327,6 +327,17 @@
                 let FormData=document.getElementById("message-search-form");
                 FormData.submit();
             });
+
+        // Alert for Search Fail
+        var queryParams = new URLSearchParams(window.location.search);
+        var myVariable = queryParams.get('notFound');
+        var myVariable2 = queryParams.get('name');
+        if(myVariable=='y'){
+            alert("No Chat Found with User "+myVariable2);
+            var urlParams = new URLSearchParams(window.location.search);
+            urlParams.delete('noMessages');
+            window.history.replaceState({}, '', `${window.location.pathname}?${urlParams}`);
+        }  
     </script>
     <script src="JS/script.js"></script>    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
