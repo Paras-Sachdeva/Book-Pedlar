@@ -29,12 +29,16 @@
         $password = "";
         $database = "book_pedlar";
         $userid=$_SESSION['userid'];
+        $messageSearch=$_REQUEST['messageSearchInput'];
 
         $conn = mysqli_connect($host, $username, $password, $database);
         if (!$conn) {
             die("Connection failed");}
 
-        $sql1="SELECT DISTINCT user_id
+        $keywords = explode(' ', $messageSearch);
+
+        if($messageSearch==""){
+            $sql1="SELECT DISTINCT user_id
             FROM (
                 SELECT senderid AS user_id
                 FROM user_chat WHERE recieverid=$userid
@@ -42,10 +46,68 @@
                 SELECT recieverid AS user_id
                 FROM user_chat WHERE senderid=$userid
             ) AS unique_users";
+            $sql5="SELECT DISTINCT user_id
+            FROM (
+                SELECT senderid AS user_id
+                FROM user_chat WHERE recieverid=$userid
+                UNION
+                SELECT recieverid AS user_id
+                FROM user_chat WHERE senderid=$userid
+            ) AS unique_users LIMIT 1";
+        }else{
+            foreach ($keywords as $keyword) {
+                $whereCondition[] = " username LIKE '%$keyword%' ";
+            }
+            $whereClause= implode('OR',$whereCondition);
+            $sql9="SELECT * FROM user_data WHERE $whereClause";
+            $result9=mysqli_query($conn,$sql9);
+            while($row9=mysqli_fetch_array($result9)){
+                $whereCondition2[]=" senderid = $row9[id] ";
+                $whereCondition3[]=" recieverid = $row9[id] ";
+            }
+            $whereClause2= implode('OR',$whereCondition2);
+            $whereClause3= implode('OR',$whereCondition3);
+            $sql1="SELECT DISTINCT user_id
+            FROM (
+                (
+                    (SELECT senderid AS user_id
+                    FROM user_chat WHERE recieverid=$userid)
+                    UNION
+                    (SELECT recieverid AS user_id
+                    FROM user_chat WHERE senderid=$userid)
+                )
+                INTERSECT
+                (
+                    (SELECT senderid AS user_id
+                    FROM user_chat WHERE $whereClause2)
+                    UNION
+                    (SELECT recieverid AS user_id
+                    FROM user_chat WHERE $whereClause3)
+                )
+            ) AS unique_users";
+            $sql5="SELECT DISTINCT user_id
+            FROM (
+                (
+                    (SELECT senderid AS user_id
+                    FROM user_chat WHERE recieverid=$userid)
+                    UNION
+                    (SELECT recieverid AS user_id
+                    FROM user_chat WHERE senderid=$userid)
+                )
+                INTERSECT
+                (
+                    (SELECT senderid AS user_id
+                    FROM user_chat WHERE $whereClause2)
+                    UNION
+                    (SELECT recieverid AS user_id
+                    FROM user_chat WHERE $whereClause3)
+                )
+            ) AS unique_users LIMIT 1";
+        }
         $result1=mysqli_query($conn,$sql1);
         $count=mysqli_num_rows($result1);
         if($count==0){
-            header("Location: dashboard.php?noMessages=y");
+            // header("Location: dashboard.php?noMessages=y");
         }
     ?>
     <div class='search-results'>
@@ -60,7 +122,7 @@
                         </div>
                         <div class="message-search">
                             <form action="messageSearchResults.php" method="POST" id="message-search-form">
-                                <input type="text" name="messageSearchInput" placeholder="Search" id="message-search-input" autocomplete="off">
+                                <input type="text" name="messageSearchInput" placeholder="Search" id="message-search-input" value="<?php echo($messageSearch); ?>" autocomplete="off">
                             </form>
                         </div>
                     </div>
@@ -80,14 +142,6 @@
             $recieverId=$_GET['id'];
         }else{
             for($k=1;$k<2;$k++){
-                $sql5="SELECT DISTINCT user_id
-                        FROM (
-                            SELECT senderid AS user_id
-                            FROM user_chat WHERE recieverid=$userid
-                            UNION
-                            SELECT recieverid AS user_id
-                            FROM user_chat WHERE senderid=$userid
-                        ) AS unique_users LIMIT 1";
                 $result5=mysqli_query($conn,$sql5);
                 $row5=mysqli_fetch_assoc($result5);
                 $sql6="SELECT * FROM user_data WHERE id=$row5[user_id]";

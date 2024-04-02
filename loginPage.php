@@ -143,7 +143,7 @@
             <!-- Login Form -->
             <form id="loginForm" class="form-group" action="login.php" method="POST">
                 <label for="loginUserName">User Name:</label>
-                <input type="text" id="loginUserName" name="loginUserName" required>
+                <input type="text" id="loginUserName" name="loginUserName" required autocomplete="off">
 
                 <label for="loginPassword">Password:</label>
                 <div class="password-container" style="display:flex;">
@@ -162,10 +162,10 @@
             <!-- Sign Up Form -->
             <form id="signupForm" class="form-group" style="display: none;" action="signup.php" method="POST">
                 <label for="signupName">User Name:</label>
-                <input type="text" id="signupName" name="signupName" required>
+                <input type="text" id="signupName" name="signupName" required autocomplete="off">
 
                 <label for="signupEmail">Email:</label>
-                <input type="email" id="signupEmail" name="signupEmail" required>
+                <input type="email" id="signupEmail" name="signupEmail" required autocomplete="off">
 
                 <label for="signupPassword">Password:</label>
                 <div class="password-container" style="display:flex;">

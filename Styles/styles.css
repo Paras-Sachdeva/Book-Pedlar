@@ -623,11 +623,8 @@ label {
     flex-direction: row;
 }
 
-/* .message-search{
-} */
-
 #message-search-input{
-    width: 7rem;
+    width: 80%;
     padding: 0.6rem;
     outline: none;
     font-size: 1rem;
@@ -638,6 +635,7 @@ label {
     width: 2rem;
     height: 2rem;
     padding: 0.35rem;
+    cursor: pointer;
 }
 
 .search-ppl-icon{
@@ -703,7 +701,6 @@ label {
     display: flex;
     flex-direction: column;
     height: auto;
-    /* overflow:; */
 }
 
 #scroll-messages{
