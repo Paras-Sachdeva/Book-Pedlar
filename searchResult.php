@@ -253,18 +253,22 @@
                             </div>");
               }
             }else{
-                echo("<div id='notify-text' style='width:100%;'><h4 style='text-align:center;'>No Books match your search.<br><br> Tap on \"NOTIFY ME\" to get personalized e-mail whenever this book becomes available.</h4></div>");
-                echo("<div><button id='notify-btn'>Notify Me</button></div>");
-                // $to_email = "paras140902@gmail.com";
-                // $subject = "Simple Email Test via PHP";
-                // $body = "Hi, This is test email send by PHP Script";
-                // $headers = "From: paras140902@gmail.com";
-
-                // if (mail($to_email, $subject, $body, $headers)) {
-                //     echo "Email successfully sent to $to_email...";
-                // } else {
-                //     echo "Email sending failed...";
-                // }
+                if(isset($_SESSION['id'])){
+                    echo("<div id='notify-text' style='width:100%;'><h4 style='text-align:center;'>No Books match your search.<br><br> Tap on \"NOTIFY ME\" to get personalized e-mail whenever this book becomes available.</h4></div>");
+                    echo("<div><button id='notify-btn'>Notify Me</button></div>");
+                    // $to_email = "paras140902@gmail.com";
+                    // $subject = "Simple Email Test via PHP";
+                    // $body = "Hi, This is test email send by PHP Script";
+                    // $headers = "From: paras140902@gmail.com";
+    
+                    // if (mail($to_email, $subject, $body, $headers)) {
+                    //     echo "Email successfully sent to $to_email...";
+                    // } else {
+                    //     echo "Email sending failed...";
+                    // }
+                }else{
+                    echo("<br>Not Signed In");
+                }
             }
             mysqli_close($conn);
             echo("</div>");
