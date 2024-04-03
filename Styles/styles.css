@@ -579,6 +579,13 @@ label {
     background-color: darkblue;
 }
 
+.applyFilter{
+    display: flex;
+    margin-top: 2.5rem;
+    justify-content: center;
+    align-items: center;
+}
+
 /* FullBookInfo.php */
 .book-info-buttons{
     background-color: #333333;
