@@ -586,7 +586,7 @@ label {
     align-items: center;
 }
 
-.filters-head{
+#filters-head{
     margin-right: 1.5rem;
     flex-shrink: 0;
     background-color: black;
@@ -595,7 +595,7 @@ label {
     border-radius: 5%;
 }
 
-.filters-head:hover{
+#filters-head:hover{
     cursor: pointer;
     scale: 0.95;
     background-color: #333333;
