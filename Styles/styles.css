@@ -586,6 +586,32 @@ label {
     align-items: center;
 }
 
+.filters-head{
+    margin-right: 1.5rem;
+    flex-shrink: 0;
+    background-color: black;
+    color: white;
+    padding: 0.6rem;
+    border-radius: 5%;
+}
+
+.filters-head:hover{
+    cursor: pointer;
+    scale: 0.95;
+    background-color: #333333;
+}
+
+#priceRangeFilter, #genreFilter, #bookConditionFilter{
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f5f5f5;
+    width: 200px;
+    outline: none;
+    margin-right: 2.5rem;
+}
+
 /* FullBookInfo.php */
 .book-info-buttons{
     background-color: #333333;
