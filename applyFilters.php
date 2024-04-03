@@ -34,8 +34,8 @@
                         if (!$conn) {
                             die("Connection failed");}
             
-                        $type=$_REQUEST["selectValue"];
-                        $value=$_REQUEST["searchInput"];
+                        $type=$_REQUEST["typeSend"];
+                        $value=$_REQUEST["valueSend"];
                         $capitalize_value=ucwords($value);
                         $keywords = explode(' ', $capitalize_value);
             
@@ -210,6 +210,8 @@
                             <option value="Fair">Fair</option>
                             <option value="Poor">Poor</option>
                         </select>
+                        <input type="hidden" name="typeSend" value="<?php echo($type); ?>">
+                        <input type="hidden" name="valueSend" value="<?php echo($value); ?>">
                         </form>
                     </div>
             </div>   

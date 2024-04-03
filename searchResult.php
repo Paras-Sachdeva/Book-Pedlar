@@ -210,7 +210,9 @@
                             <option value="Fair">Fair</option>
                             <option value="Poor">Poor</option>
                         </select>
-                        </form>
+                        <input type="hidden" name="typeSend" value="<?php echo($type); ?>">
+                        <input type="hidden" name="valueSend" value="<?php echo($value); ?>">
+                    </form>
                     </div>
             </div>   
         <?php
