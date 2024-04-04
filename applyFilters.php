@@ -19,6 +19,7 @@
             $priceRangeSet=$_REQUEST["priceRange"];
             $genreSet=$_REQUEST["genre"];
             $bookConditionSet=$_REQUEST["bookCondition"];
+
             if($priceRangeSet=="all" && $genreSet=="all" && $bookConditionSet=="all"){
                 $whereConditionFilter="";
             }else if($priceRangeSet=="all" && $genreSet=="all" && $bookConditionSet!="all"){
@@ -174,8 +175,8 @@
                         if (!$conn) {
                             die("Connection failed");}
             
-                        $type=$_REQUEST["selectValue"];
-                        $value=$_REQUEST["searchInput"];
+                        $type=$_REQUEST["typeSend"];
+                        $value=$_REQUEST["valueSend"];
                         $capitalize_value=ucwords($value);
                         $keywords = explode(' ', $capitalize_value);
             
@@ -214,7 +215,7 @@
                                 $whereConditions[] = "author LIKE '%$keyword%'";
                             }
                             $whereClause = "(author='$capitalize_value' OR ".implode(' OR ', $whereConditions).") ".$whereConditionFilter;
-                            $sql = "SELECT * FROM book_data WHERE $whereClauseORDER BY
+                            $sql = "SELECT * FROM book_data WHERE $whereClause ORDER BY
                             CASE
                             WHEN author='$capitalize_value' THEN 1 else 2 end";
                         }else if($type=="Publisher"){
@@ -346,21 +347,12 @@
                             </div>");
               }
             }else{
-                if(isset($_SESSION['id'])){
+                if(isset($_SESSION['userid'])){
                     echo("<div id='notify-text' style='width:100%;'><h4 style='text-align:center;'>No Books match your search.<br><br> Tap on \"NOTIFY ME\" to get personalized e-mail whenever this book becomes available.</h4></div>");
                     echo("<div><button id='notify-btn'>Notify Me</button></div>");
-                    // $to_email = "paras140902@gmail.com";
-                    // $subject = "Simple Email Test via PHP";
-                    // $body = "Hi, This is test email send by PHP Script";
-                    // $headers = "From: paras140902@gmail.com";
-    
-                    // if (mail($to_email, $subject, $body, $headers)) {
-                    //     echo "Email successfully sent to $to_email...";
-                    // } else {
-                    //     echo "Email sending failed...";
-                    // }
                 }else{
-                    echo("<br>Not Signed In");
+                    echo("<div id='notify-text' style='width:100%;'><h4 style='text-align:center;'>No Books match your search.<br><br> Sign Up / Login to get personalized e-mail whenever this book becomes available.</h4></div>");
+                    echo("<div><button id='signin-notify-btn'>Sign Up</button><button id='login-notify-btn'>Login</button></div>");
                 }
             }
             mysqli_close($conn);
@@ -417,6 +409,19 @@
         let filtersForm=document.getElementById("filter-form");
         filtersSubmitButton.addEventListener("click",function(){
             filtersForm.submit();
+        });
+
+        // Notify Me or Sign In Button Click
+        let signInNotifybtn=document.getElementById("signin-notify-btn");
+        let loginNotifybtn=document.getElementById("login-notify-btn");
+        let notifyBtn=document.getElementById("notify-btn");
+        signInNotifybtn.addEventListener("click",function(){
+            window.location.href="signupPage.php";
+        });
+        loginNotifybtn.addEventListener("click",function(){
+            window.location.href="loginPage.php";
+        });
+        notifyBtn.addEventListener("click",function(){
         });
 
         // Change Default values for Filter select

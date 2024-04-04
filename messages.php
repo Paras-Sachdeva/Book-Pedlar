@@ -333,7 +333,7 @@
         var myVariable = queryParams.get('notFound');
         var myVariable2 = queryParams.get('name');
         if(myVariable=='y'){
-            alert("No Chat Found with User "+myVariable2);
+            alert("No Chat Found with User '"+myVariable2+"'");
             var urlParams = new URLSearchParams(window.location.search);
             urlParams.delete('noMessages');
             window.history.replaceState({}, '', `${window.location.pathname}?${urlParams}`);

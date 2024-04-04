@@ -573,7 +573,19 @@ label{
     margin-left: 35rem;
 }
 
-#notify-btn:hover{
+#signin-notify-btn, #login-notify-btn{
+    padding: 1rem;
+    width: 10rem;
+    color: white;
+    background-color: #2980b9;
+    border-radius: 2%;
+    font-weight: 750;
+    font-size: 1.3rem;
+    margin: 3.5rem;
+    margin-left: 20rem;
+}
+
+#notify-btn:hover, #signin-notify-btn:hover, #login-notify-btn:hover{
     cursor: pointer;
     scale: 1.1;
     background-color: darkblue;
