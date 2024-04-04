@@ -16,6 +16,83 @@
     
             require("./Components/header.php");  //Header Component
 
+            $priceRangeSet=$_REQUEST["priceRange"];
+            $genreSet=$_REQUEST["genre"];
+            $bookConditionSet=$_REQUEST["bookCondition"];
+            if($priceRangeSet=="all" && $genreSet=="all" && $bookConditionSet=="all"){
+                $whereConditionFilter="";
+            }else if($priceRangeSet=="all" && $genreSet=="all" && $bookConditionSet!="all"){
+                $whereConditionFilter="AND bookcondition=$bookConditionSet";
+            }else if($priceRangeSet=="all" && $genreSet!="all" && $bookConditionSet=="all"){
+                $whereConditionFilter="AND genre='$genreSet'";
+            }else if($priceRangeSet!="all" && $genreSet=="all" && $bookConditionSet=="all"){
+                if($priceRangeSet=="below500"){
+                    $whereConditionFilter="AND sellprice<=500";
+                }else if($priceRangeSet=="500To1000"){
+                    $whereConditionFilter="AND (sellprice>=500 AND sellprice<=1000)";
+                }else if($priceRangeSet=="1000To2000"){
+                    $whereConditionFilter="AND (sellprice>=1000 AND sellprice<=2000)";
+                }else if($priceRangeSet=="2000To3000"){
+                    $whereConditionFilter="AND (sellprice>=2000 AND sellprice<=3000)";
+                }else if($priceRangeSet=="3000To4000"){
+                    $whereConditionFilter="AND (sellprice>=3000 AND sellprice<=4000)";
+                }else if($priceRangeSet=="4000To5000"){
+                    $whereConditionFilter="AND (sellprice>=4000 AND sellprice<=5000)";
+                }else if($priceRangeSet=="Above5000"){
+                    $whereConditionFilter="AND sellprice>=5000";
+                }
+            }else if($priceRangeSet!="all" && $genreSet!="all" && $bookConditionSet!="all"){
+                if($priceRangeSet=="below500"){
+                    $whereConditionFilter="AND sellprice<=500 AND genre='$genreSet' AND bookcondition='$bookConditionSet'";
+                }else if($priceRangeSet=="500To1000"){
+                    $whereConditionFilter="AND (sellprice>=500 AND sellprice<=1000) AND genre='$genreSet' AND bookcondition='$bookConditionSet'";
+                }else if($priceRangeSet=="1000To2000"){
+                    $whereConditionFilter="AND (sellprice>=1000 AND sellprice<=2000) AND genre='$genreSet' AND bookcondition='$bookConditionSet'";
+                }else if($priceRangeSet=="2000To3000"){
+                    $whereConditionFilter="AND (sellprice>=2000 AND sellprice<=3000) AND genre='$genreSet' AND bookcondition='$bookConditionSet'";
+                }else if($priceRangeSet=="3000To4000"){
+                    $whereConditionFilter="AND (sellprice>=3000 AND sellprice<=4000) AND genre='$genreSet' AND bookcondition='$bookConditionSet'";
+                }else if($priceRangeSet=="4000To5000"){
+                    $whereConditionFilter="AND (sellprice>=4000 AND sellprice<=5000) AND genre='$genreSet' AND bookcondition='$bookConditionSet'";
+                }else if($priceRangeSet=="Above5000"){
+                    $whereConditionFilter="AND sellprice>=5000 AND genre='$genreSet' AND bookcondition='$bookConditionSet'";
+                }
+            }else if($priceRangeSet!="all" && $genreSet!="all" && $bookConditionSet=="all"){
+                if($priceRangeSet=="below500"){
+                    $whereConditionFilter="AND sellprice<=500 AND genre='$genreSet'";
+                }else if($priceRangeSet=="500To1000"){
+                    $whereConditionFilter="AND (sellprice>=500 AND sellprice<=1000) AND genre='$genreSet'";
+                }else if($priceRangeSet=="1000To2000"){
+                    $whereConditionFilter="AND (sellprice>=1000 AND sellprice<=2000) AND genre='$genreSet'";
+                }else if($priceRangeSet=="2000To3000"){
+                    $whereConditionFilter="AND (sellprice>=2000 AND sellprice<=3000) AND genre='$genreSet'";
+                }else if($priceRangeSet=="3000To4000"){
+                    $whereConditionFilter="AND (sellprice>=3000 AND sellprice<=4000) AND genre='$genreSet'";
+                }else if($priceRangeSet=="4000To5000"){
+                    $whereConditionFilter="AND (sellprice>=4000 AND sellprice<=5000) AND genre='$genreSet'";
+                }else if($priceRangeSet=="Above5000"){
+                    $whereConditionFilter="AND sellprice>=5000 AND genre='$genreSet'";
+                }
+            }else if($priceRangeSet=="all" && $genreSet!="all" && $bookConditionSet!="all"){
+                $whereConditionFilter="AND (genre=$genreSet AND bookcondition=$bookConditionSet)";
+            }else if($priceRangeSet!="all" && $genreSet=="all" && $bookConditionSet!="all"){
+                if($priceRangeSet=="below500"){
+                    $whereConditionFilter="AND sellprice<=500 AND bookcondition='$bookConditionSet'";
+                }else if($priceRangeSet=="500To1000"){
+                    $whereConditionFilter="AND (sellprice>=500 AND sellprice<=1000) AND bookcondition='$bookConditionSet'";
+                }else if($priceRangeSet=="1000To2000"){
+                    $whereConditionFilter="AND (sellprice>=1000 AND sellprice<=2000) AND bookcondition='$bookConditionSet'";
+                }else if($priceRangeSet=="2000To3000"){
+                    $whereConditionFilter="AND (sellprice>=2000 AND sellprice<=3000) AND bookcondition='$bookConditionSet'";
+                }else if($priceRangeSet=="3000To4000"){
+                    $whereConditionFilter="AND (sellprice>=3000 AND sellprice<=4000) AND bookcondition='$bookConditionSet'";
+                }else if($priceRangeSet=="4000To5000"){
+                    $whereConditionFilter="AND (sellprice>=4000 AND sellprice<=5000) AND bookcondition='$bookConditionSet'";
+                }else if($priceRangeSet=="Above5000"){
+                    $whereConditionFilter="AND sellprice>=5000 AND bookcondition='$bookConditionSet'";
+                }
+            }
+
             // <!-- Navigation List -->
             if(isset($_SESSION['userid'])){
                 echo("<div class='navList'>
@@ -33,25 +110,22 @@
                         $conn = mysqli_connect($host, $username, $password, $database);
                         if (!$conn) {
                             die("Connection failed");}
-
-                        $priceRangeSet=$_REQUEST["priceRange"];
-                        $genreSet=$_REQUEST["genre"];
-                        $bookConditionSet=$_REQUEST["bookCondition"];
             
                         $type=$_REQUEST["typeSend"];
                         $value=$_REQUEST["valueSend"];
                         $capitalize_value=ucwords($value);
                         $keywords = explode(' ', $capitalize_value);
-            
+
                         if($value==""){
-                            $sql="SELECT * FROM book_data where userid!=$userid";
+                            $whereClause="userid!=$userid ".$whereConditionFilter;
+                            $sql="SELECT * FROM book_data WHERE $whereClause";
                         }else if($type=="All"){
                             foreach ($keywords as $keyword) {
                                 $whereConditions[] = "bookname LIKE '%$keyword%'
                                                      OR author LIKE '%$keyword%'
                                                      OR publisher LIKE '%$keyword%'";
                             }
-                            $whereClause = "(bookname='$capitalize_value' OR author='$capitalize_value' OR publisher='$capitalize_value' OR ".implode(' OR ', $whereConditions).")";
+                            $whereClause = "(bookname='$capitalize_value' OR author='$capitalize_value' OR publisher='$capitalize_value' OR ".implode(' OR ', $whereConditions).") ".$whereConditionFilter;
                             $sql = "SELECT * FROM book_data WHERE $whereClause && userid!=$userid ORDER BY
                             CASE
                                 WHEN (bookname='$capitalize_value') THEN 1
@@ -63,25 +137,25 @@
                             foreach ($keywords as $keyword) {
                                 $whereConditions[] = "bookname LIKE '%$keyword%'";
                             }
-                            $whereClause = "(bookname='$capitalize_value' OR ".implode(' OR ', $whereConditions).")";
+                            $whereClause = "(bookname='$capitalize_value' OR ".implode(' OR ', $whereConditions).") ".$whereConditionFilter;
                             $sql = "SELECT * FROM book_data WHERE $whereClause && userid!='$userid' ORDER BY
-                        CASE
+                            CASE
                             WHEN bookname='$capitalize_value' THEN 1 ELSE 2 END";
                         }else if($type=="Author Name"){
                             foreach ($keywords as $keyword) {
                                 $whereConditions[] = "author LIKE '%$keyword%'";
                             }
-                            $whereClause = "(author='$capitalize_value' OR ".implode(' OR ', $whereConditions).")";
+                            $whereClause = "(author='$capitalize_value' OR ".implode(' OR ', $whereConditions).") ".$whereConditionFilter;
                             $sql = "SELECT * FROM book_data WHERE $whereClause && userid!='$userid' ORDER BY
-                        CASE
+                            CASE
                             WHEN author='$capitalize_value' THEN 1 else 2 end";
                         }else if($type=="Publisher"){
                             foreach ($keywords as $keyword) {
                                 $whereConditions[] = "publisher LIKE '%$keyword%'";
                             }
-                            $whereClause = "(publisher='$capitalize_value' OR ".implode(' OR ', $whereConditions).")";
+                            $whereClause = "(publisher='$capitalize_value' OR ".implode(' OR ', $whereConditions).") ".$whereConditionFilter;
                             $sql = "SELECT * FROM book_data WHERE $whereClause && userid!='$userid' ORDER BY
-                        CASE
+                            CASE
                             WHEN publisher='$capitalize_value' THEN 1 else 2 end";
                         }
             }else{
@@ -95,7 +169,6 @@
                         $username = "root";
                         $password = "";
                         $database = "book_pedlar";
-                        // $userid=$_SESSION['userid'];
             
                         $conn = mysqli_connect($host, $username, $password, $database);
                         if (!$conn) {
@@ -107,14 +180,20 @@
                         $keywords = explode(' ', $capitalize_value);
             
                         if($value==""){
-                            $sql="SELECT * FROM book_data";
+                            if($whereConditionFilter!=""){
+                                $whereClause=substr($whereConditionFilter,4);
+                            }
+                            else{
+                                $whereClause="";
+                            }
+                            $sql="SELECT * FROM book_data WHERE $whereClause";
                         }else if($type=="All"){
                             foreach ($keywords as $keyword) {
                                 $whereConditions[] = "bookname LIKE '%$keyword%'
                                                      OR author LIKE '%$keyword%'
                                                      OR publisher LIKE '%$keyword%'";
                             }
-                            $whereClause = "(bookname='$capitalize_value' OR author='$capitalize_value' OR publisher='$capitalize_value' OR ".implode(' OR ', $whereConditions).")";
+                            $whereClause = "(bookname='$capitalize_value' OR author='$capitalize_value' OR publisher='$capitalize_value' OR ".implode(' OR ', $whereConditions).") ".$whereConditionFilter;
                             $sql = "SELECT * FROM book_data WHERE $whereClause ORDER BY
                             CASE
                                 WHEN (bookname='$capitalize_value') THEN 1
@@ -126,25 +205,25 @@
                             foreach ($keywords as $keyword) {
                                 $whereConditions[] = "bookname LIKE '%$keyword%'";
                             }
-                            $whereClause = "(bookname='$capitalize_value' OR ".implode(' OR ', $whereConditions).")";
+                            $whereClause = "(bookname='$capitalize_value' OR ".implode(' OR ', $whereConditions).") ".$whereConditionFilter;
                             $sql = "SELECT * FROM book_data WHERE $whereClause ORDER BY
-                        CASE
+                            CASE
                             WHEN bookname='$capitalize_value' THEN 1 ELSE 2 END";
                         }else if($type=="Author Name"){
                             foreach ($keywords as $keyword) {
                                 $whereConditions[] = "author LIKE '%$keyword%'";
                             }
-                            $whereClause = "(author='$capitalize_value' OR ".implode(' OR ', $whereConditions).")";
+                            $whereClause = "(author='$capitalize_value' OR ".implode(' OR ', $whereConditions).") ".$whereConditionFilter;
                             $sql = "SELECT * FROM book_data WHERE $whereClauseORDER BY
-                        CASE
+                            CASE
                             WHEN author='$capitalize_value' THEN 1 else 2 end";
                         }else if($type=="Publisher"){
                             foreach ($keywords as $keyword) {
                                 $whereConditions[] = "publisher LIKE '%$keyword%'";
                             }
-                            $whereClause = "(publisher='$capitalize_value' OR ".implode(' OR ', $whereConditions).")";
+                            $whereClause = "(publisher='$capitalize_value' OR ".implode(' OR ', $whereConditions).") ".$whereConditionFilter;
                             $sql = "SELECT * FROM book_data WHERE $whereClause ORDER BY
-                        CASE
+                            CASE
                             WHEN publisher='$capitalize_value' THEN 1 else 2 end";
                         }
             }
@@ -171,7 +250,7 @@
                             <option value="1500To2000">&#8377;1500 - &#8377;2000</option>
                             <option value="2000To2500">&#8377;2000 - &#8377;2500</option>
                             <option value="2500To3000">&#8377;2500 - &#8377;3000</option>
-                            <option value="Above3000">Above&#8377;3000</option>
+                            <option value="Above3000">Above &#8377;3000</option>
                         </select>
                     </div>
                     <div class="genre-filter">
@@ -348,21 +427,21 @@
         let jsGenreFilter=document.getElementById("genreFilter");
         let jsBookConditionFilter=document.getElementById("bookConditionFilter");
         if(jsPriceRange=="all"){
-            jsPriceRangeFilter.innerHTML="<option value='all' selected>All</option><option value='below500'>Below &#8377;500</option><option value='500To1000'>&#8377;500 - &#8377;1000</option><option value='1000To2000'>&#8377;1000 - &#8377;2000</option><option value='2000To3000'>&#8377;2000 - &#8377;3000</option><option value='3000To4000'>&#8377;3000 - &#8377;4000</option><option value='4000To5000'>&#8377;4000 - &#8377;5000</option><option value='Above5000'>Above&#8377;5000</option>";
+            jsPriceRangeFilter.innerHTML="<option value='all' selected>All</option><option value='below500'>Below &#8377;500</option><option value='500To1000'>&#8377;500 - &#8377;1000</option><option value='1000To2000'>&#8377;1000 - &#8377;2000</option><option value='2000To3000'>&#8377;2000 - &#8377;3000</option><option value='3000To4000'>&#8377;3000 - &#8377;4000</option><option value='4000To5000'>&#8377;4000 - &#8377;5000</option><option value='Above5000'>Above &#8377;5000</option>";
         }else if(jsPriceRange=="below500"){
-            jsPriceRangeFilter.innerHTML="<option value='all'>All</option><option value='below500' selected>Below &#8377;500</option><option value='500To1000'>&#8377;500 - &#8377;1000</option><option value='1000To2000'>&#8377;1000 - &#8377;2000</option><option value='2000To3000'>&#8377;2000 - &#8377;3000</option><option value='3000To4000'>&#8377;3000 - &#8377;4000</option><option value='4000To5000'>&#8377;4000 - &#8377;5000</option><option value='Above5000'>Above&#8377;5000</option>";
+            jsPriceRangeFilter.innerHTML="<option value='all'>All</option><option value='below500' selected>Below &#8377;500</option><option value='500To1000'>&#8377;500 - &#8377;1000</option><option value='1000To2000'>&#8377;1000 - &#8377;2000</option><option value='2000To3000'>&#8377;2000 - &#8377;3000</option><option value='3000To4000'>&#8377;3000 - &#8377;4000</option><option value='4000To5000'>&#8377;4000 - &#8377;5000</option><option value='Above5000'>Above &#8377;5000</option>";
         }else if(jsPriceRange=="500To1000"){
-            jsPriceRangeFilter.innerHTML="<option value='all'>All</option><option value='below500'>Below &#8377;500</option><option value='500To1000' selected>&#8377;500 - &#8377;1000</option><option value='1000To2000'>&#8377;1000 - &#8377;2000</option><option value='2000To3000'>&#8377;2000 - &#8377;3000</option><option value='3000To4000'>&#8377;3000 - &#8377;4000</option><option value='4000To5000'>&#8377;4000 - &#8377;5000</option><option value='Above5000'>Above&#8377;5000</option>";
+            jsPriceRangeFilter.innerHTML="<option value='all'>All</option><option value='below500'>Below &#8377;500</option><option value='500To1000' selected>&#8377;500 - &#8377;1000</option><option value='1000To2000'>&#8377;1000 - &#8377;2000</option><option value='2000To3000'>&#8377;2000 - &#8377;3000</option><option value='3000To4000'>&#8377;3000 - &#8377;4000</option><option value='4000To5000'>&#8377;4000 - &#8377;5000</option><option value='Above5000'>Above &#8377;5000</option>";
         }else if(jsPriceRange=="1000To2000"){
-            jsPriceRangeFilter.innerHTML="<option value='all'>All</option><option value='below500'>Below &#8377;500</option><option value='500To1000'>&#8377;500 - &#8377;1000</option><option value='1000To2000' selected>&#8377;1000 - &#8377;2000</option><option value='2000To3000'>&#8377;2000 - &#8377;3000</option><option value='3000To4000'>&#8377;3000 - &#8377;4000</option><option value='4000To5000'>&#8377;4000 - &#8377;5000</option><option value='Above5000'>Above&#8377;5000</option>";
+            jsPriceRangeFilter.innerHTML="<option value='all'>All</option><option value='below500'>Below &#8377;500</option><option value='500To1000'>&#8377;500 - &#8377;1000</option><option value='1000To2000' selected>&#8377;1000 - &#8377;2000</option><option value='2000To3000'>&#8377;2000 - &#8377;3000</option><option value='3000To4000'>&#8377;3000 - &#8377;4000</option><option value='4000To5000'>&#8377;4000 - &#8377;5000</option><option value='Above5000'>Above &#8377;5000</option>";
         }else if(jsPriceRange=="2000To3000"){
-            jsPriceRangeFilter.innerHTML="<option value='all'>All</option><option value='below500'>Below &#8377;500</option><option value='500To1000'>&#8377;500 - &#8377;1000</option><option value='1000To2000'>&#8377;1000 - &#8377;2000</option><option value='2000To3000' selected>&#8377;2000 - &#8377;3000</option><option value='3000To4000'>&#8377;3000 - &#8377;4000</option><option value='4000To5000'>&#8377;4000 - &#8377;5000</option><option value='Above5000'>Above&#8377;5000</option>";
+            jsPriceRangeFilter.innerHTML="<option value='all'>All</option><option value='below500'>Below &#8377;500</option><option value='500To1000'>&#8377;500 - &#8377;1000</option><option value='1000To2000'>&#8377;1000 - &#8377;2000</option><option value='2000To3000' selected>&#8377;2000 - &#8377;3000</option><option value='3000To4000'>&#8377;3000 - &#8377;4000</option><option value='4000To5000'>&#8377;4000 - &#8377;5000</option><option value='Above5000'>Above &#8377;5000</option>";
         }else if(jsPriceRange=="3000To4000"){
-            jsPriceRangeFilter.innerHTML="<option value='all'>All</option><option value='below500'>Below &#8377;500</option><option value='500To1000'>&#8377;500 - &#8377;1000</option><option value='1000To2000'>&#8377;1000 - &#8377;2000</option><option value='2000To3000'>&#8377;2000 - &#8377;3000</option><option value='3000To4000' selected>&#8377;3000 - &#8377;4000</option><option value='4000To5000'>&#8377;4000 - &#8377;5000</option><option value='Above5000'>Above&#8377;5000</option>";
+            jsPriceRangeFilter.innerHTML="<option value='all'>All</option><option value='below500'>Below &#8377;500</option><option value='500To1000'>&#8377;500 - &#8377;1000</option><option value='1000To2000'>&#8377;1000 - &#8377;2000</option><option value='2000To3000'>&#8377;2000 - &#8377;3000</option><option value='3000To4000' selected>&#8377;3000 - &#8377;4000</option><option value='4000To5000'>&#8377;4000 - &#8377;5000</option><option value='Above5000'>Above &#8377;5000</option>";
         }else if(jsPriceRange=="4000To5000"){
-            jsPriceRangeFilter.innerHTML="<option value='all'>All</option><option value='below500'>Below &#8377;500</option><option value='500To1000'>&#8377;500 - &#8377;1000</option><option value='1000To2000'>&#8377;1000 - &#8377;2000</option><option value='2000To3000'>&#8377;2000 - &#8377;3000</option><option value='3000To4000'>&#8377;3000 - &#8377;4000</option><option value='4000To5000' selected>&#8377;4000 - &#8377;5000</option><option value='Above5000'>Above&#8377;5000</option>";
+            jsPriceRangeFilter.innerHTML="<option value='all'>All</option><option value='below500'>Below &#8377;500</option><option value='500To1000'>&#8377;500 - &#8377;1000</option><option value='1000To2000'>&#8377;1000 - &#8377;2000</option><option value='2000To3000'>&#8377;2000 - &#8377;3000</option><option value='3000To4000'>&#8377;3000 - &#8377;4000</option><option value='4000To5000' selected>&#8377;4000 - &#8377;5000</option><option value='Above5000'>Above &#8377;5000</option>";
         }else if(jsPriceRange=="Above5000"){
-            jsPriceRangeFilter.innerHTML="<option value='all'>All</option><option value='below500'>Below &#8377;500</option><option value='500To1000'>&#8377;500 - &#8377;1000</option><option value='1000To2000'>&#8377;1000 - &#8377;2000</option><option value='2000To3000'>&#8377;2000 - &#8377;3000</option><option value='3000To4000'>&#8377;3000 - &#8377;4000</option><option value='4000To5000'>&#8377;4000 - &#8377;5000</option><option value='Above5000' selected>Above&#8377;5000</option>";
+            jsPriceRangeFilter.innerHTML="<option value='all'>All</option><option value='below500'>Below &#8377;500</option><option value='500To1000'>&#8377;500 - &#8377;1000</option><option value='1000To2000'>&#8377;1000 - &#8377;2000</option><option value='2000To3000'>&#8377;2000 - &#8377;3000</option><option value='3000To4000'>&#8377;3000 - &#8377;4000</option><option value='4000To5000'>&#8377;4000 - &#8377;5000</option><option value='Above5000' selected>Above &#8377;5000</option>";
         }
 
         

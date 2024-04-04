@@ -167,7 +167,7 @@
                             <option value="2000To3000">&#8377;2000 - &#8377;3000</option>
                             <option value="3000To4000">&#8377;3000 - &#8377;4000</option>
                             <option value="4000To5000">&#8377;4000 - &#8377;5000</option>
-                            <option value="Above5000">Above&#8377;5000</option>
+                            <option value="Above5000">Above &#8377;5000</option>
                         </select>
                     </div>
                     <div class="genre-filter">
