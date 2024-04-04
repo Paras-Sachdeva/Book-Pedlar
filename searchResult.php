@@ -162,12 +162,12 @@
                         <select id="priceRangeFilter" name="priceRange">
                             <option value="all" selected>All</option>
                             <option value="below500">Below &#8377;500</option>
-                            <option value="500To1000">&#8377;500-&#8377;1000</option>
-                            <option value="1000To1500">&#8377;1000-&#8377;1500</option>
-                            <option value="1500To2000">&#8377;1500-&#8377;2000</option>
-                            <option value="2000To2500">&#8377;2000-&#8377;2500</option>
-                            <option value="2500To3000">&#8377;2500-&#8377;3000</option>
-                            <option value="Above3000">Above&#8377;3000</option>
+                            <option value="500To1000">&#8377;500 - &#8377;1000</option>
+                            <option value="1000To2000">&#8377;1000 - &#8377;2000</option>
+                            <option value="2000To3000">&#8377;2000 - &#8377;3000</option>
+                            <option value="3000To4000">&#8377;3000 - &#8377;4000</option>
+                            <option value="4000To5000">&#8377;4000 - &#8377;5000</option>
+                            <option value="Above5000">Above&#8377;5000</option>
                         </select>
                     </div>
                     <div class="genre-filter">
@@ -286,6 +286,7 @@
 ?>
     <script src="JS/script.js"></script>
     <script>
+        // Display Book Pics
         let jsBookId=<?php echo json_encode($arr1); ?>;
         let jsBookPhoto=<?php echo json_encode($arr2); ?>;
         let jsSoldBook=<?php echo json_encode($arr3); ?>;
@@ -311,6 +312,8 @@
             });
             }
         }
+
+        // Change Default Values for Search Bar Select
         let jsValue=<?php echo json_encode($value); ?>;
         let jsType=<?php echo json_encode($type); ?>;
         let jsSearchType=document.getElementById("searchBy");
@@ -329,8 +332,6 @@
         // Apply Filters
         let filtersSubmitButton=document.getElementById("filters-head");
         let filtersForm=document.getElementById("filter-form");
-        let jsTypeSend=<?php echo json_encode($type); ?>;
-        let jsValueSend=<?php echo json_encode($value); ?>;
         filtersSubmitButton.addEventListener("click",function(){
             filtersForm.submit();
         });
