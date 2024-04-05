@@ -8,6 +8,7 @@
     <link rel="icon" href="Images/Icon.png" type="image/x-icon">
     <link rel="stylesheet" href="Styles/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body>
     <?php
@@ -68,5 +69,66 @@
 
     <!-- JavaScript -->
     <script src="JS/script.js"></script>
+    <script>
+        // Image Slider
+        $(document).ready(function() {
+            var slideIndex = 0;
+            var slides = $('.slide');
+            var totalSlides = slides.length;
+            var slideInterval = 4500; // 4.5 seconds
+            var slideTimer;
+
+            // Function to move to the next slide
+            function nextSlide() {
+            slideIndex = (slideIndex + 1) % totalSlides;
+            updateSlider();
+            }
+
+            // Function to move to the previous slide
+            function prevSlide() {
+              slideIndex = (slideIndex - 1 + totalSlides) % totalSlides;
+              updateSlider();
+            }
+
+            // Set interval to move to the next slide
+            function startSlideTimer() {
+              slideTimer = setInterval(nextSlide, slideInterval);
+            }
+
+            // Start the slide timer
+            startSlideTimer();
+
+            // Pause slide transition on hover
+            $('.slider-container').hover(
+            function() {
+                clearInterval(slideTimer);
+            },
+            function() {
+                startSlideTimer();
+            }
+            );
+
+            // Previous slide button click event
+            $('.prev-slide').click(function() {
+              clearInterval(slideTimer);
+              prevSlide();
+              startSlideTimer();
+            });
+
+            // Next slide button click event
+            $('.next-slide').click(function() {
+              clearInterval(slideTimer);
+              nextSlide();
+              startSlideTimer();
+            });
+
+            // Function to update slider position
+            function updateSlider() {
+            var slideWidth = $('.slide').width();
+            var slidePosition = -slideIndex * slideWidth;
+            $('.slider').css('transform', 'translateX(' + slidePosition + 'px)');
+            }
+        });
+    </script>
 </body>
 </html>
