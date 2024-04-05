@@ -164,6 +164,11 @@
         function switchForm(formId) {
             document.getElementById('loginForm').style.display = formId === 'loginForm' ? 'block' : 'none';
             document.getElementById('signupForm').style.display = formId === 'signupForm' ? 'block' : 'none';
+            if(formId==='loginForm'){
+                document.getElementById('loginUserName').focus();
+            }else{
+                document.getElementById('signupName').focus();
+            }
         }
 
         // Form Validations
