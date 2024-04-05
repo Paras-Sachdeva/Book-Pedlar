@@ -34,9 +34,35 @@
                     </div>");
             }
         ?>   
-    
+        <div class="outside-all-home-items">
+            <div class="slider-container">
+                <div class="slider">
+                    <div class="slide">
+                        <div class="slide-img"><img src="Images/Second Hand Book Trading Platform.jpg" alt="Slide 0"></div>
+                    </div>
+                    <div class="slide">
+                        <div class="slide-img"><img src="Images/Steps.jpg" alt="Slide 1"></div>
+                    </div>
+                    <div class="slide">
+                        <div class="slide-img"><img src="Images/Step1.jpg" alt="Slide 2"></div>
+                    </div>
+                    <div class="slide">
+                        <div class="slide-img"><img src="Images/Step2.jpg" alt="Slide 3"></div>
+                    </div>
+                    <div class="slide">
+                        <div class="slide-img"><img src="Images/Step3.jpg" alt="Slide 3"></div>
+                    </div>
+                    <div class="slide">
+                        <div class="slide-img"><img src="Images/LastStep.jpg" alt="Slide 4"></div>
+                    </div>
+                </div>
+                <i class="fa-solid fa-circle-chevron-left prev-slide"></i>
+                <i class="fa-solid fa-circle-chevron-right next-slide"></i>
+            </div>
+  
+        </div>
         <?php
-            // require("./Components/footer.php");  //Footer Component
+            require("./Components/footer.php");  //Footer Component
         ?>
     </div>
 

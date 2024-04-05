@@ -46,6 +46,7 @@ body{
     top: 0;
     width: 100%;
     font-weight: 600;
+    z-index: 1;
 }
 
 #bars{
@@ -150,6 +151,15 @@ a{
     height: 10rem;
     background-color: #333333;
     margin-top: 3rem;
+}
+
+.outside-all-home-items{
+    display: flex;
+    flex-direction: column;
+}
+
+.banner-home{
+    display: flex;
 }
 
 /* Dashboard.php */
