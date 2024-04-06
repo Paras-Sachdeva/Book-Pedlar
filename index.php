@@ -85,11 +85,11 @@
             </div>
             <div class="user-book-stats">
                 <div class="user-stats">
-                    <div id="user-stats-no"><?php echo($count1); ?></div>
+                    <div id="user-stats-no" class="counter" data-count='<?php echo($count1); ?>'>0</div>
                     <div class="user-stats-text">Users Registered</div>
                 </div>
                 <div class="book-stats">
-                    <div id="book-stats-no"><?php echo($count2); ?></div>
+                    <div id="book-stats-no" class="counter" data-count='<?php echo($count2); ?>'>0</div>
                     <div class="book-stats-text">Books Added</div>
                 </div>
             </div>
@@ -176,6 +176,49 @@
             $('.slider').css('transform', 'translateX(' + slidePosition + 'px)');
             }
         });
+
+        // Counting Animation
+        function animateCounterOnScroll() {
+            var counterElements = document.querySelectorAll(".counter");
+            var countersStarted = {};
+
+            function animateValue(id, start, end, duration) {
+                var range = end - start;
+                var stepTime = Math.abs(Math.floor(duration / range));
+                var currentCount = start;
+                var element = document.getElementById(id);
+  
+                function animate() {
+                    currentCount += 1;
+                    element.textContent = currentCount;
+                    if (currentCount < end) {
+                    setTimeout(animate, stepTime);
+                    }
+                }
+                animate();
+            }
+            // Check if the counter element is visible in the viewport
+            function isElementInViewport(el) {
+                var rect = el.getBoundingClientRect();
+                return (
+                  rect.top >= 0 &&
+                  rect.left >= 0 &&
+                  rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                  rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+                );
+            }
+            // Add scroll event listener to trigger animation for all counters
+            window.addEventListener("scroll", function() {
+                counterElements.forEach(function(counterElement) {
+                    if (!countersStarted[counterElement.id] && isElementInViewport(counterElement)) {
+                        animateValue(counterElement.id, 0, parseInt(counterElement.getAttribute("data-count")), 2000);
+                        countersStarted[counterElement.id] = true; // Prevent animation from triggering multiple times
+                    }
+                });
+            });
+        }
+        // Call the function when the DOM content is loaded
+        document.addEventListener("DOMContentLoaded", animateCounterOnScroll);
     </script>
 </body>
 </html>
