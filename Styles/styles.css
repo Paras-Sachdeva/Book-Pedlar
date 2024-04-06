@@ -206,6 +206,52 @@ a{
     align-items: center;
 }
 
+.user-book-stats{
+    display: flex;
+}
+
+.user-stats{
+    border-right: 0.2rem solid black;
+    margin-top: 4rem;
+    margin-left: 25rem;
+    padding-right: 1rem;
+    width: 20rem;
+    height: 20rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#user-stats-no{
+    color: cornflowerblue;
+    font-size: 5rem;
+}
+
+.user-stats-text{
+    font-size: 2rem;
+}
+
+.book-stats{
+    margin-top: 4rem;
+    padding-left: 1rem;
+    width: 20rem;
+    height: 20rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;    
+    align-items: center;
+}
+
+#book-stats-no{
+    color: green;
+    font-size: 5rem;
+}
+
+.book-stats-text{
+    font-size: 2rem;
+}
+
 .footer{
     width: 100%;
     height: 10rem;
