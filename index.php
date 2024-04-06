@@ -18,6 +18,24 @@
         <?php
             require("./Components/header.php");  //Header Component
 
+            $host = "localhost";
+            $username = "root";
+            $password = "";
+            $database = "book_pedlar";
+
+            $conn = mysqli_connect($host, $username, $password, $database);
+            if (!$conn) {
+                die("Connection failed");
+            }
+            
+            $sql1="SELECT * FROM user_data";
+            $result1=mysqli_query($conn,$sql1);
+            $count1=mysqli_num_rows($result1);
+
+            $sql2="SELECT * FROM book_data";
+            $result2=mysqli_query($conn,$sql2);
+            $count2=mysqli_num_rows($result2);
+
             // <!-- Navigation List -->
             if(isset($_SESSION['userid'])){
                 echo("<div class='navList'>
@@ -63,6 +81,16 @@
             <div class="ribbon">
                 <div class="quote1">
                     <p>"Bringing Books to Life, Second Hand, First Choice"</p>
+                </div>
+            </div>
+            <div class="user-book-stats">
+                <div class="user-stats">
+                    <div id="user-stats-no"><?php echo($count1); ?></div>
+                    <div class="user-stats-text">Users Registered</div>
+                </div>
+                <div class="book-stats">
+                    <div id="book-stats-no"><?php echo($count2); ?></div>
+                    <div class="book-stats-text">Books Added</div>
                 </div>
             </div>
             <div class="ribbon">
