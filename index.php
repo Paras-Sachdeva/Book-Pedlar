@@ -31,7 +31,7 @@
                         <a href='signupPage.php' class='linkAni'>Create Profile</a>
                         <a href='loginPage.php' class='linkAni'>Buy Books</a>
                         <a href='loginPage.php' class='linkAni'>Sell Books</a>
-                        <a href='about.html' class='linkAni'>About Us</a>
+                        <a href='about.php' class='linkAni'>About Us</a>
                     </div>");
             }
         ?>   
@@ -60,7 +60,26 @@
                 <i class="fa-solid fa-circle-chevron-left prev-slide"></i>
                 <i class="fa-solid fa-circle-chevron-right next-slide"></i>
             </div>
-  
+            <div class="ribbon">
+                <div class="quote1">
+                    <p>"Bringing Books to Life, Second Hand, First Choice"</p>
+                </div>
+            </div>
+            <div class="ribbon">
+                <div class="quote2">
+                    <p>"Cultivating Green Minds, One Book at a Time"</p>
+                </div>
+            </div>
+            <div class="ribbon">
+                <div class="quote3">
+                    <p>"Your Gateway to Affordable Reading Pleasure"</p>
+                </div>
+            </div>
+            <div class="ribbon">
+                <div class="quote4">
+                    <p>"Building Bridges Between Book Lovers and Bargain Hunters"</p>
+                </div>
+            </div>
         </div>
         <?php
             require("./Components/footer.php");  //Footer Component
@@ -75,7 +94,7 @@
             var slideIndex = 0;
             var slides = $('.slide');
             var totalSlides = slides.length;
-            var slideInterval = 4500; // 4.5 seconds
+            var slideInterval = 4000; // 4 seconds
             var slideTimer;
 
             // Function to move to the next slide
@@ -100,12 +119,12 @@
 
             // Pause slide transition on hover
             $('.slider-container').hover(
-            function() {
+                function() {
                 clearInterval(slideTimer);
-            },
-            function() {
+                },
+                function() {
                 startSlideTimer();
-            }
+                }
             );
 
             // Previous slide button click event

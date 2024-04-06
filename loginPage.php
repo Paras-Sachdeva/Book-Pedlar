@@ -185,6 +185,11 @@
 
     <!-- JavaScript -->
     <script>
+        // Put Focus on Username Input
+        setTimeout(() => {
+            document.getElementById("loginUserName").focus();
+        }, 1500);
+
         // To switch between login and signup forms
         function switchForm(formId) {
             document.getElementById('loginForm').style.display = formId === 'loginForm' ? 'block' : 'none';
