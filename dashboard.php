@@ -372,7 +372,6 @@
 
             // Upload Notification Pics
             let jsSmallPhoto=<?php echo json_encode($arr4); ?>;
-            console.log(jsSmallPhoto);
             let jsSmallSenderId=<?php echo json_encode($arr5); ?>;
             for(let i=0;i<jsSmallPhoto.length;i++){
                 let jsSmallPhotoTag=document.getElementById(jsSmallSenderId[i]+'-'+i);

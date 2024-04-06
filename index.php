@@ -36,6 +36,10 @@
             $result2=mysqli_query($conn,$sql2);
             $count2=mysqli_num_rows($result2);
 
+            $sql3="SELECT * FROM book_data WHERE bookstatus!='Sold'";
+            $result3=mysqli_query($conn,$sql3);
+            $count3=mysqli_num_rows($result3);
+
             // <!-- Navigation List -->
             if(isset($_SESSION['userid'])){
                 echo("<div class='navList'>
@@ -96,6 +100,26 @@
             <div class="ribbon">
                 <div class="quote2">
                     <p>"Cultivating Green Minds, One Book at a Time"</p>
+                </div>
+            </div>
+            <div class="slider-container-books">
+                <div class="slider-books" id="clickable-slide">
+                    <?php
+                        $i=0;
+                        $arr1=array();
+                        while($row3=mysqli_fetch_assoc($result3)){
+                    ?>
+                    <div class="slide-content-books" id='<?php echo($i); ?>'>
+                        <div class="slide-img-books" id='<?php echo("Img".$i); ?>'></div>
+                        <div class="slide-name-books" id='<?php echo("Name".$i); ?>'>
+                            <p><b><?php echo($row3['bookname']); ?></b></p>
+                        </div>
+                    </div>
+                    <?php
+                            array_push($arr1,$row3['photo']);
+                            $i++;
+                        }
+                    ?>
                 </div>
             </div>
             <div class="ribbon">
@@ -219,6 +243,14 @@
         }
         // Call the function when the DOM content is loaded
         document.addEventListener("DOMContentLoaded", animateCounterOnScroll);
+
+        // Upload Book Pics
+        let jsBookPics=<?php echo json_encode($arr1); ?>;
+        for(let i=0;i<jsBookPics.length;i++){
+            let jsBookPictag=document.getElementById("Img"+i);
+            jsBookPictag.style.backgroundImage="url('Uploads/"+jsBookPics[i]+"')";
+            jsBookPictag.style.backgroundSize="250px 310px";
+        }
     </script>
 </body>
 </html>
