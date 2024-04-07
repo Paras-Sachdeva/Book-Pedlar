@@ -132,6 +132,19 @@
                     <p>"Building Bridges Between Book Lovers and Bargain Hunters"</p>
                 </div>
             </div>
+            <div class="faq">
+                <div class="faq-head">
+                    <h1>FAQs</h1>
+                </div>
+                <div class="question">Question 1</div>
+                <div class="answer">Answer 1</div>
+                <div class="question">Question 2</div>
+                <div class="answer">Answer 2</div>
+                <div class="question">Question 3</div>
+                <div class="answer">Answer 3</div>
+                <div class="question">Question 4</div>
+                <div class="answer">Answer 4</div>
+            </div>
         </div>
         <?php
             require("./Components/footer.php");  //Footer Component
