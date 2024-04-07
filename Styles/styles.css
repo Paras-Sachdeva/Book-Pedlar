@@ -252,6 +252,58 @@ a{
     font-size: 2rem;
 }
 
+.slider-container-books{
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 20rem;
+    margin-top: 4rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+  
+.slider-books{
+    display: flex;
+    animation-name: circularAnimation;
+    animation-duration: calc(2s * var(--count));
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+  
+.slide-content-books{
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-right: 3rem;
+}
+  
+.slide-img-books{
+    border: 0.2rem solid black;
+    width: 15rem;
+    height: 18rem;
+}
+  
+.slide-name-books{
+    width: 15rem;
+    height: 18rem;
+    overflow: hidden;
+}
+  
+@keyframes circularAnimation{
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+}
+  
+.slider-books:hover{
+    animation-play-state: paused;
+}
+
 .footer{
     width: 100%;
     height: 10rem;

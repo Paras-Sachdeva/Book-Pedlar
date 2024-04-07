@@ -251,6 +251,10 @@
             jsBookPictag.style.backgroundImage="url('Uploads/"+jsBookPics[i]+"')";
             jsBookPictag.style.backgroundSize="250px 310px";
         }
+
+        // Change Animation Duration According to Number of Books
+        var count = document.querySelectorAll('.slide-name-books').length;
+        document.documentElement.style.setProperty('--count', count);
     </script>
 </body>
 </html>
