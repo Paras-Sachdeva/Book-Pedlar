@@ -268,6 +268,21 @@
         // Change Animation Duration According to Number of Books
         var count = document.querySelectorAll('.slide-name-books').length;
         document.documentElement.style.setProperty('--count', count);
+
+        // FAQs
+        document.addEventListener('DOMContentLoaded', function() {
+            const questions = document.querySelectorAll('.question');
+            questions.forEach(question => {
+                question.addEventListener('click', function() {
+                    const answer = this.nextElementSibling;
+                    if (answer.style.display === 'block') {
+                        answer.style.display = 'none';
+                    } else {
+                        answer.style.display = 'block';
+                    }
+                });
+            });
+        });
     </script>
 </body>
 </html>
