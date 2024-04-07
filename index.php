@@ -136,13 +136,41 @@
                 <div class="faq-head">
                     <h1>FAQs</h1>
                 </div>
-                <div class="question">Question 1</div>
+                <div class="question">
+                    <div class="question-text">
+                        Question 1
+                    </div>
+                    <div class="question-icon">
+                        <i class="fa-solid fa-chevron-up"></i>
+                    </div>
+                </div>
                 <div class="answer">Answer 1</div>
-                <div class="question">Question 2</div>
+                <div class="question">
+                    <div class="question-text">
+                        Question 2
+                    </div>
+                    <div class="question-icon">
+                        <i class="fa-solid fa-chevron-up"></i>
+                    </div>
+                </div>
                 <div class="answer">Answer 2</div>
-                <div class="question">Question 3</div>
+                <div class="question">
+                    <div class="question-text">
+                        Question 3
+                    </div>
+                    <div class="question-icon">
+                        <i class="fa-solid fa-chevron-up"></i>
+                    </div>
+                </div>
                 <div class="answer">Answer 3</div>
-                <div class="question">Question 4</div>
+                <div class="question">
+                    <div class="question-text">
+                        Question 4
+                    </div>
+                    <div class="question-icon">
+                        <i class="fa-solid fa-chevron-up"></i>
+                    </div>
+                </div>
                 <div class="answer">Answer 4</div>
             </div>
         </div>
@@ -275,10 +303,13 @@
             questions.forEach(question => {
                 question.addEventListener('click', function() {
                     const answer = this.nextElementSibling;
+                    const icon = this.querySelector('i.fa-chevron-up');
                     if (answer.style.display === 'block') {
                         answer.style.display = 'none';
+                        icon.style.transform = 'rotate(0deg)';
                     } else {
                         answer.style.display = 'block';
+                        icon.style.transform = 'rotate(180deg)';
                     }
                 });
             });
