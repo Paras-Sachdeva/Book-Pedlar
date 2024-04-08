@@ -6,19 +6,20 @@ document.addEventListener("DOMContentLoaded", function() {
     }, 1000);
 });
 
-// Display Navigation List
 let bars=document.querySelector('#bars');
 let navLis=document.querySelector('.navList');
 let icon=document.querySelector('#icons');
+let sliderContainer=document.querySelector('.slider-container');
 icon.addEventListener("click",()=>{
-    if(navLis.style.visibility==""||navLis.style.visibility=="hidden"){
-        navLis.style.visibility="visible";
+    if(navLis.style.display=="none"){
+        navLis.style.display="flex";
+        navLis.style.justifyContent="space-around";
+        navLis.style.alignItems="center";
         icon.innerHTML='<i class="fa-solid fa-xmark" id="bars-cross"></i>';
     }
     else{
-        navLis.style.visibility="hidden";
+        navLis.style.display="none";
         icon.innerHTML=' <i class="fa-solid fa-bars" id="bars"></i>';
-
     } 
 });
 

@@ -24,6 +24,7 @@
                             <a href='messages.php' class='linkAni'>Messages</a>
                             <a href='about.html' class='linkAni'>About Us</a>
                         </div>");
+                echo("</div>");  // Header Div
                         $host = "localhost";
                         $username = "root";
                         $password = "";

@@ -43,9 +43,9 @@
             // <!-- Navigation List -->
             if(isset($_SESSION['userid'])){
                 echo("<div class='navList'>
-                <a href='dashboard.php' class='linkAni'>Profile</a>
-                <a href='addBook' class='linkAni'>Add Book</a>
-                    <a href='#' class='linkAni'>Messages</a>
+                    <a href='dashboard.php' class='linkAni'>Profile</a>
+                    <a href='addBook.php' class='linkAni'>Add Book</a>
+                    <a href='messages.php' class='linkAni'>Messages</a>
                     <a href='about.html' class='linkAni'>About Us</a>
                 </div>");
             }else{
@@ -56,6 +56,7 @@
                         <a href='about.php' class='linkAni'>About Us</a>
                     </div>");
             }
+            echo("</div>");  // Header Div
         ?>   
         <div class="outside-all-home-items">
             <div class="slider-container">
