@@ -138,40 +138,114 @@
                 </div>
                 <div class="question">
                     <div class="question-text">
-                        Question 1
+                        What is Book Pedlar?
                     </div>
                     <div class="question-icon">
                         <i class="fa-solid fa-chevron-up"></i>
                     </div>
                 </div>
-                <div class="answer">Answer 1</div>
+                <div class="answer">
+                    Book Pedlar is an online platform where individuals can buy and sell second-hand books. It provides a convenient marketplace for book enthusiasts to discover affordable literature and connect with fellow readers and sellers.
+                </div>
                 <div class="question">
                     <div class="question-text">
-                        Question 2
+                        How does Book Pedlar work?
                     </div>
                     <div class="question-icon">
                         <i class="fa-solid fa-chevron-up"></i>
                     </div>
                 </div>
-                <div class="answer">Answer 2</div>
+                <div class="answer">
+                    Users can sign up or log in to Book Pedlar to create profiles and list their second-hand books for sale. Buyers can search for books using keywords, browse categories, and filter results based on various criteria. They can mark books as "INTERESTED" and communicate with sellers to negotiate prices and arrange transactions.
+                </div>
                 <div class="question">
                     <div class="question-text">
-                        Question 3
+                        Is it free to use Book Pedlar?
                     </div>
                     <div class="question-icon">
                         <i class="fa-solid fa-chevron-up"></i>
                     </div>
                 </div>
-                <div class="answer">Answer 3</div>
+                <div class="answer">
+                    Yes, signing up and browsing listings on Book Pedlar is completely free. There is no fees for browsing, searching, or communicating with sellers.
+                </div>
                 <div class="question">
                     <div class="question-text">
-                        Question 4
+                        How do I list a book for sale on Book Pedlar?
                     </div>
                     <div class="question-icon">
                         <i class="fa-solid fa-chevron-up"></i>
                     </div>
                 </div>
-                <div class="answer">Answer 4</div>
+                <div class="answer">
+                    To list a book for sale, simply log in to your account and navigate to the "ADD BOOK" section. Fill out the book listing form with details such as title, author, condition, price, and upload images. Once submitted, your listing will be reviewed and published on the platform.
+                </div>
+                <div class="question">
+                    <div class="question-text">
+                        How do I buy a book on Book Pedlar?
+                    </div>
+                    <div class="question-icon">
+                        <i class="fa-solid fa-chevron-up"></i>
+                    </div>
+                </div>
+                <div class="answer">
+                    To buy a book, browse through listings using the search bar or categories. Click on a listing to view detailed information about the book and the seller. If interested, you can mark the book as "interested" and communicate with the seller to negotiate prices and arrange the transaction.
+                </div>
+                <div class="question">
+                    <div class="question-text">
+                        Can I return a book if I'm not satisfied with it?
+                    </div>
+                    <div class="question-icon">
+                        <i class="fa-solid fa-chevron-up"></i>
+                    </div>
+                </div>
+                <div class="answer">
+                    Book Pedlar's aim is to provide an interface between buyers and sellers. The return policy may vary depending on the seller's terms and conditions. Buyers are encouraged to communicate with sellers and clarify return policies before making a purchase.
+                </div>
+                <div class="question">
+                    <div class="question-text">
+                        How do I contact a seller on Book Pedlar?
+                    </div>
+                    <div class="question-icon">
+                        <i class="fa-solid fa-chevron-up"></i>
+                    </div>
+                </div>
+                <div class="answer">
+                    When you mark a particular book as "INTERESTED", a notification will be sent to the seller of that book. It depends on the seller to approve your request or not. Once the seller approves the notification, a conversation between you and the seller will be initiated, allowing you to communicate and negotiate transaction details.
+                </div>
+                <div class="question">
+                    <div class="question-text">
+                        Is my personal information safe on Book Pedlar?
+                    </div>
+                    <div class="question-icon">
+                        <i class="fa-solid fa-chevron-up"></i>
+                    </div>
+                </div>
+                <div class="answer">
+                    Book Pedlar takes user privacy and security seriously. Your personal information is protected using industry-standard encryption protocols. However, it's essential to exercise caution when sharing sensitive information.
+                </div>
+                <div class="question">
+                    <div class="question-text">
+                        Can I sell other items besides books on Book Pedlar?
+                    </div>
+                    <div class="question-icon">
+                        <i class="fa-solid fa-chevron-up"></i>
+                    </div>
+                </div>
+                <div class="answer">
+                    Currently, Book Pedlar focuses exclusively on facilitating the buying and selling of second-hand books. However, the platform may consider expanding its offerings in the future based on user feedback and market demand.
+                </div>
+                <div class="question">
+                    <div class="question-text">
+                        What if I don't find the book I search for?
+                    </div>
+                    <div class="question-icon">
+                        <i class="fa-solid fa-chevron-up"></i>
+                    </div>
+                </div>
+                <div class="answer">
+                    If you are not able to find your desired book, you can click on "NOTIFY ME". In future, when that book is uploaded by any user, you will get a personalized e-mail to inform you.
+                </div>
             </div>
         </div>
         <?php
