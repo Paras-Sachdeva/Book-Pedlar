@@ -22,75 +22,136 @@
 
             if($priceRangeSet=="all" && $genreSet=="all" && $bookConditionSet=="all"){
                 $whereConditionFilter="";
+                $boxText="";
             }else if($priceRangeSet=="all" && $genreSet=="all" && $bookConditionSet!="all"){
                 $whereConditionFilter="AND bookcondition=$bookConditionSet";
+                $boxText="<li>Book Condition: $bookConditionSet</li>";
             }else if($priceRangeSet=="all" && $genreSet!="all" && $bookConditionSet=="all"){
                 $whereConditionFilter="AND genre='$genreSet'";
+                $boxText="<li>Genre: $genreSet</li>";
             }else if($priceRangeSet!="all" && $genreSet=="all" && $bookConditionSet=="all"){
                 if($priceRangeSet=="below500"){
                     $whereConditionFilter="AND sellprice<=500";
+                    $boxText="<li>Price Range: Below &#8377;500</li>";
                 }else if($priceRangeSet=="500To1000"){
                     $whereConditionFilter="AND (sellprice>=500 AND sellprice<=1000)";
+                    $boxText="<li>Price Range: &#8377;500 - &#8377;1000</li>";
                 }else if($priceRangeSet=="1000To2000"){
                     $whereConditionFilter="AND (sellprice>=1000 AND sellprice<=2000)";
+                    $boxText="<li>Price Range: &#8377;1000 - &#8377;2000</li>";
                 }else if($priceRangeSet=="2000To3000"){
                     $whereConditionFilter="AND (sellprice>=2000 AND sellprice<=3000)";
+                    $boxText="<li>Price Range: &#8377;2000 - &#8377;3000</li>";
                 }else if($priceRangeSet=="3000To4000"){
                     $whereConditionFilter="AND (sellprice>=3000 AND sellprice<=4000)";
+                    $boxText="<li>Price Range: &#8377;3000 - &#8377;4000</li>";
                 }else if($priceRangeSet=="4000To5000"){
                     $whereConditionFilter="AND (sellprice>=4000 AND sellprice<=5000)";
+                    $boxText="<li>Price Range: &#8377;4000 - &#8377;5000</li>";
                 }else if($priceRangeSet=="Above5000"){
                     $whereConditionFilter="AND sellprice>=5000";
+                    $boxText="<li>Price Range: Above &#8377;5000</li>";
                 }
             }else if($priceRangeSet!="all" && $genreSet!="all" && $bookConditionSet!="all"){
                 if($priceRangeSet=="below500"){
                     $whereConditionFilter="AND sellprice<=500 AND genre='$genreSet' AND bookcondition='$bookConditionSet'";
+                    $boxText="<li>Price Range: Below &#8377;500</li>
+                            <li>Genre: $genreSet</li>
+                            <li>Book Condition: $bookConditionSet</li>";
                 }else if($priceRangeSet=="500To1000"){
                     $whereConditionFilter="AND (sellprice>=500 AND sellprice<=1000) AND genre='$genreSet' AND bookcondition='$bookConditionSet'";
+                    $boxText="<li>Price Range: &#8377;500 - &#8377;1000</li>
+                            <li>Genre: $genreSet</li>
+                            <li>Book Condition: $bookConditionSet</li>";
                 }else if($priceRangeSet=="1000To2000"){
                     $whereConditionFilter="AND (sellprice>=1000 AND sellprice<=2000) AND genre='$genreSet' AND bookcondition='$bookConditionSet'";
+                    $boxText="<li>Price Range: &#8377;1000 - &#8377;2000</li>
+                            <li>Genre: $genreSet</li>
+                            <li>Book Condition: $bookConditionSet</li>";
                 }else if($priceRangeSet=="2000To3000"){
                     $whereConditionFilter="AND (sellprice>=2000 AND sellprice<=3000) AND genre='$genreSet' AND bookcondition='$bookConditionSet'";
+                    $boxText="<li>Price Range: &#8377;2000 - &#8377;3000</li>
+                            <li>Genre: $genreSet</li>
+                            <li>Book Condition: $bookConditionSet</li>";
                 }else if($priceRangeSet=="3000To4000"){
                     $whereConditionFilter="AND (sellprice>=3000 AND sellprice<=4000) AND genre='$genreSet' AND bookcondition='$bookConditionSet'";
+                    $boxText="<li>Price Range: &#8377;3000 - &#8377;4000</li>
+                            <li>Genre: $genreSet</li>
+                            <li>Book Condition: $bookConditionSet</li>";
                 }else if($priceRangeSet=="4000To5000"){
                     $whereConditionFilter="AND (sellprice>=4000 AND sellprice<=5000) AND genre='$genreSet' AND bookcondition='$bookConditionSet'";
+                    $boxText="<li>Price Range: &#8377;4000 - &#8377;5000</li>
+                            <li>Genre: $genreSet</li>
+                            <li>Book Condition: $bookConditionSet</li>";
                 }else if($priceRangeSet=="Above5000"){
                     $whereConditionFilter="AND sellprice>=5000 AND genre='$genreSet' AND bookcondition='$bookConditionSet'";
+                    $boxText="<li>Price Range: Above &#8377;5000</li>
+                            <li>Genre: $genreSet</li>
+                            <li>Book Condition: $bookConditionSet</li>";
                 }
             }else if($priceRangeSet!="all" && $genreSet!="all" && $bookConditionSet=="all"){
                 if($priceRangeSet=="below500"){
                     $whereConditionFilter="AND sellprice<=500 AND genre='$genreSet'";
+                    $boxText="<li>Price Range: Below &#8377;500</li>
+                            <li>Genre: $genreSet</li>";
                 }else if($priceRangeSet=="500To1000"){
                     $whereConditionFilter="AND (sellprice>=500 AND sellprice<=1000) AND genre='$genreSet'";
+                    $boxText="<li>Price Range: &#8377;500 - &#8377;1000</li>
+                            <li>Genre: $genreSet</li>";
                 }else if($priceRangeSet=="1000To2000"){
                     $whereConditionFilter="AND (sellprice>=1000 AND sellprice<=2000) AND genre='$genreSet'";
+                    $boxText="<li>Price Range: &#8377;1000 - &#8377;2000</li>
+                            <li>Genre: $genreSet</li>";
                 }else if($priceRangeSet=="2000To3000"){
                     $whereConditionFilter="AND (sellprice>=2000 AND sellprice<=3000) AND genre='$genreSet'";
+                    $boxText="<li>Price Range: &#8377;2000 - &#8377;3000</li>
+                            <li>Genre: $genreSet</li>";
                 }else if($priceRangeSet=="3000To4000"){
                     $whereConditionFilter="AND (sellprice>=3000 AND sellprice<=4000) AND genre='$genreSet'";
+                    $boxText="<li>Price Range: &#8377;3000 - &#8377;4000</li>
+                            <li>Genre: $genreSet</li>";
                 }else if($priceRangeSet=="4000To5000"){
                     $whereConditionFilter="AND (sellprice>=4000 AND sellprice<=5000) AND genre='$genreSet'";
+                    $boxText="<li>Price Range: &#8377;4000 - &#8377;5000</li>
+                            <li>Genre: $genreSet</li>";
                 }else if($priceRangeSet=="Above5000"){
                     $whereConditionFilter="AND sellprice>=5000 AND genre='$genreSet'";
+                    $boxText="<li>Price Range: Above &#8377;5000</li>
+                            <li>Genre: $genreSet</li>";
                 }
             }else if($priceRangeSet=="all" && $genreSet!="all" && $bookConditionSet!="all"){
                 $whereConditionFilter="AND (genre=$genreSet AND bookcondition=$bookConditionSet)";
+                $boxText="<li>Genre: $genreSet</li>
+                        <li>Book Condition: $bookConditionSet</li>";
             }else if($priceRangeSet!="all" && $genreSet=="all" && $bookConditionSet!="all"){
                 if($priceRangeSet=="below500"){
                     $whereConditionFilter="AND sellprice<=500 AND bookcondition='$bookConditionSet'";
+                    $boxText="<li>Price Range: Below &#8377;500</li>
+                        <li>Book Condition: $bookConditionSet</li>";
                 }else if($priceRangeSet=="500To1000"){
                     $whereConditionFilter="AND (sellprice>=500 AND sellprice<=1000) AND bookcondition='$bookConditionSet'";
+                    $boxText="<li>Price Range: &#8377;500 - &#8377;1000</li>
+                        <li>Book Condition: $bookConditionSet</li>";
                 }else if($priceRangeSet=="1000To2000"){
                     $whereConditionFilter="AND (sellprice>=1000 AND sellprice<=2000) AND bookcondition='$bookConditionSet'";
+                    $boxText="<li>Price Range: &#8377;1000 - &#8377;2000</li>
+                        <li>Book Condition: $bookConditionSet</li>";
                 }else if($priceRangeSet=="2000To3000"){
                     $whereConditionFilter="AND (sellprice>=2000 AND sellprice<=3000) AND bookcondition='$bookConditionSet'";
+                    $boxText="<li>Price Range: &#8377;2000 - &#8377;3000</li>
+                        <li>Book Condition: $bookConditionSet</li>";
                 }else if($priceRangeSet=="3000To4000"){
                     $whereConditionFilter="AND (sellprice>=3000 AND sellprice<=4000) AND bookcondition='$bookConditionSet'";
+                    $boxText="<li>Price Range: &#8377;3000 - &#8377;4000</li>
+                        <li>Book Condition: $bookConditionSet</li>";
                 }else if($priceRangeSet=="4000To5000"){
                     $whereConditionFilter="AND (sellprice>=4000 AND sellprice<=5000) AND bookcondition='$bookConditionSet'";
+                    $boxText="<li>Price Range: &#8377;4000 - &#8377;5000</li>
+                        <li>Book Condition: $bookConditionSet</li>";
                 }else if($priceRangeSet=="Above5000"){
                     $whereConditionFilter="AND sellprice>=5000 AND bookcondition='$bookConditionSet'";
+                    $boxText="<li>Price Range: Above &#8377;5000</li>
+                        <li>Book Condition: $bookConditionSet</li>";
                 }
             }
 
@@ -357,10 +418,66 @@
                     echo("<div><button id='signin-notify-btn'>Sign Up</button><button id='login-notify-btn'>Login</button></div>");
                 }
             }
+
             mysqli_close($conn);
             echo("</div>");
             require("./Components/footer.php");
-?>
+            echo("</div>");
+        ?>
+        <div class="box" id="notifyMeBox" style="height: auto;">
+            <div id="notify-head">
+                <div id="notify-text"><h4>NOTIFY YOU?</h4></div>
+                <div class="notify-close-icon" id="notify-close-icon">
+                    <i class="fa-solid fa-square-xmark close-icon" title="Close Notification"></i>
+                </div>
+            </div>
+            <div id="notify-content">
+                <div class="notify-ques">
+                    <h6>Do you want to be Notified when the following Book Description becomes Available?</h6>
+                </div>
+                <div class="book-characters">
+                    <ul>
+                        <form action="notifyMe.php" method="POST" id="notifyMeForm">
+                            <?php
+                                if($value==""){
+                                    echo($boxText);
+                                    $bookName_notify="All";
+                                    $authorName_notify="All";
+                                    $publisher_notify="All";
+                                }else if($type=="All"){
+                                    echo("<li>Book/Author/Publisher Name: $value</li>".$boxText);
+                                    $bookName_notify=$value;
+                                    $authorName_notify=$value;
+                                    $publisher_notify=$value;
+                                }else if($type=="Book Name"){
+                                    echo("<li>Book Name: $value</li>".$boxText);
+                                    $bookName_notify=$value;
+                                    $authorName_notify="No";
+                                    $publisher_notify="No";
+                                }else if($type=="Author Name"){
+                                    echo("<li>Author Name: $value</li>".$boxText);
+                                    $bookName_notify="No";
+                                    $authorName_notify=$value;
+                                    $publisher_notify="No";
+                                }else{
+                                    echo("<li>Publisher: $value</li>".$boxText);
+                                    $bookName_notify="No";
+                                    $authorName_notify="No";
+                                    $publisher_notify=$value;
+                                }
+                                $priceRange_notify=$priceRangeSet;
+                                $genre_notify=$genreSet;
+                                $bookCondition_notify=$bookConditionSet;
+                            ?>
+                        </form>
+                    </ul>
+                </div>
+            </div>
+            <div class="notify-btns" style="margin-top: 1rem;">
+                <button class="notify-btn-approve" id="notify-okay-btn">Okay</button>                    
+                <button class="notify-btn-delete" id="notify-cancel-btn">Cancel</button>                    
+            </div>
+        </div>
     <script src="JS/script.js"></script>
     <script>
         // Display Book Pics
@@ -412,20 +529,7 @@
         filtersSubmitButton.addEventListener("click",function(){
             filtersForm.submit();
         });
-
-        // Notify Me or Sign In Button Click
-        let signInNotifybtn=document.getElementById("signin-notify-btn");
-        let loginNotifybtn=document.getElementById("login-notify-btn");
-        let notifyBtn=document.getElementById("notify-btn");
-        signInNotifybtn.addEventListener("click",function(){
-            window.location.href="signupPage.php";
-        });
-        loginNotifybtn.addEventListener("click",function(){
-            window.location.href="loginPage.php";
-        });
-        notifyBtn.addEventListener("click",function(){
-        });
-
+        
         // Change Default values for Filter select
         let jsPriceRange=<?php echo json_encode($priceRangeSet); ?>;
         let jsGenre=<?php echo json_encode($genreSet); ?>;
@@ -433,6 +537,7 @@
         let jsPriceRangeFilter=document.getElementById("priceRangeFilter");
         let jsGenreFilter=document.getElementById("genreFilter");
         let jsBookConditionFilter=document.getElementById("bookConditionFilter");
+        console.log(jsPriceRangeFilter);
         if(jsPriceRange=="all"){
             jsPriceRangeFilter.innerHTML="<option value='all' selected>All</option><option value='below500'>Below &#8377;500</option><option value='500To1000'>&#8377;500 - &#8377;1000</option><option value='1000To2000'>&#8377;1000 - &#8377;2000</option><option value='2000To3000'>&#8377;2000 - &#8377;3000</option><option value='3000To4000'>&#8377;3000 - &#8377;4000</option><option value='4000To5000'>&#8377;4000 - &#8377;5000</option><option value='Above5000'>Above &#8377;5000</option>";
         }else if(jsPriceRange=="below500"){
@@ -450,7 +555,7 @@
         }else if(jsPriceRange=="Above5000"){
             jsPriceRangeFilter.innerHTML="<option value='all'>All</option><option value='below500'>Below &#8377;500</option><option value='500To1000'>&#8377;500 - &#8377;1000</option><option value='1000To2000'>&#8377;1000 - &#8377;2000</option><option value='2000To3000'>&#8377;2000 - &#8377;3000</option><option value='3000To4000'>&#8377;3000 - &#8377;4000</option><option value='4000To5000'>&#8377;4000 - &#8377;5000</option><option value='Above5000' selected>Above &#8377;5000</option>";
         }
-
+        
         
         if(jsGenre=="all"){
             jsGenreFilter.innerHTML="<option value='all' selected>All</option><option value='Fiction'>Fiction</option><option value='Non-Fiction'>Non-Fiction</option><option value='Romance'>Romance</option><option value='Science-Fiction (Sci-Fi)'>Science Fiction (Sci-Fi)</option><option value='Educational'>Educational</option><option value='Current Affairs'>Current Affairs</option><option value='Technology'>Technology</option><option value='Fantasy'>Fantasy</option><option value='Horror'>Horror</option><option value='Thriller'>Thriller</option><option value='Historical Fiction'>Historical Fiction</option><option value='Biography'>Biography</option><option value='Autobiography'>Autobiography</option><option value='Poetry'>Poetry</option><option value='Self Help'>Self-Help</option><option value='Business & Economics'>Business & Economics</option><option value='Science'>Science</option><option value='Philosophy'>Philosophy</option><option value='Travel'>Travel</option><option value='Children'>Children's</option><option value='Young Adult'>Young Adult</option><option value='Classics'>Classics</option>";
@@ -499,7 +604,7 @@
         }else if(jsGenre=="Classics"){
             jsGenreFilter.innerHTML="<option value='all'>All</option><option value='Fiction'>Fiction</option><option value='Non-Fiction'>Non-Fiction</option><option value='Romance'>Romance</option><option value='Science-Fiction (Sci-Fi)'>Science Fiction (Sci-Fi)</option><option value='Educational'>Educational</option><option value='Current Affairs'>Current Affairs</option><option value='Technology'>Technology</option><option value='Fantasy'>Fantasy</option><option value='Horror'>Horror</option><option value='Thriller'>Thriller</option><option value='Historical Fiction'>Historical Fiction</option><option value='Biography'>Biography</option><option value='Autobiography'>Autobiography</option><option value='Poetry'>Poetry</option><option value='Self Help'>Self-Help</option><option value='Business & Economics'>Business & Economics</option><option value='Science'>Science</option><option value='Philosophy'>Philosophy</option><option value='Travel'>Travel</option><option value='Children'>Children's</option><option value='Young Adult'>Young Adult</option><option value='Classics' selected>Classics</option>";
         }
-
+        
         if(jsBookCondition=="all"){
             jsBookConditionFilter.innerHTML="<option value='all' selected>All</option><option value='New'>New</option><option value='Like New'>Like New</option><option value='Very Good'>Very Good</option><option value='Good'>Good</option><option value='Acceptable'>Acceptable</option><option value='Fair'>Fair</option><option value='Poor'>Poor</option>";
         }else if(jsBookCondition=="New"){
@@ -517,6 +622,52 @@
         }else if(jsBookCondition=="Poor"){
             jsBookConditionFilter.innerHTML="<option value='all'>All</option><option value='New'>New</option><option value='Like New'>Like New</option><option value='Very Good'>Very Good</option><option value='Good'>Good</option><option value='Acceptable'>Acceptable</option><option value='Fair'>Fair</option><option value='Poor' selected>Poor</option>";
         }
+
+                // Notify Me Click
+                let signInNotifybtn=document.getElementById("signin-notify-btn");
+        let loginNotifybtn=document.getElementById("login-notify-btn");
+        let notifyBtn=document.getElementById("notify-btn");
+        notifyBtn.addEventListener("click",function(){
+            let content = document.querySelector('.content');
+            let box=document.getElementById("notifyMeBox");
+            var viewportWidth = window.innerWidth;
+            var viewportHeight = window.innerHeight;
+            var centerX = viewportWidth / 2;
+            var centerY = viewportHeight / 2;
+
+            content.classList.add('blur');
+            content.style.pointerEvents = 'none';
+            document.body.style.overflow = 'hidden';
+
+            box.style.display="flex";
+            box.style.flexDirection="column";
+            box.style.transform = 'scale(2)';
+            box.style.position = 'fixed';
+            box.style.left = centerX - box.offsetWidth / 2 + 'px';
+            box.style.top = centerY - box.offsetHeight / 2 + 'px';
+            let closeIcon=document.getElementById("notify-close-icon");
+            closeIcon.addEventListener("click",function(){
+                box.style.display="none";
+                content.classList.remove('blur');
+                content.style.pointerEvents = 'auto';
+                document.body.style.overflow = 'auto';
+            });
+            let notifyCancel=document.getElementById("notify-cancel-btn");
+            notifyCancel.addEventListener("click",function(){
+                box.style.display="none";
+                content.classList.remove('blur');
+                content.style.pointerEvents = 'auto';
+                document.body.style.overflow = 'auto';
+            });
+        });
+        
+        // Sign Up or Login Click
+        signInNotifybtn.addEventListener("click",function(){
+            window.location.href="signupPage.php";
+        });
+        loginNotifybtn.addEventListener("click",function(){
+            window.location.href="loginPage.php";
+        });
     </script>
 </body> 
 </HTML>

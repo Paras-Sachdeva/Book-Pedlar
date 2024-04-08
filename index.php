@@ -128,11 +128,11 @@
                     <p>"Your Gateway to Affordable Reading Pleasure"</p>
                 </div>
             </div>
-            <div class="ribbon">
+            <!-- <div class="ribbon">
                 <div class="quote4">
                     <p>"Building Bridges Between Book Lovers and Bargain Hunters"</p>
                 </div>
-            </div>
+            </div> -->
             <div class="faq">
                 <div class="faq-head">
                     <h1>FAQs</h1>
