@@ -623,8 +623,8 @@
             jsBookConditionFilter.innerHTML="<option value='all'>All</option><option value='New'>New</option><option value='Like New'>Like New</option><option value='Very Good'>Very Good</option><option value='Good'>Good</option><option value='Acceptable'>Acceptable</option><option value='Fair'>Fair</option><option value='Poor' selected>Poor</option>";
         }
 
-                // Notify Me Click
-                let signInNotifybtn=document.getElementById("signin-notify-btn");
+        // Notify Me Click
+        let signInNotifybtn=document.getElementById("signin-notify-btn");
         let loginNotifybtn=document.getElementById("login-notify-btn");
         let notifyBtn=document.getElementById("notify-btn");
         notifyBtn.addEventListener("click",function(){
@@ -654,6 +654,37 @@
             });
             let notifyCancel=document.getElementById("notify-cancel-btn");
             notifyCancel.addEventListener("click",function(){
+                box.style.display="none";
+                content.classList.remove('blur');
+                content.style.pointerEvents = 'auto';
+                document.body.style.overflow = 'auto';
+            });
+            let notifyOkay=document.getElementById("notify-okay-btn");
+            notifyOkay.addEventListener("click",function(){
+                let userid = <?php echo json_encode($userid); ?>;
+                let bookName = <?php echo json_encode($bookName_notify); ?>;
+                let authorName = <?php echo json_encode($authorName_notify); ?>;
+                let publisher = <?php echo json_encode($publisher_notify); ?>;
+                let priceRange = <?php echo json_encode($priceRange_notify); ?>;
+                let genre = <?php echo json_encode($genre_notify); ?>;
+                let bookCondition = <?php echo json_encode($bookCondition_notify); ?>;
+                let jsNotifyMeObj={};
+                jsNotifyMeObj.userid=userid;
+                jsNotifyMeObj.bookName=bookName;
+                jsNotifyMeObj.authorName=authorName;
+                jsNotifyMeObj.publisher=publisher;
+                jsNotifyMeObj.priceRange=priceRange;
+                jsNotifyMeObj.genre=genre;
+                jsNotifyMeObj.bookCondition=bookCondition;
+                console.log(jsNotifyMeObj);
+                $.ajax({
+                    url:"notifyMe.php",
+                    method:"POST",
+                    data:{ jsNotifyMeObj: JSON.stringify(jsNotifyMeObj)},
+                        success:function(response){
+                        console.log(response);
+                    }
+                });
                 box.style.display="none";
                 content.classList.remove('blur');
                 content.style.pointerEvents = 'auto';
