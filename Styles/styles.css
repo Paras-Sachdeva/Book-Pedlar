@@ -823,6 +823,16 @@ label{
     margin-right: 2.5rem;
 }
 
+.notify-ques{
+    padding: 1rem;
+    margin-left: 1rem;
+}
+
+.book-characters{
+    font-size: 0.75rem;
+    line-height: 1rem;
+}
+
 /* FullBookInfo.php */
 .book-info-buttons{
     background-color: #333333;
