@@ -274,7 +274,59 @@
             mysqli_close($conn);
             echo("</div>");
             require("./Components/footer.php");
+            echo("</div>");
 ?>
+        <div class="box" id="notifyMeBox" style="height: auto;">
+            <div id="notify-head">
+                <div id="notify-text"><h4>NOTIFY YOU?</h4></div>
+                <div class="notify-close-icon" id="notify-close-icon">
+                    <i class="fa-solid fa-square-xmark close-icon" title="Close Notification"></i>
+                </div>
+            </div>
+            <div id="notify-content">
+                <div class="notify-ques">
+                    <h6>Do you want to be Notified when the following Book Description becomes Available?</h6>
+                </div>
+                <div class="book-characters">
+                    <ul>
+                        <form action="notifyMe.php" method="POST" id="notifyMeForm">
+                            <?php
+                                if($value==""){
+                                    echo($boxText);
+                                    $bookName_notify="All";
+                                    $authorName_notify="All";
+                                    $publisher_notify="All";
+                                }else if($type=="All"){
+                                    echo("<li>Book/Author/Publisher Name: $value</li>");
+                                    $bookName_notify=$value;
+                                    $authorName_notify=$value;
+                                    $publisher_notify=$value;
+                                }else if($type=="Book Name"){
+                                    echo("<li>Book Name: $value</li>");
+                                    $bookName_notify=$value;
+                                    $authorName_notify="No";
+                                    $publisher_notify="No";
+                                }else if($type=="Author Name"){
+                                    echo("<li>Author Name: $value</li>");
+                                    $bookName_notify="No";
+                                    $authorName_notify=$value;
+                                    $publisher_notify="No";
+                                }else{
+                                    echo("<li>Publisher: $value</li>");
+                                    $bookName_notify="No";
+                                    $authorName_notify="No";
+                                    $publisher_notify=$value;
+                                }
+                            ?>
+                        </form>
+                    </ul>
+                </div>
+            </div>
+            <div class="notify-btns" style="margin-top: 1rem;">
+                <button class="notify-btn-approve" id="notify-okay-btn">Okay</button>                    
+                <button class="notify-btn-delete" id="notify-cancel-btn">Cancel</button>                    
+            </div>
+        </div>
     <script src="JS/script.js"></script>
     <script>
         // Display Book Pics
@@ -327,18 +379,83 @@
             filtersForm.submit();
         });
 
-        // Notify Me or Sign In Button Click
+        // Notify Me Click
         let signInNotifybtn=document.getElementById("signin-notify-btn");
         let loginNotifybtn=document.getElementById("login-notify-btn");
         let notifyBtn=document.getElementById("notify-btn");
+        notifyBtn.addEventListener("click",function(){
+            let content = document.querySelector('.content');
+            let box=document.getElementById("notifyMeBox");
+            var viewportWidth = window.innerWidth;
+            var viewportHeight = window.innerHeight;
+            var centerX = viewportWidth / 2;
+            var centerY = viewportHeight / 2;
+
+            content.classList.add('blur');
+            content.style.pointerEvents = 'none';
+            document.body.style.overflow = 'hidden';
+
+            box.style.display="flex";
+            box.style.flexDirection="column";
+            box.style.transform = 'scale(2)';
+            box.style.position = 'fixed';
+            box.style.left = centerX - box.offsetWidth / 2 + 'px';
+            box.style.top = centerY - box.offsetHeight / 2 + 'px';
+            let closeIcon=document.getElementById("notify-close-icon");
+            closeIcon.addEventListener("click",function(){
+                box.style.display="none";
+                content.classList.remove('blur');
+                content.style.pointerEvents = 'auto';
+                document.body.style.overflow = 'auto';
+            });
+            let notifyCancel=document.getElementById("notify-cancel-btn");
+            notifyCancel.addEventListener("click",function(){
+                box.style.display="none";
+                content.classList.remove('blur');
+                content.style.pointerEvents = 'auto';
+                document.body.style.overflow = 'auto';
+            });
+            let notifyOkay=document.getElementById("notify-okay-btn");
+            notifyOkay.addEventListener("click",function(){
+                let userid = <?php echo json_encode($userid); ?>;
+                let bookName = <?php echo json_encode($bookName_notify); ?>;
+                let authorName = <?php echo json_encode($authorName_notify); ?>;
+                let publisher = <?php echo json_encode($publisher_notify); ?>;
+                let priceRange = "all";
+                let genre = "all"
+                let bookCondition = "all";
+                let jsNotifyMeObj={};
+                jsNotifyMeObj.userid=userid;
+                jsNotifyMeObj.bookName=bookName;
+                jsNotifyMeObj.authorName=authorName;
+                jsNotifyMeObj.publisher=publisher;
+                jsNotifyMeObj.priceRange=priceRange;
+                jsNotifyMeObj.genre=genre;
+                jsNotifyMeObj.bookCondition=bookCondition;
+                console.log(jsNotifyMeObj);
+                $.ajax({
+                    url:"notifyMe.php",
+                    method:"POST",
+                    data:{ jsNotifyMeObj: JSON.stringify(jsNotifyMeObj)},
+                        success:function(response){
+                        console.log(response);
+                    }
+                });
+                box.style.display="none";
+                content.classList.remove('blur');
+                content.style.pointerEvents = 'auto';
+                document.body.style.overflow = 'auto';
+            });
+        });
+        
+        // Sign Up or Login Click
         signInNotifybtn.addEventListener("click",function(){
             window.location.href="signupPage.php";
         });
         loginNotifybtn.addEventListener("click",function(){
             window.location.href="loginPage.php";
         });
-        notifyBtn.addEventListener("click",function(){
-        });
     </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </body>
 </HTML>
