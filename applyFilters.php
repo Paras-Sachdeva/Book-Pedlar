@@ -24,7 +24,7 @@
                 $whereConditionFilter="";
                 $boxText="";
             }else if($priceRangeSet=="all" && $genreSet=="all" && $bookConditionSet!="all"){
-                $whereConditionFilter="AND bookcondition=$bookConditionSet";
+                $whereConditionFilter="AND bookcondition='$bookConditionSet'";
                 $boxText="<li>Book Condition: $bookConditionSet</li>";
             }else if($priceRangeSet=="all" && $genreSet!="all" && $bookConditionSet=="all"){
                 $whereConditionFilter="AND genre='$genreSet'";
@@ -120,7 +120,7 @@
                             <li>Genre: $genreSet</li>";
                 }
             }else if($priceRangeSet=="all" && $genreSet!="all" && $bookConditionSet!="all"){
-                $whereConditionFilter="AND (genre=$genreSet AND bookcondition=$bookConditionSet)";
+                $whereConditionFilter="AND (genre='$genreSet' AND bookcondition='$bookConditionSet')";
                 $boxText="<li>Genre: $genreSet</li>
                         <li>Book Condition: $bookConditionSet</li>";
             }else if($priceRangeSet!="all" && $genreSet=="all" && $bookConditionSet!="all"){

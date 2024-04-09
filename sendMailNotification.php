@@ -13,8 +13,6 @@
             $headers .= "Content-type: text/html; charset=UTF-8\r\n";
             $mail_sql1="SELECT * FROM book_notification";
             $mail_result1=mysqli_query($conn,$mail_sql1);
-            $mail_sql2="SELECT * FROM book_data";
-            $mail_result2=mysqli_query($conn,$mail_sql2);
             $format1="<!DOCTYPE html>
             <html lang='en'>
             <head>
@@ -39,6 +37,8 @@
     </html>";
 
             while($mail_row1=mysqli_fetch_assoc($mail_result1)){
+                $mail_sql2="SELECT * FROM book_data WHERE userid!=$mail_row1[userid]";
+                $mail_result2=mysqli_query($conn,$mail_sql2);
                 $mail_sql3="SELECT * FROM user_data WHERE id='$mail_row1[userid]'";
                 $mail_result3=mysqli_query($conn,$mail_sql3);
                 $mail_row3=mysqli_fetch_assoc($mail_result3);
