@@ -10,10 +10,33 @@
     }
     
             $headers = "From: paras140902@gmail.com\r\n";
+            $headers .= "Content-type: text/html; charset=UTF-8\r\n";
             $mail_sql1="SELECT * FROM book_notification";
             $mail_result1=mysqli_query($conn,$mail_sql1);
             $mail_sql2="SELECT * FROM book_data";
             $mail_result2=mysqli_query($conn,$mail_sql2);
+            $format1="<!DOCTYPE html>
+            <html lang='en'>
+            <head>
+                <meta charset='UTF-8'>
+                <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+                <title>Book Pedlar Notification</title>
+            </head>
+            <body>
+                <div style='font-family: Arial, sans-serif;'>
+                    <h2>Your Requested Book is Now Available on Book Pedlar!</h2>";
+            $format2="<p>We're excited to inform you that the book you've been eagerly waiting for is now available on Book Pedlar! 📚</p>
+            
+            <h3>Book Details:</h3>";
+            $format3="<p><strong>Negotiate and Purchase:</strong> If you're interested in purchasing the book, you can start a conversation with the seller to negotiate the price and arrange for the pickup or delivery. Simply log in to your Book Pedlar account and visit the book's page to initiate the conversation.</p>
+            
+            <p><strong>Act Fast!</strong> Books on Book Pedlar sell quickly, so don't miss this opportunity to grab your copy!</p>
+    
+            <p>Happy Reading! 📖</p>
+            <p>Warm Regards,<br>Paras Sachdeva<br>Book Pedlar Team</p>
+        </div>
+    </body>
+    </html>";
 
             while($mail_row1=mysqli_fetch_assoc($mail_result1)){
                 $mail_sql3="SELECT * FROM user_data WHERE id='$mail_row1[userid]'";
@@ -25,8 +48,24 @@
                         while($mail_row2=mysqli_fetch_assoc($mail_result2)){
                             if($mail_row1['genre']==$mail_row2['genre']){
                                 $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $body = "Hi, the Book with the Following Description is Available on Book Pedlar Website. Hurry up before someone else grabs it! Genre: $mail_row1[genre]";
+                                $subject = "Book Pedlar Notification";
+                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                $mail_result4=mysqli_query($conn,$mail_sql4);
+                                $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                $body = $format1."<p>Dear $mail_row3[username],</p>".$format2."<ul>
+                                <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                <li><strong>Author:</strong> $mail_row2[author]</li>
+                                <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                            </ul>
+                    
+                            <h3>Seller Details:</h3>
+                            <ul>
+                                <li><strong>Name:</strong> $mail_row4[username]</li>
+                                <li><strong>Email:</strong> $mail_row4[email]</li>
+                            </ul>".$format3;
 
                                 if(mail($to_email, $subject, $body, $headers)){
                                     echo "Email successfully sent to $to_email...";
@@ -42,7 +81,23 @@
                             if($mail_row1['bookcondition']==$mail_row2['bookcondition']){
                                 $to_email = $mail_row3['email'];
                                 $subject = "Book Notification From Book Pedlar";
-                                $body = "Hi, the Book with the Following Description is Available on Book Pedlar Website. Hurry up before someone else grabs it! Book Condition: $mail_row1[bookcondition]";
+                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                $mail_result4=mysqli_query($conn,$mail_sql4);
+                                $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                $body = $format1."<p>Dear $mail_row3[username],</p>".$format2."<ul>
+                                <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                <li><strong>Author:</strong> $mail_row2[author]</li>
+                                <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                            </ul>
+                    
+                            <h3>Seller Details:</h3>
+                            <ul>
+                                <li><strong>Name:</strong> $mail_row4[username]</li>
+                                <li><strong>Email:</strong> $mail_row4[email]</li>
+                            </ul>".$format3;
 
                                 if(mail($to_email, $subject, $body, $headers)){
                                     echo "Email successfully sent to $to_email...";
@@ -59,7 +114,23 @@
                                 if($mail_row2['sellprice']<=500){
                                     $to_email = $mail_row3['email'];
                                     $subject = "Book Notification From Book Pedlar";
-                                    $body = "Hi, the Book with the Following Description is Available on Book Pedlar Website. Hurry up before someone else grabs it! Price Range: Below ₹500";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                $mail_result4=mysqli_query($conn,$mail_sql4);
+                                $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                $body = $format1."<p>Dear $mail_row3[username],</p>".$format2."<ul>
+                                <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                <li><strong>Author:</strong> $mail_row2[author]</li>
+                                <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                            </ul>
+                    
+                            <h3>Seller Details:</h3>
+                            <ul>
+                                <li><strong>Name:</strong> $mail_row4[username]</li>
+                                <li><strong>Email:</strong> $mail_row4[email]</li>
+                            </ul>".$format3;
     
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
@@ -73,7 +144,23 @@
                                 if($mail_row2['sellprice']>=500 && $mail_row2['sellprice']<=1000){
                                     $to_email = $mail_row3['email'];
                                     $subject = "Book Notification From Book Pedlar";
-                                    $body = "Hi, the Book with the Following Description is Available on Book Pedlar Website. Hurry up before someone else grabs it! Price Range: ₹500 - ₹1000";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>Dear $mail_row3[username],</p>".$format2."<ul>
+                                <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                <li><strong>Author:</strong> $mail_row2[author]</li>
+                                <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                            </ul>
+                    
+                            <h3>Seller Details:</h3>
+                            <ul>
+                                <li><strong>Name:</strong> $mail_row4[username]</li>
+                                <li><strong>Email:</strong> $mail_row4[email]</li>
+                            </ul>".$format3;
     
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
@@ -87,7 +174,23 @@
                                 if($mail_row2['sellprice']>=1000 && $mail_row2['sellprice']<=2000){
                                     $to_email = $mail_row3['email'];
                                     $subject = "Book Notification From Book Pedlar";
-                                    $body = "Hi, the Book with the Following Description is Available on Book Pedlar Website. Hurry up before someone else grabs it! Price Range: ₹1000 - ₹2000";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>Dear $mail_row3[username],</p>".$format2."<ul>
+                                <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                <li><strong>Author:</strong> $mail_row2[author]</li>
+                                <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                            </ul>
+                    
+                            <h3>Seller Details:</h3>
+                            <ul>
+                                <li><strong>Name:</strong> $mail_row4[username]</li>
+                                <li><strong>Email:</strong> $mail_row4[email]</li>
+                            </ul>".$format3;
     
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
@@ -101,7 +204,23 @@
                                 if($mail_row2['sellprice']>=2000 && $mail_row2['sellprice']<=3000){
                                     $to_email = $mail_row3['email'];
                                     $subject = "Book Notification From Book Pedlar";
-                                    $body = "Hi, the Book with the Following Description is Available on Book Pedlar Website. Hurry up before someone else grabs it! Price Range: ₹2000 - ₹3000";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                $mail_result4=mysqli_query($conn,$mail_sql4);
+                                $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                $body = $format1."<p>Dear $mail_row3[username],</p>".$format2."<ul>
+                                <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                <li><strong>Author:</strong> $mail_row2[author]</li>
+                                <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                            </ul>
+                    
+                            <h3>Seller Details:</h3>
+                            <ul>
+                                <li><strong>Name:</strong> $mail_row4[username]</li>
+                                <li><strong>Email:</strong> $mail_row4[email]</li>
+                            </ul>".$format3;
     
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
@@ -115,7 +234,23 @@
                                 if($mail_row2['sellprice']>=3000 && $mail_row2['sellprice']<=4000){
                                     $to_email = $mail_row3['email'];
                                     $subject = "Book Notification From Book Pedlar";
-                                    $body = "Hi, the Book with the Following Description is Available on Book Pedlar Website. Hurry up before someone else grabs it! Price Range: ₹3000 - ₹4000";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                $mail_result4=mysqli_query($conn,$mail_sql4);
+                                $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                $body = $format1."<p>Dear $mail_row3[username],</p>".$format2."<ul>
+                                <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                <li><strong>Author:</strong> $mail_row2[author]</li>
+                                <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                            </ul>
+                    
+                            <h3>Seller Details:</h3>
+                            <ul>
+                                <li><strong>Name:</strong> $mail_row4[username]</li>
+                                <li><strong>Email:</strong> $mail_row4[email]</li>
+                            </ul>".$format3;
     
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
@@ -129,7 +264,23 @@
                                 if($mail_row2['sellprice']>=4000 && $mail_row2['sellprice']<=5000){
                                     $to_email = $mail_row3['email'];
                                     $subject = "Book Notification From Book Pedlar";
-                                    $body = "Hi, the Book with the Following Description is Available on Book Pedlar Website. Hurry up before someone else grabs it! Price Range: ₹4000 - ₹5000";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                $mail_result4=mysqli_query($conn,$mail_sql4);
+                                $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                $body = $format1."<p>Dear $mail_row3[username],</p>".$format2."<ul>
+                                <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                <li><strong>Author:</strong> $mail_row2[author]</li>
+                                <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                            </ul>
+                    
+                            <h3>Seller Details:</h3>
+                            <ul>
+                                <li><strong>Name:</strong> $mail_row4[username]</li>
+                                <li><strong>Email:</strong> $mail_row4[email]</li>
+                            </ul>".$format3;
     
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
@@ -143,7 +294,23 @@
                                 if($mail_row2['sellprice']>=5000){
                                     $to_email = $mail_row3['email'];
                                     $subject = "Book Notification From Book Pedlar";
-                                    $body = "Hi, the Book with the Following Description is Available on Book Pedlar Website. Hurry up before someone else grabs it! Price Range: Above ₹5000";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                $mail_result4=mysqli_query($conn,$mail_sql4);
+                                $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                $body = $format1."<p>Dear $mail_row3[username],</p>".$format2."<ul>
+                                <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                <li><strong>Author:</strong> $mail_row2[author]</li>
+                                <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                            </ul>
+                    
+                            <h3>Seller Details:</h3>
+                            <ul>
+                                <li><strong>Name:</strong> $mail_row4[username]</li>
+                                <li><strong>Email:</strong> $mail_row4[email]</li>
+                            </ul>".$format3;
     
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
@@ -160,7 +327,23 @@
                             if($mail_row1['bookcondition']==$mail_row2['bookcondition'] && $mail_row1['genre']==$mail_row2['genre']){
                                 $to_email = $mail_row3['email'];
                                 $subject = "Book Notification From Book Pedlar";
-                                $body = "Hi, the Book with the Following Description is Available on Book Pedlar Website. Hurry up before someone else grabs it! Book Condition: $mail_row1[bookcondition], Genre: $mail_row1[bookcondition]";
+                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                $mail_result4=mysqli_query($conn,$mail_sql4);
+                                $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                $body = $format1."<p>Dear $mail_row3[username],</p>".$format2."<ul>
+                                <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                <li><strong>Author:</strong> $mail_row2[author]</li>
+                                <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                            </ul>
+                    
+                            <h3>Seller Details:</h3>
+                            <ul>
+                                <li><strong>Name:</strong> $mail_row4[username]</li>
+                                <li><strong>Email:</strong> $mail_row4[email]</li>
+                            </ul>".$format3;
 
                                 if(mail($to_email, $subject, $body, $headers)){
                                     echo "Email successfully sent to $to_email...";
@@ -177,7 +360,23 @@
                                 if($mail_row2['sellprice']<=500 && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
                                     $to_email = $mail_row3['email'];
                                     $subject = "Book Notification From Book Pedlar";
-                                    $body = "Hi, the Book with the Following Description is Available on Book Pedlar Website. Hurry up before someone else grabs it! Price Range: Below ₹500, Book Condition: $mail_row1[bookcondition]";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                $mail_result4=mysqli_query($conn,$mail_sql4);
+                                $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                $body = $format1."<p>Dear $mail_row3[username],</p>".$format2."<ul>
+                                <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                <li><strong>Author:</strong> $mail_row2[author]</li>
+                                <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                            </ul>
+                    
+                            <h3>Seller Details:</h3>
+                            <ul>
+                                <li><strong>Name:</strong> $mail_row4[username]</li>
+                                <li><strong>Email:</strong> $mail_row4[email]</li>
+                            </ul>".$format3;
     
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
@@ -191,7 +390,23 @@
                                 if($mail_row2['sellprice']>=500 && $mail_row2['sellprice']<=1000 && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
                                     $to_email = $mail_row3['email'];
                                     $subject = "Book Notification From Book Pedlar";
-                                    $body = "Hi, the Book with the Following Description is Available on Book Pedlar Website. Hurry up before someone else grabs it! Price Range: ₹500 - ₹1000, Book Condition: $mail_row1[bookcondition]";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                $mail_result4=mysqli_query($conn,$mail_sql4);
+                                $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                $body = $format1."<p>Dear $mail_row3[username],</p>".$format2."<ul>
+                                <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                <li><strong>Author:</strong> $mail_row2[author]</li>
+                                <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                            </ul>
+                    
+                            <h3>Seller Details:</h3>
+                            <ul>
+                                <li><strong>Name:</strong> $mail_row4[username]</li>
+                                <li><strong>Email:</strong> $mail_row4[email]</li>
+                            </ul>".$format3;
     
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
@@ -205,7 +420,23 @@
                                 if($mail_row2['sellprice']>=1000 && $mail_row2['sellprice']<=2000 && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
                                     $to_email = $mail_row3['email'];
                                     $subject = "Book Notification From Book Pedlar";
-                                    $body = "Hi, the Book with the Following Description is Available on Book Pedlar Website. Hurry up before someone else grabs it! Price Range: ₹1000 - ₹2000, Book Condition: $mail_row1[bookcondition]";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                $mail_result4=mysqli_query($conn,$mail_sql4);
+                                $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                $body = $format1."<p>Dear $mail_row3[username],</p>".$format2."<ul>
+                                <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                <li><strong>Author:</strong> $mail_row2[author]</li>
+                                <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                            </ul>
+                    
+                            <h3>Seller Details:</h3>
+                            <ul>
+                                <li><strong>Name:</strong> $mail_row4[username]</li>
+                                <li><strong>Email:</strong> $mail_row4[email]</li>
+                            </ul>".$format3;
     
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
@@ -219,7 +450,23 @@
                                 if($mail_row2['sellprice']>=2000 && $mail_row2['sellprice']<=3000 && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
                                     $to_email = $mail_row3['email'];
                                     $subject = "Book Notification From Book Pedlar";
-                                    $body = "Hi, the Book with the Following Description is Available on Book Pedlar Website. Hurry up before someone else grabs it! Price Range: ₹2000 - ₹3000, Book Condition: $mail_row1[bookcondition]";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                $mail_result4=mysqli_query($conn,$mail_sql4);
+                                $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                $body = $format1."<p>Dear $mail_row3[username],</p>".$format2."<ul>
+                                <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                <li><strong>Author:</strong> $mail_row2[author]</li>
+                                <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                            </ul>
+                    
+                            <h3>Seller Details:</h3>
+                            <ul>
+                                <li><strong>Name:</strong> $mail_row4[username]</li>
+                                <li><strong>Email:</strong> $mail_row4[email]</li>
+                            </ul>".$format3;
     
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
@@ -233,7 +480,23 @@
                                 if($mail_row2['sellprice']>=3000 && $mail_row2['sellprice']<=4000 && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
                                     $to_email = $mail_row3['email'];
                                     $subject = "Book Notification From Book Pedlar";
-                                    $body = "Hi, the Book with the Following Description is Available on Book Pedlar Website. Hurry up before someone else grabs it! Price Range: ₹3000 - ₹4000, Book Condition: $mail_row1[bookcondition]";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                $mail_result4=mysqli_query($conn,$mail_sql4);
+                                $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                $body = $format1."<p>Dear $mail_row3[username],</p>".$format2."<ul>
+                                <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                <li><strong>Author:</strong> $mail_row2[author]</li>
+                                <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                            </ul>
+                    
+                            <h3>Seller Details:</h3>
+                            <ul>
+                                <li><strong>Name:</strong> $mail_row4[username]</li>
+                                <li><strong>Email:</strong> $mail_row4[email]</li>
+                            </ul>".$format3;
     
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
@@ -247,7 +510,23 @@
                                 if($mail_row2['sellprice']>=4000 && $mail_row2['sellprice']<=5000 && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
                                     $to_email = $mail_row3['email'];
                                     $subject = "Book Notification From Book Pedlar";
-                                    $body = "Hi, the Book with the Following Description is Available on Book Pedlar Website. Hurry up before someone else grabs it! Price Range: ₹4000 - ₹5000, Book Condition: $mail_row1[bookcondition]";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                $mail_result4=mysqli_query($conn,$mail_sql4);
+                                $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                $body = $format1."<p>Dear $mail_row3[username],</p>".$format2."<ul>
+                                <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                <li><strong>Author:</strong> $mail_row2[author]</li>
+                                <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                            </ul>
+                    
+                            <h3>Seller Details:</h3>
+                            <ul>
+                                <li><strong>Name:</strong> $mail_row4[username]</li>
+                                <li><strong>Email:</strong> $mail_row4[email]</li>
+                            </ul>".$format3;
     
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
@@ -261,7 +540,23 @@
                                 if($mail_row2['sellprice']>=5000 && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
                                     $to_email = $mail_row3['email'];
                                     $subject = "Book Notification From Book Pedlar";
-                                    $body = "Hi, the Book with the Following Description is Available on Book Pedlar Website. Hurry up before someone else grabs it! Price Range: Above ₹5000, Book Condition: $mail_row1[bookcondition]";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                $mail_result4=mysqli_query($conn,$mail_sql4);
+                                $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                $body = $format1."<p>Dear $mail_row3[username],</p>".$format2."<ul>
+                                <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                <li><strong>Author:</strong> $mail_row2[author]</li>
+                                <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                            </ul>
+                    
+                            <h3>Seller Details:</h3>
+                            <ul>
+                                <li><strong>Name:</strong> $mail_row4[username]</li>
+                                <li><strong>Email:</strong> $mail_row4[email]</li>
+                            </ul>".$format3;
     
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
@@ -279,7 +574,23 @@
                                 if($mail_row2['sellprice']<=500 && $mail_row1['genre']==$mail_row2['genre']){
                                     $to_email = $mail_row3['email'];
                                     $subject = "Book Notification From Book Pedlar";
-                                    $body = "Hi, the Book with the Following Description is Available on Book Pedlar Website. Hurry up before someone else grabs it! Price Range: Below ₹500, Genre: $mail_row1[genre]";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>Dear $mail_row3[username],</p>".$format2."<ul>
+                                    <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                    <li><strong>Author:</strong> $mail_row2[author]</li>
+                                    <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                    <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                    <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                    <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                </ul>
+                        
+                                <h3>Seller Details:</h3>
+                                <ul>
+                                    <li><strong>Name:</strong> $mail_row4[username]</li>
+                                    <li><strong>Email:</strong> $mail_row4[email]</li>
+                                </ul>".$format3;
     
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
@@ -293,7 +604,23 @@
                                 if($mail_row2['sellprice']>=500 && $mail_row2['sellprice']<=1000 && $mail_row1['genre']==$mail_row2['genre']){
                                     $to_email = $mail_row3['email'];
                                     $subject = "Book Notification From Book Pedlar";
-                                    $body = "Hi, the Book with the Following Description is Available on Book Pedlar Website. Hurry up before someone else grabs it! Price Range: ₹500 - ₹1000, Genre: $mail_row1[genre]";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                $mail_result4=mysqli_query($conn,$mail_sql4);
+                                $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                $body = $format1."<p>Dear $mail_row3[username],</p>".$format2."<ul>
+                                <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                <li><strong>Author:</strong> $mail_row2[author]</li>
+                                <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                            </ul>
+                    
+                            <h3>Seller Details:</h3>
+                            <ul>
+                                <li><strong>Name:</strong> $mail_row4[username]</li>
+                                <li><strong>Email:</strong> $mail_row4[email]</li>
+                            </ul>".$format3;
     
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
@@ -307,7 +634,23 @@
                                 if($mail_row2['sellprice']>=1000 && $mail_row2['sellprice']<=2000 && $mail_row1['genre']==$mail_row2['genre']){
                                     $to_email = $mail_row3['email'];
                                     $subject = "Book Notification From Book Pedlar";
-                                    $body = "Hi, the Book with the Following Description is Available on Book Pedlar Website. Hurry up before someone else grabs it! Price Range: ₹1000 - ₹2000, Genre: $mail_row1[genre]";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                $mail_result4=mysqli_query($conn,$mail_sql4);
+                                $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                $body = $format1."<p>Dear $mail_row3[username],</p>".$format2."<ul>
+                                <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                <li><strong>Author:</strong> $mail_row2[author]</li>
+                                <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                            </ul>
+                    
+                            <h3>Seller Details:</h3>
+                            <ul>
+                                <li><strong>Name:</strong> $mail_row4[username]</li>
+                                <li><strong>Email:</strong> $mail_row4[email]</li>
+                            </ul>".$format3;
     
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
@@ -321,7 +664,23 @@
                                 if($mail_row2['sellprice']>=2000 && $mail_row2['sellprice']<=3000 && $mail_row1['genre']==$mail_row2['genre']){
                                     $to_email = $mail_row3['email'];
                                     $subject = "Book Notification From Book Pedlar";
-                                    $body = "Hi, the Book with the Following Description is Available on Book Pedlar Website. Hurry up before someone else grabs it! Price Range: ₹2000 - ₹3000, Genre: $mail_row1[genre]";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                $mail_result4=mysqli_query($conn,$mail_sql4);
+                                $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                $body = $format1."<p>Dear $mail_row3[username],</p>".$format2."<ul>
+                                <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                <li><strong>Author:</strong> $mail_row2[author]</li>
+                                <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                            </ul>
+                    
+                            <h3>Seller Details:</h3>
+                            <ul>
+                                <li><strong>Name:</strong> $mail_row4[username]</li>
+                                <li><strong>Email:</strong> $mail_row4[email]</li>
+                            </ul>".$format3;
     
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
@@ -335,7 +694,23 @@
                                 if($mail_row2['sellprice']>=3000 && $mail_row2['sellprice']<=4000 && $mail_row1['genre']==$mail_row2['genre']){
                                     $to_email = $mail_row3['email'];
                                     $subject = "Book Notification From Book Pedlar";
-                                    $body = "Hi, the Book with the Following Description is Available on Book Pedlar Website. Hurry up before someone else grabs it! Price Range: ₹3000 - ₹4000, Genre: $mail_row1[genre]";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                $mail_result4=mysqli_query($conn,$mail_sql4);
+                                $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                $body = $format1."<p>Dear $mail_row3[username],</p>".$format2."<ul>
+                                <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                <li><strong>Author:</strong> $mail_row2[author]</li>
+                                <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                            </ul>
+                    
+                            <h3>Seller Details:</h3>
+                            <ul>
+                                <li><strong>Name:</strong> $mail_row4[username]</li>
+                                <li><strong>Email:</strong> $mail_row4[email]</li>
+                            </ul>".$format3;
     
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
@@ -349,7 +724,23 @@
                                 if($mail_row2['sellprice']>=4000 && $mail_row2['sellprice']<=5000 && $mail_row1['genre']==$mail_row2['genre']){
                                     $to_email = $mail_row3['email'];
                                     $subject = "Book Notification From Book Pedlar";
-                                    $body = "Hi, the Book with the Following Description is Available on Book Pedlar Website. Hurry up before someone else grabs it! Price Range: ₹4000 - ₹5000, Genre: $mail_row1[genre]";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                $mail_result4=mysqli_query($conn,$mail_sql4);
+                                $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                $body = $format1."<p>Dear $mail_row3[username],</p>".$format2."<ul>
+                                <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                <li><strong>Author:</strong> $mail_row2[author]</li>
+                                <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                            </ul>
+                    
+                            <h3>Seller Details:</h3>
+                            <ul>
+                                <li><strong>Name:</strong> $mail_row4[username]</li>
+                                <li><strong>Email:</strong> $mail_row4[email]</li>
+                            </ul>".$format3;
     
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
@@ -363,7 +754,23 @@
                                 if($mail_row2['sellprice']>=5000 && $mail_row1['genre']==$mail_row2['genre']){
                                     $to_email = $mail_row3['email'];
                                     $subject = "Book Notification From Book Pedlar";
-                                    $body = "Hi, the Book with the Following Description is Available on Book Pedlar Website. Hurry up before someone else grabs it! Price Range: Above ₹5000, Genre: $mail_row1[genre]";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                $mail_result4=mysqli_query($conn,$mail_sql4);
+                                $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                $body = $format1."<p>Dear $mail_row3[username],</p>".$format2."<ul>
+                                <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                <li><strong>Author:</strong> $mail_row2[author]</li>
+                                <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                            </ul>
+                    
+                            <h3>Seller Details:</h3>
+                            <ul>
+                                <li><strong>Name:</strong> $mail_row4[username]</li>
+                                <li><strong>Email:</strong> $mail_row4[email]</li>
+                            </ul>".$format3;
     
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
@@ -381,7 +788,23 @@
                                 if($mail_row2['sellprice']<=500 && $mail_row1['genre']==$mail_row2['genre'] && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
                                     $to_email = $mail_row3['email'];
                                     $subject = "Book Notification From Book Pedlar";
-                                    $body = "Hi, the Book with the Following Description is Available on Book Pedlar Website. Hurry up before someone else grabs it! Price Range: Below ₹500, Genre: $mail_row1[genre], Book Condition: $mail_row1[bookcondition]";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                $mail_result4=mysqli_query($conn,$mail_sql4);
+                                $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                $body = $format1."<p>Dear $mail_row3[username],</p>".$format2."<ul>
+                                <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                <li><strong>Author:</strong> $mail_row2[author]</li>
+                                <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                            </ul>
+                    
+                            <h3>Seller Details:</h3>
+                            <ul>
+                                <li><strong>Name:</strong> $mail_row4[username]</li>
+                                <li><strong>Email:</strong> $mail_row4[email]</li>
+                            </ul>".$format3;
     
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
@@ -395,7 +818,23 @@
                                 if($mail_row2['sellprice']>=500 && $mail_row2['sellprice']<=1000 && $mail_row1['genre']==$mail_row2['genre'] && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
                                     $to_email = $mail_row3['email'];
                                     $subject = "Book Notification From Book Pedlar";
-                                    $body = "Hi, the Book with the Following Description is Available on Book Pedlar Website. Hurry up before someone else grabs it! Price Range: ₹500 - ₹1000, Genre: $mail_row1[genre], Book Condition: $mail_row1[bookcondition]";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                $mail_result4=mysqli_query($conn,$mail_sql4);
+                                $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                $body = $format1."<p>Dear $mail_row3[username],</p>".$format2."<ul>
+                                <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                <li><strong>Author:</strong> $mail_row2[author]</li>
+                                <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                            </ul>
+                    
+                            <h3>Seller Details:</h3>
+                            <ul>
+                                <li><strong>Name:</strong> $mail_row4[username]</li>
+                                <li><strong>Email:</strong> $mail_row4[email]</li>
+                            </ul>".$format3;
     
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
@@ -409,7 +848,23 @@
                                 if($mail_row2['sellprice']>=1000 && $mail_row2['sellprice']<=2000 && $mail_row1['genre']==$mail_row2['genre'] && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
                                     $to_email = $mail_row3['email'];
                                     $subject = "Book Notification From Book Pedlar";
-                                    $body = "Hi, the Book with the Following Description is Available on Book Pedlar Website. Hurry up before someone else grabs it! Price Range: ₹1000 - ₹2000, Genre: $mail_row1[genre], Book Condition: $mail_row1[bookcondition]";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                $mail_result4=mysqli_query($conn,$mail_sql4);
+                                $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                $body = $format1."<p>Dear $mail_row3[username],</p>".$format2."<ul>
+                                <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                <li><strong>Author:</strong> $mail_row2[author]</li>
+                                <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                            </ul>
+                    
+                            <h3>Seller Details:</h3>
+                            <ul>
+                                <li><strong>Name:</strong> $mail_row4[username]</li>
+                                <li><strong>Email:</strong> $mail_row4[email]</li>
+                            </ul>".$format3;
     
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
@@ -423,7 +878,23 @@
                                 if($mail_row2['sellprice']>=2000 && $mail_row2['sellprice']<=3000 && $mail_row1['genre']==$mail_row2['genre'] && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
                                     $to_email = $mail_row3['email'];
                                     $subject = "Book Notification From Book Pedlar";
-                                    $body = "Hi, the Book with the Following Description is Available on Book Pedlar Website. Hurry up before someone else grabs it! Price Range: ₹2000 - ₹3000, Genre: $mail_row1[genre], Book Condition: $mail_row1[bookcondition]";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                $mail_result4=mysqli_query($conn,$mail_sql4);
+                                $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                $body = $format1."<p>Dear $mail_row3[username],</p>".$format2."<ul>
+                                <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                <li><strong>Author:</strong> $mail_row2[author]</li>
+                                <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                            </ul>
+                    
+                            <h3>Seller Details:</h3>
+                            <ul>
+                                <li><strong>Name:</strong> $mail_row4[username]</li>
+                                <li><strong>Email:</strong> $mail_row4[email]</li>
+                            </ul>".$format3;
     
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
@@ -437,7 +908,23 @@
                                 if($mail_row2['sellprice']>=3000 && $mail_row2['sellprice']<=4000 && $mail_row1['genre']==$mail_row2['genre'] && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
                                     $to_email = $mail_row3['email'];
                                     $subject = "Book Notification From Book Pedlar";
-                                    $body = "Hi, the Book with the Following Description is Available on Book Pedlar Website. Hurry up before someone else grabs it! Price Range: ₹3000 - ₹4000, Genre: $mail_row1[genre], Book Condition: $mail_row1[bookcondition]";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                $mail_result4=mysqli_query($conn,$mail_sql4);
+                                $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                $body = $format1."<p>Dear $mail_row3[username],</p>".$format2."<ul>
+                                <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                <li><strong>Author:</strong> $mail_row2[author]</li>
+                                <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                            </ul>
+                    
+                            <h3>Seller Details:</h3>
+                            <ul>
+                                <li><strong>Name:</strong> $mail_row4[username]</li>
+                                <li><strong>Email:</strong> $mail_row4[email]</li>
+                            </ul>".$format3;
     
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
@@ -451,7 +938,23 @@
                                 if($mail_row2['sellprice']>=4000 && $mail_row2['sellprice']<=5000 && $mail_row1['genre']==$mail_row2['genre'] && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
                                     $to_email = $mail_row3['email'];
                                     $subject = "Book Notification From Book Pedlar";
-                                    $body = "Hi, the Book with the Following Description is Available on Book Pedlar Website. Hurry up before someone else grabs it! Price Range: ₹4000 - ₹5000, Genre: $mail_row1[genre], Book Condition: $mail_row1[bookcondition]";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                $mail_result4=mysqli_query($conn,$mail_sql4);
+                                $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                $body = $format1."<p>Dear $mail_row3[username],</p>".$format2."<ul>
+                                <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                <li><strong>Author:</strong> $mail_row2[author]</li>
+                                <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                            </ul>
+                    
+                            <h3>Seller Details:</h3>
+                            <ul>
+                                <li><strong>Name:</strong> $mail_row4[username]</li>
+                                <li><strong>Email:</strong> $mail_row4[email]</li>
+                            </ul>".$format3;
     
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
@@ -465,7 +968,23 @@
                                 if($mail_row2['sellprice']>=5000 && $mail_row1['genre']==$mail_row2['genre'] && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
                                     $to_email = $mail_row3['email'];
                                     $subject = "Book Notification From Book Pedlar";
-                                    $body = "Hi, the Book with the Following Description is Available on Book Pedlar Website. Hurry up before someone else grabs it! Price Range: Above ₹5000, Genre: $mail_row1[genre], Book Condition: $mail_row1[bookcondition]";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                $mail_result4=mysqli_query($conn,$mail_sql4);
+                                $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                $body = $format1."<p>Dear $mail_row3[username],</p>".$format2."<ul>
+                                <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                <li><strong>Author:</strong> $mail_row2[author]</li>
+                                <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                            </ul>
+                    
+                            <h3>Seller Details:</h3>
+                            <ul>
+                                <li><strong>Name:</strong> $mail_row4[username]</li>
+                                <li><strong>Email:</strong> $mail_row4[email]</li>
+                            </ul>".$format3;
     
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
