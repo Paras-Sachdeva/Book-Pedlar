@@ -266,7 +266,8 @@ a{
 .slider-books{
     display: flex;
     animation-name: circularAnimation;
-    animation-duration: calc(2s * var(--count));
+    /* animation-duration: calc(2s * var(--count)); */
+    animation-duration: 15s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
 }

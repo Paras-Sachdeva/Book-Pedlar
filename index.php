@@ -371,6 +371,7 @@
         // Change Animation Duration According to Number of Books
         var count = document.querySelectorAll('.slide-name-books').length;
         document.documentElement.style.setProperty('--count', count);
+        console.log(count);
 
         // FAQs
         document.addEventListener('DOMContentLoaded', function() {
