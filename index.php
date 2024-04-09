@@ -27,6 +27,17 @@
             if (!$conn) {
                 die("Connection failed");
             }
+
+            $to_email = "paras140902@gmail.com";
+            $subject = "Simple Email Test via PHP";
+            $body = "Hi, This is test email send by PHP Script";
+            $headers = "From: paras140902@gmail.com";
+
+            if (mail($to_email, $subject, $body, $headers)) {            
+                echo "Email successfully sent to $to_email...";
+            } else {
+                echo "Email sending failed...";
+            }
             
             $sql1="SELECT * FROM user_data";
             $result1=mysqli_query($conn,$sql1);
