@@ -240,12 +240,7 @@
                 }
                 echo("<div class='book-outer' id='book-outer-$book_id4'>
                                 <div class='book-inner1' id='book-$book_id4'></div>
-                                <div class='book-inner2'style='padding: 0.3rem;
-                                width: 50%;
-                                height: 98%;
-                                display: flex;
-                                flex-direction: column;
-                                border-left: 0.3rem solid black;'>
+                                <div class='book-inner2'>
                                     <div class='heading-book' style='text-align:center;'>
                                         <b>\"$book_name4\"</b>
                                     </div>

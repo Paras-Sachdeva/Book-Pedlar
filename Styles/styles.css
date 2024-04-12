@@ -643,6 +643,12 @@ a{
     border-left: 0.3rem solid black;
 }
 
+.book-inner2 > * {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 .details-book{
     margin: 1rem 0.2rem 1rem 0.2rem;
 }
@@ -681,7 +687,12 @@ a{
 }
 
 .price-book{
-    margin-left: 2rem;
+    margin-left: 5rem;
+    margin-top: 1.5rem;
+}
+
+.price-book h2{
+    margin-left: 1rem;
 }
 
 /* addBook.php */
