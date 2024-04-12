@@ -47,89 +47,19 @@
     </html>";
 
     while($mail_row1=mysqli_fetch_assoc($mail_result1)){
-        $mail_sql2="SELECT * FROM book_data WHERE userid!=$mail_row1[userid]";
-        $mail_result2=mysqli_query($conn,$mail_sql2);
-        $mail_sql3="SELECT * FROM user_data WHERE id='$mail_row1[userid]'";
-        $mail_result3=mysqli_query($conn,$mail_sql3);
-        $mail_row3=mysqli_fetch_assoc($mail_result3);
-
-        if($mail_row1['bookname']=="All" && $mail_row1['author']=="All" && $mail_row1['publisher']=="All"){
-            if($mail_row1['priceRange']=="all" && $mail_row1['bookcondition']=="all"){
-                while($mail_row2=mysqli_fetch_assoc($mail_result2)){
-                    if($mail_row1['genre']==$mail_row2['genre']){
-                        $to_email = $mail_row3['email'];
-                        $subject = "Book Pedlar Notification";
-                        $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                        $mail_result4=mysqli_query($conn,$mail_sql4);
-                        $mail_row4=mysqli_fetch_assoc($mail_result4);
-                        $body = $format1."<p>
-                                            Dear $mail_row3[username],
-                                        </p>".$format2."<ul>
-                                                            <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                            <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                            <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                            <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                            <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                            <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                        </ul>
-                                                        <h3>
-                                                            Seller Details:
-                                                        </h3>
-                                                        <ul>
-                                                            <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                            <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                        </ul>".$format3;
-
-                        if(mail($to_email, $subject, $body, $headers)){
-                            echo "Email successfully sent to $to_email...";
-                        }else{
-                            echo "Email sending failed...";
-                        }
-                        $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND priceRange='all' AND bookcondition='all' AND genre='$mail_row1[genre]')";
-                        mysqli_query($conn,$mail_sql4);
-                    }
-                }
-            }else if($mail_row1['priceRange']=="all" && $mail_row1['genre']=="all"){
-                while($mail_row2=mysqli_fetch_assoc($mail_result2)){
-                    if($mail_row1['bookcondition']==$mail_row2['bookcondition']){
-                        $to_email = $mail_row3['email'];
-                        $subject = "Book Notification From Book Pedlar";
-                        $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                        $mail_result4=mysqli_query($conn,$mail_sql4);
-                        $mail_row4=mysqli_fetch_assoc($mail_result4);
-                        $body = $format1."<p>
-                                            Dear $mail_row3[username],
-                                        </p>".$format2."<ul>
-                                                            <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                            <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                            <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                            <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                            <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                            <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                        </ul>
-                                                        <h3>
-                                                            Seller Details:
-                                                        </h3>
-                                                        <ul>
-                                                            <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                            <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                        </ul>".$format3;
-
-                        if(mail($to_email, $subject, $body, $headers)){
-                            echo "Email successfully sent to $to_email...";
-                        }else{
-                            echo "Email sending failed...";
-                        }
-                        $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND priceRange='all' AND genre='all' AND bookcondition='$mail_row1[bookcondition]')";
-                        mysqli_query($conn,$mail_sql4);
-                    }
-                }
-            }else if($mail_row1['bookcondition']=="all" && $mail_row1['genre']=="all"){
-                while($mail_row2=mysqli_fetch_assoc($mail_result2)){
-                    if($mail_row1['priceRange']=="below500"){
-                        if($mail_row2['sellprice']<=500){
+        if($mail_row1['email']!=1){
+            $mail_sql2="SELECT * FROM book_data WHERE userid!=$mail_row1[userid]";
+            $mail_result2=mysqli_query($conn,$mail_sql2);
+            $mail_sql3="SELECT * FROM user_data WHERE id='$mail_row1[userid]'";
+            $mail_result3=mysqli_query($conn,$mail_sql3);
+            $mail_row3=mysqli_fetch_assoc($mail_result3);
+    
+            if($mail_row1['bookname']=="All" && $mail_row1['author']=="All" && $mail_row1['publisher']=="All"){
+                if($mail_row1['priceRange']=="all" && $mail_row1['bookcondition']=="all"){
+                    while($mail_row2=mysqli_fetch_assoc($mail_result2)){
+                        if($mail_row1['genre']==$mail_row2['genre']){
                             $to_email = $mail_row3['email'];
-                            $subject = "Book Notification From Book Pedlar";
+                            $subject = "Book Pedlar Notification";
                             $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
                             $mail_result4=mysqli_query($conn,$mail_sql4);
                             $mail_row4=mysqli_fetch_assoc($mail_result4);
@@ -150,254 +80,19 @@
                                                                 <li><strong>Name:</strong> $mail_row4[username]</li>
                                                                 <li><strong>Email:</strong> $mail_row4[email]</li>
                                                             </ul>".$format3;
-
+    
                             if(mail($to_email, $subject, $body, $headers)){
                                 echo "Email successfully sent to $to_email...";
+                                $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND priceRange='all' AND bookcondition='all' AND genre='$mail_row1[genre]')";
+                                mysqli_query($conn,$mail_sql4);
                             }else{
                                 echo "Email sending failed...";
                             }
-                            $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND bookcondition='all' AND genre='all' AND priceRange='below500')";
-                            mysqli_query($conn,$mail_sql4);
-                        }
-                    }else if($mail_row1['priceRange']=="500To1000"){
-                        if($mail_row2['sellprice']>=500 && $mail_row2['sellprice']<=1000){
-                            $to_email = $mail_row3['email'];
-                            $subject = "Book Notification From Book Pedlar";
-                            $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                            $mail_result4=mysqli_query($conn,$mail_sql4);
-                            $mail_row4=mysqli_fetch_assoc($mail_result4);
-                            $body = $format1."<p>
-                                            Dear $mail_row3[username],
-                                        </p>".$format2."<ul>
-                                                            <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                            <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                            <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                            <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                            <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                            <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                        </ul>
-                                                        <h3>
-                                                            Seller Details:
-                                                        </h3>
-                                                        <ul>
-                                                            <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                            <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                        </ul>".$format3;
-
-                            if(mail($to_email, $subject, $body, $headers)){
-                                echo "Email successfully sent to $to_email...";
-                            }else{
-                                echo "Email sending failed...";
-                            }
-                            $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND bookcondition='all' AND genre='all' AND priceRange='500To1000')";
-                            mysqli_query($conn,$mail_sql4);
-                        }
-                    }else if($mail_row1['priceRange']=="1000To2000"){
-                        if($mail_row2['sellprice']>=1000 && $mail_row2['sellprice']<=2000){
-                            $to_email = $mail_row3['email'];
-                            $subject = "Book Notification From Book Pedlar";
-                            $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                            $mail_result4=mysqli_query($conn,$mail_sql4);
-                            $mail_row4=mysqli_fetch_assoc($mail_result4);
-                            $body = $format1."<p>
-                                            Dear $mail_row3[username],
-                                        </p>".$format2."<ul>
-                                                            <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                            <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                            <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                            <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                            <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                            <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                        </ul>
-                                                        <h3>
-                                                            Seller Details:
-                                                        </h3>
-                                                        <ul>
-                                                            <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                            <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                        </ul>".$format3;
-
-                            if(mail($to_email, $subject, $body, $headers)){
-                                echo "Email successfully sent to $to_email...";
-                            }else{
-                                echo "Email sending failed...";
-                            }
-                            $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND bookcondition='all' AND genre='all' AND priceRange='1000To2000')";
-                            mysqli_query($conn,$mail_sql4);
-                        }
-                    }else if($mail_row1['priceRange']=="2000To3000"){
-                        if($mail_row2['sellprice']>=2000 && $mail_row2['sellprice']<=3000){
-                            $to_email = $mail_row3['email'];
-                            $subject = "Book Notification From Book Pedlar";
-                            $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                            $mail_result4=mysqli_query($conn,$mail_sql4);
-                            $mail_row4=mysqli_fetch_assoc($mail_result4);
-                            $body = $format1."<p>
-                                                Dear $mail_row3[username],
-                                            </p>".$format2."<ul>
-                                                                <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                            </ul>
-                                                            <h3>
-                                                                Seller Details:
-                                                            </h3>
-                                                            <ul>
-                                                                <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                            </ul>".$format3;
-
-                            if(mail($to_email, $subject, $body, $headers)){
-                                echo "Email successfully sent to $to_email...";
-                            }else{
-                                echo "Email sending failed...";
-                            }
-                            $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND bookcondition='all' AND genre='all' AND priceRange='2000To3000')";
-                            mysqli_query($conn,$mail_sql4);
-                        }
-                    }else if($mail_row1['priceRange']=="3000To4000"){
-                        if($mail_row2['sellprice']>=3000 && $mail_row2['sellprice']<=4000){
-                            $to_email = $mail_row3['email'];
-                            $subject = "Book Notification From Book Pedlar";
-                            $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                            $mail_result4=mysqli_query($conn,$mail_sql4);
-                            $mail_row4=mysqli_fetch_assoc($mail_result4);
-                            $body = $format1."<p>
-                                                Dear $mail_row3[username],
-                                            </p>".$format2."<ul>
-                                                                <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                            </ul>
-                                                            <h3>
-                                                                Seller Details:
-                                                            </h3>
-                                                            <ul>
-                                                                <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                            </ul>".$format3;
-
-                            if(mail($to_email, $subject, $body, $headers)){
-                                echo "Email successfully sent to $to_email...";
-                            }else{
-                                echo "Email sending failed...";
-                            }
-                            $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND bookcondition='all' AND genre='all' AND priceRange='3000To4000')";
-                            mysqli_query($conn,$mail_sql4);
-                        }
-                    }else if($mail_row1['priceRange']=="4000To5000"){
-                        if($mail_row2['sellprice']>=4000 && $mail_row2['sellprice']<=5000){
-                            $to_email = $mail_row3['email'];
-                            $subject = "Book Notification From Book Pedlar";
-                            $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                            $mail_result4=mysqli_query($conn,$mail_sql4);
-                            $mail_row4=mysqli_fetch_assoc($mail_result4);
-                            $body = $format1."<p>
-                                                Dear $mail_row3[username],
-                                            </p>".$format2."<ul>
-                                                                <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                            </ul>
-                                                            <h3>
-                                                                Seller Details:
-                                                            </h3>
-                                                            <ul>
-                                                                <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                            </ul>".$format3;
-
-                            if(mail($to_email, $subject, $body, $headers)){
-                                echo "Email successfully sent to $to_email...";
-                            }else{
-                                echo "Email sending failed...";
-                            }
-                            $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND bookcondition='all' AND genre='all' AND priceRange='4000To5000')";
-                            mysqli_query($conn,$mail_sql4);
-                        }
-                    }else if($mail_row1['priceRange']=="Above5000"){
-                        if($mail_row2['sellprice']>=5000){
-                            $to_email = $mail_row3['email'];
-                            $subject = "Book Notification From Book Pedlar";
-                            $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                            $mail_result4=mysqli_query($conn,$mail_sql4);
-                            $mail_row4=mysqli_fetch_assoc($mail_result4);
-                            $body = $format1."<p>
-                                                Dear $mail_row3[username],
-                                            </p>".$format2."<ul>
-                                                                <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                            </ul>
-                                                            <h3>
-                                                                Seller Details:
-                                                            </h3>
-                                                            <ul>
-                                                                <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                            </ul>".$format3;
-
-                            if(mail($to_email, $subject, $body, $headers)){
-                                echo "Email successfully sent to $to_email...";
-                            }else{
-                                echo "Email sending failed...";
-                            }
-                            $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND bookcondition='all' AND genre='all' AND priceRange='Above5000')";
-                            mysqli_query($conn,$mail_sql4);
                         }
                     }
-                }
-            }else if($mail_row1['priceRange']=="all"){
-                while($mail_row2=mysqli_fetch_assoc($mail_result2)){
-                    if($mail_row1['bookcondition']==$mail_row2['bookcondition'] && $mail_row1['genre']==$mail_row2['genre']){
-                        $to_email = $mail_row3['email'];
-                        $subject = "Book Notification From Book Pedlar";
-                        $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                        $mail_result4=mysqli_query($conn,$mail_sql4);
-                        $mail_row4=mysqli_fetch_assoc($mail_result4);
-                        $body = $format1."<p>
-                                            Dear $mail_row3[username],
-                                        </p>".$format2."<ul>
-                                                            <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                            <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                            <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                            <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                            <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                            <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                        </ul>
-                                                        <h3>
-                                                            Seller Details:
-                                                        </h3>
-                                                        <ul>
-                                                            <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                            <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                        </ul>".$format3;
-
-                        if(mail($to_email, $subject, $body, $headers)){
-                            echo "Email successfully sent to $to_email...";
-                        }else{
-                            echo "Email sending failed...";
-                        }
-                        $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND priceRange='all' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]')";
-                        mysqli_query($conn,$mail_sql4);
-                    }
-                }
-            }else if($mail_row1['genre']=="all"){
-                while($mail_row2=mysqli_fetch_assoc($mail_result2)){
-                    if($mail_row1['priceRange']=="below500"){
-                        if($mail_row2['sellprice']<=500 && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
+                }else if($mail_row1['priceRange']=="all" && $mail_row1['genre']=="all"){
+                    while($mail_row2=mysqli_fetch_assoc($mail_result2)){
+                        if($mail_row1['bookcondition']==$mail_row2['bookcondition']){
                             $to_email = $mail_row3['email'];
                             $subject = "Book Notification From Book Pedlar";
                             $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
@@ -420,760 +115,18 @@
                                                                 <li><strong>Name:</strong> $mail_row4[username]</li>
                                                                 <li><strong>Email:</strong> $mail_row4[email]</li>
                                                             </ul>".$format3;
-
+    
                             if(mail($to_email, $subject, $body, $headers)){
                                 echo "Email successfully sent to $to_email...";
+                                $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND priceRange='all' AND genre='all' AND bookcondition='$mail_row1[bookcondition]')";
+                                mysqli_query($conn,$mail_sql4);
                             }else{
                                 echo "Email sending failed...";
                             }
-                            $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='below500')";
-                            mysqli_query($conn,$mail_sql4);
-                        }
-                    }else if($mail_row1['priceRange']=="500To1000"){
-                        if($mail_row2['sellprice']>=500 && $mail_row2['sellprice']<=1000 && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
-                            $to_email = $mail_row3['email'];
-                            $subject = "Book Notification From Book Pedlar";
-                            $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                            $mail_result4=mysqli_query($conn,$mail_sql4);
-                            $mail_row4=mysqli_fetch_assoc($mail_result4);
-                            $body = $format1."<p>
-                                                Dear $mail_row3[username],
-                                            </p>".$format2."<ul>
-                                                                <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                            </ul>
-                                                            <h3>
-                                                                Seller Details:
-                                                            </h3>
-                                                            <ul>
-                                                                <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                            </ul>".$format3;
-
-                            if(mail($to_email, $subject, $body, $headers)){
-                                echo "Email successfully sent to $to_email...";
-                            }else{
-                                echo "Email sending failed...";
-                            }
-                            $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='500To1000')";
-                            mysqli_query($conn,$mail_sql4);
-                        }
-                    }else if($mail_row1['priceRange']=="1000To2000"){
-                        if($mail_row2['sellprice']>=1000 && $mail_row2['sellprice']<=2000 && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
-                            $to_email = $mail_row3['email'];
-                            $subject = "Book Notification From Book Pedlar";
-                            $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                            $mail_result4=mysqli_query($conn,$mail_sql4);
-                            $mail_row4=mysqli_fetch_assoc($mail_result4);
-                            $body = $format1."<p>
-                                                Dear $mail_row3[username],
-                                            </p>".$format2."<ul>
-                                                                <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                            </ul>
-                                                            <h3>
-                                                                Seller Details:
-                                                            </h3>
-                                                            <ul>
-                                                                <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                            </ul>".$format3;
-
-                            if(mail($to_email, $subject, $body, $headers)){
-                                echo "Email successfully sent to $to_email...";
-                            }else{
-                                echo "Email sending failed...";
-                            }
-                            $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='1000To2000')";
-                            mysqli_query($conn,$mail_sql4);
-                        }
-                    }else if($mail_row1['priceRange']=="2000To3000"){
-                        if($mail_row2['sellprice']>=2000 && $mail_row2['sellprice']<=3000 && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
-                            $to_email = $mail_row3['email'];
-                            $subject = "Book Notification From Book Pedlar";
-                            $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                            $mail_result4=mysqli_query($conn,$mail_sql4);
-                            $mail_row4=mysqli_fetch_assoc($mail_result4);
-                            $body = $format1."<p>
-                                                Dear $mail_row3[username],
-                                            </p>".$format2."<ul>
-                                                                <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                            </ul>
-                                                            <h3>
-                                                                Seller Details:
-                                                            </h3>
-                                                            <ul>
-                                                                <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                            </ul>".$format3;
-
-                            if(mail($to_email, $subject, $body, $headers)){
-                                echo "Email successfully sent to $to_email...";
-                            }else{
-                                echo "Email sending failed...";
-                            }
-                            $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='2000To3000')";
-                            mysqli_query($conn,$mail_sql4);
-                        }
-                    }else if($mail_row1['priceRange']=="3000To4000"){
-                        if($mail_row2['sellprice']>=3000 && $mail_row2['sellprice']<=4000 && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
-                            $to_email = $mail_row3['email'];
-                            $subject = "Book Notification From Book Pedlar";
-                            $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                            $mail_result4=mysqli_query($conn,$mail_sql4);
-                            $mail_row4=mysqli_fetch_assoc($mail_result4);
-                            $body = $format1."<p>
-                                                Dear $mail_row3[username],
-                                            </p>".$format2."<ul>
-                                                                <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                            </ul>
-                                                            <h3>
-                                                                Seller Details:
-                                                            </h3>
-                                                            <ul>
-                                                                <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                            </ul>".$format3;
-
-                            if(mail($to_email, $subject, $body, $headers)){
-                                echo "Email successfully sent to $to_email...";
-                            }else{
-                                echo "Email sending failed...";
-                            }
-                            $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='3000To4000')";
-                            mysqli_query($conn,$mail_sql4);
-                        }
-                    }else if($mail_row1['priceRange']=="4000To5000"){
-                        if($mail_row2['sellprice']>=4000 && $mail_row2['sellprice']<=5000 && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
-                            $to_email = $mail_row3['email'];
-                            $subject = "Book Notification From Book Pedlar";
-                            $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                            $mail_result4=mysqli_query($conn,$mail_sql4);
-                            $mail_row4=mysqli_fetch_assoc($mail_result4);
-                            $body = $format1."<p>
-                                                Dear $mail_row3[username],
-                                            </p>".$format2."<ul>
-                                                                <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                            </ul>
-                                                            <h3>
-                                                                Seller Details:
-                                                            </h3>
-                                                            <ul>
-                                                                <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                            </ul>".$format3;
-
-                            if(mail($to_email, $subject, $body, $headers)){
-                                echo "Email successfully sent to $to_email...";
-                            }else{
-                                echo "Email sending failed...";
-                            }
-                            $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='4000To5000')";
-                            mysqli_query($conn,$mail_sql4);
-                        }
-                    }else if($mail_row1['priceRange']=="Above5000"){
-                        if($mail_row2['sellprice']>=5000 && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
-                            $to_email = $mail_row3['email'];
-                            $subject = "Book Notification From Book Pedlar";
-                            $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                            $mail_result4=mysqli_query($conn,$mail_sql4);
-                            $mail_row4=mysqli_fetch_assoc($mail_result4);
-                            $body = $format1."<p>
-                                                Dear $mail_row3[username],
-                                            </p>".$format2."<ul>
-                                                                <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                            </ul>
-                                                            <h3>
-                                                                Seller Details:
-                                                            </h3>
-                                                            <ul>
-                                                                <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                            </ul>".$format3;
-
-                            if(mail($to_email, $subject, $body, $headers)){
-                                echo "Email successfully sent to $to_email...";
-                            }else{
-                                echo "Email sending failed...";
-                            }
-                            $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='Above5000')";
-                            mysqli_query($conn,$mail_sql4);
                         }
                     }
-                }
-            }else if($mail_row1['bookcondition']=="all"){
-                while($mail_row2=mysqli_fetch_assoc($mail_result2)){
-                    if($mail_row1['priceRange']=="below500"){
-                        if($mail_row2['sellprice']<=500 && $mail_row1['genre']==$mail_row2['genre']){
-                            $to_email = $mail_row3['email'];
-                            $subject = "Book Notification From Book Pedlar";
-                            $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                            $mail_result4=mysqli_query($conn,$mail_sql4);
-                            $mail_row4=mysqli_fetch_assoc($mail_result4);
-                            $body = $format1."<p>
-                                            Dear $mail_row3[username],
-                                        </p>".$format2."<ul>
-                                                            <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                            <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                            <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                            <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                            <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                            <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                        </ul>
-                                                        <h3>
-                                                            Seller Details:
-                                                        </h3>
-                                                        <ul>
-                                                            <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                            <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                        </ul>".$format3;
-
-                            if(mail($to_email, $subject, $body, $headers)){
-                                echo "Email successfully sent to $to_email...";
-                            }else{
-                                echo "Email sending failed...";
-                            }
-                            $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='below500')";
-                            mysqli_query($conn,$mail_sql4);
-                        }
-                    }else if($mail_row1['priceRange']=="500To1000"){
-                        if($mail_row2['sellprice']>=500 && $mail_row2['sellprice']<=1000 && $mail_row1['genre']==$mail_row2['genre']){
-                            $to_email = $mail_row3['email'];
-                            $subject = "Book Notification From Book Pedlar";
-                            $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                            $mail_result4=mysqli_query($conn,$mail_sql4);
-                            $mail_row4=mysqli_fetch_assoc($mail_result4);
-                            $body = $format1."<p>
-                                                Dear $mail_row3[username],
-                                            </p>".$format2."<ul>
-                                                                <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                            </ul>
-                                                            <h3>
-                                                                Seller Details:
-                                                            </h3>
-                                                            <ul>
-                                                                <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                            </ul>".$format3;
-
-                            if(mail($to_email, $subject, $body, $headers)){
-                                echo "Email successfully sent to $to_email...";
-                            }else{
-                                echo "Email sending failed...";
-                            }
-                            $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='500To1000')";
-                            mysqli_query($conn,$mail_sql4);
-                        }
-                    }else if($mail_row1['priceRange']=="1000To2000"){
-                        if($mail_row2['sellprice']>=1000 && $mail_row2['sellprice']<=2000 && $mail_row1['genre']==$mail_row2['genre']){
-                            $to_email = $mail_row3['email'];
-                            $subject = "Book Notification From Book Pedlar";
-                            $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                            $mail_result4=mysqli_query($conn,$mail_sql4);
-                            $mail_row4=mysqli_fetch_assoc($mail_result4);
-                            $body = $format1."<p>
-                                                Dear $mail_row3[username],
-                                            </p>".$format2."<ul>
-                                                                <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                            </ul>
-                                                            <h3>
-                                                                Seller Details:
-                                                            </h3>
-                                                            <ul>
-                                                                <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                            </ul>".$format3;
-
-                            if(mail($to_email, $subject, $body, $headers)){
-                                echo "Email successfully sent to $to_email...";
-                            }else{
-                                echo "Email sending failed...";
-                            }
-                            $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='1000To2000')";
-                            mysqli_query($conn,$mail_sql4);
-                        }
-                    }else if($mail_row1['priceRange']=="2000To3000"){
-                        if($mail_row2['sellprice']>=2000 && $mail_row2['sellprice']<=3000 && $mail_row1['genre']==$mail_row2['genre']){
-                            $to_email = $mail_row3['email'];
-                            $subject = "Book Notification From Book Pedlar";
-                            $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                            $mail_result4=mysqli_query($conn,$mail_sql4);
-                            $mail_row4=mysqli_fetch_assoc($mail_result4);
-                            $body = $format1."<p>
-                                                Dear $mail_row3[username],
-                                            </p>".$format2."<ul>
-                                                                <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                            </ul>
-                                                            <h3>
-                                                                Seller Details:
-                                                            </h3>
-                                                            <ul>
-                                                                <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                            </ul>".$format3;
-
-                            if(mail($to_email, $subject, $body, $headers)){
-                                echo "Email successfully sent to $to_email...";
-                            }else{
-                                echo "Email sending failed...";
-                            }
-                            $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='2000To3000')";
-                            mysqli_query($conn,$mail_sql4);
-                        }
-                    }else if($mail_row1['priceRange']=="3000To4000"){
-                        if($mail_row2['sellprice']>=3000 && $mail_row2['sellprice']<=4000 && $mail_row1['genre']==$mail_row2['genre']){
-                            $to_email = $mail_row3['email'];
-                            $subject = "Book Notification From Book Pedlar";
-                            $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                            $mail_result4=mysqli_query($conn,$mail_sql4);
-                            $mail_row4=mysqli_fetch_assoc($mail_result4);
-                            $body = $format1."<p>
-                                                Dear $mail_row3[username],
-                                            </p>".$format2."<ul>
-                                                                <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                            </ul>
-                                                            <h3>
-                                                                Seller Details:
-                                                            </h3>
-                                                            <ul>
-                                                                <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                            </ul>".$format3;
-
-                            if(mail($to_email, $subject, $body, $headers)){
-                                echo "Email successfully sent to $to_email...";
-                            }else{
-                                echo "Email sending failed...";
-                            }
-                            $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='3000To4000')";
-                            mysqli_query($conn,$mail_sql4);
-                        }
-                    }else if($mail_row1['priceRange']=="4000To5000"){
-                        if($mail_row2['sellprice']>=4000 && $mail_row2['sellprice']<=5000 && $mail_row1['genre']==$mail_row2['genre']){
-                            $to_email = $mail_row3['email'];
-                            $subject = "Book Notification From Book Pedlar";
-                            $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                            $mail_result4=mysqli_query($conn,$mail_sql4);
-                            $mail_row4=mysqli_fetch_assoc($mail_result4);
-                            $body = $format1."<p>
-                                                Dear $mail_row3[username],
-                                            </p>".$format2."<ul>
-                                                                <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                            </ul>
-                                                            <h3>
-                                                                Seller Details:
-                                                            </h3>
-                                                            <ul>
-                                                                <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                            </ul>".$format3;
-
-                            if(mail($to_email, $subject, $body, $headers)){
-                                echo "Email successfully sent to $to_email...";
-                            }else{
-                                echo "Email sending failed...";
-                            }
-                            $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='4000To5000')";
-                            mysqli_query($conn,$mail_sql4);
-                        }
-                    }else if($mail_row1['priceRange']=="Above5000"){
-                        if($mail_row2['sellprice']>=5000 && $mail_row1['genre']==$mail_row2['genre']){
-                            $to_email = $mail_row3['email'];
-                            $subject = "Book Notification From Book Pedlar";
-                            $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                            $mail_result4=mysqli_query($conn,$mail_sql4);
-                            $mail_row4=mysqli_fetch_assoc($mail_result4);
-                            $body = $format1."<p>
-                                                Dear $mail_row3[username],
-                                            </p>".$format2."<ul>
-                                                                <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                            </ul>
-                                                            <h3>
-                                                                Seller Details:
-                                                            </h3>
-                                                            <ul>
-                                                                <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                            </ul>".$format3;
-
-                            if(mail($to_email, $subject, $body, $headers)){
-                                echo "Email successfully sent to $to_email...";
-                            }else{
-                                echo "Email sending failed...";
-                            }
-                            $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='Above5000')";
-                            mysqli_query($conn,$mail_sql4);
-                        }
-                    }
-                }
-            }else{
-                while($mail_row2=mysqli_fetch_assoc($mail_result2)){
-                    if($mail_row1['priceRange']=="below500"){
-                        if($mail_row2['sellprice']<=500 && $mail_row1['genre']==$mail_row2['genre'] && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
-                            $to_email = $mail_row3['email'];
-                            $subject = "Book Notification From Book Pedlar";
-                            $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                            $mail_result4=mysqli_query($conn,$mail_sql4);
-                            $mail_row4=mysqli_fetch_assoc($mail_result4);
-                            $body = $format1."<p>
-                                                Dear $mail_row3[username],
-                                            </p>".$format2."<ul>
-                                                                <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                            </ul>
-                                                            <h3>
-                                                                Seller Details:
-                                                            </h3>
-                                                            <ul>
-                                                                <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                            </ul>".$format3;
-
-                            if(mail($to_email, $subject, $body, $headers)){
-                                echo "Email successfully sent to $to_email...";
-                            }else{
-                                echo "Email sending failed...";
-                            }
-                            $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='below500')";
-                            mysqli_query($conn,$mail_sql4);
-                        }
-                    }else if($mail_row1['priceRange']=="500To1000"){
-                        if($mail_row2['sellprice']>=500 && $mail_row2['sellprice']<=1000 && $mail_row1['genre']==$mail_row2['genre'] && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
-                            $to_email = $mail_row3['email'];
-                            $subject = "Book Notification From Book Pedlar";
-                            $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                            $mail_result4=mysqli_query($conn,$mail_sql4);
-                            $mail_row4=mysqli_fetch_assoc($mail_result4);
-                            $body = $format1."<p>
-                                                Dear $mail_row3[username],
-                                            </p>".$format2."<ul>
-                                                                <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                            </ul>
-                                                            <h3>
-                                                                Seller Details:
-                                                            </h3>
-                                                            <ul>
-                                                                <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                            </ul>".$format3;
-
-                            if(mail($to_email, $subject, $body, $headers)){
-                                echo "Email successfully sent to $to_email...";
-                            }else{
-                                echo "Email sending failed...";
-                            }
-                            $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='500To1000')";
-                            mysqli_query($conn,$mail_sql4);
-                        }
-                    }else if($mail_row1['priceRange']=="1000To2000"){
-                        if($mail_row2['sellprice']>=1000 && $mail_row2['sellprice']<=2000 && $mail_row1['genre']==$mail_row2['genre'] && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
-                            $to_email = $mail_row3['email'];
-                            $subject = "Book Notification From Book Pedlar";
-                            $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                            $mail_result4=mysqli_query($conn,$mail_sql4);
-                            $mail_row4=mysqli_fetch_assoc($mail_result4);
-                            $body = $format1."<p>
-                                                Dear $mail_row3[username],
-                                            </p>".$format2."<ul>
-                                                                <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                            </ul>
-                                                            <h3>
-                                                                Seller Details:
-                                                            </h3>
-                                                            <ul>
-                                                                <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                            </ul>".$format3;
-
-                            if(mail($to_email, $subject, $body, $headers)){
-                                echo "Email successfully sent to $to_email...";
-                            }else{
-                                echo "Email sending failed...";
-                            }
-                            $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='1000To2000')";
-                            mysqli_query($conn,$mail_sql4);
-                        }
-                    }else if($mail_row1['priceRange']=="2000To3000"){
-                        if($mail_row2['sellprice']>=2000 && $mail_row2['sellprice']<=3000 && $mail_row1['genre']==$mail_row2['genre'] && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
-                            $to_email = $mail_row3['email'];
-                            $subject = "Book Notification From Book Pedlar";
-                            $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                            $mail_result4=mysqli_query($conn,$mail_sql4);
-                            $mail_row4=mysqli_fetch_assoc($mail_result4);
-                            $body = $format1."<p>
-                                                Dear $mail_row3[username],
-                                            </p>".$format2."<ul>
-                                                                <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                            </ul>
-                                                            <h3>
-                                                                Seller Details:
-                                                            </h3>
-                                                            <ul>
-                                                                <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                            </ul>".$format3;
-
-                            if(mail($to_email, $subject, $body, $headers)){
-                                echo "Email successfully sent to $to_email...";
-                            }else{
-                                echo "Email sending failed...";
-                            }
-                            $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='2000To3000')";
-                            mysqli_query($conn,$mail_sql4);
-                        }
-                    }else if($mail_row1['priceRange']=="3000To4000"){
-                        if($mail_row2['sellprice']>=3000 && $mail_row2['sellprice']<=4000 && $mail_row1['genre']==$mail_row2['genre'] && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
-                            $to_email = $mail_row3['email'];
-                            $subject = "Book Notification From Book Pedlar";
-                            $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                            $mail_result4=mysqli_query($conn,$mail_sql4);
-                            $mail_row4=mysqli_fetch_assoc($mail_result4);
-                            $body = $format1."<p>
-                                                Dear $mail_row3[username],
-                                            </p>".$format2."<ul>
-                                                                <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                            </ul>
-                                                            <h3>
-                                                                Seller Details:
-                                                            </h3>
-                                                            <ul>
-                                                                <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                            </ul>".$format3;
-
-                            if(mail($to_email, $subject, $body, $headers)){
-                                echo "Email successfully sent to $to_email...";
-                            }else{
-                                echo "Email sending failed...";
-                            }
-                            $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='3000To4000')";
-                            mysqli_query($conn,$mail_sql4);
-                        }
-                    }else if($mail_row1['priceRange']=="4000To5000"){
-                        if($mail_row2['sellprice']>=4000 && $mail_row2['sellprice']<=5000 && $mail_row1['genre']==$mail_row2['genre'] && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
-                            $to_email = $mail_row3['email'];
-                            $subject = "Book Notification From Book Pedlar";
-                            $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                            $mail_result4=mysqli_query($conn,$mail_sql4);
-                            $mail_row4=mysqli_fetch_assoc($mail_result4);
-                            $body = $format1."<p>
-                                                Dear $mail_row3[username],
-                                            </p>".$format2."<ul>
-                                                                <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                            </ul>
-                                                            <h3>
-                                                                Seller Details:
-                                                            </h3>
-                                                            <ul>
-                                                                <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                            </ul>".$format3;
-
-                            if(mail($to_email, $subject, $body, $headers)){
-                                echo "Email successfully sent to $to_email...";
-                            }else{
-                                echo "Email sending failed...";
-                            }
-                            $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='4000To5000')";
-                            mysqli_query($conn,$mail_sql4);
-                        }
-                    }else if($mail_row1['priceRange']=="Above5000"){
-                        if($mail_row2['sellprice']>=5000 && $mail_row1['genre']==$mail_row2['genre'] && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
-                            $to_email = $mail_row3['email'];
-                            $subject = "Book Notification From Book Pedlar";
-                            $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                            $mail_result4=mysqli_query($conn,$mail_sql4);
-                            $mail_row4=mysqli_fetch_assoc($mail_result4);
-                            $body = $format1."<p>
-                                                Dear $mail_row3[username],
-                                            </p>".$format2."<ul>
-                                                                <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                            </ul>
-                                                            <h3>
-                                                                Seller Details:
-                                                            </h3>
-                                                            <ul>
-                                                                <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                            </ul>".$format3;
-
-                            if(mail($to_email, $subject, $body, $headers)){
-                                echo "Email successfully sent to $to_email...";
-                            }else{
-                                echo "Email sending failed...";
-                            }
-                            $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='Above5000')";
-                            mysqli_query($conn,$mail_sql4);
-                        }
-                    }
-                }
-            }
-        }else if($mail_row1['bookname']=="No" && $mail_row1['author']=="No" && $mail_row1['publisher']!="No"){
-            if($mail_row1['priceRange']=="all" && $mail_row1['bookcondition']=="all"){
-                while($mail_row2=mysqli_fetch_assoc($mail_result2)){
-                    if($mail_row1['genre']==$mail_row2['genre'] && strtolower($mail_row1['publisher'])==strtolower($mail_row2['publisher'])){
-                        $to_email = $mail_row3['email'];
-                        $subject = "Book Pedlar Notification";
-                        $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                        $mail_result4=mysqli_query($conn,$mail_sql4);
-                        $mail_row4=mysqli_fetch_assoc($mail_result4);
-                        $body = $format1."<p>
-                                            Dear $mail_row3[username],
-                                        </p>".$format2."<ul>
-                                                            <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                            <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                            <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                            <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                            <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                            <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                        </ul>
-                                                        <h3>
-                                                            Seller Details:
-                                                        </h3>
-                                                        <ul>
-                                                            <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                            <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                        </ul>".$format3;
-
-                        if(mail($to_email, $subject, $body, $headers)){
-                            echo "Email successfully sent to $to_email...";
-                        }else{
-                            echo "Email sending failed...";
-                        }
-                        $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND priceRange='all' AND bookcondition='all' AND genre='$mail_row1[genre]')";
-                        mysqli_query($conn,$mail_sql4);
-                    }
-                }
-            }else if($mail_row1['priceRange']=="all" && $mail_row1['genre']=="all"){
-                while($mail_row2=mysqli_fetch_assoc($mail_result2)){
-                    if($mail_row1['bookcondition']==$mail_row2['bookcondition'] && strtolower($mail_row1['publisher'])==strtolower($mail_row2['publisher'])){
-                        $to_email = $mail_row3['email'];
-                        $subject = "Book Notification From Book Pedlar";
-                        $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                        $mail_result4=mysqli_query($conn,$mail_sql4);
-                        $mail_row4=mysqli_fetch_assoc($mail_result4);
-                        $body = $format1."<p>
-                                            Dear $mail_row3[username],
-                                        </p>".$format2."<ul>
-                                                            <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                            <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                            <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                            <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                            <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                            <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                        </ul>
-                                                        <h3>
-                                                            Seller Details:
-                                                        </h3>
-                                                        <ul>
-                                                            <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                            <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                        </ul>".$format3;
-
-                        if(mail($to_email, $subject, $body, $headers)){
-                            echo "Email successfully sent to $to_email...";
-                        }else{
-                            echo "Email sending failed...";
-                        }
-                        $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND priceRange='all' AND genre='all' AND bookcondition='$mail_row1[bookcondition]')";
-                        mysqli_query($conn,$mail_sql4);
-                    }
-                }
-            }else if($mail_row1['bookcondition']=="all" && $mail_row1['genre']=="all"){
-                while($mail_row2=mysqli_fetch_assoc($mail_result2)){
-                    if(strtolower($mail_row1['publisher'])==strtolower($mail_row2['publisher'])){
+                }else if($mail_row1['bookcondition']=="all" && $mail_row1['genre']=="all"){
+                    while($mail_row2=mysqli_fetch_assoc($mail_result2)){
                         if($mail_row1['priceRange']=="below500"){
                             if($mail_row2['sellprice']<=500){
                                 $to_email = $mail_row3['email'];
@@ -1201,11 +154,12 @@
     
                                 if(mail($to_email, $subject, $body, $headers)){
                                     echo "Email successfully sent to $to_email...";
+                                    $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND bookcondition='all' AND genre='all' AND priceRange='below500')";
+                                    mysqli_query($conn,$mail_sql4);
+                                    
                                 }else{
                                     echo "Email sending failed...";
                                 }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND bookcondition='all' AND genre='all' AND priceRange='below500')";
-                                mysqli_query($conn,$mail_sql4);
                             }
                         }else if($mail_row1['priceRange']=="500To1000"){
                             if($mail_row2['sellprice']>=500 && $mail_row2['sellprice']<=1000){
@@ -1234,11 +188,11 @@
     
                                 if(mail($to_email, $subject, $body, $headers)){
                                     echo "Email successfully sent to $to_email...";
+                                    $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND bookcondition='all' AND genre='all' AND priceRange='500To1000')";
+                                    mysqli_query($conn,$mail_sql4);
                                 }else{
                                     echo "Email sending failed...";
                                 }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND bookcondition='all' AND genre='all' AND priceRange='500To1000')";
-                                mysqli_query($conn,$mail_sql4);
                             }
                         }else if($mail_row1['priceRange']=="1000To2000"){
                             if($mail_row2['sellprice']>=1000 && $mail_row2['sellprice']<=2000){
@@ -1267,11 +221,11 @@
     
                                 if(mail($to_email, $subject, $body, $headers)){
                                     echo "Email successfully sent to $to_email...";
+                                    $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND bookcondition='all' AND genre='all' AND priceRange='1000To2000')";
+                                    mysqli_query($conn,$mail_sql4);
                                 }else{
                                     echo "Email sending failed...";
                                 }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND bookcondition='all' AND genre='all' AND priceRange='1000To2000')";
-                                mysqli_query($conn,$mail_sql4);
                             }
                         }else if($mail_row1['priceRange']=="2000To3000"){
                             if($mail_row2['sellprice']>=2000 && $mail_row2['sellprice']<=3000){
@@ -1300,11 +254,11 @@
     
                                 if(mail($to_email, $subject, $body, $headers)){
                                     echo "Email successfully sent to $to_email...";
+                                    $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND bookcondition='all' AND genre='all' AND priceRange='2000To3000')";
+                                    mysqli_query($conn,$mail_sql4);
                                 }else{
                                     echo "Email sending failed...";
                                 }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND bookcondition='all' AND genre='all' AND priceRange='2000To3000')";
-                                mysqli_query($conn,$mail_sql4);
                             }
                         }else if($mail_row1['priceRange']=="3000To4000"){
                             if($mail_row2['sellprice']>=3000 && $mail_row2['sellprice']<=4000){
@@ -1333,11 +287,11 @@
     
                                 if(mail($to_email, $subject, $body, $headers)){
                                     echo "Email successfully sent to $to_email...";
+                                    $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND bookcondition='all' AND genre='all' AND priceRange='3000To4000')";
+                                    mysqli_query($conn,$mail_sql4);
                                 }else{
                                     echo "Email sending failed...";
                                 }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND bookcondition='all' AND genre='all' AND priceRange='3000To4000')";
-                                mysqli_query($conn,$mail_sql4);
                             }
                         }else if($mail_row1['priceRange']=="4000To5000"){
                             if($mail_row2['sellprice']>=4000 && $mail_row2['sellprice']<=5000){
@@ -1366,11 +320,11 @@
     
                                 if(mail($to_email, $subject, $body, $headers)){
                                     echo "Email successfully sent to $to_email...";
+                                    $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND bookcondition='all' AND genre='all' AND priceRange='4000To5000')";
+                                    mysqli_query($conn,$mail_sql4);
                                 }else{
                                     echo "Email sending failed...";
                                 }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND bookcondition='all' AND genre='all' AND priceRange='4000To5000')";
-                                mysqli_query($conn,$mail_sql4);
                             }
                         }else if($mail_row1['priceRange']=="Above5000"){
                             if($mail_row2['sellprice']>=5000){
@@ -1399,53 +353,51 @@
     
                                 if(mail($to_email, $subject, $body, $headers)){
                                     echo "Email successfully sent to $to_email...";
+                                    $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND bookcondition='all' AND genre='all' AND priceRange='Above5000')";
+                                    mysqli_query($conn,$mail_sql4);
                                 }else{
                                     echo "Email sending failed...";
                                 }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND bookcondition='all' AND genre='all' AND priceRange='Above5000')";
-                                mysqli_query($conn,$mail_sql4);
                             }
                         }
                     }
-                }
-            }else if($mail_row1['priceRange']=="all"){
-                while($mail_row2=mysqli_fetch_assoc($mail_result2)){
-                    if($mail_row1['bookcondition']==$mail_row2['bookcondition'] && $mail_row1['genre']==$mail_row2['genre'] && strtolower($mail_row1['publisher'])==strtolower($mail_row2['publisher'])){
-                        $to_email = $mail_row3['email'];
-                        $subject = "Book Notification From Book Pedlar";
-                        $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                        $mail_result4=mysqli_query($conn,$mail_sql4);
-                        $mail_row4=mysqli_fetch_assoc($mail_result4);
-                        $body = $format1."<p>
-                                            Dear $mail_row3[username],
-                                        </p>".$format2."<ul>
-                                                            <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                            <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                            <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                            <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                            <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                            <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                        </ul>
-                                                        <h3>
-                                                            Seller Details:
-                                                        </h3>
-                                                        <ul>
-                                                            <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                            <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                        </ul>".$format3;
-
-                        if(mail($to_email, $subject, $body, $headers)){
-                            echo "Email successfully sent to $to_email...";
-                        }else{
-                            echo "Email sending failed...";
+                }else if($mail_row1['priceRange']=="all"){
+                    while($mail_row2=mysqli_fetch_assoc($mail_result2)){
+                        if($mail_row1['bookcondition']==$mail_row2['bookcondition'] && $mail_row1['genre']==$mail_row2['genre']){
+                            $to_email = $mail_row3['email'];
+                            $subject = "Book Notification From Book Pedlar";
+                            $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                            $mail_result4=mysqli_query($conn,$mail_sql4);
+                            $mail_row4=mysqli_fetch_assoc($mail_result4);
+                            $body = $format1."<p>
+                                                Dear $mail_row3[username],
+                                            </p>".$format2."<ul>
+                                                                <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                            </ul>
+                                                            <h3>
+                                                                Seller Details:
+                                                            </h3>
+                                                            <ul>
+                                                                <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                            </ul>".$format3;
+    
+                            if(mail($to_email, $subject, $body, $headers)){
+                                echo "Email successfully sent to $to_email...";
+                                $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND priceRange='all' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]')";
+                                mysqli_query($conn,$mail_sql4);
+                            }else{
+                                echo "Email sending failed...";
+                            }
                         }
-                        $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND priceRange='all' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]')";
-                        mysqli_query($conn,$mail_sql4);
                     }
-                }
-            }else if($mail_row1['genre']=="all"){
-                while($mail_row2=mysqli_fetch_assoc($mail_result2)){
-                    if(strtolower($mail_row1['publisher'])==strtolower($mail_row2['publisher'])){
+                }else if($mail_row1['genre']=="all"){
+                    while($mail_row2=mysqli_fetch_assoc($mail_result2)){
                         if($mail_row1['priceRange']=="below500"){
                             if($mail_row2['sellprice']<=500 && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
                                 $to_email = $mail_row3['email'];
@@ -1473,11 +425,11 @@
     
                                 if(mail($to_email, $subject, $body, $headers)){
                                     echo "Email successfully sent to $to_email...";
+                                    $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='below500')";
+                                    mysqli_query($conn,$mail_sql4);
                                 }else{
                                     echo "Email sending failed...";
                                 }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='below500')";
-                                mysqli_query($conn,$mail_sql4);
                             }
                         }else if($mail_row1['priceRange']=="500To1000"){
                             if($mail_row2['sellprice']>=500 && $mail_row2['sellprice']<=1000 && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
@@ -1506,11 +458,11 @@
     
                                 if(mail($to_email, $subject, $body, $headers)){
                                     echo "Email successfully sent to $to_email...";
+                                    $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='500To1000')";
+                                    mysqli_query($conn,$mail_sql4);
                                 }else{
                                     echo "Email sending failed...";
                                 }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='500To1000')";
-                                mysqli_query($conn,$mail_sql4);
                             }
                         }else if($mail_row1['priceRange']=="1000To2000"){
                             if($mail_row2['sellprice']>=1000 && $mail_row2['sellprice']<=2000 && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
@@ -1539,11 +491,11 @@
     
                                 if(mail($to_email, $subject, $body, $headers)){
                                     echo "Email successfully sent to $to_email...";
+                                    $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='1000To2000')";
+                                    mysqli_query($conn,$mail_sql4);
                                 }else{
                                     echo "Email sending failed...";
                                 }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='1000To2000')";
-                                mysqli_query($conn,$mail_sql4);
                             }
                         }else if($mail_row1['priceRange']=="2000To3000"){
                             if($mail_row2['sellprice']>=2000 && $mail_row2['sellprice']<=3000 && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
@@ -1572,11 +524,11 @@
     
                                 if(mail($to_email, $subject, $body, $headers)){
                                     echo "Email successfully sent to $to_email...";
+                                    $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='2000To3000')";
+                                    mysqli_query($conn,$mail_sql4);
                                 }else{
                                     echo "Email sending failed...";
                                 }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='2000To3000')";
-                                mysqli_query($conn,$mail_sql4);
                             }
                         }else if($mail_row1['priceRange']=="3000To4000"){
                             if($mail_row2['sellprice']>=3000 && $mail_row2['sellprice']<=4000 && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
@@ -1605,11 +557,11 @@
     
                                 if(mail($to_email, $subject, $body, $headers)){
                                     echo "Email successfully sent to $to_email...";
+                                    $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='3000To4000')";
+                                    mysqli_query($conn,$mail_sql4);
                                 }else{
                                     echo "Email sending failed...";
                                 }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='3000To4000')";
-                                mysqli_query($conn,$mail_sql4);
                             }
                         }else if($mail_row1['priceRange']=="4000To5000"){
                             if($mail_row2['sellprice']>=4000 && $mail_row2['sellprice']<=5000 && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
@@ -1638,11 +590,11 @@
     
                                 if(mail($to_email, $subject, $body, $headers)){
                                     echo "Email successfully sent to $to_email...";
+                                    $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='4000To5000')";
+                                    mysqli_query($conn,$mail_sql4);
                                 }else{
                                     echo "Email sending failed...";
                                 }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='4000To5000')";
-                                mysqli_query($conn,$mail_sql4);
                             }
                         }else if($mail_row1['priceRange']=="Above5000"){
                             if($mail_row2['sellprice']>=5000 && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
@@ -1671,18 +623,16 @@
     
                                 if(mail($to_email, $subject, $body, $headers)){
                                     echo "Email successfully sent to $to_email...";
+                                    $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='Above5000')";
+                                    mysqli_query($conn,$mail_sql4);
                                 }else{
                                     echo "Email sending failed...";
                                 }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='Above5000')";
-                                mysqli_query($conn,$mail_sql4);
                             }
                         }
                     }
-                }
-            }else if($mail_row1['bookcondition']=="all"){
-                while($mail_row2=mysqli_fetch_assoc($mail_result2)){
-                    if(strtolower($mail_row1['publisher'])==strtolower($mail_row2['publisher'])){
+                }else if($mail_row1['bookcondition']=="all"){
+                    while($mail_row2=mysqli_fetch_assoc($mail_result2)){
                         if($mail_row1['priceRange']=="below500"){
                             if($mail_row2['sellprice']<=500 && $mail_row1['genre']==$mail_row2['genre']){
                                 $to_email = $mail_row3['email'];
@@ -1710,11 +660,11 @@
     
                                 if(mail($to_email, $subject, $body, $headers)){
                                     echo "Email successfully sent to $to_email...";
+                                    $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='below500')";
+                                    mysqli_query($conn,$mail_sql4);
                                 }else{
                                     echo "Email sending failed...";
                                 }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='below500')";
-                                mysqli_query($conn,$mail_sql4);
                             }
                         }else if($mail_row1['priceRange']=="500To1000"){
                             if($mail_row2['sellprice']>=500 && $mail_row2['sellprice']<=1000 && $mail_row1['genre']==$mail_row2['genre']){
@@ -1743,11 +693,11 @@
     
                                 if(mail($to_email, $subject, $body, $headers)){
                                     echo "Email successfully sent to $to_email...";
+                                    $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='500To1000')";
+                                    mysqli_query($conn,$mail_sql4);
                                 }else{
                                     echo "Email sending failed...";
                                 }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='500To1000')";
-                                mysqli_query($conn,$mail_sql4);
                             }
                         }else if($mail_row1['priceRange']=="1000To2000"){
                             if($mail_row2['sellprice']>=1000 && $mail_row2['sellprice']<=2000 && $mail_row1['genre']==$mail_row2['genre']){
@@ -1776,11 +726,11 @@
     
                                 if(mail($to_email, $subject, $body, $headers)){
                                     echo "Email successfully sent to $to_email...";
+                                    $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='1000To2000')";
+                                    mysqli_query($conn,$mail_sql4);
                                 }else{
                                     echo "Email sending failed...";
                                 }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='1000To2000')";
-                                mysqli_query($conn,$mail_sql4);
                             }
                         }else if($mail_row1['priceRange']=="2000To3000"){
                             if($mail_row2['sellprice']>=2000 && $mail_row2['sellprice']<=3000 && $mail_row1['genre']==$mail_row2['genre']){
@@ -1809,11 +759,11 @@
     
                                 if(mail($to_email, $subject, $body, $headers)){
                                     echo "Email successfully sent to $to_email...";
+                                    $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='2000To3000')";
+                                    mysqli_query($conn,$mail_sql4);
                                 }else{
                                     echo "Email sending failed...";
                                 }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='2000To3000')";
-                                mysqli_query($conn,$mail_sql4);
                             }
                         }else if($mail_row1['priceRange']=="3000To4000"){
                             if($mail_row2['sellprice']>=3000 && $mail_row2['sellprice']<=4000 && $mail_row1['genre']==$mail_row2['genre']){
@@ -1842,11 +792,11 @@
     
                                 if(mail($to_email, $subject, $body, $headers)){
                                     echo "Email successfully sent to $to_email...";
+                                    $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='3000To4000')";
+                                    mysqli_query($conn,$mail_sql4);
                                 }else{
                                     echo "Email sending failed...";
                                 }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='3000To4000')";
-                                mysqli_query($conn,$mail_sql4);
                             }
                         }else if($mail_row1['priceRange']=="4000To5000"){
                             if($mail_row2['sellprice']>=4000 && $mail_row2['sellprice']<=5000 && $mail_row1['genre']==$mail_row2['genre']){
@@ -1875,11 +825,11 @@
     
                                 if(mail($to_email, $subject, $body, $headers)){
                                     echo "Email successfully sent to $to_email...";
+                                    $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='4000To5000')";
+                                    mysqli_query($conn,$mail_sql4);
                                 }else{
                                     echo "Email sending failed...";
                                 }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='4000To5000')";
-                                mysqli_query($conn,$mail_sql4);
                             }
                         }else if($mail_row1['priceRange']=="Above5000"){
                             if($mail_row2['sellprice']>=5000 && $mail_row1['genre']==$mail_row2['genre']){
@@ -1908,18 +858,16 @@
     
                                 if(mail($to_email, $subject, $body, $headers)){
                                     echo "Email successfully sent to $to_email...";
+                                    $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='Above5000')";
+                                    mysqli_query($conn,$mail_sql4);
                                 }else{
                                     echo "Email sending failed...";
                                 }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='Above5000')";
-                                mysqli_query($conn,$mail_sql4);
                             }
                         }
                     }
-                }
-            }else{
-                while($mail_row2=mysqli_fetch_assoc($mail_result2)){
-                    if(strtolower($mail_row1['publisher'])==strtolower($mail_row2['publisher'])){
+                }else{
+                    while($mail_row2=mysqli_fetch_assoc($mail_result2)){
                         if($mail_row1['priceRange']=="below500"){
                             if($mail_row2['sellprice']<=500 && $mail_row1['genre']==$mail_row2['genre'] && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
                                 $to_email = $mail_row3['email'];
@@ -1947,11 +895,11 @@
     
                                 if(mail($to_email, $subject, $body, $headers)){
                                     echo "Email successfully sent to $to_email...";
+                                    $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='below500')";
+                                    mysqli_query($conn,$mail_sql4);
                                 }else{
                                     echo "Email sending failed...";
                                 }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='below500')";
-                                mysqli_query($conn,$mail_sql4);
                             }
                         }else if($mail_row1['priceRange']=="500To1000"){
                             if($mail_row2['sellprice']>=500 && $mail_row2['sellprice']<=1000 && $mail_row1['genre']==$mail_row2['genre'] && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
@@ -1980,11 +928,11 @@
     
                                 if(mail($to_email, $subject, $body, $headers)){
                                     echo "Email successfully sent to $to_email...";
+                                    $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='500To1000')";
+                                    mysqli_query($conn,$mail_sql4);
                                 }else{
                                     echo "Email sending failed...";
                                 }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='500To1000')";
-                                mysqli_query($conn,$mail_sql4);
                             }
                         }else if($mail_row1['priceRange']=="1000To2000"){
                             if($mail_row2['sellprice']>=1000 && $mail_row2['sellprice']<=2000 && $mail_row1['genre']==$mail_row2['genre'] && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
@@ -2013,11 +961,11 @@
     
                                 if(mail($to_email, $subject, $body, $headers)){
                                     echo "Email successfully sent to $to_email...";
+                                    $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='1000To2000')";
+                                    mysqli_query($conn,$mail_sql4);
                                 }else{
                                     echo "Email sending failed...";
                                 }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='1000To2000')";
-                                mysqli_query($conn,$mail_sql4);
                             }
                         }else if($mail_row1['priceRange']=="2000To3000"){
                             if($mail_row2['sellprice']>=2000 && $mail_row2['sellprice']<=3000 && $mail_row1['genre']==$mail_row2['genre'] && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
@@ -2046,11 +994,11 @@
     
                                 if(mail($to_email, $subject, $body, $headers)){
                                     echo "Email successfully sent to $to_email...";
+                                    $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='2000To3000')";
+                                    mysqli_query($conn,$mail_sql4);
                                 }else{
                                     echo "Email sending failed...";
                                 }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='2000To3000')";
-                                mysqli_query($conn,$mail_sql4);
                             }
                         }else if($mail_row1['priceRange']=="3000To4000"){
                             if($mail_row2['sellprice']>=3000 && $mail_row2['sellprice']<=4000 && $mail_row1['genre']==$mail_row2['genre'] && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
@@ -2079,11 +1027,11 @@
     
                                 if(mail($to_email, $subject, $body, $headers)){
                                     echo "Email successfully sent to $to_email...";
+                                    $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='3000To4000')";
+                                    mysqli_query($conn,$mail_sql4);
                                 }else{
                                     echo "Email sending failed...";
                                 }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='3000To4000')";
-                                mysqli_query($conn,$mail_sql4);
                             }
                         }else if($mail_row1['priceRange']=="4000To5000"){
                             if($mail_row2['sellprice']>=4000 && $mail_row2['sellprice']<=5000 && $mail_row1['genre']==$mail_row2['genre'] && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
@@ -2112,11 +1060,11 @@
     
                                 if(mail($to_email, $subject, $body, $headers)){
                                     echo "Email successfully sent to $to_email...";
+                                    $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='4000To5000')";
+                                    mysqli_query($conn,$mail_sql4);
                                 }else{
                                     echo "Email sending failed...";
                                 }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='4000To5000')";
-                                mysqli_query($conn,$mail_sql4);
                             }
                         }else if($mail_row1['priceRange']=="Above5000"){
                             if($mail_row2['sellprice']>=5000 && $mail_row1['genre']==$mail_row2['genre'] && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
@@ -2145,131 +1093,25 @@
     
                                 if(mail($to_email, $subject, $body, $headers)){
                                     echo "Email successfully sent to $to_email...";
+                                    $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='Above5000')";
+                                    mysqli_query($conn,$mail_sql4);
                                 }else{
                                     echo "Email sending failed...";
                                 }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='Above5000')";
-                                mysqli_query($conn,$mail_sql4);
                             }
                         }
                     }
                 }
-            }
-        }else if($mail_row1['bookname']!="No" && $mail_row1['author']=="No" && $mail_row1['publisher']=="No"){
-            if($mail_row1['priceRange']=="all" && $mail_row1['bookcondition']=="all"){
-                while($mail_row2=mysqli_fetch_assoc($mail_result2)){
-                    if($mail_row1['genre']==$mail_row2['genre'] && strtolower($mail_row1['bookname'])==strtolower($mail_row2['bookname'])){
-                        $to_email = $mail_row3['email'];
-                        $subject = "Book Pedlar Notification";
-                        $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                        $mail_result4=mysqli_query($conn,$mail_sql4);
-                        $mail_row4=mysqli_fetch_assoc($mail_result4);
-                        $body = $format1."<p>
-                                            Dear $mail_row3[username],
-                                        </p>".$format2."<ul>
-                                                            <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                            <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                            <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                            <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                            <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                            <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                        </ul>
-                                                        <h3>
-                                                            Seller Details:
-                                                        </h3>
-                                                        <ul>
-                                                            <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                            <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                        </ul>".$format3;
-
-                        if(mail($to_email, $subject, $body, $headers)){
-                            echo "Email successfully sent to $to_email...";
-                        }else{
-                            echo "Email sending failed...";
-                        }
-                        $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND priceRange='all' AND bookcondition='all' AND genre='$mail_row1[genre]')";
-                        mysqli_query($conn,$mail_sql4);
-                    }
-                }
-            }else if($mail_row1['priceRange']=="all" && $mail_row1['genre']=="all"){
-                while($mail_row2=mysqli_fetch_assoc($mail_result2)){
-                    if($mail_row1['bookcondition']==$mail_row2['bookcondition'] && strtolower($mail_row1['bookname'])==strtolower($mail_row2['bookname'])){
-                        $to_email = $mail_row3['email'];
-                        $subject = "Book Notification From Book Pedlar";
-                        $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                        $mail_result4=mysqli_query($conn,$mail_sql4);
-                        $mail_row4=mysqli_fetch_assoc($mail_result4);
-                        $body = $format1."<p>
-                                            Dear $mail_row3[username],
-                                        </p>".$format2."<ul>
-                                                            <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                            <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                            <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                            <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                            <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                            <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                        </ul>
-                                                        <h3>
-                                                            Seller Details:
-                                                        </h3>
-                                                        <ul>
-                                                            <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                            <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                        </ul>".$format3;
-
-                        if(mail($to_email, $subject, $body, $headers)){
-                            echo "Email successfully sent to $to_email...";
-                        }else{
-                            echo "Email sending failed...";
-                        }
-                        $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND priceRange='all' AND genre='all' AND bookcondition='$mail_row1[bookcondition]')";
-                        mysqli_query($conn,$mail_sql4);
-                    }
-                }
-            }else if($mail_row1['bookcondition']=="all" && $mail_row1['genre']=="all"){
-                while($mail_row2=mysqli_fetch_assoc($mail_result2)){
-                    if(strtolower($mail_row1['bookname'])==strtolower($mail_row2['bookname'])){
-                        if($mail_row1['priceRange']=="below500"){
-                            if($mail_row2['sellprice']<=500){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
-                                                    Dear $mail_row3[username],
-                                                </p>".$format2."<ul>
-                                                                    <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                    <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                    <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                    <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                    <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                    <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                                </ul>
-                                                                <h3>
-                                                                    Seller Details:
-                                                                </h3>
-                                                                <ul>
-                                                                    <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                    <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                                </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
-                                }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND bookcondition='all' AND genre='all' AND priceRange='below500')";
-                                mysqli_query($conn,$mail_sql4);
-                            }
-                        }else if($mail_row1['priceRange']=="500To1000"){
-                            if($mail_row2['sellprice']>=500 && $mail_row2['sellprice']<=1000){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
+            }else if($mail_row1['bookname']=="No" && $mail_row1['author']=="No" && $mail_row1['publisher']!="No"){
+                if($mail_row1['priceRange']=="all" && $mail_row1['bookcondition']=="all"){
+                    while($mail_row2=mysqli_fetch_assoc($mail_result2)){
+                        if($mail_row1['genre']==$mail_row2['genre'] && strtolower($mail_row1['publisher'])==strtolower($mail_row2['publisher'])){
+                            $to_email = $mail_row3['email'];
+                            $subject = "Book Pedlar Notification";
+                            $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                            $mail_result4=mysqli_query($conn,$mail_sql4);
+                            $mail_row4=mysqli_fetch_assoc($mail_result4);
+                            $body = $format1."<p>
                                                 Dear $mail_row3[username],
                                             </p>".$format2."<ul>
                                                                 <li><strong>Title:</strong> $mail_row2[bookname]</li>
@@ -2287,22 +1129,24 @@
                                                                 <li><strong>Email:</strong> $mail_row4[email]</li>
                                                             </ul>".$format3;
     
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
-                                }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND bookcondition='all' AND genre='all' AND priceRange='500To1000')";
-                                mysqli_query($conn,$mail_sql4);
+                            if(mail($to_email, $subject, $body, $headers)){
+                                echo "Email successfully sent to $to_email...";
+                                $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND priceRange='all' AND bookcondition='all' AND genre='$mail_row1[genre]')";
+                                        mysqli_query($conn,$mail_sql4);
+                            }else{
+                                echo "Email sending failed...";
                             }
-                        }else if($mail_row1['priceRange']=="1000To2000"){
-                            if($mail_row2['sellprice']>=1000 && $mail_row2['sellprice']<=2000){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
+                        }
+                    }
+                }else if($mail_row1['priceRange']=="all" && $mail_row1['genre']=="all"){
+                    while($mail_row2=mysqli_fetch_assoc($mail_result2)){
+                        if($mail_row1['bookcondition']==$mail_row2['bookcondition'] && strtolower($mail_row1['publisher'])==strtolower($mail_row2['publisher'])){
+                            $to_email = $mail_row3['email'];
+                            $subject = "Book Notification From Book Pedlar";
+                            $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                            $mail_result4=mysqli_query($conn,$mail_sql4);
+                            $mail_row4=mysqli_fetch_assoc($mail_result4);
+                            $body = $format1."<p>
                                                 Dear $mail_row3[username],
                                             </p>".$format2."<ul>
                                                                 <li><strong>Title:</strong> $mail_row2[bookname]</li>
@@ -2320,195 +1164,59 @@
                                                                 <li><strong>Email:</strong> $mail_row4[email]</li>
                                                             </ul>".$format3;
     
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
-                                }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND bookcondition='all' AND genre='all' AND priceRange='1000To2000')";
-                                mysqli_query($conn,$mail_sql4);
-                            }
-                        }else if($mail_row1['priceRange']=="2000To3000"){
-                            if($mail_row2['sellprice']>=2000 && $mail_row2['sellprice']<=3000){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
-                                                    Dear $mail_row3[username],
-                                                </p>".$format2."<ul>
-                                                                    <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                    <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                    <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                    <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                    <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                    <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                                </ul>
-                                                                <h3>
-                                                                    Seller Details:
-                                                                </h3>
-                                                                <ul>
-                                                                    <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                    <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                                </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
-                                }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND bookcondition='all' AND genre='all' AND priceRange='2000To3000')";
-                                mysqli_query($conn,$mail_sql4);
-                            }
-                        }else if($mail_row1['priceRange']=="3000To4000"){
-                            if($mail_row2['sellprice']>=3000 && $mail_row2['sellprice']<=4000){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
-                                                    Dear $mail_row3[username],
-                                                </p>".$format2."<ul>
-                                                                    <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                    <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                    <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                    <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                    <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                    <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                                </ul>
-                                                                <h3>
-                                                                    Seller Details:
-                                                                </h3>
-                                                                <ul>
-                                                                    <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                    <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                                </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
-                                }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND bookcondition='all' AND genre='all' AND priceRange='3000To4000')";
-                                mysqli_query($conn,$mail_sql4);
-                            }
-                        }else if($mail_row1['priceRange']=="4000To5000"){
-                            if($mail_row2['sellprice']>=4000 && $mail_row2['sellprice']<=5000){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
-                                                    Dear $mail_row3[username],
-                                                </p>".$format2."<ul>
-                                                                    <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                    <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                    <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                    <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                    <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                    <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                                </ul>
-                                                                <h3>
-                                                                    Seller Details:
-                                                                </h3>
-                                                                <ul>
-                                                                    <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                    <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                                </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
-                                }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND bookcondition='all' AND genre='all' AND priceRange='4000To5000')";
-                                mysqli_query($conn,$mail_sql4);
-                            }
-                        }else if($mail_row1['priceRange']=="Above5000"){
-                            if($mail_row2['sellprice']>=5000){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
-                                                    Dear $mail_row3[username],
-                                                </p>".$format2."<ul>
-                                                                    <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                    <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                    <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                    <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                    <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                    <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                                </ul>
-                                                                <h3>
-                                                                    Seller Details:
-                                                                </h3>
-                                                                <ul>
-                                                                    <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                    <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                                </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
-                                }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND bookcondition='all' AND genre='all' AND priceRange='Above5000')";
-                                mysqli_query($conn,$mail_sql4);
+                            if(mail($to_email, $subject, $body, $headers)){
+                                echo "Email successfully sent to $to_email...";
+                                $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND priceRange='all' AND genre='all' AND bookcondition='$mail_row1[bookcondition]')";
+                                        mysqli_query($conn,$mail_sql4);
+                            }else{
+                                echo "Email sending failed...";
                             }
                         }
                     }
-                }
-            }else if($mail_row1['priceRange']=="all"){
-                while($mail_row2=mysqli_fetch_assoc($mail_result2)){
-                    if($mail_row1['bookcondition']==$mail_row2['bookcondition'] && $mail_row1['genre']==$mail_row2['genre'] && strtolower($mail_row1['bookname'])==strtolower($mail_row2['bookname'])){
-                        $to_email = $mail_row3['email'];
-                        $subject = "Book Notification From Book Pedlar";
-                        $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                        $mail_result4=mysqli_query($conn,$mail_sql4);
-                        $mail_row4=mysqli_fetch_assoc($mail_result4);
-                        $body = $format1."<p>
-                                            Dear $mail_row3[username],
-                                        </p>".$format2."<ul>
-                                                            <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                            <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                            <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                            <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                            <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                            <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                        </ul>
-                                                        <h3>
-                                                            Seller Details:
-                                                        </h3>
-                                                        <ul>
-                                                            <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                            <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                        </ul>".$format3;
-
-                        if(mail($to_email, $subject, $body, $headers)){
-                            echo "Email successfully sent to $to_email...";
-                        }else{
-                            echo "Email sending failed...";
-                        }
-                        $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND priceRange='all' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]')";
-                        mysqli_query($conn,$mail_sql4);
-                    }
-                }
-            }else if($mail_row1['genre']=="all"){
-                while($mail_row2=mysqli_fetch_assoc($mail_result2)){
-                    if(strtolower($mail_row1['bookname'])==strtolower($mail_row2['bookname'])){
-                        if($mail_row1['priceRange']=="below500"){
-                            if($mail_row2['sellprice']<=500 && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
+                }else if($mail_row1['bookcondition']=="all" && $mail_row1['genre']=="all"){
+                    while($mail_row2=mysqli_fetch_assoc($mail_result2)){
+                        if(strtolower($mail_row1['publisher'])==strtolower($mail_row2['publisher'])){
+                            if($mail_row1['priceRange']=="below500"){
+                                if($mail_row2['sellprice']<=500){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND bookcondition='all' AND genre='all' AND priceRange='below500')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
+                            }else if($mail_row1['priceRange']=="500To1000"){
+                                if($mail_row2['sellprice']>=500 && $mail_row2['sellprice']<=1000){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
                                                     Dear $mail_row3[username],
                                                 </p>".$format2."<ul>
                                                                     <li><strong>Title:</strong> $mail_row2[bookname]</li>
@@ -2525,23 +1233,23 @@
                                                                     <li><strong>Name:</strong> $mail_row4[username]</li>
                                                                     <li><strong>Email:</strong> $mail_row4[email]</li>
                                                                 </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND bookcondition='all' AND genre='all' AND priceRange='500To1000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
                                 }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='below500')";
-                                mysqli_query($conn,$mail_sql4);
-                            }
-                        }else if($mail_row1['priceRange']=="500To1000"){
-                            if($mail_row2['sellprice']>=500 && $mail_row2['sellprice']<=1000 && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
+                            }else if($mail_row1['priceRange']=="1000To2000"){
+                                if($mail_row2['sellprice']>=1000 && $mail_row2['sellprice']<=2000){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
                                                     Dear $mail_row3[username],
                                                 </p>".$format2."<ul>
                                                                     <li><strong>Title:</strong> $mail_row2[bookname]</li>
@@ -2558,194 +1266,159 @@
                                                                     <li><strong>Name:</strong> $mail_row4[username]</li>
                                                                     <li><strong>Email:</strong> $mail_row4[email]</li>
                                                                 </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND bookcondition='all' AND genre='all' AND priceRange='1000To2000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
                                 }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='500To1000')";
-                                mysqli_query($conn,$mail_sql4);
-                            }
-                        }else if($mail_row1['priceRange']=="1000To2000"){
-                            if($mail_row2['sellprice']>=1000 && $mail_row2['sellprice']<=2000 && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
-                                                    Dear $mail_row3[username],
-                                                </p>".$format2."<ul>
-                                                                    <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                    <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                    <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                    <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                    <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                    <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                                </ul>
-                                                                <h3>
-                                                                    Seller Details:
-                                                                </h3>
-                                                                <ul>
-                                                                    <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                    <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                                </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
+                            }else if($mail_row1['priceRange']=="2000To3000"){
+                                if($mail_row2['sellprice']>=2000 && $mail_row2['sellprice']<=3000){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND bookcondition='all' AND genre='all' AND priceRange='2000To3000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
                                 }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='1000To2000')";
-                                mysqli_query($conn,$mail_sql4);
-                            }
-                        }else if($mail_row1['priceRange']=="2000To3000"){
-                            if($mail_row2['sellprice']>=2000 && $mail_row2['sellprice']<=3000 && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
-                                                    Dear $mail_row3[username],
-                                                </p>".$format2."<ul>
-                                                                    <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                    <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                    <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                    <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                    <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                    <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                                </ul>
-                                                                <h3>
-                                                                    Seller Details:
-                                                                </h3>
-                                                                <ul>
-                                                                    <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                    <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                                </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
+                            }else if($mail_row1['priceRange']=="3000To4000"){
+                                if($mail_row2['sellprice']>=3000 && $mail_row2['sellprice']<=4000){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND bookcondition='all' AND genre='all' AND priceRange='3000To4000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
                                 }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='2000To3000')";
-                                mysqli_query($conn,$mail_sql4);
-                            }
-                        }else if($mail_row1['priceRange']=="3000To4000"){
-                            if($mail_row2['sellprice']>=3000 && $mail_row2['sellprice']<=4000 && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
-                                                    Dear $mail_row3[username],
-                                                </p>".$format2."<ul>
-                                                                    <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                    <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                    <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                    <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                    <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                    <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                                </ul>
-                                                                <h3>
-                                                                    Seller Details:
-                                                                </h3>
-                                                                <ul>
-                                                                    <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                    <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                                </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
+                            }else if($mail_row1['priceRange']=="4000To5000"){
+                                if($mail_row2['sellprice']>=4000 && $mail_row2['sellprice']<=5000){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND bookcondition='all' AND genre='all' AND priceRange='4000To5000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
                                 }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='3000To4000')";
-                                mysqli_query($conn,$mail_sql4);
-                            }
-                        }else if($mail_row1['priceRange']=="4000To5000"){
-                            if($mail_row2['sellprice']>=4000 && $mail_row2['sellprice']<=5000 && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
-                                                    Dear $mail_row3[username],
-                                                </p>".$format2."<ul>
-                                                                    <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                    <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                    <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                    <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                    <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                    <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                                </ul>
-                                                                <h3>
-                                                                    Seller Details:
-                                                                </h3>
-                                                                <ul>
-                                                                    <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                    <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                                </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
+                            }else if($mail_row1['priceRange']=="Above5000"){
+                                if($mail_row2['sellprice']>=5000){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND bookcondition='all' AND genre='all' AND priceRange='Above5000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
                                 }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='4000To5000')";
-                                mysqli_query($conn,$mail_sql4);
-                            }
-                        }else if($mail_row1['priceRange']=="Above5000"){
-                            if($mail_row2['sellprice']>=5000 && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
-                                                    Dear $mail_row3[username],
-                                                </p>".$format2."<ul>
-                                                                    <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                    <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                    <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                    <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                    <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                    <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                                </ul>
-                                                                <h3>
-                                                                    Seller Details:
-                                                                </h3>
-                                                                <ul>
-                                                                    <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                    <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                                </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
-                                }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='Above5000')";
-                                mysqli_query($conn,$mail_sql4);
                             }
                         }
                     }
-                }
-            }else if($mail_row1['bookcondition']=="all"){
-                while($mail_row2=mysqli_fetch_assoc($mail_result2)){
-                    if(strtolower($mail_row1['bookname'])==strtolower($mail_row2['bookname'])){
-                        if($mail_row1['priceRange']=="below500"){
-                            if($mail_row2['sellprice']<=500 && $mail_row1['genre']==$mail_row2['genre']){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
+                }else if($mail_row1['priceRange']=="all"){
+                    while($mail_row2=mysqli_fetch_assoc($mail_result2)){
+                        if($mail_row1['bookcondition']==$mail_row2['bookcondition'] && $mail_row1['genre']==$mail_row2['genre'] && strtolower($mail_row1['publisher'])==strtolower($mail_row2['publisher'])){
+                            $to_email = $mail_row3['email'];
+                            $subject = "Book Notification From Book Pedlar";
+                            $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                            $mail_result4=mysqli_query($conn,$mail_sql4);
+                            $mail_row4=mysqli_fetch_assoc($mail_result4);
+                            $body = $format1."<p>
                                                 Dear $mail_row3[username],
                                             </p>".$format2."<ul>
                                                                 <li><strong>Title:</strong> $mail_row2[bookname]</li>
@@ -2763,22 +1436,263 @@
                                                                 <li><strong>Email:</strong> $mail_row4[email]</li>
                                                             </ul>".$format3;
     
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
-                                }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='below500')";
-                                mysqli_query($conn,$mail_sql4);
+                            if(mail($to_email, $subject, $body, $headers)){
+                                echo "Email successfully sent to $to_email...";
+                                $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND priceRange='all' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]')";
+                                        mysqli_query($conn,$mail_sql4);
+                            }else{
+                                echo "Email sending failed...";
                             }
-                        }else if($mail_row1['priceRange']=="500To1000"){
-                            if($mail_row2['sellprice']>=500 && $mail_row2['sellprice']<=1000 && $mail_row1['genre']==$mail_row2['genre']){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
+                        }
+                    }
+                }else if($mail_row1['genre']=="all"){
+                    while($mail_row2=mysqli_fetch_assoc($mail_result2)){
+                        if(strtolower($mail_row1['publisher'])==strtolower($mail_row2['publisher'])){
+                            if($mail_row1['priceRange']=="below500"){
+                                if($mail_row2['sellprice']<=500 && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='below500')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
+                            }else if($mail_row1['priceRange']=="500To1000"){
+                                if($mail_row2['sellprice']>=500 && $mail_row2['sellprice']<=1000 && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='500To1000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
+                            }else if($mail_row1['priceRange']=="1000To2000"){
+                                if($mail_row2['sellprice']>=1000 && $mail_row2['sellprice']<=2000 && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='1000To2000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
+                            }else if($mail_row1['priceRange']=="2000To3000"){
+                                if($mail_row2['sellprice']>=2000 && $mail_row2['sellprice']<=3000 && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='2000To3000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
+                            }else if($mail_row1['priceRange']=="3000To4000"){
+                                if($mail_row2['sellprice']>=3000 && $mail_row2['sellprice']<=4000 && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='3000To4000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
+                            }else if($mail_row1['priceRange']=="4000To5000"){
+                                if($mail_row2['sellprice']>=4000 && $mail_row2['sellprice']<=5000 && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='4000To5000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
+                            }else if($mail_row1['priceRange']=="Above5000"){
+                                if($mail_row2['sellprice']>=5000 && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='Above5000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }else if($mail_row1['bookcondition']=="all"){
+                    while($mail_row2=mysqli_fetch_assoc($mail_result2)){
+                        if(strtolower($mail_row1['publisher'])==strtolower($mail_row2['publisher'])){
+                            if($mail_row1['priceRange']=="below500"){
+                                if($mail_row2['sellprice']<=500 && $mail_row1['genre']==$mail_row2['genre']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
                                                     Dear $mail_row3[username],
                                                 </p>".$format2."<ul>
                                                                     <li><strong>Title:</strong> $mail_row2[bookname]</li>
@@ -2795,536 +1709,464 @@
                                                                     <li><strong>Name:</strong> $mail_row4[username]</li>
                                                                     <li><strong>Email:</strong> $mail_row4[email]</li>
                                                                 </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='below500')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
                                 }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='500To1000')";
-                                mysqli_query($conn,$mail_sql4);
+                            }else if($mail_row1['priceRange']=="500To1000"){
+                                if($mail_row2['sellprice']>=500 && $mail_row2['sellprice']<=1000 && $mail_row1['genre']==$mail_row2['genre']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='500To1000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
+                            }else if($mail_row1['priceRange']=="1000To2000"){
+                                if($mail_row2['sellprice']>=1000 && $mail_row2['sellprice']<=2000 && $mail_row1['genre']==$mail_row2['genre']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='1000To2000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
+                            }else if($mail_row1['priceRange']=="2000To3000"){
+                                if($mail_row2['sellprice']>=2000 && $mail_row2['sellprice']<=3000 && $mail_row1['genre']==$mail_row2['genre']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='2000To3000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
+                            }else if($mail_row1['priceRange']=="3000To4000"){
+                                if($mail_row2['sellprice']>=3000 && $mail_row2['sellprice']<=4000 && $mail_row1['genre']==$mail_row2['genre']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='3000To4000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
+                            }else if($mail_row1['priceRange']=="4000To5000"){
+                                if($mail_row2['sellprice']>=4000 && $mail_row2['sellprice']<=5000 && $mail_row1['genre']==$mail_row2['genre']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='4000To5000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
+                            }else if($mail_row1['priceRange']=="Above5000"){
+                                if($mail_row2['sellprice']>=5000 && $mail_row1['genre']==$mail_row2['genre']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='Above5000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
                             }
-                        }else if($mail_row1['priceRange']=="1000To2000"){
-                            if($mail_row2['sellprice']>=1000 && $mail_row2['sellprice']<=2000 && $mail_row1['genre']==$mail_row2['genre']){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
-                                                    Dear $mail_row3[username],
-                                                </p>".$format2."<ul>
-                                                                    <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                    <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                    <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                    <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                    <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                    <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                                </ul>
-                                                                <h3>
-                                                                    Seller Details:
-                                                                </h3>
-                                                                <ul>
-                                                                    <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                    <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                                </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
+                        }
+                    }
+                }else{
+                    while($mail_row2=mysqli_fetch_assoc($mail_result2)){
+                        if(strtolower($mail_row1['publisher'])==strtolower($mail_row2['publisher'])){
+                            if($mail_row1['priceRange']=="below500"){
+                                if($mail_row2['sellprice']<=500 && $mail_row1['genre']==$mail_row2['genre'] && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='below500')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
                                 }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='1000To2000')";
-                                mysqli_query($conn,$mail_sql4);
-                            }
-                        }else if($mail_row1['priceRange']=="2000To3000"){
-                            if($mail_row2['sellprice']>=2000 && $mail_row2['sellprice']<=3000 && $mail_row1['genre']==$mail_row2['genre']){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
-                                                    Dear $mail_row3[username],
-                                                </p>".$format2."<ul>
-                                                                    <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                    <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                    <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                    <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                    <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                    <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                                </ul>
-                                                                <h3>
-                                                                    Seller Details:
-                                                                </h3>
-                                                                <ul>
-                                                                    <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                    <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                                </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
+                            }else if($mail_row1['priceRange']=="500To1000"){
+                                if($mail_row2['sellprice']>=500 && $mail_row2['sellprice']<=1000 && $mail_row1['genre']==$mail_row2['genre'] && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='500To1000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
                                 }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='2000To3000')";
-                                mysqli_query($conn,$mail_sql4);
-                            }
-                        }else if($mail_row1['priceRange']=="3000To4000"){
-                            if($mail_row2['sellprice']>=3000 && $mail_row2['sellprice']<=4000 && $mail_row1['genre']==$mail_row2['genre']){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
-                                                    Dear $mail_row3[username],
-                                                </p>".$format2."<ul>
-                                                                    <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                    <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                    <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                    <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                    <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                    <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                                </ul>
-                                                                <h3>
-                                                                    Seller Details:
-                                                                </h3>
-                                                                <ul>
-                                                                    <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                    <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                                </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
+                            }else if($mail_row1['priceRange']=="1000To2000"){
+                                if($mail_row2['sellprice']>=1000 && $mail_row2['sellprice']<=2000 && $mail_row1['genre']==$mail_row2['genre'] && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='1000To2000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
                                 }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='3000To4000')";
-                                mysqli_query($conn,$mail_sql4);
-                            }
-                        }else if($mail_row1['priceRange']=="4000To5000"){
-                            if($mail_row2['sellprice']>=4000 && $mail_row2['sellprice']<=5000 && $mail_row1['genre']==$mail_row2['genre']){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
-                                                    Dear $mail_row3[username],
-                                                </p>".$format2."<ul>
-                                                                    <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                    <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                    <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                    <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                    <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                    <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                                </ul>
-                                                                <h3>
-                                                                    Seller Details:
-                                                                </h3>
-                                                                <ul>
-                                                                    <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                    <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                                </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
+                            }else if($mail_row1['priceRange']=="2000To3000"){
+                                if($mail_row2['sellprice']>=2000 && $mail_row2['sellprice']<=3000 && $mail_row1['genre']==$mail_row2['genre'] && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='2000To3000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
                                 }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='4000To5000')";
-                                mysqli_query($conn,$mail_sql4);
-                            }
-                        }else if($mail_row1['priceRange']=="Above5000"){
-                            if($mail_row2['sellprice']>=5000 && $mail_row1['genre']==$mail_row2['genre']){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
-                                                    Dear $mail_row3[username],
-                                                </p>".$format2."<ul>
-                                                                    <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                    <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                    <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                    <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                    <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                    <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                                </ul>
-                                                                <h3>
-                                                                    Seller Details:
-                                                                </h3>
-                                                                <ul>
-                                                                    <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                    <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                                </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
+                            }else if($mail_row1['priceRange']=="3000To4000"){
+                                if($mail_row2['sellprice']>=3000 && $mail_row2['sellprice']<=4000 && $mail_row1['genre']==$mail_row2['genre'] && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='3000To4000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
                                 }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='Above5000')";
-                                mysqli_query($conn,$mail_sql4);
+                            }else if($mail_row1['priceRange']=="4000To5000"){
+                                if($mail_row2['sellprice']>=4000 && $mail_row2['sellprice']<=5000 && $mail_row1['genre']==$mail_row2['genre'] && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='4000To5000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
+                            }else if($mail_row1['priceRange']=="Above5000"){
+                                if($mail_row2['sellprice']>=5000 && $mail_row1['genre']==$mail_row2['genre'] && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='Above5000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
                             }
                         }
                     }
                 }
-            }else{
-                while($mail_row2=mysqli_fetch_assoc($mail_result2)){
-                    if(strtolower($mail_row1['bookname'])==strtolower($mail_row2['bookname'])){
-                        if($mail_row1['priceRange']=="below500"){
-                            if($mail_row2['sellprice']<=500 && $mail_row1['genre']==$mail_row2['genre'] && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
-                                                    Dear $mail_row3[username],
-                                                </p>".$format2."<ul>
-                                                                    <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                    <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                    <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                    <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                    <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                    <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                                </ul>
-                                                                <h3>
-                                                                    Seller Details:
-                                                                </h3>
-                                                                <ul>
-                                                                    <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                    <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                                </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
-                                }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='below500')";
-                                mysqli_query($conn,$mail_sql4);
-                            }
-                        }else if($mail_row1['priceRange']=="500To1000"){
-                            if($mail_row2['sellprice']>=500 && $mail_row2['sellprice']<=1000 && $mail_row1['genre']==$mail_row2['genre'] && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
-                                                    Dear $mail_row3[username],
-                                                </p>".$format2."<ul>
-                                                                    <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                    <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                    <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                    <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                    <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                    <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                                </ul>
-                                                                <h3>
-                                                                    Seller Details:
-                                                                </h3>
-                                                                <ul>
-                                                                    <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                    <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                                </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
-                                }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='500To1000')";
-                                mysqli_query($conn,$mail_sql4);
-                            }
-                        }else if($mail_row1['priceRange']=="1000To2000"){
-                            if($mail_row2['sellprice']>=1000 && $mail_row2['sellprice']<=2000 && $mail_row1['genre']==$mail_row2['genre'] && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
-                                                    Dear $mail_row3[username],
-                                                </p>".$format2."<ul>
-                                                                    <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                    <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                    <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                    <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                    <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                    <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                                </ul>
-                                                                <h3>
-                                                                    Seller Details:
-                                                                </h3>
-                                                                <ul>
-                                                                    <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                    <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                                </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
-                                }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='1000To2000')";
-                                mysqli_query($conn,$mail_sql4);
-                            }
-                        }else if($mail_row1['priceRange']=="2000To3000"){
-                            if($mail_row2['sellprice']>=2000 && $mail_row2['sellprice']<=3000 && $mail_row1['genre']==$mail_row2['genre'] && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
-                                                    Dear $mail_row3[username],
-                                                </p>".$format2."<ul>
-                                                                    <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                    <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                    <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                    <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                    <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                    <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                                </ul>
-                                                                <h3>
-                                                                    Seller Details:
-                                                                </h3>
-                                                                <ul>
-                                                                    <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                    <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                                </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
-                                }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='2000To3000')";
-                                mysqli_query($conn,$mail_sql4);
-                            }
-                        }else if($mail_row1['priceRange']=="3000To4000"){
-                            if($mail_row2['sellprice']>=3000 && $mail_row2['sellprice']<=4000 && $mail_row1['genre']==$mail_row2['genre'] && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
-                                                    Dear $mail_row3[username],
-                                                </p>".$format2."<ul>
-                                                                    <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                    <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                    <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                    <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                    <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                    <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                                </ul>
-                                                                <h3>
-                                                                    Seller Details:
-                                                                </h3>
-                                                                <ul>
-                                                                    <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                    <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                                </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
-                                }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='3000To4000')";
-                                mysqli_query($conn,$mail_sql4);
-                            }
-                        }else if($mail_row1['priceRange']=="4000To5000"){
-                            if($mail_row2['sellprice']>=4000 && $mail_row2['sellprice']<=5000 && $mail_row1['genre']==$mail_row2['genre'] && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
-                                                    Dear $mail_row3[username],
-                                                </p>".$format2."<ul>
-                                                                    <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                    <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                    <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                    <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                    <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                    <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                                </ul>
-                                                                <h3>
-                                                                    Seller Details:
-                                                                </h3>
-                                                                <ul>
-                                                                    <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                    <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                                </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
-                                }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='4000To5000')";
-                                mysqli_query($conn,$mail_sql4);
-                            }
-                        }else if($mail_row1['priceRange']=="Above5000"){
-                            if($mail_row2['sellprice']>=5000 && $mail_row1['genre']==$mail_row2['genre'] && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
-                                                    Dear $mail_row3[username],
-                                                </p>".$format2."<ul>
-                                                                    <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                    <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                    <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                    <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                    <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                    <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                                </ul>
-                                                                <h3>
-                                                                    Seller Details:
-                                                                </h3>
-                                                                <ul>
-                                                                    <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                    <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                                </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
-                                }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='Above5000')";
-                                mysqli_query($conn,$mail_sql4);
-                            }
-                        }
-                    }
-                }
-            }
-        }else if($mail_row1['bookname']=="No" && $mail_row1['author']!="No" && $mail_row1['publisher']=="No"){
-            if($mail_row1['priceRange']=="all" && $mail_row1['bookcondition']=="all"){
-                while($mail_row2=mysqli_fetch_assoc($mail_result2)){
-                    if($mail_row1['genre']==$mail_row2['genre'] && strtolower($mail_row1['author'])==strtolower($mail_row2['author'])){
-                        $to_email = $mail_row3['email'];
-                        $subject = "Book Pedlar Notification";
-                        $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                        $mail_result4=mysqli_query($conn,$mail_sql4);
-                        $mail_row4=mysqli_fetch_assoc($mail_result4);
-                        $body = $format1."<p>
-                                            Dear $mail_row3[username],
-                                        </p>".$format2."<ul>
-                                                            <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                            <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                            <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                            <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                            <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                            <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                        </ul>
-                                                        <h3>
-                                                            Seller Details:
-                                                        </h3>
-                                                        <ul>
-                                                            <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                            <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                        </ul>".$format3;
-
-                        if(mail($to_email, $subject, $body, $headers)){
-                            echo "Email successfully sent to $to_email...";
-                        }else{
-                            echo "Email sending failed...";
-                        }
-                        $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND priceRange='all' AND bookcondition='all' AND genre='$mail_row1[genre]')";
-                        mysqli_query($conn,$mail_sql4);
-                    }
-                }
-            }else if($mail_row1['priceRange']=="all" && $mail_row1['genre']=="all"){
-                while($mail_row2=mysqli_fetch_assoc($mail_result2)){
-                    if($mail_row1['bookcondition']==$mail_row2['bookcondition'] && strtolower($mail_row1['author'])==strtolower($mail_row2['author'])){
-                        $to_email = $mail_row3['email'];
-                        $subject = "Book Notification From Book Pedlar";
-                        $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                        $mail_result4=mysqli_query($conn,$mail_sql4);
-                        $mail_row4=mysqli_fetch_assoc($mail_result4);
-                        $body = $format1."<p>
-                                            Dear $mail_row3[username],
-                                        </p>".$format2."<ul>
-                                                            <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                            <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                            <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                            <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                            <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                            <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                        </ul>
-                                                        <h3>
-                                                            Seller Details:
-                                                        </h3>
-                                                        <ul>
-                                                            <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                            <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                        </ul>".$format3;
-
-                        if(mail($to_email, $subject, $body, $headers)){
-                            echo "Email successfully sent to $to_email...";
-                        }else{
-                            echo "Email sending failed...";
-                        }
-                        $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND priceRange='all' AND genre='all' AND bookcondition='$mail_row1[bookcondition]')";
-                        mysqli_query($conn,$mail_sql4);
-                    }
-                }
-            }else if($mail_row1['bookcondition']=="all" && $mail_row1['genre']=="all"){
-                while($mail_row2=mysqli_fetch_assoc($mail_result2)){
-                    if(strtolower($mail_row1['author'])==strtolower($mail_row2['author'])){
-                        if($mail_row1['priceRange']=="below500"){
-                            if($mail_row2['sellprice']<=500){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
-                                                    Dear $mail_row3[username],
-                                                </p>".$format2."<ul>
-                                                                    <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                    <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                    <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                    <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                    <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                    <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                                </ul>
-                                                                <h3>
-                                                                    Seller Details:
-                                                                </h3>
-                                                                <ul>
-                                                                    <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                    <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                                </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
-                                }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND bookcondition='all' AND genre='all' AND priceRange='below500')";
-                                mysqli_query($conn,$mail_sql4);
-                            }
-                        }else if($mail_row1['priceRange']=="500To1000"){
-                            if($mail_row2['sellprice']>=500 && $mail_row2['sellprice']<=1000){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
+            }else if($mail_row1['bookname']!="No" && $mail_row1['author']=="No" && $mail_row1['publisher']=="No"){
+                if($mail_row1['priceRange']=="all" && $mail_row1['bookcondition']=="all"){
+                    while($mail_row2=mysqli_fetch_assoc($mail_result2)){
+                        if($mail_row1['genre']==$mail_row2['genre'] && strtolower($mail_row1['bookname'])==strtolower($mail_row2['bookname'])){
+                            $to_email = $mail_row3['email'];
+                            $subject = "Book Pedlar Notification";
+                            $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                            $mail_result4=mysqli_query($conn,$mail_sql4);
+                            $mail_row4=mysqli_fetch_assoc($mail_result4);
+                            $body = $format1."<p>
                                                 Dear $mail_row3[username],
                                             </p>".$format2."<ul>
                                                                 <li><strong>Title:</strong> $mail_row2[bookname]</li>
@@ -3342,22 +2184,24 @@
                                                                 <li><strong>Email:</strong> $mail_row4[email]</li>
                                                             </ul>".$format3;
     
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
-                                }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND bookcondition='all' AND genre='all' AND priceRange='500To1000')";
+                            if(mail($to_email, $subject, $body, $headers)){
+                                echo "Email successfully sent to $to_email...";
+                                $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND priceRange='all' AND bookcondition='all' AND genre='$mail_row1[genre]')";
                                 mysqli_query($conn,$mail_sql4);
+                            }else{
+                                echo "Email sending failed...";
                             }
-                        }else if($mail_row1['priceRange']=="1000To2000"){
-                            if($mail_row2['sellprice']>=1000 && $mail_row2['sellprice']<=2000){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
+                        }
+                    }
+                }else if($mail_row1['priceRange']=="all" && $mail_row1['genre']=="all"){
+                    while($mail_row2=mysqli_fetch_assoc($mail_result2)){
+                        if($mail_row1['bookcondition']==$mail_row2['bookcondition'] && strtolower($mail_row1['bookname'])==strtolower($mail_row2['bookname'])){
+                            $to_email = $mail_row3['email'];
+                            $subject = "Book Notification From Book Pedlar";
+                            $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                            $mail_result4=mysqli_query($conn,$mail_sql4);
+                            $mail_row4=mysqli_fetch_assoc($mail_result4);
+                            $body = $format1."<p>
                                                 Dear $mail_row3[username],
                                             </p>".$format2."<ul>
                                                                 <li><strong>Title:</strong> $mail_row2[bookname]</li>
@@ -3375,195 +2219,59 @@
                                                                 <li><strong>Email:</strong> $mail_row4[email]</li>
                                                             </ul>".$format3;
     
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
-                                }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND bookcondition='all' AND genre='all' AND priceRange='1000To2000')";
+                            if(mail($to_email, $subject, $body, $headers)){
+                                echo "Email successfully sent to $to_email...";
+                                $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND priceRange='all' AND genre='all' AND bookcondition='$mail_row1[bookcondition]')";
                                 mysqli_query($conn,$mail_sql4);
-                            }
-                        }else if($mail_row1['priceRange']=="2000To3000"){
-                            if($mail_row2['sellprice']>=2000 && $mail_row2['sellprice']<=3000){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
-                                                    Dear $mail_row3[username],
-                                                </p>".$format2."<ul>
-                                                                    <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                    <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                    <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                    <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                    <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                    <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                                </ul>
-                                                                <h3>
-                                                                    Seller Details:
-                                                                </h3>
-                                                                <ul>
-                                                                    <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                    <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                                </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
-                                }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND bookcondition='all' AND genre='all' AND priceRange='2000To3000')";
-                                mysqli_query($conn,$mail_sql4);
-                            }
-                        }else if($mail_row1['priceRange']=="3000To4000"){
-                            if($mail_row2['sellprice']>=3000 && $mail_row2['sellprice']<=4000){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
-                                                    Dear $mail_row3[username],
-                                                </p>".$format2."<ul>
-                                                                    <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                    <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                    <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                    <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                    <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                    <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                                </ul>
-                                                                <h3>
-                                                                    Seller Details:
-                                                                </h3>
-                                                                <ul>
-                                                                    <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                    <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                                </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
-                                }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND bookcondition='all' AND genre='all' AND priceRange='3000To4000')";
-                                mysqli_query($conn,$mail_sql4);
-                            }
-                        }else if($mail_row1['priceRange']=="4000To5000"){
-                            if($mail_row2['sellprice']>=4000 && $mail_row2['sellprice']<=5000){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
-                                                    Dear $mail_row3[username],
-                                                </p>".$format2."<ul>
-                                                                    <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                    <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                    <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                    <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                    <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                    <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                                </ul>
-                                                                <h3>
-                                                                    Seller Details:
-                                                                </h3>
-                                                                <ul>
-                                                                    <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                    <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                                </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
-                                }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND bookcondition='all' AND genre='all' AND priceRange='4000To5000')";
-                                mysqli_query($conn,$mail_sql4);
-                            }
-                        }else if($mail_row1['priceRange']=="Above5000"){
-                            if($mail_row2['sellprice']>=5000){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
-                                                    Dear $mail_row3[username],
-                                                </p>".$format2."<ul>
-                                                                    <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                    <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                    <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                    <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                    <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                    <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                                </ul>
-                                                                <h3>
-                                                                    Seller Details:
-                                                                </h3>
-                                                                <ul>
-                                                                    <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                    <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                                </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
-                                }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND bookcondition='all' AND genre='all' AND priceRange='Above5000')";
-                                mysqli_query($conn,$mail_sql4);
+                            }else{
+                                echo "Email sending failed...";
                             }
                         }
                     }
-                }
-            }else if($mail_row1['priceRange']=="all"){
-                while($mail_row2=mysqli_fetch_assoc($mail_result2)){
-                    if($mail_row1['bookcondition']==$mail_row2['bookcondition'] && $mail_row1['genre']==$mail_row2['genre'] && strtolower($mail_row1['author'])==strtolower($mail_row2['author'])){
-                        $to_email = $mail_row3['email'];
-                        $subject = "Book Notification From Book Pedlar";
-                        $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                        $mail_result4=mysqli_query($conn,$mail_sql4);
-                        $mail_row4=mysqli_fetch_assoc($mail_result4);
-                        $body = $format1."<p>
-                                            Dear $mail_row3[username],
-                                        </p>".$format2."<ul>
-                                                            <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                            <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                            <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                            <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                            <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                            <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                        </ul>
-                                                        <h3>
-                                                            Seller Details:
-                                                        </h3>
-                                                        <ul>
-                                                            <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                            <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                        </ul>".$format3;
-
-                        if(mail($to_email, $subject, $body, $headers)){
-                            echo "Email successfully sent to $to_email...";
-                        }else{
-                            echo "Email sending failed...";
-                        }
-                        $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND priceRange='all' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]')";
-                        mysqli_query($conn,$mail_sql4);
-                    }
-                }
-            }else if($mail_row1['genre']=="all"){
-                while($mail_row2=mysqli_fetch_assoc($mail_result2)){
-                    if(strtolower($mail_row1['author'])==strtolower($mail_row2['author'])){
-                        if($mail_row1['priceRange']=="below500"){
-                            if($mail_row2['sellprice']<=500 && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
+                }else if($mail_row1['bookcondition']=="all" && $mail_row1['genre']=="all"){
+                    while($mail_row2=mysqli_fetch_assoc($mail_result2)){
+                        if(strtolower($mail_row1['bookname'])==strtolower($mail_row2['bookname'])){
+                            if($mail_row1['priceRange']=="below500"){
+                                if($mail_row2['sellprice']<=500){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND bookcondition='all' AND genre='all' AND priceRange='below500')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
+                            }else if($mail_row1['priceRange']=="500To1000"){
+                                if($mail_row2['sellprice']>=500 && $mail_row2['sellprice']<=1000){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
                                                     Dear $mail_row3[username],
                                                 </p>".$format2."<ul>
                                                                     <li><strong>Title:</strong> $mail_row2[bookname]</li>
@@ -3580,23 +2288,23 @@
                                                                     <li><strong>Name:</strong> $mail_row4[username]</li>
                                                                     <li><strong>Email:</strong> $mail_row4[email]</li>
                                                                 </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND bookcondition='all' AND genre='all' AND priceRange='500To1000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
                                 }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='below500')";
-                                mysqli_query($conn,$mail_sql4);
-                            }
-                        }else if($mail_row1['priceRange']=="500To1000"){
-                            if($mail_row2['sellprice']>=500 && $mail_row2['sellprice']<=1000 && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
+                            }else if($mail_row1['priceRange']=="1000To2000"){
+                                if($mail_row2['sellprice']>=1000 && $mail_row2['sellprice']<=2000){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
                                                     Dear $mail_row3[username],
                                                 </p>".$format2."<ul>
                                                                     <li><strong>Title:</strong> $mail_row2[bookname]</li>
@@ -3613,194 +2321,159 @@
                                                                     <li><strong>Name:</strong> $mail_row4[username]</li>
                                                                     <li><strong>Email:</strong> $mail_row4[email]</li>
                                                                 </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND bookcondition='all' AND genre='all' AND priceRange='1000To2000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
                                 }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='500To1000')";
-                                mysqli_query($conn,$mail_sql4);
-                            }
-                        }else if($mail_row1['priceRange']=="1000To2000"){
-                            if($mail_row2['sellprice']>=1000 && $mail_row2['sellprice']<=2000 && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
-                                                    Dear $mail_row3[username],
-                                                </p>".$format2."<ul>
-                                                                    <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                    <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                    <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                    <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                    <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                    <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                                </ul>
-                                                                <h3>
-                                                                    Seller Details:
-                                                                </h3>
-                                                                <ul>
-                                                                    <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                    <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                                </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
+                            }else if($mail_row1['priceRange']=="2000To3000"){
+                                if($mail_row2['sellprice']>=2000 && $mail_row2['sellprice']<=3000){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND bookcondition='all' AND genre='all' AND priceRange='2000To3000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
                                 }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='1000To2000')";
-                                mysqli_query($conn,$mail_sql4);
-                            }
-                        }else if($mail_row1['priceRange']=="2000To3000"){
-                            if($mail_row2['sellprice']>=2000 && $mail_row2['sellprice']<=3000 && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
-                                                    Dear $mail_row3[username],
-                                                </p>".$format2."<ul>
-                                                                    <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                    <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                    <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                    <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                    <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                    <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                                </ul>
-                                                                <h3>
-                                                                    Seller Details:
-                                                                </h3>
-                                                                <ul>
-                                                                    <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                    <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                                </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
+                            }else if($mail_row1['priceRange']=="3000To4000"){
+                                if($mail_row2['sellprice']>=3000 && $mail_row2['sellprice']<=4000){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND bookcondition='all' AND genre='all' AND priceRange='3000To4000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
                                 }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='2000To3000')";
-                                mysqli_query($conn,$mail_sql4);
-                            }
-                        }else if($mail_row1['priceRange']=="3000To4000"){
-                            if($mail_row2['sellprice']>=3000 && $mail_row2['sellprice']<=4000 && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
-                                                    Dear $mail_row3[username],
-                                                </p>".$format2."<ul>
-                                                                    <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                    <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                    <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                    <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                    <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                    <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                                </ul>
-                                                                <h3>
-                                                                    Seller Details:
-                                                                </h3>
-                                                                <ul>
-                                                                    <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                    <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                                </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
+                            }else if($mail_row1['priceRange']=="4000To5000"){
+                                if($mail_row2['sellprice']>=4000 && $mail_row2['sellprice']<=5000){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND bookcondition='all' AND genre='all' AND priceRange='4000To5000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
                                 }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='3000To4000')";
-                                mysqli_query($conn,$mail_sql4);
-                            }
-                        }else if($mail_row1['priceRange']=="4000To5000"){
-                            if($mail_row2['sellprice']>=4000 && $mail_row2['sellprice']<=5000 && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
-                                                    Dear $mail_row3[username],
-                                                </p>".$format2."<ul>
-                                                                    <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                    <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                    <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                    <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                    <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                    <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                                </ul>
-                                                                <h3>
-                                                                    Seller Details:
-                                                                </h3>
-                                                                <ul>
-                                                                    <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                    <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                                </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
+                            }else if($mail_row1['priceRange']=="Above5000"){
+                                if($mail_row2['sellprice']>=5000){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND bookcondition='all' AND genre='all' AND priceRange='Above5000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
                                 }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='4000To5000')";
-                                mysqli_query($conn,$mail_sql4);
-                            }
-                        }else if($mail_row1['priceRange']=="Above5000"){
-                            if($mail_row2['sellprice']>=5000 && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
-                                                    Dear $mail_row3[username],
-                                                </p>".$format2."<ul>
-                                                                    <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                    <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                    <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                    <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                    <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                    <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                                </ul>
-                                                                <h3>
-                                                                    Seller Details:
-                                                                </h3>
-                                                                <ul>
-                                                                    <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                    <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                                </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
-                                }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='Above5000')";
-                                mysqli_query($conn,$mail_sql4);
                             }
                         }
                     }
-                }
-            }else if($mail_row1['bookcondition']=="all"){
-                while($mail_row2=mysqli_fetch_assoc($mail_result2)){
-                    if(strtolower($mail_row1['author'])==strtolower($mail_row2['author'])){
-                        if($mail_row1['priceRange']=="below500"){
-                            if($mail_row2['sellprice']<=500 && $mail_row1['genre']==$mail_row2['genre']){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
+                }else if($mail_row1['priceRange']=="all"){
+                    while($mail_row2=mysqli_fetch_assoc($mail_result2)){
+                        if($mail_row1['bookcondition']==$mail_row2['bookcondition'] && $mail_row1['genre']==$mail_row2['genre'] && strtolower($mail_row1['bookname'])==strtolower($mail_row2['bookname'])){
+                            $to_email = $mail_row3['email'];
+                            $subject = "Book Notification From Book Pedlar";
+                            $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                            $mail_result4=mysqli_query($conn,$mail_sql4);
+                            $mail_row4=mysqli_fetch_assoc($mail_result4);
+                            $body = $format1."<p>
                                                 Dear $mail_row3[username],
                                             </p>".$format2."<ul>
                                                                 <li><strong>Title:</strong> $mail_row2[bookname]</li>
@@ -3818,22 +2491,263 @@
                                                                 <li><strong>Email:</strong> $mail_row4[email]</li>
                                                             </ul>".$format3;
     
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
-                                }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='below500')";
+                            if(mail($to_email, $subject, $body, $headers)){
+                                echo "Email successfully sent to $to_email...";
+                                $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND priceRange='all' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]')";
                                 mysqli_query($conn,$mail_sql4);
+                            }else{
+                                echo "Email sending failed...";
                             }
-                        }else if($mail_row1['priceRange']=="500To1000"){
-                            if($mail_row2['sellprice']>=500 && $mail_row2['sellprice']<=1000 && $mail_row1['genre']==$mail_row2['genre']){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
+                        }
+                    }
+                }else if($mail_row1['genre']=="all"){
+                    while($mail_row2=mysqli_fetch_assoc($mail_result2)){
+                        if(strtolower($mail_row1['bookname'])==strtolower($mail_row2['bookname'])){
+                            if($mail_row1['priceRange']=="below500"){
+                                if($mail_row2['sellprice']<=500 && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='below500')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
+                            }else if($mail_row1['priceRange']=="500To1000"){
+                                if($mail_row2['sellprice']>=500 && $mail_row2['sellprice']<=1000 && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='500To1000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
+                            }else if($mail_row1['priceRange']=="1000To2000"){
+                                if($mail_row2['sellprice']>=1000 && $mail_row2['sellprice']<=2000 && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='1000To2000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
+                            }else if($mail_row1['priceRange']=="2000To3000"){
+                                if($mail_row2['sellprice']>=2000 && $mail_row2['sellprice']<=3000 && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='2000To3000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
+                            }else if($mail_row1['priceRange']=="3000To4000"){
+                                if($mail_row2['sellprice']>=3000 && $mail_row2['sellprice']<=4000 && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='3000To4000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
+                            }else if($mail_row1['priceRange']=="4000To5000"){
+                                if($mail_row2['sellprice']>=4000 && $mail_row2['sellprice']<=5000 && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='4000To5000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
+                            }else if($mail_row1['priceRange']=="Above5000"){
+                                if($mail_row2['sellprice']>=5000 && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='Above5000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }else if($mail_row1['bookcondition']=="all"){
+                    while($mail_row2=mysqli_fetch_assoc($mail_result2)){
+                        if(strtolower($mail_row1['bookname'])==strtolower($mail_row2['bookname'])){
+                            if($mail_row1['priceRange']=="below500"){
+                                if($mail_row2['sellprice']<=500 && $mail_row1['genre']==$mail_row2['genre']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
                                                     Dear $mail_row3[username],
                                                 </p>".$format2."<ul>
                                                                     <li><strong>Title:</strong> $mail_row2[bookname]</li>
@@ -3850,536 +2764,464 @@
                                                                     <li><strong>Name:</strong> $mail_row4[username]</li>
                                                                     <li><strong>Email:</strong> $mail_row4[email]</li>
                                                                 </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='below500')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
                                 }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='500To1000')";
-                                mysqli_query($conn,$mail_sql4);
+                            }else if($mail_row1['priceRange']=="500To1000"){
+                                if($mail_row2['sellprice']>=500 && $mail_row2['sellprice']<=1000 && $mail_row1['genre']==$mail_row2['genre']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='500To1000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
+                            }else if($mail_row1['priceRange']=="1000To2000"){
+                                if($mail_row2['sellprice']>=1000 && $mail_row2['sellprice']<=2000 && $mail_row1['genre']==$mail_row2['genre']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='1000To2000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
+                            }else if($mail_row1['priceRange']=="2000To3000"){
+                                if($mail_row2['sellprice']>=2000 && $mail_row2['sellprice']<=3000 && $mail_row1['genre']==$mail_row2['genre']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='2000To3000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
+                            }else if($mail_row1['priceRange']=="3000To4000"){
+                                if($mail_row2['sellprice']>=3000 && $mail_row2['sellprice']<=4000 && $mail_row1['genre']==$mail_row2['genre']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='3000To4000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
+                            }else if($mail_row1['priceRange']=="4000To5000"){
+                                if($mail_row2['sellprice']>=4000 && $mail_row2['sellprice']<=5000 && $mail_row1['genre']==$mail_row2['genre']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='4000To5000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
+                            }else if($mail_row1['priceRange']=="Above5000"){
+                                if($mail_row2['sellprice']>=5000 && $mail_row1['genre']==$mail_row2['genre']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='Above5000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
                             }
-                        }else if($mail_row1['priceRange']=="1000To2000"){
-                            if($mail_row2['sellprice']>=1000 && $mail_row2['sellprice']<=2000 && $mail_row1['genre']==$mail_row2['genre']){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
-                                                    Dear $mail_row3[username],
-                                                </p>".$format2."<ul>
-                                                                    <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                    <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                    <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                    <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                    <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                    <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                                </ul>
-                                                                <h3>
-                                                                    Seller Details:
-                                                                </h3>
-                                                                <ul>
-                                                                    <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                    <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                                </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
+                        }
+                    }
+                }else{
+                    while($mail_row2=mysqli_fetch_assoc($mail_result2)){
+                        if(strtolower($mail_row1['bookname'])==strtolower($mail_row2['bookname'])){
+                            if($mail_row1['priceRange']=="below500"){
+                                if($mail_row2['sellprice']<=500 && $mail_row1['genre']==$mail_row2['genre'] && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='below500')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
                                 }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='1000To2000')";
-                                mysqli_query($conn,$mail_sql4);
-                            }
-                        }else if($mail_row1['priceRange']=="2000To3000"){
-                            if($mail_row2['sellprice']>=2000 && $mail_row2['sellprice']<=3000 && $mail_row1['genre']==$mail_row2['genre']){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
-                                                    Dear $mail_row3[username],
-                                                </p>".$format2."<ul>
-                                                                    <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                    <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                    <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                    <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                    <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                    <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                                </ul>
-                                                                <h3>
-                                                                    Seller Details:
-                                                                </h3>
-                                                                <ul>
-                                                                    <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                    <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                                </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
+                            }else if($mail_row1['priceRange']=="500To1000"){
+                                if($mail_row2['sellprice']>=500 && $mail_row2['sellprice']<=1000 && $mail_row1['genre']==$mail_row2['genre'] && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='500To1000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
                                 }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='2000To3000')";
-                                mysqli_query($conn,$mail_sql4);
-                            }
-                        }else if($mail_row1['priceRange']=="3000To4000"){
-                            if($mail_row2['sellprice']>=3000 && $mail_row2['sellprice']<=4000 && $mail_row1['genre']==$mail_row2['genre']){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
-                                                    Dear $mail_row3[username],
-                                                </p>".$format2."<ul>
-                                                                    <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                    <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                    <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                    <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                    <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                    <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                                </ul>
-                                                                <h3>
-                                                                    Seller Details:
-                                                                </h3>
-                                                                <ul>
-                                                                    <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                    <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                                </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
+                            }else if($mail_row1['priceRange']=="1000To2000"){
+                                if($mail_row2['sellprice']>=1000 && $mail_row2['sellprice']<=2000 && $mail_row1['genre']==$mail_row2['genre'] && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='1000To2000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
                                 }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='3000To4000')";
-                                mysqli_query($conn,$mail_sql4);
-                            }
-                        }else if($mail_row1['priceRange']=="4000To5000"){
-                            if($mail_row2['sellprice']>=4000 && $mail_row2['sellprice']<=5000 && $mail_row1['genre']==$mail_row2['genre']){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
-                                                    Dear $mail_row3[username],
-                                                </p>".$format2."<ul>
-                                                                    <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                    <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                    <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                    <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                    <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                    <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                                </ul>
-                                                                <h3>
-                                                                    Seller Details:
-                                                                </h3>
-                                                                <ul>
-                                                                    <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                    <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                                </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
+                            }else if($mail_row1['priceRange']=="2000To3000"){
+                                if($mail_row2['sellprice']>=2000 && $mail_row2['sellprice']<=3000 && $mail_row1['genre']==$mail_row2['genre'] && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='2000To3000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
                                 }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='4000To5000')";
-                                mysqli_query($conn,$mail_sql4);
-                            }
-                        }else if($mail_row1['priceRange']=="Above5000"){
-                            if($mail_row2['sellprice']>=5000 && $mail_row1['genre']==$mail_row2['genre']){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
-                                                    Dear $mail_row3[username],
-                                                </p>".$format2."<ul>
-                                                                    <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                    <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                    <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                    <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                    <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                    <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                                </ul>
-                                                                <h3>
-                                                                    Seller Details:
-                                                                </h3>
-                                                                <ul>
-                                                                    <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                    <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                                </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
+                            }else if($mail_row1['priceRange']=="3000To4000"){
+                                if($mail_row2['sellprice']>=3000 && $mail_row2['sellprice']<=4000 && $mail_row1['genre']==$mail_row2['genre'] && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='3000To4000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
                                 }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='Above5000')";
-                                mysqli_query($conn,$mail_sql4);
+                            }else if($mail_row1['priceRange']=="4000To5000"){
+                                if($mail_row2['sellprice']>=4000 && $mail_row2['sellprice']<=5000 && $mail_row1['genre']==$mail_row2['genre'] && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='4000To5000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
+                            }else if($mail_row1['priceRange']=="Above5000"){
+                                if($mail_row2['sellprice']>=5000 && $mail_row1['genre']==$mail_row2['genre'] && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='Above5000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
                             }
                         }
                     }
                 }
-            }else{
-                while($mail_row2=mysqli_fetch_assoc($mail_result2)){
-                    if(strtolower($mail_row1['author'])==strtolower($mail_row2['author'])){
-                        if($mail_row1['priceRange']=="below500"){
-                            if($mail_row2['sellprice']<=500 && $mail_row1['genre']==$mail_row2['genre'] && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
-                                                    Dear $mail_row3[username],
-                                                </p>".$format2."<ul>
-                                                                    <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                    <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                    <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                    <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                    <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                    <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                                </ul>
-                                                                <h3>
-                                                                    Seller Details:
-                                                                </h3>
-                                                                <ul>
-                                                                    <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                    <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                                </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
-                                }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='below500')";
-                                mysqli_query($conn,$mail_sql4);
-                            }
-                        }else if($mail_row1['priceRange']=="500To1000"){
-                            if($mail_row2['sellprice']>=500 && $mail_row2['sellprice']<=1000 && $mail_row1['genre']==$mail_row2['genre'] && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
-                                                    Dear $mail_row3[username],
-                                                </p>".$format2."<ul>
-                                                                    <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                    <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                    <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                    <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                    <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                    <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                                </ul>
-                                                                <h3>
-                                                                    Seller Details:
-                                                                </h3>
-                                                                <ul>
-                                                                    <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                    <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                                </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
-                                }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='500To1000')";
-                                mysqli_query($conn,$mail_sql4);
-                            }
-                        }else if($mail_row1['priceRange']=="1000To2000"){
-                            if($mail_row2['sellprice']>=1000 && $mail_row2['sellprice']<=2000 && $mail_row1['genre']==$mail_row2['genre'] && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
-                                                    Dear $mail_row3[username],
-                                                </p>".$format2."<ul>
-                                                                    <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                    <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                    <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                    <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                    <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                    <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                                </ul>
-                                                                <h3>
-                                                                    Seller Details:
-                                                                </h3>
-                                                                <ul>
-                                                                    <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                    <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                                </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
-                                }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='1000To2000')";
-                                mysqli_query($conn,$mail_sql4);
-                            }
-                        }else if($mail_row1['priceRange']=="2000To3000"){
-                            if($mail_row2['sellprice']>=2000 && $mail_row2['sellprice']<=3000 && $mail_row1['genre']==$mail_row2['genre'] && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
-                                                    Dear $mail_row3[username],
-                                                </p>".$format2."<ul>
-                                                                    <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                    <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                    <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                    <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                    <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                    <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                                </ul>
-                                                                <h3>
-                                                                    Seller Details:
-                                                                </h3>
-                                                                <ul>
-                                                                    <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                    <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                                </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
-                                }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='2000To3000')";
-                                mysqli_query($conn,$mail_sql4);
-                            }
-                        }else if($mail_row1['priceRange']=="3000To4000"){
-                            if($mail_row2['sellprice']>=3000 && $mail_row2['sellprice']<=4000 && $mail_row1['genre']==$mail_row2['genre'] && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
-                                                    Dear $mail_row3[username],
-                                                </p>".$format2."<ul>
-                                                                    <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                    <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                    <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                    <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                    <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                    <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                                </ul>
-                                                                <h3>
-                                                                    Seller Details:
-                                                                </h3>
-                                                                <ul>
-                                                                    <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                    <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                                </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
-                                }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='3000To4000')";
-                                mysqli_query($conn,$mail_sql4);
-                            }
-                        }else if($mail_row1['priceRange']=="4000To5000"){
-                            if($mail_row2['sellprice']>=4000 && $mail_row2['sellprice']<=5000 && $mail_row1['genre']==$mail_row2['genre'] && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
-                                                    Dear $mail_row3[username],
-                                                </p>".$format2."<ul>
-                                                                    <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                    <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                    <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                    <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                    <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                    <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                                </ul>
-                                                                <h3>
-                                                                    Seller Details:
-                                                                </h3>
-                                                                <ul>
-                                                                    <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                    <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                                </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
-                                }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='4000To5000')";
-                                mysqli_query($conn,$mail_sql4);
-                            }
-                        }else if($mail_row1['priceRange']=="Above5000"){
-                            if($mail_row2['sellprice']>=5000 && $mail_row1['genre']==$mail_row2['genre'] && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
-                                                    Dear $mail_row3[username],
-                                                </p>".$format2."<ul>
-                                                                    <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                    <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                    <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                    <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                    <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                    <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                                </ul>
-                                                                <h3>
-                                                                    Seller Details:
-                                                                </h3>
-                                                                <ul>
-                                                                    <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                    <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                                </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
-                                }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='Above5000')";
-                                mysqli_query($conn,$mail_sql4);
-                            }
-                        }
-                    }
-                }
-            }
-        }else if($mail_row1['bookname']!="No" && $mail_row1['author']!="No" && $mail_row1['publisher']!="No"){
-            if($mail_row1['priceRange']=="all" && $mail_row1['bookcondition']=="all"){
-                while($mail_row2=mysqli_fetch_assoc($mail_result2)){
-                    if($mail_row1['genre']==$mail_row2['genre'] && strtolower($mail_row1['author'])==strtolower($mail_row2['author']) && strtolower($mail_row1['bookname'])==strtolower($mail_row2['bookname']) && strtolower($mail_row1['publisher'])==strtolower($mail_row2['publisher'])){
-                        $to_email = $mail_row3['email'];
-                        $subject = "Book Pedlar Notification";
-                        $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                        $mail_result4=mysqli_query($conn,$mail_sql4);
-                        $mail_row4=mysqli_fetch_assoc($mail_result4);
-                        $body = $format1."<p>
-                                            Dear $mail_row3[username],
-                                        </p>".$format2."<ul>
-                                                            <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                            <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                            <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                            <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                            <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                            <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                        </ul>
-                                                        <h3>
-                                                            Seller Details:
-                                                        </h3>
-                                                        <ul>
-                                                            <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                            <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                        </ul>".$format3;
-
-                        if(mail($to_email, $subject, $body, $headers)){
-                            echo "Email successfully sent to $to_email...";
-                        }else{
-                            echo "Email sending failed...";
-                        }
-                        $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND priceRange='all' AND bookcondition='all' AND genre='$mail_row1[genre]')";
-                        mysqli_query($conn,$mail_sql4);
-                    }
-                }
-            }else if($mail_row1['priceRange']=="all" && $mail_row1['genre']=="all"){
-                while($mail_row2=mysqli_fetch_assoc($mail_result2)){
-                    if($mail_row1['bookcondition']==$mail_row2['bookcondition'] && strtolower($mail_row1['author'])==strtolower($mail_row2['author']) && strtolower($mail_row1['bookname'])==strtolower($mail_row2['bookname']) && strtolower($mail_row1['publisher'])==strtolower($mail_row2['publisher'])){
-                        $to_email = $mail_row3['email'];
-                        $subject = "Book Notification From Book Pedlar";
-                        $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                        $mail_result4=mysqli_query($conn,$mail_sql4);
-                        $mail_row4=mysqli_fetch_assoc($mail_result4);
-                        $body = $format1."<p>
-                                            Dear $mail_row3[username],
-                                        </p>".$format2."<ul>
-                                                            <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                            <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                            <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                            <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                            <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                            <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                        </ul>
-                                                        <h3>
-                                                            Seller Details:
-                                                        </h3>
-                                                        <ul>
-                                                            <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                            <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                        </ul>".$format3;
-
-                        if(mail($to_email, $subject, $body, $headers)){
-                            echo "Email successfully sent to $to_email...";
-                        }else{
-                            echo "Email sending failed...";
-                        }
-                        $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND priceRange='all' AND genre='all' AND bookcondition='$mail_row1[bookcondition]')";
-                        mysqli_query($conn,$mail_sql4);
-                    }
-                }
-            }else if($mail_row1['bookcondition']=="all" && $mail_row1['genre']=="all"){
-                while($mail_row2=mysqli_fetch_assoc($mail_result2)){
-                    if(strtolower($mail_row1['author'])==strtolower($mail_row2['author']) && strtolower($mail_row1['bookname'])==strtolower($mail_row2['bookname']) && strtolower($mail_row1['publisher'])==strtolower($mail_row2['publisher'])){
-                        if($mail_row1['priceRange']=="below500"){
-                            if($mail_row2['sellprice']<=500){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
-                                                    Dear $mail_row3[username],
-                                                </p>".$format2."<ul>
-                                                                    <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                    <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                    <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                    <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                    <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                    <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                                </ul>
-                                                                <h3>
-                                                                    Seller Details:
-                                                                </h3>
-                                                                <ul>
-                                                                    <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                    <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                                </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
-                                }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND bookcondition='all' AND genre='all' AND priceRange='below500')";
-                                mysqli_query($conn,$mail_sql4);
-                            }
-                        }else if($mail_row1['priceRange']=="500To1000"){
-                            if($mail_row2['sellprice']>=500 && $mail_row2['sellprice']<=1000){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
+            }else if($mail_row1['bookname']=="No" && $mail_row1['author']!="No" && $mail_row1['publisher']=="No"){
+                if($mail_row1['priceRange']=="all" && $mail_row1['bookcondition']=="all"){
+                    while($mail_row2=mysqli_fetch_assoc($mail_result2)){
+                        if($mail_row1['genre']==$mail_row2['genre'] && strtolower($mail_row1['author'])==strtolower($mail_row2['author'])){
+                            $to_email = $mail_row3['email'];
+                            $subject = "Book Pedlar Notification";
+                            $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                            $mail_result4=mysqli_query($conn,$mail_sql4);
+                            $mail_row4=mysqli_fetch_assoc($mail_result4);
+                            $body = $format1."<p>
                                                 Dear $mail_row3[username],
                                             </p>".$format2."<ul>
                                                                 <li><strong>Title:</strong> $mail_row2[bookname]</li>
@@ -4397,22 +3239,24 @@
                                                                 <li><strong>Email:</strong> $mail_row4[email]</li>
                                                             </ul>".$format3;
     
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
-                                }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND bookcondition='all' AND genre='all' AND priceRange='500To1000')";
+                            if(mail($to_email, $subject, $body, $headers)){
+                                echo "Email successfully sent to $to_email...";
+                                $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND priceRange='all' AND bookcondition='all' AND genre='$mail_row1[genre]')";
                                 mysqli_query($conn,$mail_sql4);
+                            }else{
+                                echo "Email sending failed...";
                             }
-                        }else if($mail_row1['priceRange']=="1000To2000"){
-                            if($mail_row2['sellprice']>=1000 && $mail_row2['sellprice']<=2000){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
+                        }
+                    }
+                }else if($mail_row1['priceRange']=="all" && $mail_row1['genre']=="all"){
+                    while($mail_row2=mysqli_fetch_assoc($mail_result2)){
+                        if($mail_row1['bookcondition']==$mail_row2['bookcondition'] && strtolower($mail_row1['author'])==strtolower($mail_row2['author'])){
+                            $to_email = $mail_row3['email'];
+                            $subject = "Book Notification From Book Pedlar";
+                            $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                            $mail_result4=mysqli_query($conn,$mail_sql4);
+                            $mail_row4=mysqli_fetch_assoc($mail_result4);
+                            $body = $format1."<p>
                                                 Dear $mail_row3[username],
                                             </p>".$format2."<ul>
                                                                 <li><strong>Title:</strong> $mail_row2[bookname]</li>
@@ -4430,195 +3274,59 @@
                                                                 <li><strong>Email:</strong> $mail_row4[email]</li>
                                                             </ul>".$format3;
     
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
-                                }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND bookcondition='all' AND genre='all' AND priceRange='1000To2000')";
+                            if(mail($to_email, $subject, $body, $headers)){
+                                echo "Email successfully sent to $to_email...";
+                                $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND priceRange='all' AND genre='all' AND bookcondition='$mail_row1[bookcondition]')";
                                 mysqli_query($conn,$mail_sql4);
-                            }
-                        }else if($mail_row1['priceRange']=="2000To3000"){
-                            if($mail_row2['sellprice']>=2000 && $mail_row2['sellprice']<=3000){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
-                                                    Dear $mail_row3[username],
-                                                </p>".$format2."<ul>
-                                                                    <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                    <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                    <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                    <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                    <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                    <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                                </ul>
-                                                                <h3>
-                                                                    Seller Details:
-                                                                </h3>
-                                                                <ul>
-                                                                    <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                    <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                                </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
-                                }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND bookcondition='all' AND genre='all' AND priceRange='2000To3000')";
-                                mysqli_query($conn,$mail_sql4);
-                            }
-                        }else if($mail_row1['priceRange']=="3000To4000"){
-                            if($mail_row2['sellprice']>=3000 && $mail_row2['sellprice']<=4000){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
-                                                    Dear $mail_row3[username],
-                                                </p>".$format2."<ul>
-                                                                    <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                    <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                    <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                    <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                    <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                    <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                                </ul>
-                                                                <h3>
-                                                                    Seller Details:
-                                                                </h3>
-                                                                <ul>
-                                                                    <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                    <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                                </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
-                                }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND bookcondition='all' AND genre='all' AND priceRange='3000To4000')";
-                                mysqli_query($conn,$mail_sql4);
-                            }
-                        }else if($mail_row1['priceRange']=="4000To5000"){
-                            if($mail_row2['sellprice']>=4000 && $mail_row2['sellprice']<=5000){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
-                                                    Dear $mail_row3[username],
-                                                </p>".$format2."<ul>
-                                                                    <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                    <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                    <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                    <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                    <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                    <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                                </ul>
-                                                                <h3>
-                                                                    Seller Details:
-                                                                </h3>
-                                                                <ul>
-                                                                    <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                    <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                                </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
-                                }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND bookcondition='all' AND genre='all' AND priceRange='4000To5000')";
-                                mysqli_query($conn,$mail_sql4);
-                            }
-                        }else if($mail_row1['priceRange']=="Above5000"){
-                            if($mail_row2['sellprice']>=5000){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
-                                                    Dear $mail_row3[username],
-                                                </p>".$format2."<ul>
-                                                                    <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                    <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                    <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                    <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                    <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                    <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                                </ul>
-                                                                <h3>
-                                                                    Seller Details:
-                                                                </h3>
-                                                                <ul>
-                                                                    <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                    <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                                </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
-                                }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND bookcondition='all' AND genre='all' AND priceRange='Above5000')";
-                                mysqli_query($conn,$mail_sql4);
+                            }else{
+                                echo "Email sending failed...";
                             }
                         }
                     }
-                }
-            }else if($mail_row1['priceRange']=="all"){
-                while($mail_row2=mysqli_fetch_assoc($mail_result2)){
-                    if($mail_row1['bookcondition']==$mail_row2['bookcondition'] && $mail_row1['genre']==$mail_row2['genre'] && strtolower($mail_row1['author'])==strtolower($mail_row2['author']) && strtolower($mail_row1['bookname'])==strtolower($mail_row2['bookname']) && strtolower($mail_row1['publisher'])==strtolower($mail_row2['publisher'])){
-                        $to_email = $mail_row3['email'];
-                        $subject = "Book Notification From Book Pedlar";
-                        $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                        $mail_result4=mysqli_query($conn,$mail_sql4);
-                        $mail_row4=mysqli_fetch_assoc($mail_result4);
-                        $body = $format1."<p>
-                                            Dear $mail_row3[username],
-                                        </p>".$format2."<ul>
-                                                            <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                            <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                            <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                            <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                            <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                            <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                        </ul>
-                                                        <h3>
-                                                            Seller Details:
-                                                        </h3>
-                                                        <ul>
-                                                            <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                            <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                        </ul>".$format3;
-
-                        if(mail($to_email, $subject, $body, $headers)){
-                            echo "Email successfully sent to $to_email...";
-                        }else{
-                            echo "Email sending failed...";
-                        }
-                        $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND priceRange='all' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]')";
-                        mysqli_query($conn,$mail_sql4);
-                    }
-                }
-            }else if($mail_row1['genre']=="all"){
-                while($mail_row2=mysqli_fetch_assoc($mail_result2)){
-                    if(strtolower($mail_row1['author'])==strtolower($mail_row2['author']) && strtolower($mail_row1['bookname'])==strtolower($mail_row2['bookname']) && strtolower($mail_row1['publisher'])==strtolower($mail_row2['publisher'])){
-                        if($mail_row1['priceRange']=="below500"){
-                            if($mail_row2['sellprice']<=500 && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
+                }else if($mail_row1['bookcondition']=="all" && $mail_row1['genre']=="all"){
+                    while($mail_row2=mysqli_fetch_assoc($mail_result2)){
+                        if(strtolower($mail_row1['author'])==strtolower($mail_row2['author'])){
+                            if($mail_row1['priceRange']=="below500"){
+                                if($mail_row2['sellprice']<=500){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND bookcondition='all' AND genre='all' AND priceRange='below500')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
+                            }else if($mail_row1['priceRange']=="500To1000"){
+                                if($mail_row2['sellprice']>=500 && $mail_row2['sellprice']<=1000){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
                                                     Dear $mail_row3[username],
                                                 </p>".$format2."<ul>
                                                                     <li><strong>Title:</strong> $mail_row2[bookname]</li>
@@ -4635,23 +3343,23 @@
                                                                     <li><strong>Name:</strong> $mail_row4[username]</li>
                                                                     <li><strong>Email:</strong> $mail_row4[email]</li>
                                                                 </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND bookcondition='all' AND genre='all' AND priceRange='500To1000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
                                 }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='below500')";
-                                mysqli_query($conn,$mail_sql4);
-                            }
-                        }else if($mail_row1['priceRange']=="500To1000"){
-                            if($mail_row2['sellprice']>=500 && $mail_row2['sellprice']<=1000 && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
+                            }else if($mail_row1['priceRange']=="1000To2000"){
+                                if($mail_row2['sellprice']>=1000 && $mail_row2['sellprice']<=2000){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
                                                     Dear $mail_row3[username],
                                                 </p>".$format2."<ul>
                                                                     <li><strong>Title:</strong> $mail_row2[bookname]</li>
@@ -4668,194 +3376,159 @@
                                                                     <li><strong>Name:</strong> $mail_row4[username]</li>
                                                                     <li><strong>Email:</strong> $mail_row4[email]</li>
                                                                 </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND bookcondition='all' AND genre='all' AND priceRange='1000To2000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
                                 }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='500To1000')";
-                                mysqli_query($conn,$mail_sql4);
-                            }
-                        }else if($mail_row1['priceRange']=="1000To2000"){
-                            if($mail_row2['sellprice']>=1000 && $mail_row2['sellprice']<=2000 && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
-                                                    Dear $mail_row3[username],
-                                                </p>".$format2."<ul>
-                                                                    <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                    <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                    <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                    <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                    <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                    <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                                </ul>
-                                                                <h3>
-                                                                    Seller Details:
-                                                                </h3>
-                                                                <ul>
-                                                                    <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                    <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                                </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
+                            }else if($mail_row1['priceRange']=="2000To3000"){
+                                if($mail_row2['sellprice']>=2000 && $mail_row2['sellprice']<=3000){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND bookcondition='all' AND genre='all' AND priceRange='2000To3000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
                                 }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='1000To2000')";
-                                mysqli_query($conn,$mail_sql4);
-                            }
-                        }else if($mail_row1['priceRange']=="2000To3000"){
-                            if($mail_row2['sellprice']>=2000 && $mail_row2['sellprice']<=3000 && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
-                                                    Dear $mail_row3[username],
-                                                </p>".$format2."<ul>
-                                                                    <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                    <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                    <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                    <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                    <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                    <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                                </ul>
-                                                                <h3>
-                                                                    Seller Details:
-                                                                </h3>
-                                                                <ul>
-                                                                    <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                    <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                                </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
+                            }else if($mail_row1['priceRange']=="3000To4000"){
+                                if($mail_row2['sellprice']>=3000 && $mail_row2['sellprice']<=4000){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND bookcondition='all' AND genre='all' AND priceRange='3000To4000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
                                 }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='2000To3000')";
-                                mysqli_query($conn,$mail_sql4);
-                            }
-                        }else if($mail_row1['priceRange']=="3000To4000"){
-                            if($mail_row2['sellprice']>=3000 && $mail_row2['sellprice']<=4000 && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
-                                                    Dear $mail_row3[username],
-                                                </p>".$format2."<ul>
-                                                                    <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                    <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                    <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                    <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                    <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                    <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                                </ul>
-                                                                <h3>
-                                                                    Seller Details:
-                                                                </h3>
-                                                                <ul>
-                                                                    <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                    <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                                </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
+                            }else if($mail_row1['priceRange']=="4000To5000"){
+                                if($mail_row2['sellprice']>=4000 && $mail_row2['sellprice']<=5000){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND bookcondition='all' AND genre='all' AND priceRange='4000To5000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
                                 }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='3000To4000')";
-                                mysqli_query($conn,$mail_sql4);
-                            }
-                        }else if($mail_row1['priceRange']=="4000To5000"){
-                            if($mail_row2['sellprice']>=4000 && $mail_row2['sellprice']<=5000 && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
-                                                    Dear $mail_row3[username],
-                                                </p>".$format2."<ul>
-                                                                    <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                    <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                    <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                    <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                    <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                    <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                                </ul>
-                                                                <h3>
-                                                                    Seller Details:
-                                                                </h3>
-                                                                <ul>
-                                                                    <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                    <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                                </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
+                            }else if($mail_row1['priceRange']=="Above5000"){
+                                if($mail_row2['sellprice']>=5000){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND bookcondition='all' AND genre='all' AND priceRange='Above5000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
                                 }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='4000To5000')";
-                                mysqli_query($conn,$mail_sql4);
-                            }
-                        }else if($mail_row1['priceRange']=="Above5000"){
-                            if($mail_row2['sellprice']>=5000 && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
-                                                    Dear $mail_row3[username],
-                                                </p>".$format2."<ul>
-                                                                    <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                    <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                    <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                    <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                    <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                    <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                                </ul>
-                                                                <h3>
-                                                                    Seller Details:
-                                                                </h3>
-                                                                <ul>
-                                                                    <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                    <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                                </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
-                                }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='Above5000')";
-                                mysqli_query($conn,$mail_sql4);
                             }
                         }
                     }
-                }
-            }else if($mail_row1['bookcondition']=="all"){
-                while($mail_row2=mysqli_fetch_assoc($mail_result2)){
-                    if(strtolower($mail_row1['author'])==strtolower($mail_row2['author']) && strtolower($mail_row1['bookname'])==strtolower($mail_row2['bookname']) && strtolower($mail_row1['publisher'])==strtolower($mail_row2['publisher'])){
-                        if($mail_row1['priceRange']=="below500"){
-                            if($mail_row2['sellprice']<=500 && $mail_row1['genre']==$mail_row2['genre']){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
+                }else if($mail_row1['priceRange']=="all"){
+                    while($mail_row2=mysqli_fetch_assoc($mail_result2)){
+                        if($mail_row1['bookcondition']==$mail_row2['bookcondition'] && $mail_row1['genre']==$mail_row2['genre'] && strtolower($mail_row1['author'])==strtolower($mail_row2['author'])){
+                            $to_email = $mail_row3['email'];
+                            $subject = "Book Notification From Book Pedlar";
+                            $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                            $mail_result4=mysqli_query($conn,$mail_sql4);
+                            $mail_row4=mysqli_fetch_assoc($mail_result4);
+                            $body = $format1."<p>
                                                 Dear $mail_row3[username],
                                             </p>".$format2."<ul>
                                                                 <li><strong>Title:</strong> $mail_row2[bookname]</li>
@@ -4873,22 +3546,263 @@
                                                                 <li><strong>Email:</strong> $mail_row4[email]</li>
                                                             </ul>".$format3;
     
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
-                                }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='below500')";
+                            if(mail($to_email, $subject, $body, $headers)){
+                                echo "Email successfully sent to $to_email...";
+                                $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND priceRange='all' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]')";
                                 mysqli_query($conn,$mail_sql4);
+                            }else{
+                                echo "Email sending failed...";
                             }
-                        }else if($mail_row1['priceRange']=="500To1000"){
-                            if($mail_row2['sellprice']>=500 && $mail_row2['sellprice']<=1000 && $mail_row1['genre']==$mail_row2['genre']){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
+                        }
+                    }
+                }else if($mail_row1['genre']=="all"){
+                    while($mail_row2=mysqli_fetch_assoc($mail_result2)){
+                        if(strtolower($mail_row1['author'])==strtolower($mail_row2['author'])){
+                            if($mail_row1['priceRange']=="below500"){
+                                if($mail_row2['sellprice']<=500 && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='below500')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
+                            }else if($mail_row1['priceRange']=="500To1000"){
+                                if($mail_row2['sellprice']>=500 && $mail_row2['sellprice']<=1000 && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='500To1000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
+                            }else if($mail_row1['priceRange']=="1000To2000"){
+                                if($mail_row2['sellprice']>=1000 && $mail_row2['sellprice']<=2000 && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='1000To2000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
+                            }else if($mail_row1['priceRange']=="2000To3000"){
+                                if($mail_row2['sellprice']>=2000 && $mail_row2['sellprice']<=3000 && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='2000To3000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
+                            }else if($mail_row1['priceRange']=="3000To4000"){
+                                if($mail_row2['sellprice']>=3000 && $mail_row2['sellprice']<=4000 && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='3000To4000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
+                            }else if($mail_row1['priceRange']=="4000To5000"){
+                                if($mail_row2['sellprice']>=4000 && $mail_row2['sellprice']<=5000 && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='4000To5000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
+                            }else if($mail_row1['priceRange']=="Above5000"){
+                                if($mail_row2['sellprice']>=5000 && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='Above5000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }else if($mail_row1['bookcondition']=="all"){
+                    while($mail_row2=mysqli_fetch_assoc($mail_result2)){
+                        if(strtolower($mail_row1['author'])==strtolower($mail_row2['author'])){
+                            if($mail_row1['priceRange']=="below500"){
+                                if($mail_row2['sellprice']<=500 && $mail_row1['genre']==$mail_row2['genre']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
                                                     Dear $mail_row3[username],
                                                 </p>".$format2."<ul>
                                                                     <li><strong>Title:</strong> $mail_row2[bookname]</li>
@@ -4905,260 +3819,569 @@
                                                                     <li><strong>Name:</strong> $mail_row4[username]</li>
                                                                     <li><strong>Email:</strong> $mail_row4[email]</li>
                                                                 </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='below500')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
                                 }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='500To1000')";
-                                mysqli_query($conn,$mail_sql4);
+                            }else if($mail_row1['priceRange']=="500To1000"){
+                                if($mail_row2['sellprice']>=500 && $mail_row2['sellprice']<=1000 && $mail_row1['genre']==$mail_row2['genre']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='500To1000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
+                            }else if($mail_row1['priceRange']=="1000To2000"){
+                                if($mail_row2['sellprice']>=1000 && $mail_row2['sellprice']<=2000 && $mail_row1['genre']==$mail_row2['genre']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='1000To2000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
+                            }else if($mail_row1['priceRange']=="2000To3000"){
+                                if($mail_row2['sellprice']>=2000 && $mail_row2['sellprice']<=3000 && $mail_row1['genre']==$mail_row2['genre']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='2000To3000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
+                            }else if($mail_row1['priceRange']=="3000To4000"){
+                                if($mail_row2['sellprice']>=3000 && $mail_row2['sellprice']<=4000 && $mail_row1['genre']==$mail_row2['genre']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='3000To4000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
+                            }else if($mail_row1['priceRange']=="4000To5000"){
+                                if($mail_row2['sellprice']>=4000 && $mail_row2['sellprice']<=5000 && $mail_row1['genre']==$mail_row2['genre']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='4000To5000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
+                            }else if($mail_row1['priceRange']=="Above5000"){
+                                if($mail_row2['sellprice']>=5000 && $mail_row1['genre']==$mail_row2['genre']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='Above5000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
                             }
-                        }else if($mail_row1['priceRange']=="1000To2000"){
-                            if($mail_row2['sellprice']>=1000 && $mail_row2['sellprice']<=2000 && $mail_row1['genre']==$mail_row2['genre']){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
-                                                    Dear $mail_row3[username],
-                                                </p>".$format2."<ul>
-                                                                    <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                    <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                    <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                    <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                    <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                    <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                                </ul>
-                                                                <h3>
-                                                                    Seller Details:
-                                                                </h3>
-                                                                <ul>
-                                                                    <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                    <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                                </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
+                        }
+                    }
+                }else{
+                    while($mail_row2=mysqli_fetch_assoc($mail_result2)){
+                        if(strtolower($mail_row1['author'])==strtolower($mail_row2['author'])){
+                            if($mail_row1['priceRange']=="below500"){
+                                if($mail_row2['sellprice']<=500 && $mail_row1['genre']==$mail_row2['genre'] && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='below500')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
                                 }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='1000To2000')";
-                                mysqli_query($conn,$mail_sql4);
-                            }
-                        }else if($mail_row1['priceRange']=="2000To3000"){
-                            if($mail_row2['sellprice']>=2000 && $mail_row2['sellprice']<=3000 && $mail_row1['genre']==$mail_row2['genre']){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
-                                                    Dear $mail_row3[username],
-                                                </p>".$format2."<ul>
-                                                                    <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                    <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                    <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                    <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                    <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                    <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                                </ul>
-                                                                <h3>
-                                                                    Seller Details:
-                                                                </h3>
-                                                                <ul>
-                                                                    <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                    <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                                </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
+                            }else if($mail_row1['priceRange']=="500To1000"){
+                                if($mail_row2['sellprice']>=500 && $mail_row2['sellprice']<=1000 && $mail_row1['genre']==$mail_row2['genre'] && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='500To1000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
                                 }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='2000To3000')";
-                                mysqli_query($conn,$mail_sql4);
-                            }
-                        }else if($mail_row1['priceRange']=="3000To4000"){
-                            if($mail_row2['sellprice']>=3000 && $mail_row2['sellprice']<=4000 && $mail_row1['genre']==$mail_row2['genre']){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
-                                                    Dear $mail_row3[username],
-                                                </p>".$format2."<ul>
-                                                                    <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                    <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                    <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                    <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                    <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                    <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                                </ul>
-                                                                <h3>
-                                                                    Seller Details:
-                                                                </h3>
-                                                                <ul>
-                                                                    <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                    <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                                </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
+                            }else if($mail_row1['priceRange']=="1000To2000"){
+                                if($mail_row2['sellprice']>=1000 && $mail_row2['sellprice']<=2000 && $mail_row1['genre']==$mail_row2['genre'] && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='1000To2000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
                                 }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='3000To4000')";
-                                mysqli_query($conn,$mail_sql4);
-                            }
-                        }else if($mail_row1['priceRange']=="4000To5000"){
-                            if($mail_row2['sellprice']>=4000 && $mail_row2['sellprice']<=5000 && $mail_row1['genre']==$mail_row2['genre']){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
-                                                    Dear $mail_row3[username],
-                                                </p>".$format2."<ul>
-                                                                    <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                    <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                    <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                    <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                    <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                    <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                                </ul>
-                                                                <h3>
-                                                                    Seller Details:
-                                                                </h3>
-                                                                <ul>
-                                                                    <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                    <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                                </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
+                            }else if($mail_row1['priceRange']=="2000To3000"){
+                                if($mail_row2['sellprice']>=2000 && $mail_row2['sellprice']<=3000 && $mail_row1['genre']==$mail_row2['genre'] && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='2000To3000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
                                 }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='4000To5000')";
-                                mysqli_query($conn,$mail_sql4);
-                            }
-                        }else if($mail_row1['priceRange']=="Above5000"){
-                            if($mail_row2['sellprice']>=5000 && $mail_row1['genre']==$mail_row2['genre']){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
-                                                    Dear $mail_row3[username],
-                                                </p>".$format2."<ul>
-                                                                    <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                    <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                    <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                    <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                    <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                    <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                                </ul>
-                                                                <h3>
-                                                                    Seller Details:
-                                                                </h3>
-                                                                <ul>
-                                                                    <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                    <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                                </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
+                            }else if($mail_row1['priceRange']=="3000To4000"){
+                                if($mail_row2['sellprice']>=3000 && $mail_row2['sellprice']<=4000 && $mail_row1['genre']==$mail_row2['genre'] && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='3000To4000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
                                 }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='Above5000')";
-                                mysqli_query($conn,$mail_sql4);
+                            }else if($mail_row1['priceRange']=="4000To5000"){
+                                if($mail_row2['sellprice']>=4000 && $mail_row2['sellprice']<=5000 && $mail_row1['genre']==$mail_row2['genre'] && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='4000To5000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
+                            }else if($mail_row1['priceRange']=="Above5000"){
+                                if($mail_row2['sellprice']>=5000 && $mail_row1['genre']==$mail_row2['genre'] && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='Above5000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
                             }
                         }
                     }
                 }
-            }else{
-                while($mail_row2=mysqli_fetch_assoc($mail_result2)){
-                    if(strtolower($mail_row1['author'])==strtolower($mail_row2['author']) && strtolower($mail_row1['bookname'])==strtolower($mail_row2['bookname']) && strtolower($mail_row1['publisher'])==strtolower($mail_row2['publisher'])){
-                        if($mail_row1['priceRange']=="below500"){
-                            if($mail_row2['sellprice']<=500 && $mail_row1['genre']==$mail_row2['genre'] && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
-                                                    Dear $mail_row3[username],
-                                                </p>".$format2."<ul>
-                                                                    <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                    <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                    <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                    <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                    <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                    <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                                </ul>
-                                                                <h3>
-                                                                    Seller Details:
-                                                                </h3>
-                                                                <ul>
-                                                                    <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                    <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                                </ul>".$format3;
+            }else if($mail_row1['bookname']!="No" && $mail_row1['author']!="No" && $mail_row1['publisher']!="No"){
+                if($mail_row1['priceRange']=="all" && $mail_row1['bookcondition']=="all"){
+                    while($mail_row2=mysqli_fetch_assoc($mail_result2)){
+                        if($mail_row1['genre']==$mail_row2['genre'] && strtolower($mail_row1['author'])==strtolower($mail_row2['author']) && strtolower($mail_row1['bookname'])==strtolower($mail_row2['bookname']) && strtolower($mail_row1['publisher'])==strtolower($mail_row2['publisher'])){
+                            $to_email = $mail_row3['email'];
+                            $subject = "Book Pedlar Notification";
+                            $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                            $mail_result4=mysqli_query($conn,$mail_sql4);
+                            $mail_row4=mysqli_fetch_assoc($mail_result4);
+                            $body = $format1."<p>
+                                                Dear $mail_row3[username],
+                                            </p>".$format2."<ul>
+                                                                <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                            </ul>
+                                                            <h3>
+                                                                Seller Details:
+                                                            </h3>
+                                                            <ul>
+                                                                <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                            </ul>".$format3;
     
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
-                                }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='below500')";
+                            if(mail($to_email, $subject, $body, $headers)){
+                                echo "Email successfully sent to $to_email...";
+                                $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND priceRange='all' AND bookcondition='all' AND genre='$mail_row1[genre]')";
                                 mysqli_query($conn,$mail_sql4);
+                            }else{
+                                echo "Email sending failed...";
                             }
-                        }else if($mail_row1['priceRange']=="500To1000"){
-                            if($mail_row2['sellprice']>=500 && $mail_row2['sellprice']<=1000 && $mail_row1['genre']==$mail_row2['genre'] && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
-                                                    Dear $mail_row3[username],
-                                                </p>".$format2."<ul>
-                                                                    <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                    <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                    <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                    <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                    <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                    <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                                </ul>
-                                                                <h3>
-                                                                    Seller Details:
-                                                                </h3>
-                                                                <ul>
-                                                                    <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                    <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                                </ul>".$format3;
+                        }
+                    }
+                }else if($mail_row1['priceRange']=="all" && $mail_row1['genre']=="all"){
+                    while($mail_row2=mysqli_fetch_assoc($mail_result2)){
+                        if($mail_row1['bookcondition']==$mail_row2['bookcondition'] && strtolower($mail_row1['author'])==strtolower($mail_row2['author']) && strtolower($mail_row1['bookname'])==strtolower($mail_row2['bookname']) && strtolower($mail_row1['publisher'])==strtolower($mail_row2['publisher'])){
+                            $to_email = $mail_row3['email'];
+                            $subject = "Book Notification From Book Pedlar";
+                            $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                            $mail_result4=mysqli_query($conn,$mail_sql4);
+                            $mail_row4=mysqli_fetch_assoc($mail_result4);
+                            $body = $format1."<p>
+                                                Dear $mail_row3[username],
+                                            </p>".$format2."<ul>
+                                                                <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                            </ul>
+                                                            <h3>
+                                                                Seller Details:
+                                                            </h3>
+                                                            <ul>
+                                                                <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                            </ul>".$format3;
     
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
-                                }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='500To1000')";
+                            if(mail($to_email, $subject, $body, $headers)){
+                                echo "Email successfully sent to $to_email...";
+                                $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND priceRange='all' AND genre='all' AND bookcondition='$mail_row1[bookcondition]')";
                                 mysqli_query($conn,$mail_sql4);
+                            }else{
+                                echo "Email sending failed...";
                             }
-                        }else if($mail_row1['priceRange']=="1000To2000"){
-                            if($mail_row2['sellprice']>=1000 && $mail_row2['sellprice']<=2000 && $mail_row1['genre']==$mail_row2['genre'] && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
+                        }
+                    }
+                }else if($mail_row1['bookcondition']=="all" && $mail_row1['genre']=="all"){
+                    while($mail_row2=mysqli_fetch_assoc($mail_result2)){
+                        if(strtolower($mail_row1['author'])==strtolower($mail_row2['author']) && strtolower($mail_row1['bookname'])==strtolower($mail_row2['bookname']) && strtolower($mail_row1['publisher'])==strtolower($mail_row2['publisher'])){
+                            if($mail_row1['priceRange']=="below500"){
+                                if($mail_row2['sellprice']<=500){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND bookcondition='all' AND genre='all' AND priceRange='below500')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
+                            }else if($mail_row1['priceRange']=="500To1000"){
+                                if($mail_row2['sellprice']>=500 && $mail_row2['sellprice']<=1000){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
                                                     Dear $mail_row3[username],
                                                 </p>".$format2."<ul>
                                                                     <li><strong>Title:</strong> $mail_row2[bookname]</li>
@@ -5175,89 +4398,466 @@
                                                                     <li><strong>Name:</strong> $mail_row4[username]</li>
                                                                     <li><strong>Email:</strong> $mail_row4[email]</li>
                                                                 </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND bookcondition='all' AND genre='all' AND priceRange='500To1000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
                                 }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='1000To2000')";
-                                mysqli_query($conn,$mail_sql4);
+                            }else if($mail_row1['priceRange']=="1000To2000"){
+                                if($mail_row2['sellprice']>=1000 && $mail_row2['sellprice']<=2000){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                    Dear $mail_row3[username],
+                                                </p>".$format2."<ul>
+                                                                    <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                    <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                    <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                    <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                    <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                    <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                </ul>
+                                                                <h3>
+                                                                    Seller Details:
+                                                                </h3>
+                                                                <ul>
+                                                                    <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                    <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND bookcondition='all' AND genre='all' AND priceRange='1000To2000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
+                            }else if($mail_row1['priceRange']=="2000To3000"){
+                                if($mail_row2['sellprice']>=2000 && $mail_row2['sellprice']<=3000){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND bookcondition='all' AND genre='all' AND priceRange='2000To3000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
+                            }else if($mail_row1['priceRange']=="3000To4000"){
+                                if($mail_row2['sellprice']>=3000 && $mail_row2['sellprice']<=4000){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND bookcondition='all' AND genre='all' AND priceRange='3000To4000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
+                            }else if($mail_row1['priceRange']=="4000To5000"){
+                                if($mail_row2['sellprice']>=4000 && $mail_row2['sellprice']<=5000){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND bookcondition='all' AND genre='all' AND priceRange='4000To5000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
+                            }else if($mail_row1['priceRange']=="Above5000"){
+                                if($mail_row2['sellprice']>=5000){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND bookcondition='all' AND genre='all' AND priceRange='Above5000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
                             }
-                        }else if($mail_row1['priceRange']=="2000To3000"){
-                            if($mail_row2['sellprice']>=2000 && $mail_row2['sellprice']<=3000 && $mail_row1['genre']==$mail_row2['genre'] && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
-                                                    Dear $mail_row3[username],
-                                                </p>".$format2."<ul>
-                                                                    <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                    <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                    <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                    <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                    <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                    <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                                </ul>
-                                                                <h3>
-                                                                    Seller Details:
-                                                                </h3>
-                                                                <ul>
-                                                                    <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                    <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                                </ul>".$format3;
+                        }
+                    }
+                }else if($mail_row1['priceRange']=="all"){
+                    while($mail_row2=mysqli_fetch_assoc($mail_result2)){
+                        if($mail_row1['bookcondition']==$mail_row2['bookcondition'] && $mail_row1['genre']==$mail_row2['genre'] && strtolower($mail_row1['author'])==strtolower($mail_row2['author']) && strtolower($mail_row1['bookname'])==strtolower($mail_row2['bookname']) && strtolower($mail_row1['publisher'])==strtolower($mail_row2['publisher'])){
+                            $to_email = $mail_row3['email'];
+                            $subject = "Book Notification From Book Pedlar";
+                            $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                            $mail_result4=mysqli_query($conn,$mail_sql4);
+                            $mail_row4=mysqli_fetch_assoc($mail_result4);
+                            $body = $format1."<p>
+                                                Dear $mail_row3[username],
+                                            </p>".$format2."<ul>
+                                                                <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                            </ul>
+                                                            <h3>
+                                                                Seller Details:
+                                                            </h3>
+                                                            <ul>
+                                                                <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                            </ul>".$format3;
     
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
-                                }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='2000To3000')";
+                            if(mail($to_email, $subject, $body, $headers)){
+                                echo "Email successfully sent to $to_email...";
+                                $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND priceRange='all' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]')";
                                 mysqli_query($conn,$mail_sql4);
+                            }else{
+                                echo "Email sending failed...";
                             }
-                        }else if($mail_row1['priceRange']=="3000To4000"){
-                            if($mail_row2['sellprice']>=3000 && $mail_row2['sellprice']<=4000 && $mail_row1['genre']==$mail_row2['genre'] && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
-                                                    Dear $mail_row3[username],
-                                                </p>".$format2."<ul>
-                                                                    <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                    <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                    <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                    <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                    <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                    <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                                </ul>
-                                                                <h3>
-                                                                    Seller Details:
-                                                                </h3>
-                                                                <ul>
-                                                                    <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                    <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                                </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
+                        }
+                    }
+                }else if($mail_row1['genre']=="all"){
+                    while($mail_row2=mysqli_fetch_assoc($mail_result2)){
+                        if(strtolower($mail_row1['author'])==strtolower($mail_row2['author']) && strtolower($mail_row1['bookname'])==strtolower($mail_row2['bookname']) && strtolower($mail_row1['publisher'])==strtolower($mail_row2['publisher'])){
+                            if($mail_row1['priceRange']=="below500"){
+                                if($mail_row2['sellprice']<=500 && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='below500')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
                                 }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='3000To4000')";
-                                mysqli_query($conn,$mail_sql4);
+                            }else if($mail_row1['priceRange']=="500To1000"){
+                                if($mail_row2['sellprice']>=500 && $mail_row2['sellprice']<=1000 && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='500To1000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
+                            }else if($mail_row1['priceRange']=="1000To2000"){
+                                if($mail_row2['sellprice']>=1000 && $mail_row2['sellprice']<=2000 && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='1000To2000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
+                            }else if($mail_row1['priceRange']=="2000To3000"){
+                                if($mail_row2['sellprice']>=2000 && $mail_row2['sellprice']<=3000 && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='2000To3000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
+                            }else if($mail_row1['priceRange']=="3000To4000"){
+                                if($mail_row2['sellprice']>=3000 && $mail_row2['sellprice']<=4000 && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='3000To4000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
+                            }else if($mail_row1['priceRange']=="4000To5000"){
+                                if($mail_row2['sellprice']>=4000 && $mail_row2['sellprice']<=5000 && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='4000To5000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
+                            }else if($mail_row1['priceRange']=="Above5000"){
+                                if($mail_row2['sellprice']>=5000 && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='Above5000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
                             }
-                        }else if($mail_row1['priceRange']=="4000To5000"){
-                            if($mail_row2['sellprice']>=4000 && $mail_row2['sellprice']<=5000 && $mail_row1['genre']==$mail_row2['genre'] && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
+                        }
+                    }
+                }else if($mail_row1['bookcondition']=="all"){
+                    while($mail_row2=mysqli_fetch_assoc($mail_result2)){
+                        if(strtolower($mail_row1['author'])==strtolower($mail_row2['author']) && strtolower($mail_row1['bookname'])==strtolower($mail_row2['bookname']) && strtolower($mail_row1['publisher'])==strtolower($mail_row2['publisher'])){
+                            if($mail_row1['priceRange']=="below500"){
+                                if($mail_row2['sellprice']<=500 && $mail_row1['genre']==$mail_row2['genre']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
                                                     Dear $mail_row3[username],
                                                 </p>".$format2."<ul>
                                                                     <li><strong>Title:</strong> $mail_row2[bookname]</li>
@@ -5274,47 +4874,450 @@
                                                                     <li><strong>Name:</strong> $mail_row4[username]</li>
                                                                     <li><strong>Email:</strong> $mail_row4[email]</li>
                                                                 </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='below500')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
                                 }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='4000To5000')";
-                                mysqli_query($conn,$mail_sql4);
+                            }else if($mail_row1['priceRange']=="500To1000"){
+                                if($mail_row2['sellprice']>=500 && $mail_row2['sellprice']<=1000 && $mail_row1['genre']==$mail_row2['genre']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='500To1000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
+                            }else if($mail_row1['priceRange']=="1000To2000"){
+                                if($mail_row2['sellprice']>=1000 && $mail_row2['sellprice']<=2000 && $mail_row1['genre']==$mail_row2['genre']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='1000To2000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
+                            }else if($mail_row1['priceRange']=="2000To3000"){
+                                if($mail_row2['sellprice']>=2000 && $mail_row2['sellprice']<=3000 && $mail_row1['genre']==$mail_row2['genre']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='2000To3000'))";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
+                            }else if($mail_row1['priceRange']=="3000To4000"){
+                                if($mail_row2['sellprice']>=3000 && $mail_row2['sellprice']<=4000 && $mail_row1['genre']==$mail_row2['genre']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='3000To4000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
+                            }else if($mail_row1['priceRange']=="4000To5000"){
+                                if($mail_row2['sellprice']>=4000 && $mail_row2['sellprice']<=5000 && $mail_row1['genre']==$mail_row2['genre']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='4000To5000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
+                            }else if($mail_row1['priceRange']=="Above5000"){
+                                if($mail_row2['sellprice']>=5000 && $mail_row1['genre']==$mail_row2['genre']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='Above5000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
                             }
-                        }else if($mail_row1['priceRange']=="Above5000"){
-                            if($mail_row2['sellprice']>=5000 && $mail_row1['genre']==$mail_row2['genre'] && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
-                                $to_email = $mail_row3['email'];
-                                $subject = "Book Notification From Book Pedlar";
-                                $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
-                                $mail_result4=mysqli_query($conn,$mail_sql4);
-                                $mail_row4=mysqli_fetch_assoc($mail_result4);
-                                $body = $format1."<p>
-                                                    Dear $mail_row3[username],
-                                                </p>".$format2."<ul>
-                                                                    <li><strong>Title:</strong> $mail_row2[bookname]</li>
-                                                                    <li><strong>Author:</strong> $mail_row2[author]</li>
-                                                                    <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
-                                                                    <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
-                                                                    <li><strong>Genre:</strong> $mail_row2[genre]</li>
-                                                                    <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
-                                                                </ul>
-                                                                <h3>
-                                                                    Seller Details:
-                                                                </h3>
-                                                                <ul>
-                                                                    <li><strong>Name:</strong> $mail_row4[username]</li>
-                                                                    <li><strong>Email:</strong> $mail_row4[email]</li>
-                                                                </ul>".$format3;
-    
-                                if(mail($to_email, $subject, $body, $headers)){
-                                    echo "Email successfully sent to $to_email...";
-                                }else{
-                                    echo "Email sending failed...";
+                        }
+                    }
+                }else{
+                    while($mail_row2=mysqli_fetch_assoc($mail_result2)){
+                        if(strtolower($mail_row1['author'])==strtolower($mail_row2['author']) && strtolower($mail_row1['bookname'])==strtolower($mail_row2['bookname']) && strtolower($mail_row1['publisher'])==strtolower($mail_row2['publisher'])){
+                            if($mail_row1['priceRange']=="below500"){
+                                if($mail_row2['sellprice']<=500 && $mail_row1['genre']==$mail_row2['genre'] && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='below500')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
                                 }
-                                $mail_sql4="DELETE FROM book_notification WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='Above5000')";
-                                mysqli_query($conn,$mail_sql4);
+                            }else if($mail_row1['priceRange']=="500To1000"){
+                                if($mail_row2['sellprice']>=500 && $mail_row2['sellprice']<=1000 && $mail_row1['genre']==$mail_row2['genre'] && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='500To1000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
+                            }else if($mail_row1['priceRange']=="1000To2000"){
+                                if($mail_row2['sellprice']>=1000 && $mail_row2['sellprice']<=2000 && $mail_row1['genre']==$mail_row2['genre'] && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='1000To2000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
+                            }else if($mail_row1['priceRange']=="2000To3000"){
+                                if($mail_row2['sellprice']>=2000 && $mail_row2['sellprice']<=3000 && $mail_row1['genre']==$mail_row2['genre'] && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='2000To3000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
+                            }else if($mail_row1['priceRange']=="3000To4000"){
+                                if($mail_row2['sellprice']>=3000 && $mail_row2['sellprice']<=4000 && $mail_row1['genre']==$mail_row2['genre'] && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='3000To4000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
+                            }else if($mail_row1['priceRange']=="4000To5000"){
+                                if($mail_row2['sellprice']>=4000 && $mail_row2['sellprice']<=5000 && $mail_row1['genre']==$mail_row2['genre'] && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='4000To5000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
+                            }else if($mail_row1['priceRange']=="Above5000"){
+                                if($mail_row2['sellprice']>=5000 && $mail_row1['genre']==$mail_row2['genre'] && $mail_row1['bookcondition']==$mail_row2['bookcondition']){
+                                    $to_email = $mail_row3['email'];
+                                    $subject = "Book Notification From Book Pedlar";
+                                    $mail_sql4="SELECT * FROM user_data WHERE id=$mail_row2[userid]";
+                                    $mail_result4=mysqli_query($conn,$mail_sql4);
+                                    $mail_row4=mysqli_fetch_assoc($mail_result4);
+                                    $body = $format1."<p>
+                                                        Dear $mail_row3[username],
+                                                    </p>".$format2."<ul>
+                                                                        <li><strong>Title:</strong> $mail_row2[bookname]</li>
+                                                                        <li><strong>Author:</strong> $mail_row2[author]</li>
+                                                                        <li><strong>Publisher:</strong> $mail_row2[publisher]</li>
+                                                                        <li><strong>Price:</strong> ₹$mail_row2[sellprice]</li>
+                                                                        <li><strong>Genre:</strong> $mail_row2[genre]</li>
+                                                                        <li><strong>Condition:</strong> $mail_row2[bookcondition]</li>
+                                                                    </ul>
+                                                                    <h3>
+                                                                        Seller Details:
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li><strong>Name:</strong> $mail_row4[username]</li>
+                                                                        <li><strong>Email:</strong> $mail_row4[email]</li>
+                                                                    </ul>".$format3;
+        
+                                    if(mail($to_email, $subject, $body, $headers)){
+                                        echo "Email successfully sent to $to_email...";
+                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='Above5000')";
+                                        mysqli_query($conn,$mail_sql4);
+                                    }else{
+                                        echo "Email sending failed...";
+                                    }
+                                }
                             }
                         }
                     }
