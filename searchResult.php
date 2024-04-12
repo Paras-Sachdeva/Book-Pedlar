@@ -18,6 +18,7 @@
 
             // <!-- Navigation List -->
             if(isset($_SESSION['userid'])){
+                $issetVar=1;
                 echo("<div class='navList'>
                             <a href='dashboard.php' class='linkAni'>Profile</a>
                             <a href='addBook.php' class='linkAni'>Add Book</a>
@@ -82,6 +83,7 @@
                             WHEN publisher='$capitalize_value' THEN 1 else 2 end";
                         }
             }else{
+                $issetVar=0;
                 $userid=0;
                 echo("<div class='navList'>
                             <a href='index.php' class='linkAni'>Home</a>
@@ -375,82 +377,85 @@
             filtersForm.submit();
         });
 
-        // Notify Me Click
-        let signInNotifybtn=document.getElementById("signin-notify-btn");
-        let loginNotifybtn=document.getElementById("login-notify-btn");
-        let notifyBtn=document.getElementById("notify-btn");
-        notifyBtn.addEventListener("click",function(){
-            let content = document.querySelector('.content');
-            let box=document.getElementById("notifyMeBox");
-            var viewportWidth = window.innerWidth;
-            var viewportHeight = window.innerHeight;
-            var centerX = viewportWidth / 2;
-            var centerY = viewportHeight / 2;
-
-            content.classList.add('blur');
-            content.style.pointerEvents = 'none';
-            document.body.style.overflow = 'hidden';
-
-            box.style.display="flex";
-            box.style.flexDirection="column";
-            box.style.transform = 'scale(2)';
-            box.style.position = 'fixed';
-            box.style.left = centerX - box.offsetWidth / 2 + 'px';
-            box.style.top = centerY - box.offsetHeight / 2 + 'px';
-            let closeIcon=document.getElementById("notify-close-icon");
-            closeIcon.addEventListener("click",function(){
-                box.style.display="none";
-                content.classList.remove('blur');
-                content.style.pointerEvents = 'auto';
-                document.body.style.overflow = 'auto';
-            });
-            let notifyCancel=document.getElementById("notify-cancel-btn");
-            notifyCancel.addEventListener("click",function(){
-                box.style.display="none";
-                content.classList.remove('blur');
-                content.style.pointerEvents = 'auto';
-                document.body.style.overflow = 'auto';
-            });
-            let notifyOkay=document.getElementById("notify-okay-btn");
-            notifyOkay.addEventListener("click",function(){
-                let userid = <?php echo json_encode($userid); ?>;
-                let bookName = <?php echo json_encode($bookName_notify); ?>;
-                let authorName = <?php echo json_encode($authorName_notify); ?>;
-                let publisher = <?php echo json_encode($publisher_notify); ?>;
-                let priceRange = "all";
-                let genre = "all"
-                let bookCondition = "all";
-                let jsNotifyMeObj={};
-                jsNotifyMeObj.userid=userid;
-                jsNotifyMeObj.bookName=bookName;
-                jsNotifyMeObj.authorName=authorName;
-                jsNotifyMeObj.publisher=publisher;
-                jsNotifyMeObj.priceRange=priceRange;
-                jsNotifyMeObj.genre=genre;
-                jsNotifyMeObj.bookCondition=bookCondition;
-                console.log(jsNotifyMeObj);
-                $.ajax({
-                    url:"notifyMe.php",
-                    method:"POST",
-                    data:{ jsNotifyMeObj: JSON.stringify(jsNotifyMeObj)},
-                        success:function(response){
-                        console.log(response);
-                    }
+        let issetVar = <?php echo json_encode($issetVar); ?>;
+        if(issetVar==1){
+            // Notify Me Click
+            let notifyBtn=document.getElementById("notify-btn");
+            notifyBtn.addEventListener("click",function(){
+                let content = document.querySelector('.content');
+                let box=document.getElementById("notifyMeBox");
+                var viewportWidth = window.innerWidth;
+                var viewportHeight = window.innerHeight;
+                var centerX = viewportWidth / 2;
+                var centerY = viewportHeight / 2;
+    
+                content.classList.add('blur');
+                content.style.pointerEvents = 'none';
+                document.body.style.overflow = 'hidden';
+    
+                box.style.display="flex";
+                box.style.flexDirection="column";
+                box.style.transform = 'scale(2)';
+                box.style.position = 'fixed';
+                box.style.left = centerX - box.offsetWidth / 2 + 'px';
+                box.style.top = centerY - box.offsetHeight / 2 + 'px';
+                let closeIcon=document.getElementById("notify-close-icon");
+                closeIcon.addEventListener("click",function(){
+                    box.style.display="none";
+                    content.classList.remove('blur');
+                    content.style.pointerEvents = 'auto';
+                    document.body.style.overflow = 'auto';
                 });
-                box.style.display="none";
-                content.classList.remove('blur');
-                content.style.pointerEvents = 'auto';
-                document.body.style.overflow = 'auto';
+                let notifyCancel=document.getElementById("notify-cancel-btn");
+                notifyCancel.addEventListener("click",function(){
+                    box.style.display="none";
+                    content.classList.remove('blur');
+                    content.style.pointerEvents = 'auto';
+                    document.body.style.overflow = 'auto';
+                });
+                let notifyOkay=document.getElementById("notify-okay-btn");
+                notifyOkay.addEventListener("click",function(){
+                    let userid = <?php echo json_encode($userid); ?>;
+                    let bookName = <?php echo json_encode($bookName_notify); ?>;
+                    let authorName = <?php echo json_encode($authorName_notify); ?>;
+                    let publisher = <?php echo json_encode($publisher_notify); ?>;
+                    let priceRange = "all";
+                    let genre = "all"
+                    let bookCondition = "all";
+                    let jsNotifyMeObj={};
+                    jsNotifyMeObj.userid=userid;
+                    jsNotifyMeObj.bookName=bookName;
+                    jsNotifyMeObj.authorName=authorName;
+                    jsNotifyMeObj.publisher=publisher;
+                    jsNotifyMeObj.priceRange=priceRange;
+                    jsNotifyMeObj.genre=genre;
+                    jsNotifyMeObj.bookCondition=bookCondition;
+                    console.log(jsNotifyMeObj);
+                    $.ajax({
+                        url:"notifyMe.php",
+                        method:"POST",
+                        data:{ jsNotifyMeObj: JSON.stringify(jsNotifyMeObj)},
+                            success:function(response){
+                            console.log(response);
+                        }
+                    });
+                    box.style.display="none";
+                    content.classList.remove('blur');
+                    content.style.pointerEvents = 'auto';
+                    document.body.style.overflow = 'auto';
+                });
             });
-        });
-        
-        // Sign Up or Login Click
-        signInNotifybtn.addEventListener("click",function(){
-            window.location.href="signupPage.php";
-        });
-        loginNotifybtn.addEventListener("click",function(){
-            window.location.href="loginPage.php";
-        });
+        }else{
+            // Sign Up or Login Click
+            let signInNotifybtn=document.getElementById("signin-notify-btn");
+            let loginNotifybtn=document.getElementById("login-notify-btn");
+            signInNotifybtn.addEventListener("click",function(){
+                window.location.href="signupPage.php";
+            });
+            loginNotifybtn.addEventListener("click",function(){
+                window.location.href="loginPage.php";
+            });
+        }
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </body>
