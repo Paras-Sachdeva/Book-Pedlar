@@ -600,10 +600,10 @@ a{
     cursor: pointer;
 }
 
-.apply-filters{
+/* .apply-filters{
     display: flex;
     flex-direction: row;
-}
+} */
 
 .user-books{
     width: 60%;
@@ -693,6 +693,19 @@ a{
 
 .price-book h2{
     margin-left: 1rem;
+    color:green;
+    text-decoration:none;
+    display:inline;
+}
+
+.price-book h4{
+    display:inline;
+}
+
+.price-book h6{
+    color:red;
+    text-decoration:line-through;
+    display:inline;
 }
 
 /* addBook.php */
@@ -799,6 +812,14 @@ label{
     cursor: pointer;
     scale: 1.1;
     background-color: darkblue;
+}
+
+.outside-all-books{
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 10rem;
+    padding-right: 10rem;
+    padding-top: 2rem;
 }
 
 .applyFilter{

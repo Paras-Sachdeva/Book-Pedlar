@@ -174,9 +174,9 @@
                                             <h5>Genre</h5> $genre4<br>
                                         </div>
                                         <div class='price-book'>
-                                            <h2 style='color:green;text-decoration:none;display:inline;'>&#x20b9;$sell_price4</h2><br>
-                                            <h6 style='color:red;text-decoration:line-through;display:inline;'>&#x20b9;$actual_price4</h6>
-                                            <h4 style='color:green;display:inline;'>$discount4%</h4><h4 style='display:inline;'>off</h4>
+                                            <h2>&#x20b9;$sell_price4</h2><br>
+                                            <h6>&#x20b9;$actual_price4</h6>
+                                            <h4 style='color:green;'>$discount4%</h4><h4>off</h4>
                                         </div>
                                         <div class='deleteEdit-book'>
                                             <br>

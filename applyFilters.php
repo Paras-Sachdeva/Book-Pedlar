@@ -222,6 +222,7 @@
                             WHEN publisher='$capitalize_value' THEN 1 else 2 end";
                         }
             }else{
+                $userid=0;
                 echo("<div class='navList'>
                             <a href='index.php' class='linkAni'>Home</a>
                             <a href='loginPage.php' class='linkAni'>Create Profile</a>
@@ -363,7 +364,7 @@
                     </div>
             </div>   
         <?php
-            echo("<div class='outside-all-books' style='display: flex;flex-wrap: wrap;padding-left: 10rem;padding-right: 10rem;padding-top: 2rem;'>");
+            echo("<div class='outside-all-books'>");
             if($count>0){
               while($row4=mysqli_fetch_array($query_result)){
                 $book_name4=$row4['bookname'];
@@ -387,12 +388,7 @@
                 }
                 echo("<div class='book-outer' id='book-outer-$book_id4'>
                                 <div class='book-inner1' id='book-$book_id4'></div>
-                                <div class='book-inner2'style='padding: 0.3rem;
-                                width: 50%;
-                                height: 98%;
-                                display: flex;
-                                flex-direction: column;
-                                border-left: 0.3rem solid black;'>
+                                <div class='book-inner2'>
                                     <div class='heading-book' style='text-align:center;'>
                                         <b>\"$book_name4\"</b>
                                     </div>
@@ -402,9 +398,9 @@
                                         <h5>Genre</h5> $genre4<br>
                                     </div>
                                     <div class='price-book'>
-                                        <h2 style='color:green;text-decoration:none;display:inline;'>&#x20b9;$sell_price4</h2><br>
-                                        <h6 style='color:red;text-decoration:line-through;display:inline;'>&#x20b9;$actual_price4</h6>
-                                        <h4 style='color:green;display:inline;'>$discount4%</h4><h4 style='display:inline;'>off</h4>
+                                        <h2>&#x20b9;$sell_price4</h2><br>
+                                        <h6>&#x20b9;$actual_price4</h6>
+                                        <h4 style='color:green;'>$discount4%</h4><h4>off</h4>
                                     </div> 
                                 </div>
                             </div>");
