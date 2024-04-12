@@ -15,6 +15,6 @@
     $result1=mysqli_query($conn, $sql1);
     
     if(mysqli_num_rows($result1)==0){
-        $sql2="INSERT INTO book_notification (userid, bookname, author, publisher, priceRange, bookcondition, genre) VALUES ($jsNotifyMeObj->userid, '$jsNotifyMeObj->bookName', '$jsNotifyMeObj->authorName', '$jsNotifyMeObj->publisher', '$jsNotifyMeObj->priceRange', '$jsNotifyMeObj->bookCondition', '$jsNotifyMeObj->genre')";
+        $sql2="INSERT INTO book_notification (userid, bookname, author, publisher, priceRange, bookcondition, genre, email, bookid) VALUES ($jsNotifyMeObj->userid, '$jsNotifyMeObj->bookName', '$jsNotifyMeObj->authorName', '$jsNotifyMeObj->publisher', '$jsNotifyMeObj->priceRange', '$jsNotifyMeObj->bookCondition', '$jsNotifyMeObj->genre', 0, 0)";
         mysqli_query($conn,$sql2);
     }
