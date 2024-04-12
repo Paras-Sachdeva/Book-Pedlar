@@ -90,10 +90,10 @@
                         }else{
                             $Final_distance=$Final_distance."kms away";
                         }
-                        echo("<div class='search-results'>$book_name7</div><div class='outside-book-info' style='width=100%;padding-bottom:5em;display: flex;flex-wrap: wrap;padding-left: 10rem;padding-right: 10rem;padding-top: 2rem;justify-content:space-around'>");
-                        echo("<div id='book-photo-alone' style='width: 272px;height:320px;margin-top:2rem;border:0.6rem solid black;'></div>
+                        echo("<div class='search-results'>$book_name7</div><div class='outside-book-info'>");
+                        echo("<div id='book-photo-alone'></div>
                         <div id='book-full-info'>
-                            <h2 style='text-decoration:none;'>Book Details</h2><br>
+                            <h2>Book Details</h2><br>
                             <ul>
                                 <li>Author: <b>$author7</b></li><br>
                                 <li>Publisher: <b>$publisher7</b></li><br>
@@ -110,14 +110,14 @@
                             </div>
                         </div>");
                         if($_GET['again']==0){
-                            echo("<div id='book-seller-info' style='padding-left:70px'>
-                                        <div>
-                                            <h2 style='text-align:left;margin-left:3.5rem;text-decoration:none'>Seller</h2>
+                            echo("<div id='book-seller-info'>
+                                        <div id='seller-text'>
+                                            <h2>Seller</h2>
                                             <br>
                                         </div>
-                                        <div id='seller-pic' style='margin-top: 0.5rem;margin-left:1.5rem;height: 8.75rem;width: 8.75rem;border: 0.2rem solid black;border-radius: 50%;background-color: black; background-image:url('Images/ProfileImg.jpg'); background-size: 140px 140px;'>
+                                        <div id='seller-pic'>
                                         </div>
-                                        <div style='margin-top:2rem;line-height:1rem;align-self:baseline;'>
+                                        <div id='seller-info-text'>
                                             <ul>
                                                 <li>Username: <b>$seller_username9</b></li><br>
                                                 <li>Email: <b>$seller_email9</b></li><br>

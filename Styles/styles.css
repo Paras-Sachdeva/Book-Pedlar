@@ -696,7 +696,6 @@ a{
 }
 
 /* addBook.php */
-
 .container{
     width: 80%;
     max-width: 400px;
@@ -859,6 +858,54 @@ label{
 
 .book-info-buttons:hover{
     scale: 1.1;
+}
+
+.outside-book-info{
+    padding-bottom:5em;
+    display: flex;
+    padding-left: 10rem;
+    padding-right: 10rem;
+    padding-top: 2rem;
+    justify-content:space-evenly;
+}
+
+#book-photo-alone{
+    width: 272px;
+    height:320px;
+    margin-top:2rem;
+    border:0.6rem solid black;
+}
+
+#book-full-info{
+    max-width:20rem; 
+    margin-left:8rem;
+}
+
+#book-seller-info{
+    padding-left: 70px;
+}
+
+#seller-pic{
+    margin-top: 0.5rem;
+    margin-left:1.5rem;
+    height: 8.75rem;
+    width: 8.75rem;
+    border: 0.2rem solid black;
+    border-radius: 50%;background-color: black; 
+    background-image:url('Images/ProfileImg.jpg'); 
+    background-size: 140px 140px;
+}
+
+#seller-text h2{
+    text-align: left;
+    margin-left: 3.5rem;
+    text-decoration: none;
+}
+
+#seller-info-text{
+    margin-top:2rem;
+    line-height:1rem;
+    align-self:baseline;
 }
 
 /* messages.php */
