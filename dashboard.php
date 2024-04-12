@@ -99,7 +99,7 @@
                 if(mysqli_num_rows($result2)>0){            
                     echo("<div class='outside-notifications'>
                                 <div class='notifications'>
-                                    <H2>NOTIFICATIONS</H2>
+                                    <H2>USER NOTIFICATIONS</H2>
                                 </div>
                                 <div class='new-notification'>");
                     $i=0;

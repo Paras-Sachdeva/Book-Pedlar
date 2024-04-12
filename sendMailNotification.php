@@ -83,7 +83,7 @@
     
                             if(mail($to_email, $subject, $body, $headers)){
                                 echo "Email successfully sent to $to_email...";
-                                $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND priceRange='all' AND bookcondition='all' AND genre='$mail_row1[genre]')";
+                                $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND priceRange='all' AND bookcondition='all' AND genre='$mail_row1[genre]')";
                                 mysqli_query($conn,$mail_sql4);
                             }else{
                                 echo "Email sending failed...";
@@ -118,7 +118,7 @@
     
                             if(mail($to_email, $subject, $body, $headers)){
                                 echo "Email successfully sent to $to_email...";
-                                $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND priceRange='all' AND genre='all' AND bookcondition='$mail_row1[bookcondition]')";
+                                $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND priceRange='all' AND genre='all' AND bookcondition='$mail_row1[bookcondition]')";
                                 mysqli_query($conn,$mail_sql4);
                             }else{
                                 echo "Email sending failed...";
@@ -154,7 +154,7 @@
     
                                 if(mail($to_email, $subject, $body, $headers)){
                                     echo "Email successfully sent to $to_email...";
-                                    $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND bookcondition='all' AND genre='all' AND priceRange='below500')";
+                                    $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND bookcondition='all' AND genre='all' AND priceRange='below500')";
                                     mysqli_query($conn,$mail_sql4);
                                     
                                 }else{
@@ -188,7 +188,7 @@
     
                                 if(mail($to_email, $subject, $body, $headers)){
                                     echo "Email successfully sent to $to_email...";
-                                    $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND bookcondition='all' AND genre='all' AND priceRange='500To1000')";
+                                    $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND bookcondition='all' AND genre='all' AND priceRange='500To1000')";
                                     mysqli_query($conn,$mail_sql4);
                                 }else{
                                     echo "Email sending failed...";
@@ -221,7 +221,7 @@
     
                                 if(mail($to_email, $subject, $body, $headers)){
                                     echo "Email successfully sent to $to_email...";
-                                    $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND bookcondition='all' AND genre='all' AND priceRange='1000To2000')";
+                                    $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND bookcondition='all' AND genre='all' AND priceRange='1000To2000')";
                                     mysqli_query($conn,$mail_sql4);
                                 }else{
                                     echo "Email sending failed...";
@@ -254,7 +254,7 @@
     
                                 if(mail($to_email, $subject, $body, $headers)){
                                     echo "Email successfully sent to $to_email...";
-                                    $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND bookcondition='all' AND genre='all' AND priceRange='2000To3000')";
+                                    $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND bookcondition='all' AND genre='all' AND priceRange='2000To3000')";
                                     mysqli_query($conn,$mail_sql4);
                                 }else{
                                     echo "Email sending failed...";
@@ -287,7 +287,7 @@
     
                                 if(mail($to_email, $subject, $body, $headers)){
                                     echo "Email successfully sent to $to_email...";
-                                    $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND bookcondition='all' AND genre='all' AND priceRange='3000To4000')";
+                                    $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND bookcondition='all' AND genre='all' AND priceRange='3000To4000')";
                                     mysqli_query($conn,$mail_sql4);
                                 }else{
                                     echo "Email sending failed...";
@@ -320,7 +320,7 @@
     
                                 if(mail($to_email, $subject, $body, $headers)){
                                     echo "Email successfully sent to $to_email...";
-                                    $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND bookcondition='all' AND genre='all' AND priceRange='4000To5000')";
+                                    $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND bookcondition='all' AND genre='all' AND priceRange='4000To5000')";
                                     mysqli_query($conn,$mail_sql4);
                                 }else{
                                     echo "Email sending failed...";
@@ -353,7 +353,7 @@
     
                                 if(mail($to_email, $subject, $body, $headers)){
                                     echo "Email successfully sent to $to_email...";
-                                    $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND bookcondition='all' AND genre='all' AND priceRange='Above5000')";
+                                    $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND bookcondition='all' AND genre='all' AND priceRange='Above5000')";
                                     mysqli_query($conn,$mail_sql4);
                                 }else{
                                     echo "Email sending failed...";
@@ -389,7 +389,7 @@
     
                             if(mail($to_email, $subject, $body, $headers)){
                                 echo "Email successfully sent to $to_email...";
-                                $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND priceRange='all' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]')";
+                                $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND priceRange='all' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]')";
                                 mysqli_query($conn,$mail_sql4);
                             }else{
                                 echo "Email sending failed...";
@@ -425,7 +425,7 @@
     
                                 if(mail($to_email, $subject, $body, $headers)){
                                     echo "Email successfully sent to $to_email...";
-                                    $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='below500')";
+                                    $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='below500')";
                                     mysqli_query($conn,$mail_sql4);
                                 }else{
                                     echo "Email sending failed...";
@@ -458,7 +458,7 @@
     
                                 if(mail($to_email, $subject, $body, $headers)){
                                     echo "Email successfully sent to $to_email...";
-                                    $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='500To1000')";
+                                    $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='500To1000')";
                                     mysqli_query($conn,$mail_sql4);
                                 }else{
                                     echo "Email sending failed...";
@@ -491,7 +491,7 @@
     
                                 if(mail($to_email, $subject, $body, $headers)){
                                     echo "Email successfully sent to $to_email...";
-                                    $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='1000To2000')";
+                                    $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='1000To2000')";
                                     mysqli_query($conn,$mail_sql4);
                                 }else{
                                     echo "Email sending failed...";
@@ -524,7 +524,7 @@
     
                                 if(mail($to_email, $subject, $body, $headers)){
                                     echo "Email successfully sent to $to_email...";
-                                    $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='2000To3000')";
+                                    $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='2000To3000')";
                                     mysqli_query($conn,$mail_sql4);
                                 }else{
                                     echo "Email sending failed...";
@@ -557,7 +557,7 @@
     
                                 if(mail($to_email, $subject, $body, $headers)){
                                     echo "Email successfully sent to $to_email...";
-                                    $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='3000To4000')";
+                                    $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='3000To4000')";
                                     mysqli_query($conn,$mail_sql4);
                                 }else{
                                     echo "Email sending failed...";
@@ -590,7 +590,7 @@
     
                                 if(mail($to_email, $subject, $body, $headers)){
                                     echo "Email successfully sent to $to_email...";
-                                    $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='4000To5000')";
+                                    $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='4000To5000')";
                                     mysqli_query($conn,$mail_sql4);
                                 }else{
                                     echo "Email sending failed...";
@@ -623,7 +623,7 @@
     
                                 if(mail($to_email, $subject, $body, $headers)){
                                     echo "Email successfully sent to $to_email...";
-                                    $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='Above5000')";
+                                    $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='Above5000')";
                                     mysqli_query($conn,$mail_sql4);
                                 }else{
                                     echo "Email sending failed...";
@@ -660,7 +660,7 @@
     
                                 if(mail($to_email, $subject, $body, $headers)){
                                     echo "Email successfully sent to $to_email...";
-                                    $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='below500')";
+                                    $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='below500')";
                                     mysqli_query($conn,$mail_sql4);
                                 }else{
                                     echo "Email sending failed...";
@@ -693,7 +693,7 @@
     
                                 if(mail($to_email, $subject, $body, $headers)){
                                     echo "Email successfully sent to $to_email...";
-                                    $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='500To1000')";
+                                    $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='500To1000')";
                                     mysqli_query($conn,$mail_sql4);
                                 }else{
                                     echo "Email sending failed...";
@@ -726,7 +726,7 @@
     
                                 if(mail($to_email, $subject, $body, $headers)){
                                     echo "Email successfully sent to $to_email...";
-                                    $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='1000To2000')";
+                                    $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='1000To2000')";
                                     mysqli_query($conn,$mail_sql4);
                                 }else{
                                     echo "Email sending failed...";
@@ -759,7 +759,7 @@
     
                                 if(mail($to_email, $subject, $body, $headers)){
                                     echo "Email successfully sent to $to_email...";
-                                    $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='2000To3000')";
+                                    $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='2000To3000')";
                                     mysqli_query($conn,$mail_sql4);
                                 }else{
                                     echo "Email sending failed...";
@@ -792,7 +792,7 @@
     
                                 if(mail($to_email, $subject, $body, $headers)){
                                     echo "Email successfully sent to $to_email...";
-                                    $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='3000To4000')";
+                                    $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='3000To4000')";
                                     mysqli_query($conn,$mail_sql4);
                                 }else{
                                     echo "Email sending failed...";
@@ -825,7 +825,7 @@
     
                                 if(mail($to_email, $subject, $body, $headers)){
                                     echo "Email successfully sent to $to_email...";
-                                    $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='4000To5000')";
+                                    $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='4000To5000')";
                                     mysqli_query($conn,$mail_sql4);
                                 }else{
                                     echo "Email sending failed...";
@@ -858,7 +858,7 @@
     
                                 if(mail($to_email, $subject, $body, $headers)){
                                     echo "Email successfully sent to $to_email...";
-                                    $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='Above5000')";
+                                    $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='Above5000')";
                                     mysqli_query($conn,$mail_sql4);
                                 }else{
                                     echo "Email sending failed...";
@@ -895,7 +895,7 @@
     
                                 if(mail($to_email, $subject, $body, $headers)){
                                     echo "Email successfully sent to $to_email...";
-                                    $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='below500')";
+                                    $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='below500')";
                                     mysqli_query($conn,$mail_sql4);
                                 }else{
                                     echo "Email sending failed...";
@@ -928,7 +928,7 @@
     
                                 if(mail($to_email, $subject, $body, $headers)){
                                     echo "Email successfully sent to $to_email...";
-                                    $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='500To1000')";
+                                    $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='500To1000')";
                                     mysqli_query($conn,$mail_sql4);
                                 }else{
                                     echo "Email sending failed...";
@@ -961,7 +961,7 @@
     
                                 if(mail($to_email, $subject, $body, $headers)){
                                     echo "Email successfully sent to $to_email...";
-                                    $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='1000To2000')";
+                                    $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='1000To2000')";
                                     mysqli_query($conn,$mail_sql4);
                                 }else{
                                     echo "Email sending failed...";
@@ -994,7 +994,7 @@
     
                                 if(mail($to_email, $subject, $body, $headers)){
                                     echo "Email successfully sent to $to_email...";
-                                    $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='2000To3000')";
+                                    $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='2000To3000')";
                                     mysqli_query($conn,$mail_sql4);
                                 }else{
                                     echo "Email sending failed...";
@@ -1027,7 +1027,7 @@
     
                                 if(mail($to_email, $subject, $body, $headers)){
                                     echo "Email successfully sent to $to_email...";
-                                    $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='3000To4000')";
+                                    $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='3000To4000')";
                                     mysqli_query($conn,$mail_sql4);
                                 }else{
                                     echo "Email sending failed...";
@@ -1060,7 +1060,7 @@
     
                                 if(mail($to_email, $subject, $body, $headers)){
                                     echo "Email successfully sent to $to_email...";
-                                    $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='4000To5000')";
+                                    $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='4000To5000')";
                                     mysqli_query($conn,$mail_sql4);
                                 }else{
                                     echo "Email sending failed...";
@@ -1093,7 +1093,7 @@
     
                                 if(mail($to_email, $subject, $body, $headers)){
                                     echo "Email successfully sent to $to_email...";
-                                    $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='Above5000')";
+                                    $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='All' AND author='All' AND publisher='All' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='Above5000')";
                                     mysqli_query($conn,$mail_sql4);
                                 }else{
                                     echo "Email sending failed...";
@@ -1131,7 +1131,7 @@
     
                             if(mail($to_email, $subject, $body, $headers)){
                                 echo "Email successfully sent to $to_email...";
-                                $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND priceRange='all' AND bookcondition='all' AND genre='$mail_row1[genre]')";
+                                $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND priceRange='all' AND bookcondition='all' AND genre='$mail_row1[genre]')";
                                         mysqli_query($conn,$mail_sql4);
                             }else{
                                 echo "Email sending failed...";
@@ -1166,7 +1166,7 @@
     
                             if(mail($to_email, $subject, $body, $headers)){
                                 echo "Email successfully sent to $to_email...";
-                                $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND priceRange='all' AND genre='all' AND bookcondition='$mail_row1[bookcondition]')";
+                                $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND priceRange='all' AND genre='all' AND bookcondition='$mail_row1[bookcondition]')";
                                         mysqli_query($conn,$mail_sql4);
                             }else{
                                 echo "Email sending failed...";
@@ -1203,7 +1203,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND bookcondition='all' AND genre='all' AND priceRange='below500')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND bookcondition='all' AND genre='all' AND priceRange='below500')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -1236,7 +1236,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND bookcondition='all' AND genre='all' AND priceRange='500To1000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND bookcondition='all' AND genre='all' AND priceRange='500To1000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -1269,7 +1269,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND bookcondition='all' AND genre='all' AND priceRange='1000To2000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND bookcondition='all' AND genre='all' AND priceRange='1000To2000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -1302,7 +1302,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND bookcondition='all' AND genre='all' AND priceRange='2000To3000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND bookcondition='all' AND genre='all' AND priceRange='2000To3000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -1335,7 +1335,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND bookcondition='all' AND genre='all' AND priceRange='3000To4000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND bookcondition='all' AND genre='all' AND priceRange='3000To4000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -1368,7 +1368,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND bookcondition='all' AND genre='all' AND priceRange='4000To5000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND bookcondition='all' AND genre='all' AND priceRange='4000To5000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -1401,7 +1401,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND bookcondition='all' AND genre='all' AND priceRange='Above5000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND bookcondition='all' AND genre='all' AND priceRange='Above5000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -1438,7 +1438,7 @@
     
                             if(mail($to_email, $subject, $body, $headers)){
                                 echo "Email successfully sent to $to_email...";
-                                $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND priceRange='all' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]')";
+                                $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND priceRange='all' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]')";
                                         mysqli_query($conn,$mail_sql4);
                             }else{
                                 echo "Email sending failed...";
@@ -1475,7 +1475,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='below500')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='below500')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -1508,7 +1508,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='500To1000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='500To1000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -1541,7 +1541,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='1000To2000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='1000To2000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -1574,7 +1574,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='2000To3000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='2000To3000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -1607,7 +1607,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='3000To4000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='3000To4000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -1640,7 +1640,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='4000To5000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='4000To5000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -1673,7 +1673,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='Above5000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='Above5000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -1712,7 +1712,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='below500')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='below500')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -1745,7 +1745,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='500To1000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='500To1000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -1778,7 +1778,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='1000To2000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='1000To2000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -1811,7 +1811,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='2000To3000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='2000To3000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -1844,7 +1844,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='3000To4000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='3000To4000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -1877,7 +1877,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='4000To5000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='4000To5000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -1910,7 +1910,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='Above5000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='Above5000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -1949,7 +1949,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='below500')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='below500')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -1982,7 +1982,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='500To1000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='500To1000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -2015,7 +2015,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='1000To2000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='1000To2000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -2048,7 +2048,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='2000To3000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='2000To3000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -2081,7 +2081,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='3000To4000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='3000To4000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -2114,7 +2114,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='4000To5000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='4000To5000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -2147,7 +2147,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='Above5000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='No' AND author='No' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='Above5000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -2186,7 +2186,7 @@
     
                             if(mail($to_email, $subject, $body, $headers)){
                                 echo "Email successfully sent to $to_email...";
-                                $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND priceRange='all' AND bookcondition='all' AND genre='$mail_row1[genre]')";
+                                $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND priceRange='all' AND bookcondition='all' AND genre='$mail_row1[genre]')";
                                 mysqli_query($conn,$mail_sql4);
                             }else{
                                 echo "Email sending failed...";
@@ -2221,7 +2221,7 @@
     
                             if(mail($to_email, $subject, $body, $headers)){
                                 echo "Email successfully sent to $to_email...";
-                                $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND priceRange='all' AND genre='all' AND bookcondition='$mail_row1[bookcondition]')";
+                                $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND priceRange='all' AND genre='all' AND bookcondition='$mail_row1[bookcondition]')";
                                 mysqli_query($conn,$mail_sql4);
                             }else{
                                 echo "Email sending failed...";
@@ -2258,7 +2258,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND bookcondition='all' AND genre='all' AND priceRange='below500')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND bookcondition='all' AND genre='all' AND priceRange='below500')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -2291,7 +2291,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND bookcondition='all' AND genre='all' AND priceRange='500To1000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND bookcondition='all' AND genre='all' AND priceRange='500To1000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -2324,7 +2324,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND bookcondition='all' AND genre='all' AND priceRange='1000To2000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND bookcondition='all' AND genre='all' AND priceRange='1000To2000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -2357,7 +2357,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND bookcondition='all' AND genre='all' AND priceRange='2000To3000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND bookcondition='all' AND genre='all' AND priceRange='2000To3000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -2390,7 +2390,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND bookcondition='all' AND genre='all' AND priceRange='3000To4000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND bookcondition='all' AND genre='all' AND priceRange='3000To4000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -2423,7 +2423,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND bookcondition='all' AND genre='all' AND priceRange='4000To5000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND bookcondition='all' AND genre='all' AND priceRange='4000To5000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -2456,7 +2456,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND bookcondition='all' AND genre='all' AND priceRange='Above5000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND bookcondition='all' AND genre='all' AND priceRange='Above5000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -2493,7 +2493,7 @@
     
                             if(mail($to_email, $subject, $body, $headers)){
                                 echo "Email successfully sent to $to_email...";
-                                $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND priceRange='all' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]')";
+                                $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND priceRange='all' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]')";
                                 mysqli_query($conn,$mail_sql4);
                             }else{
                                 echo "Email sending failed...";
@@ -2530,7 +2530,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='below500')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='below500')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -2563,7 +2563,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='500To1000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='500To1000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -2596,7 +2596,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='1000To2000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='1000To2000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -2629,7 +2629,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='2000To3000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='2000To3000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -2662,7 +2662,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='3000To4000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='3000To4000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -2695,7 +2695,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='4000To5000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='4000To5000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -2728,7 +2728,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='Above5000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='Above5000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -2767,7 +2767,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='below500')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='below500')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -2800,7 +2800,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='500To1000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='500To1000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -2833,7 +2833,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='1000To2000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='1000To2000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -2866,7 +2866,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='2000To3000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='2000To3000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -2899,7 +2899,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='3000To4000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='3000To4000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -2932,7 +2932,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='4000To5000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='4000To5000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -2965,7 +2965,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='Above5000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='Above5000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -3004,7 +3004,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='below500')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='below500')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -3037,7 +3037,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='500To1000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='500To1000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -3070,7 +3070,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='1000To2000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='1000To2000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -3103,7 +3103,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='2000To3000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='2000To3000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -3136,7 +3136,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='3000To4000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='3000To4000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -3169,7 +3169,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='4000To5000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='4000To5000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -3202,7 +3202,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='Above5000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND bookname='$mail_row1[bookname]' AND author='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='Above5000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -3241,7 +3241,7 @@
     
                             if(mail($to_email, $subject, $body, $headers)){
                                 echo "Email successfully sent to $to_email...";
-                                $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND priceRange='all' AND bookcondition='all' AND genre='$mail_row1[genre]')";
+                                $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND priceRange='all' AND bookcondition='all' AND genre='$mail_row1[genre]')";
                                 mysqli_query($conn,$mail_sql4);
                             }else{
                                 echo "Email sending failed...";
@@ -3276,7 +3276,7 @@
     
                             if(mail($to_email, $subject, $body, $headers)){
                                 echo "Email successfully sent to $to_email...";
-                                $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND priceRange='all' AND genre='all' AND bookcondition='$mail_row1[bookcondition]')";
+                                $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND priceRange='all' AND genre='all' AND bookcondition='$mail_row1[bookcondition]')";
                                 mysqli_query($conn,$mail_sql4);
                             }else{
                                 echo "Email sending failed...";
@@ -3313,7 +3313,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND bookcondition='all' AND genre='all' AND priceRange='below500')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND bookcondition='all' AND genre='all' AND priceRange='below500')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -3346,7 +3346,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND bookcondition='all' AND genre='all' AND priceRange='500To1000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND bookcondition='all' AND genre='all' AND priceRange='500To1000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -3379,7 +3379,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND bookcondition='all' AND genre='all' AND priceRange='1000To2000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND bookcondition='all' AND genre='all' AND priceRange='1000To2000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -3412,7 +3412,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND bookcondition='all' AND genre='all' AND priceRange='2000To3000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND bookcondition='all' AND genre='all' AND priceRange='2000To3000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -3445,7 +3445,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND bookcondition='all' AND genre='all' AND priceRange='3000To4000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND bookcondition='all' AND genre='all' AND priceRange='3000To4000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -3478,7 +3478,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND bookcondition='all' AND genre='all' AND priceRange='4000To5000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND bookcondition='all' AND genre='all' AND priceRange='4000To5000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -3511,7 +3511,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND bookcondition='all' AND genre='all' AND priceRange='Above5000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND bookcondition='all' AND genre='all' AND priceRange='Above5000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -3548,7 +3548,7 @@
     
                             if(mail($to_email, $subject, $body, $headers)){
                                 echo "Email successfully sent to $to_email...";
-                                $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND priceRange='all' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]')";
+                                $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND priceRange='all' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]')";
                                 mysqli_query($conn,$mail_sql4);
                             }else{
                                 echo "Email sending failed...";
@@ -3585,7 +3585,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='below500')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='below500')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -3618,7 +3618,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='500To1000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='500To1000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -3651,7 +3651,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='1000To2000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='1000To2000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -3684,7 +3684,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='2000To3000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='2000To3000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -3717,7 +3717,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='3000To4000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='3000To4000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -3750,7 +3750,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='4000To5000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='4000To5000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -3783,7 +3783,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='Above5000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='Above5000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -3822,7 +3822,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='below500')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='below500')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -3855,7 +3855,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='500To1000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='500To1000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -3888,7 +3888,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='1000To2000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='1000To2000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -3921,7 +3921,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='2000To3000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='2000To3000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -3954,7 +3954,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='3000To4000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='3000To4000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -3987,7 +3987,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='4000To5000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='4000To5000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -4020,7 +4020,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='Above5000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='Above5000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -4059,7 +4059,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='below500')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='below500')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -4092,7 +4092,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='500To1000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='500To1000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -4125,7 +4125,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='1000To2000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='1000To2000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -4158,7 +4158,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='2000To3000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='2000To3000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -4191,7 +4191,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='3000To4000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='3000To4000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -4224,7 +4224,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='4000To5000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='4000To5000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -4257,7 +4257,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='Above5000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='No' AND publisher='No' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='Above5000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -4296,7 +4296,7 @@
     
                             if(mail($to_email, $subject, $body, $headers)){
                                 echo "Email successfully sent to $to_email...";
-                                $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND priceRange='all' AND bookcondition='all' AND genre='$mail_row1[genre]')";
+                                $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND priceRange='all' AND bookcondition='all' AND genre='$mail_row1[genre]')";
                                 mysqli_query($conn,$mail_sql4);
                             }else{
                                 echo "Email sending failed...";
@@ -4331,7 +4331,7 @@
     
                             if(mail($to_email, $subject, $body, $headers)){
                                 echo "Email successfully sent to $to_email...";
-                                $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND priceRange='all' AND genre='all' AND bookcondition='$mail_row1[bookcondition]')";
+                                $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND priceRange='all' AND genre='all' AND bookcondition='$mail_row1[bookcondition]')";
                                 mysqli_query($conn,$mail_sql4);
                             }else{
                                 echo "Email sending failed...";
@@ -4368,7 +4368,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND bookcondition='all' AND genre='all' AND priceRange='below500')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND bookcondition='all' AND genre='all' AND priceRange='below500')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -4401,7 +4401,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND bookcondition='all' AND genre='all' AND priceRange='500To1000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND bookcondition='all' AND genre='all' AND priceRange='500To1000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -4434,7 +4434,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND bookcondition='all' AND genre='all' AND priceRange='1000To2000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND bookcondition='all' AND genre='all' AND priceRange='1000To2000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -4467,7 +4467,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND bookcondition='all' AND genre='all' AND priceRange='2000To3000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND bookcondition='all' AND genre='all' AND priceRange='2000To3000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -4500,7 +4500,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND bookcondition='all' AND genre='all' AND priceRange='3000To4000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND bookcondition='all' AND genre='all' AND priceRange='3000To4000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -4533,7 +4533,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND bookcondition='all' AND genre='all' AND priceRange='4000To5000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND bookcondition='all' AND genre='all' AND priceRange='4000To5000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -4566,7 +4566,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND bookcondition='all' AND genre='all' AND priceRange='Above5000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND bookcondition='all' AND genre='all' AND priceRange='Above5000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -4603,7 +4603,7 @@
     
                             if(mail($to_email, $subject, $body, $headers)){
                                 echo "Email successfully sent to $to_email...";
-                                $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND priceRange='all' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]')";
+                                $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND priceRange='all' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]')";
                                 mysqli_query($conn,$mail_sql4);
                             }else{
                                 echo "Email sending failed...";
@@ -4640,7 +4640,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='below500')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='below500')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -4673,7 +4673,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='500To1000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='500To1000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -4706,7 +4706,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='1000To2000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='1000To2000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -4739,7 +4739,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='2000To3000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='2000To3000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -4772,7 +4772,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='3000To4000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='3000To4000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -4805,7 +4805,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='4000To5000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='4000To5000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -4838,7 +4838,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='Above5000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND bookcondition='$mail_row1[bookcondition]' AND genre='all' AND priceRange='Above5000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -4877,7 +4877,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='below500')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='below500')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -4910,7 +4910,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='500To1000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='500To1000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -4943,7 +4943,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='1000To2000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='1000To2000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -4976,7 +4976,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='2000To3000'))";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='2000To3000'))";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -5009,7 +5009,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='3000To4000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='3000To4000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -5042,7 +5042,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='4000To5000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='4000To5000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -5075,7 +5075,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='Above5000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='all' AND priceRange='Above5000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -5114,7 +5114,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='below500')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='below500')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -5147,7 +5147,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='500To1000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='500To1000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -5180,7 +5180,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='1000To2000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='1000To2000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -5213,7 +5213,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='2000To3000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='2000To3000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -5246,7 +5246,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='3000To4000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='3000To4000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -5279,7 +5279,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='4000To5000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='4000To5000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
@@ -5312,7 +5312,7 @@
         
                                     if(mail($to_email, $subject, $body, $headers)){
                                         echo "Email successfully sent to $to_email...";
-                                        $mail_sql4="UPDATE book_notification SET email=1 WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='Above5000')";
+                                        $mail_sql4="UPDATE book_notification SET email=1, bookid=$mail_row2[id] WHERE (userid='$mail_row1[userid]' AND author='$mail_row1[author]' AND bookname='$mail_row1[bookname]' AND publisher='$mail_row1[publisher]' AND genre='$mail_row1[genre]' AND bookcondition='$mail_row1[bookcondition]' AND priceRange='Above5000')";
                                         mysqli_query($conn,$mail_sql4);
                                     }else{
                                         echo "Email sending failed...";
