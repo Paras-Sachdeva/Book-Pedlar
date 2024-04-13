@@ -160,7 +160,12 @@
                         echo(" <div class='notify' id='book-$k'>
                                 <div class='book-pic-small' id='book-pic-$k'>
                                 </div>");
-                        echo("<div class='notification-content'><b>\"$row8[bookname]\", $row8[author] ($row8[genre])</b></div></div>");
+                        echo("<div class='notification-content'>
+                                    <span class='content-bookname'><b>$row8[bookname]</b></span>
+                                    <span class='content-author'> $row8[author]</span>
+                                    <span class='content-genre'> ($row8[genre])</span>
+                                </div>
+                            </div>");
                         array_push($book_arr1,$row8['photo']);
                         array_push($book_arr5,$row8['bookname']);
                         array_push($book_arr6,$row10['username']);

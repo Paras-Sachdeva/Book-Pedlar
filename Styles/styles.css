@@ -426,10 +426,12 @@ a{
     width: 5rem;
     height: 5rem;
     border: 0.2rem solid black;
+    flex-shrink: 0;
 }
 
 .interested-book-name{
     margin-left: 0.5rem;
+    max-width: 18rem;
 }
 
 .notify-btns{
@@ -564,6 +566,7 @@ a{
     display: flex;
     flex-direction: row;
     align-items: center;
+    overflow-y: hidden;
 }
 
 .notify:hover{
@@ -573,7 +576,15 @@ a{
 
 .notification-content{
     margin-left: 1rem;
-    /* padding: 0.5rem; */
+    max-height: 3rem;
+    overflow: hidden;
+}
+
+.content-bookname, .content-author, .content-genre{
+    display: inline-block;
+    text-overflow: clip;
+    max-width: 15rem;
+    white-space: nowrap;
 }
 
 .small-buyer-pic{
