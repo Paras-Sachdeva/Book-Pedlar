@@ -354,7 +354,7 @@ a{
     filter: blur(5px);
 }
 
-.box{
+.box, .box2{
     display: none;
     border: 0.1rem solid black;
     font-family: 'roboto', sans-serif;
@@ -371,11 +371,11 @@ a{
     cursor: pointer;
 }
 
-#notify-head{
+.notify-head{
     display:flex;
 }
 
-#notify-text{
+.notify-text{
     padding:1rem;
     margin-left:7rem;
 }
@@ -389,13 +389,13 @@ a{
     scale: 0.9;
 }
 
-#notify-content{
+.notify-content{
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-#user-interested{
+.user-interested{
     display: flex;
     align-items: center;
     flex-grow: 0;
@@ -412,12 +412,12 @@ a{
     margin-left: 0.5rem;
 }
 
-#interested-text{
+.interested-text{
     margin: 1rem;
     flex-shrink: 0;
 }
 
-#interested-book{
+.interested-book{
     display: flex;
     align-items: center;
 }
@@ -580,6 +580,12 @@ a{
     width:3.5rem;
     height:3.5rem;
     border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.book-pic-small{
+    width:3.5rem;
+    height:3.5rem;
     flex-shrink: 0;
 }
 

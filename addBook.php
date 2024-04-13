@@ -31,7 +31,7 @@
         <form action="book_process.php" method="post" enctype="multipart/form-data" id="book-form">
             <!-- Book Picture Input -->
             <label for="bookPicture">Book Picture:</label>
-            <input type="file" id="bookPicture" name="bookPicture" accept=".jpg, .jpeg, .png, .gif" class="book-input">
+            <input type="file" id="bookPicture" name="bookPicture" accept=".jpg, .jpeg, .png, .gif" class="book-input" required>
 
             <!-- Book Name Input -->
             <label for="bookName">Book Name:</label>

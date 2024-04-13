@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Pedlar - User Profile</title>
     <link rel="icon" href="Images/Icon.png" type="image/x-icon">
-    <link rel="stylesheet" href="Styles/styles.css?v=2">
+    <link rel="stylesheet" href="Styles/styles.css?v=20">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
@@ -133,6 +133,43 @@
                                 </div>");
                         $i++;
                     }
+                    echo("</div>");
+                }
+                $book_arr1=array();
+                $book_arr2=array();
+                $book_arr3=array();
+                $book_arr4=array();
+                $book_arr5=array();
+                $book_arr6=array();
+                $book_arr7=array();
+                $sql7="SELECT * FROM book_notification WHERE (userid='$userid' && email=1)";
+                $result7=mysqli_query($conn,$sql7);
+                if(mysqli_num_rows($result7)>0){
+                    echo("<div class='notifications'>
+                                <H2>BOOK NOTIFICATIONS</H2>
+                            </div>
+                            <div class='new-notification'>");
+                    $k=0;
+                    while($row7=mysqli_fetch_assoc($result7)){
+                        $sql8="SELECT * FROM book_data WHERE id=$row7[bookid]";
+                        $result8=mysqli_query($conn,$sql8);
+                        $row8=mysqli_fetch_assoc($result8);
+                        $sql10="SELECT * FROM user_data WHERE id=$row8[userid]";
+                        $result10=mysqli_query($conn,$sql10);
+                        $row10=mysqli_fetch_assoc($result10);
+                        echo(" <div class='notify' id='book-$k'>
+                                <div class='book-pic-small' id='book-pic-$k'>
+                                </div>");
+                        echo("<div class='notification-content'><b>\"$row8[bookname]\", $row8[author] ($row8[genre])</b></div></div>");
+                        array_push($book_arr1,$row8['photo']);
+                        array_push($book_arr5,$row8['bookname']);
+                        array_push($book_arr6,$row10['username']);
+                        array_push($book_arr7,$row10['profileImage']);
+                        array_push($book_arr2,$k);
+                        array_push($book_arr3,$row8['id']);
+                        array_push($book_arr4,$row7['id']);
+                        $k++;
+                    }
                     echo("</div></div>");
                 }
             ?>
@@ -212,19 +249,19 @@
             while($row6=mysqli_fetch_assoc($result6)){
         ?>
             <div class="box" id="<?php echo($j.'j'); ?>">
-                <div id="notify-head">
-                    <div id="notify-text"><h4>NOTIFICATION</h4></div>
+                <div class="notify-head">
+                    <div class="notify-text"><h4>NOTIFICATION</h4></div>
                     <div class="notify-close-icon" id="<?php echo('j'.$j); ?>">
                         <i class="fa-solid fa-square-xmark close-icon" title="Close Notification"></i>
                     </div>
                 </div>
-                <div id="notify-content">
-                    <div id="user-interested">
+                <div class="notify-content">
+                    <div class="user-interested">
                         <div class="user-interested-pic" id="<?php echo($j.'0'); ?>"></div>
                         <div class="user-interested-name" id="<?php echo($j.'1'); ?>"><h6>Sample Name</h6></div>
                     </div>
-                    <div id="interested-text"><p style="font-size:0.85rem;">Is looking forward to buy your Book</p></div>
-                    <div id="interested-book">
+                    <div class="interested-text"><p style="font-size:0.85rem;">Is looking forward to buy your Book</p></div>
+                    <div class="interested-book">
                         <div class="interested-book-pic" id="<?php echo($j.'2'); ?>"></div>
                         <div class="interested-book-name" id="<?php echo($j.'3'); ?>"><h6>Sample Book Name</h6></div>
                     </div>
@@ -234,284 +271,296 @@
                     <button class="notify-btn-delete" id="<?php echo('DelBtn'.$j); ?>">Delete Notification</button>                    
                 </div>
             </div>
-        <?php
+            <?php
                 $j++;
             }
             mysqli_close($conn);
-        ?>
+            ?>
         <!-- JavaScript -->
-        <script>
-            // Upload Profile Photo
-            let jsCheckPhoto = <?php echo json_encode($uploadedFileName); ?>;
-            console.log(jsCheckPhoto);
-            if(jsCheckPhoto!=''){    
-                let uploading=document.getElementById("picture");
-                uploading.style.backgroundImage="url('Uploads/"+jsCheckPhoto+"')";
-                uploading.style.backgroundSize="300px 300px";
-            }else{
-                let uploading=document.getElementById("picture");
-                uploading.style.backgroundImage="url('Images/ProfileImg.jpg')";
-                uploading.style.backgroundSize="300px 300px";
+    <script>
+        // Upload Profile Photo
+        let jsCheckPhoto = <?php echo json_encode($uploadedFileName); ?>;
+        console.log(jsCheckPhoto);
+        if(jsCheckPhoto!=''){    
+            let uploading=document.getElementById("picture");
+            uploading.style.backgroundImage="url('Uploads/"+jsCheckPhoto+"')";
+            uploading.style.backgroundSize="300px 300px";
+        }else{
+            let uploading=document.getElementById("picture");
+            uploading.style.backgroundImage="url('Images/ProfileImg.jpg')";
+            uploading.style.backgroundSize="300px 300px";
+        }
+
+        // Upload User Book Photos
+        let jsphoto=<?php echo json_encode($arr1); ?>;
+        let jsphotoid=<?php echo json_encode($arr2); ?>;
+        let jssoldphoto=<?php echo json_encode($arr3); ?>;
+        console.log(jsphoto);
+        console.log(jsphotoid);
+        for(let i=0;i<jsphoto.length;i++){
+            let jsupload=document.getElementById("book-"+jsphotoid[i]);
+            console.log(jsupload);
+            jsupload.style.backgroundImage="url('Uploads/"+jsphoto[i]+"')";
+            jsupload.style.backgroundSize="280px 325px";    
+            if(jssoldphoto[i]==true){
+                jsupload.innerHTML="<img src='Images/sold-rubber-stamp-free-png.webp' height='320px' width='280px'>";
             }
+        }
 
-            // Upload User Book Photos
-            let jsphoto=<?php echo json_encode($arr1); ?>;
-            let jsphotoid=<?php echo json_encode($arr2); ?>;
-            let jssoldphoto=<?php echo json_encode($arr3); ?>;
-            console.log(jsphoto);
-            console.log(jsphotoid);
-            for(let i=0;i<jsphoto.length;i++){
-                let jsupload=document.getElementById("book-"+jsphotoid[i]);
-                console.log(jsupload);
-                jsupload.style.backgroundImage="url('Uploads/"+jsphoto[i]+"')";
-                jsupload.style.backgroundSize="280px 325px";    
-                if(jssoldphoto[i]==true){
-                    jsupload.innerHTML="<img src='Images/sold-rubber-stamp-free-png.webp' height='320px' width='280px'>";
-                }
+        // Get User Coordinates
+        let userId=<?php echo json_encode($userid); ?>;
+        navigator.geolocation.getCurrentPosition((position)=>{
+        let latitude=position.coords.latitude;
+        let longitude=position.coords.longitude;
+        console.log(latitude+"  "+longitude);
+        let jsObject1={};
+        jsObject1.lati=latitude;
+        jsObject1.longi=longitude;
+        jsObject1.id=userId;
+        $.ajax({
+            url:"coordinates.php",
+            method:"POST",
+            data:{ jsObject1: JSON.stringify(jsObject1)},
+            success:function(response){
+                console.log(response);
             }
+        });
 
-            // Get User Coordinates
-            let userId=<?php echo json_encode($userid); ?>;
-            navigator.geolocation.getCurrentPosition((position)=>{
-            let latitude=position.coords.latitude;
-            let longitude=position.coords.longitude;
-            console.log(latitude+"  "+longitude);
-            let jsObject1={};
-            jsObject1.lati=latitude;
-            jsObject1.longi=longitude;
-            jsObject1.id=userId;
-            $.ajax({
-                url:"coordinates.php",
-                method:"POST",
-                data:{ jsObject1: JSON.stringify(jsObject1)},
-                success:function(response){
-                    console.log(response);
-                }
-            });
+        // Get User Location Details
+        function getPlaceDetails(latitude, longitude) {
+            const apiUrl = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`;
+            let placeDetailsDisplay = document.getElementById("place-details");
+            fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                if (data && data.address) {
+                    const city = data.address.city || data.address.village || data.address.town;
+                    const state = data.address.state;
+                    const country = data.address.country;
+                    let placeDetails = '';
 
-            // Get User Location Details
-            function getPlaceDetails(latitude, longitude) {
-                const apiUrl = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`;
-                let placeDetailsDisplay = document.getElementById("place-details");
-                fetch(apiUrl)
-                .then(response => response.json())
-                .then(data => {
-                    if (data && data.address) {
-                        const city = data.address.city || data.address.village || data.address.town;
-                        const state = data.address.state;
-                        const country = data.address.country;
-                        let placeDetails = '';
-
-                        if (city) {
-                            placeDetails += `City: ${city}`;
-                        }
-
-                        if (state) {
-                            placeDetails += (placeDetails ? ', ' : '') + `State: ${state}`;
-                        }
-
-                        if (country) {
-                            placeDetails += (placeDetails ? ', ' : '') + `Country: ${country}`;
-                        }
-                        //const placeDetails = `City(${city || 'N/A'}), State(${state || 'N/A'}), Country(${country || 'N/A'})`;
-                        placeDetailsDisplay.innerText="Location \n"+placeDetails;
-                    } else {
-                        document.getElementById('result').textContent = 'Unable to fetch place details.';
+                    if (city) {
+                        placeDetails += `City: ${city}`;
                     }
-                })
-                .catch(error => {
-                    console.error('Error fetching place details:', error);
-                });
-            }
-            getPlaceDetails(latitude,longitude);
-            });
-        </script>
 
-        <script src="JS/script.js"></script>
+                    if (state) {
+                        placeDetails += (placeDetails ? ', ' : '') + `State: ${state}`;
+                    }
 
-        <script>
-            // Open Book Form Page
-            document.addEventListener("DOMContentLoaded", function() {
-                var openPageButton = document.getElementById("openPageButton");
-                openPageButton.addEventListener("click", function() {
-                    window.location.href = "addBook.php";
-                });
-            });
-
-            // Remove a Book
-            let removebookbtn=document.getElementsByClassName("remove-book");
-            for(let i=0; i<removebookbtn.length;i++){
-                removebookbtn[i].addEventListener("click",function() {
-                    let jsbookid=removebookbtn[i].getAttribute("id");
-                    console.log("Book id to remove:"+jsbookid);
-                    let jsObject={};
-                    jsObject.id=jsbookid;
-                    $.ajax({
-                        url:"removeBook.php",
-                        method:"POST",
-                        data:{ jsObject: JSON.stringify(jsObject)},
-                        success:function(response){
-                            console.log(response);
-                        }
-                    });
-                    setTimeout(function(){
-                        location.reload()},2500);
-                });
-            }
-
-            // Edit Book Details
-            let editbookbtn=document.getElementsByClassName("edit-book");
-            for(let i=0; i<editbookbtn.length;i++){
-                editbookbtn[i].addEventListener("click",function() {
-                    let jsbookid=editbookbtn[i].getAttribute("id");
-                    console.log("Book id to edit:"+jsbookid);
-                    let newjsbookid = jsbookid.substring(0, jsbookid.length - 1);
-                    console.log("Book id to edit:"+newjsbookid);
-                    window.location.href = "editBook.php?id="+newjsbookid;
-                });
-            }
-
-            // Upload Notification Pics
-            let jsSmallPhoto=<?php echo json_encode($arr4); ?>;
-            let jsSmallSenderId=<?php echo json_encode($arr5); ?>;
-            for(let i=0;i<jsSmallPhoto.length;i++){
-                let jsSmallPhotoTag=document.getElementById(jsSmallSenderId[i]+'-'+i);
-                let userNotifyPic=document.getElementById(i+"0");
-                if(jsSmallPhoto[i]!=''){    
-                    jsSmallPhotoTag.style.backgroundImage="url('Uploads/"+jsSmallPhoto[i]+"')";
-                    jsSmallPhotoTag.style.backgroundSize="56px 56px";
-                    userNotifyPic.style.backgroundImage="url('Uploads/"+jsSmallPhoto[i]+"')";
-                    userNotifyPic.style.backgroundSize="80px 80px";
-                }else{
-                    jsSmallPhotoTag.style.backgroundImage="url('Images/ProfileImg.jpg')";
-                    jsSmallPhotoTag.style.backgroundSize="56px 56px";
-                    userNotifyPic.style.backgroundImage="url('Images/ProfileImg.jpg')";
-                    userNotifyPic.style.backgroundSize="80px 80px";
+                    if (country) {
+                        placeDetails += (placeDetails ? ', ' : '') + `Country: ${country}`;
+                    }
+                    //const placeDetails = `City(${city || 'N/A'}), State(${state || 'N/A'}), Country(${country || 'N/A'})`;
+                    placeDetailsDisplay.innerText="Location \n"+placeDetails;
+                } else {
+                    document.getElementById('result').textContent = 'Unable to fetch place details.';
                 }
-            }
+            })
+            .catch(error => {
+                console.error('Error fetching place details:', error);
+            });
+        }
+        getPlaceDetails(latitude,longitude);
+        });
+    </script>
 
-            // Notification Click Event
-            let jsNotifyClick = <?php echo json_encode($arr6); ?>;
-            let jsNotifyId = <?php echo json_encode($arr7); ?>;
-            let bookNotifyNames=<?php echo json_encode($arr8); ?>;
-            let userNotifyNames=<?php echo json_encode($arr9); ?>;
-            let bookNotifyPics=<?php echo json_encode($arr10); ?>;
+    <script src="JS/script.js"></script>
 
-            let content = document.querySelector('.content');
-            for(let i=0; i<jsNotifyId.length;i++){
-                let jsNotifyBar=document.getElementById(jsNotifyId[i]);
+    <script>
+        // Open Book Form Page
+        document.addEventListener("DOMContentLoaded", function() {
+            var openPageButton = document.getElementById("openPageButton");
+            openPageButton.addEventListener("click", function() {
+                window.location.href = "addBook.php";
+            });
+        });
 
-                let userNotifyName=document.getElementById(i+"1");
-                let bookNotifyName=document.getElementById(i+"3");
-                let bookNotifyPic=document.getElementById(i+"2");
-
-                let box=document.getElementById(i+"j");
-
-                jsNotifyBar.addEventListener("click",function(event){
-                    console.log(i);
-                    var viewportWidth = window.innerWidth;
-                    var viewportHeight = window.innerHeight;
-                    var centerX = viewportWidth / 2;
-                    var centerY = viewportHeight / 2;
-
-                    content.classList.add('blur');
-                    content.style.pointerEvents = 'none';
-                    document.body.style.overflow = 'hidden';
-
-                    box.style.display="flex";
-                    box.style.flexDirection="column";
-                    box.style.transform = 'scale(2)';
-                    box.style.position = 'fixed';
-                    box.style.left = centerX - box.offsetWidth / 2 + 'px';
-                    box.style.top = centerY - box.offsetHeight / 2 + 'px';
-                    userNotifyName.innerHTML="<h6>"+userNotifyNames[i]+"</h6>";
-                    bookNotifyName.innerHTML="<h6>"+bookNotifyNames[i]+"</h6>";
-                    bookNotifyPic.style.backgroundImage="url('Uploads/"+bookNotifyPics[i]+"')";
-                    bookNotifyPic.style.backgroundSize="80px 80px";
-                }); 
-                let closeIcon=document.getElementById("j"+i);
-                closeIcon.addEventListener("click",function(){
-                    box.style.display="none";
-                    content.classList.remove('blur');
-                    content.style.pointerEvents = 'auto';
-                    document.body.style.overflow = 'auto';
+        // Remove a Book
+        let removebookbtn=document.getElementsByClassName("remove-book");
+        for(let i=0; i<removebookbtn.length;i++){
+            removebookbtn[i].addEventListener("click",function() {
+                let jsbookid=removebookbtn[i].getAttribute("id");
+                console.log("Book id to remove:"+jsbookid);
+                let jsObject={};
+                jsObject.id=jsbookid;
+                $.ajax({
+                    url:"removeBook.php",
+                    method:"POST",
+                    data:{ jsObject: JSON.stringify(jsObject)},
+                    success:function(response){
+                        console.log(response);
+                    }
                 });
+                setTimeout(function(){
+                    location.reload()},2500);
+            });
+        }
 
-                // Notification Delete Button
-                let notifyDelIds = <?php echo json_encode($arr11); ?>;
-                let DelBtn=document.getElementById("DelBtn"+i);
-                DelBtn.addEventListener("click",function(){
-                    console.log("Delete Button Pressed");
-                    let jsNotifyObject={};
-                    jsNotifyObject.id=notifyDelIds[i];
-                    $.ajax({
-                        url:"deleteNotification.php",
-                        method:"POST",
-                        data:{ jsNotifyObject: JSON.stringify(jsNotifyObject)},
-                        success:function(response){
-                            console.log(response);
-                        }
-                    });
-                    setTimeout(function(){
-                        location.reload()},2000);
-                });
+        // Edit Book Details
+        let editbookbtn=document.getElementsByClassName("edit-book");
+        for(let i=0; i<editbookbtn.length;i++){
+            editbookbtn[i].addEventListener("click",function() {
+                let jsbookid=editbookbtn[i].getAttribute("id");
+                console.log("Book id to edit:"+jsbookid);
+                let newjsbookid = jsbookid.substring(0, jsbookid.length - 1);
+                console.log("Book id to edit:"+newjsbookid);
+                window.location.href = "editBook.php?id="+newjsbookid;
+            });
+        }
 
-                // Notification Approve Button
-                let senderid = <?php echo json_encode($userid); ?>;
-                let bookAuthors = <?php echo json_encode($arr12); ?>;
-                let userNotifyIds = <?php echo json_encode($arr13); ?>;
-                let BookIds = <?php echo json_encode($arr14); ?>;
-                let ApproveBtn=document.getElementById("ApproveBtn"+i);
-                ApproveBtn.addEventListener("click",function(){
-                    let notifyBox=document.getElementById(i);
-                    notifyBox.style.backgroundColor="Green";
-                    let jsNotifyObject2={};
-                    jsNotifyObject2.senderid=senderid;
-                    jsNotifyObject2.recieverid=userNotifyIds[i];
-                    jsNotifyObject2.bookName=bookNotifyNames[i];
-                    jsNotifyObject2.bookAuthor=bookAuthors[i];
-                    jsNotifyObject2.bookId=BookIds[i];
-                    $.ajax({
-                        url:"approveMessage.php",
-                        method:"POST",
-                        data:{ jsNotifyObject2: JSON.stringify(jsNotifyObject2)},
-                        success:function(response){
-                            console.log(response);
-                        }
-                    });
-                    setTimeout(function(){
-                        location.reload();
-                        alert("Check Messages for Further Updates");
-                    },2000);
-                });
-            }
-
-            // Alert for No Messages
-            var queryParams = new URLSearchParams(window.location.search);
-            var myVariable = queryParams.get('noMessages');
-            if(myVariable=='y'){
-                alert("You Have No Messages Yet");
-                var urlParams = new URLSearchParams(window.location.search);
-                urlParams.delete('noMessages');
-                window.history.replaceState({}, '', `${window.location.pathname}?${urlParams}`);
-            }  
-
-            // Delete Account Button
-            let jsSessionDel=<?php echo json_encode($delId); ?>;
-            let delAccBtn=document.getElementById("delete-account");
-            if(jsSessionDel==0){
-                delAccBtn.addEventListener("click",function(){
-                    alert("Press Delete Account Again to Confirm");
-                    window.location.href="dashboard.php?DelId=1";
-                });
+        // Upload Notification Pics
+        let jsSmallPhoto=<?php echo json_encode($arr4); ?>;
+        let jsSmallSenderId=<?php echo json_encode($arr5); ?>;
+        for(let i=0;i<jsSmallPhoto.length;i++){
+            let jsSmallPhotoTag=document.getElementById(jsSmallSenderId[i]+'-'+i);
+            let userNotifyPic=document.getElementById(i+"0");
+            if(jsSmallPhoto[i]!=''){    
+                jsSmallPhotoTag.style.backgroundImage="url('Uploads/"+jsSmallPhoto[i]+"')";
+                jsSmallPhotoTag.style.backgroundSize="56px 56px";
+                userNotifyPic.style.backgroundImage="url('Uploads/"+jsSmallPhoto[i]+"')";
+                userNotifyPic.style.backgroundSize="80px 80px";
             }else{
-                setTimeout(() => {
-                    window.location.href="dashboard.php?DelId=0";
-                }, 25000);
-                delAccBtn.addEventListener("click",function(){
-                    window.location.href="deleteAccount.php";
-                });
+                jsSmallPhotoTag.style.backgroundImage="url('Images/ProfileImg.jpg')";
+                jsSmallPhotoTag.style.backgroundSize="56px 56px";
+                userNotifyPic.style.backgroundImage="url('Images/ProfileImg.jpg')";
+                userNotifyPic.style.backgroundSize="80px 80px";
             }
+        }
+
+        // User Notification Click Event
+        let jsNotifyClick = <?php echo json_encode($arr6); ?>;
+        let jsNotifyId = <?php echo json_encode($arr7); ?>;
+        let bookNotifyNames=<?php echo json_encode($arr8); ?>;
+        let userNotifyNames=<?php echo json_encode($arr9); ?>;
+        let bookNotifyPics=<?php echo json_encode($arr10); ?>;
+
+        let content = document.querySelector('.content');
+        for(let i=0; i<jsNotifyId.length;i++){
+            let jsNotifyBar=document.getElementById(jsNotifyId[i]);
+
+            let userNotifyName=document.getElementById(i+"1");
+            let bookNotifyName=document.getElementById(i+"3");
+            let bookNotifyPic=document.getElementById(i+"2");
+
+            let box=document.getElementById(i+"j");
+
+            jsNotifyBar.addEventListener("click",function(event){
+                console.log(i);
+                var viewportWidth = window.innerWidth;
+                var viewportHeight = window.innerHeight;
+                var centerX = viewportWidth / 2;
+                var centerY = viewportHeight / 2;
+
+                content.classList.add('blur');
+                content.style.pointerEvents = 'none';
+                document.body.style.overflow = 'hidden';
+
+                box.style.display="flex";
+                box.style.flexDirection="column";
+                box.style.transform = 'scale(2)';
+                box.style.position = 'fixed';
+                box.style.left = centerX - box.offsetWidth / 2 + 'px';
+                box.style.top = centerY - box.offsetHeight / 2 + 'px';
+                userNotifyName.innerHTML="<h6>"+userNotifyNames[i]+"</h6>";
+                bookNotifyName.innerHTML="<h6>"+bookNotifyNames[i]+"</h6>";
+                bookNotifyPic.style.backgroundImage="url('Uploads/"+bookNotifyPics[i]+"')";
+                bookNotifyPic.style.backgroundSize="80px 80px";
+            }); 
+            let closeIcon=document.getElementById("j"+i);
+            closeIcon.addEventListener("click",function(){
+                box.style.display="none";
+                content.classList.remove('blur');
+                content.style.pointerEvents = 'auto';
+                document.body.style.overflow = 'auto';
+            });
+
+            // Notification Delete Button
+            let notifyDelIds = <?php echo json_encode($arr11); ?>;
+            let DelBtn=document.getElementById("DelBtn"+i);
+            DelBtn.addEventListener("click",function(){
+                console.log("Delete Button Pressed");
+                let jsNotifyObject={};
+                jsNotifyObject.id=notifyDelIds[i];
+                $.ajax({
+                    url:"deleteNotification.php",
+                    method:"POST",
+                    data:{ jsNotifyObject: JSON.stringify(jsNotifyObject)},
+                    success:function(response){
+                        console.log(response);
+                    }
+                });
+                setTimeout(function(){
+                    location.reload()},2000);
+            });
+
+            // Notification Approve Button
+            let senderid = <?php echo json_encode($userid); ?>;
+            let bookAuthors = <?php echo json_encode($arr12); ?>;
+            let userNotifyIds = <?php echo json_encode($arr13); ?>;
+            let BookIds = <?php echo json_encode($arr14); ?>;
+            let ApproveBtn=document.getElementById("ApproveBtn"+i);
+            ApproveBtn.addEventListener("click",function(){
+                let notifyBox=document.getElementById(i);
+                notifyBox.style.backgroundColor="Green";
+                let jsNotifyObject2={};
+                jsNotifyObject2.senderid=senderid;
+                jsNotifyObject2.recieverid=userNotifyIds[i];
+                jsNotifyObject2.bookName=bookNotifyNames[i];
+                jsNotifyObject2.bookAuthor=bookAuthors[i];
+                jsNotifyObject2.bookId=BookIds[i];
+                $.ajax({
+                    url:"approveMessage.php",
+                    method:"POST",
+                    data:{ jsNotifyObject2: JSON.stringify(jsNotifyObject2)},
+                    success:function(response){
+                        console.log(response);
+                    }
+                });
+                setTimeout(function(){
+                    location.reload();
+                    alert("Check Messages for Further Updates");
+                },2000);
+            });
+        }
+
+        // Alert for No Messages
+        var queryParams = new URLSearchParams(window.location.search);
+        var myVariable = queryParams.get('noMessages');
+        if(myVariable=='y'){
+            alert("You Have No Messages Yet");
+            var urlParams = new URLSearchParams(window.location.search);
+            urlParams.delete('noMessages');
+            window.history.replaceState({}, '', `${window.location.pathname}?${urlParams}`);
+        }  
+
+        // Delete Account Button
+        let jsSessionDel=<?php echo json_encode($delId); ?>;
+        let delAccBtn=document.getElementById("delete-account");
+        if(jsSessionDel==0){
+            delAccBtn.addEventListener("click",function(){
+                alert("Press Delete Account Again to Confirm");
+                window.location.href="dashboard.php?DelId=1";
+            });
+        }else{
+            setTimeout(() => {
+                window.location.href="dashboard.php?DelId=0";
+            }, 25000);
+            delAccBtn.addEventListener("click",function(){
+                window.location.href="deleteAccount.php";
+            });
+        }
+
+        // Upload Book Notification Pics
+        let jsSmallBookPics=<?php echo json_encode($book_arr1); ?>;
+        for(let i=0;i<jsSmallBookPics.length;i++){
+            let jsSmallBookTag=document.getElementById("book-pic-"+i);
+            let BookNotifyPic=document.getElementById(i+"2Box2");
+            jsSmallBookTag.style.backgroundImage="url('Uploads/"+jsSmallBookPics[i]+"')";
+            jsSmallBookTag.style.backgroundSize="56px 56px";
+            jsSmallBookTag.style.border="0.1rem solid black";
+            BookNotifyPic.style.backgroundImage="url('Uploads/"+jsSmallBookPics[i]+"')";
+            BookNotifyPic.style.backgroundSize="80px 80px";
+        }
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </body>

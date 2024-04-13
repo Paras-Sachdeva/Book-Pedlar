@@ -275,13 +275,13 @@
             echo("</div>");
 ?>
         <div class="box" id="notifyMeBox" style="height: auto;">
-            <div id="notify-head">
-                <div id="notify-text"><h4>NOTIFY YOU?</h4></div>
+            <div class="notify-head">
+                <div class="notify-text"><h4>NOTIFY YOU?</h4></div>
                 <div class="notify-close-icon" id="notify-close-icon">
                     <i class="fa-solid fa-square-xmark close-icon" title="Close Notification"></i>
                 </div>
             </div>
-            <div id="notify-content">
+            <div class="notify-content">
                 <div class="notify-ques">
                     <h6>Do you want to be Notified when the following Book Description becomes Available?</h6>
                 </div>
