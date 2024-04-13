@@ -96,12 +96,12 @@
                 $arr12=array();
                 $arr13=array();
                 $arr14=array();
-                if(mysqli_num_rows($result2)>0){            
-                    echo("<div class='outside-notifications'>
-                                <div class='notifications'>
-                                    <H2>USER NOTIFICATIONS</H2>
-                                </div>
-                                <div class='new-notification'>");
+                echo("<div class='outside-notifications'>");
+                if(mysqli_num_rows($result2)>0){         
+                    echo("<div class='notifications'>
+                                <H2>USER NOTIFICATIONS</H2>
+                            </div>
+                            <div class='new-notification'>");
                     $i=0;
                     while($row2=mysqli_fetch_assoc($result2)){
                         array_push($arr6,$row2['id']);
@@ -170,8 +170,9 @@
                         array_push($book_arr4,$row7['id']);
                         $k++;
                     }
-                    echo("</div></div>");
+                    echo("</div>");
                 }
+                echo("</div>");
             ?>
         </div>
         
@@ -271,11 +272,42 @@
                     <button class="notify-btn-delete" id="<?php echo('DelBtn'.$j); ?>">Delete Notification</button>                    
                 </div>
             </div>
-            <?php
+        <?php
                 $j++;
             }
+            $sql9 = "SELECT * FROM book_notification WHERE userid='$userid'";
+            $result9 = mysqli_query($conn,$sql9);
+            $m=0;
+            while($row9=mysqli_fetch_assoc($result9)){
+        ?>
+                <div class="box2" id="<?php echo($m.'Box2'); ?>">
+                    <div class="notify-head">
+                        <div class="notify-text"><h4>NOTIFICATION</h4></div>
+                        <div class="notify-close-icon" id="<?php echo('Close'.$m); ?>">
+                            <i class="fa-solid fa-square-xmark close-icon" title="Close Notification"></i>
+                        </div>
+                    </div>
+                    <div class="notify-content">
+                        <div class="interested-book">
+                            <div class="interested-book-pic" id="<?php echo($m.'2Box2'); ?>"></div>
+                            <div class="interested-book-name" id="<?php echo($m.'3Box2'); ?>"><h6>Sample Book Name</h6></div>
+                        </div>
+                        <div class="interested-text"><p style="font-size:0.85rem;">Has Been Uploaded By User</p></div>
+                        <div class="user-interested">
+                            <div class="user-interested-pic" id="<?php echo($m.'0Box2'); ?>"></div>
+                            <div class="user-interested-name" id="<?php echo($m.'1Box2'); ?>"><h6>Sample Name</h6></div>
+                        </div>
+                    </div>
+                    <div class="notify-btns">
+                        <button class="notify-btn-approve" id="<?php echo('BookApproveBtn'.$m); ?>">Book Details</button>                    
+                        <button class="notify-btn-delete" id="<?php echo('BookDelBtn'.$m); ?>">Delete Notification</button>                    
+                    </div>
+                </div>
+        <?php
+                $m++;
+            }
             mysqli_close($conn);
-            ?>
+        ?>
         <!-- JavaScript -->
     <script>
         // Upload Profile Photo
