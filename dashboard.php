@@ -526,6 +526,8 @@
                         console.log(response);
                     }
                 });
+                let notifyBox=document.getElementById(i);
+                notifyBox.style.backgroundColor="Red";
                 setTimeout(function(){
                     location.reload()},2000);
             });
@@ -662,6 +664,8 @@
                         console.log(response);
                     }
                 });
+                let BookNotifyBox=document.getElementById("book-"+i);
+                BookNotifyBox.style.backgroundColor="Red";
                 setTimeout(function(){
                     location.reload()},2000);
             });
