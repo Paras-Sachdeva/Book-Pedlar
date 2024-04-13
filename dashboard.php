@@ -647,6 +647,24 @@
                 content.style.pointerEvents = 'auto';
                 document.body.style.overflow = 'auto';
             });
+            // Notification Delete Button
+            let BookNotifyDelIds = <?php echo json_encode($book_arr4); ?>;
+            let BookDelBtn=document.getElementById("BookDelBtn"+i);
+            BookDelBtn.addEventListener("click",function(){
+                console.log("Delete Button Pressed");
+                let jsBookNotifyObj={};
+                jsBookNotifyObj.id=BookNotifyDelIds[i];
+                $.ajax({
+                    url:"deleteBookNotification.php",
+                    method:"POST",
+                    data:{ jsBookNotifyObj: JSON.stringify(jsBookNotifyObj)},
+                    success:function(response){
+                        console.log(response);
+                    }
+                });
+                setTimeout(function(){
+                    location.reload()},2000);
+            });
             // Book Details Button
             let bookIdsApprove = <?php echo json_encode($book_arr3); ?>;
             let BookApproveBtn=document.getElementById("BookApproveBtn"+i);
