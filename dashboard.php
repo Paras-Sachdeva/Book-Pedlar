@@ -129,7 +129,7 @@
                         echo("  <div class='notify' id='$i'>
                                     <div class='small-buyer-pic' id='$senderId-$i'>
                                     </div>
-                                    <div class='notification-content'><b>$senderName</b> is interested to buy <b>\"$bookName\"</b></div> 
+                                    <div class='notification-content'><b>$senderName</b> is interested to buy <b>$bookName</b></div> 
                                 </div>");
                         $i++;
                     }
@@ -646,6 +646,12 @@
                 content.classList.remove('blur');
                 content.style.pointerEvents = 'auto';
                 document.body.style.overflow = 'auto';
+            });
+            // Book Details Button
+            let bookIdsApprove = <?php echo json_encode($book_arr3); ?>;
+            let BookApproveBtn=document.getElementById("BookApproveBtn"+i);
+            BookApproveBtn.addEventListener("click",function(){
+                window.location.href="FullBookInfo.php?book_id="+bookIdsApprove[i]+"&again=0";
             });
         }
     </script>
