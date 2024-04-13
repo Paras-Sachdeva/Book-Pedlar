@@ -593,6 +593,56 @@
             BookNotifyPic.style.backgroundImage="url('Uploads/"+jsSmallBookPics[i]+"')";
             BookNotifyPic.style.backgroundSize="80px 80px";
         }
+
+        // Book Notification Click Event
+        let jsBookNotifyId = <?php echo json_encode($book_arr2); ?>;
+        let BookNotifyNames=<?php echo json_encode($book_arr5); ?>;
+        let UserNotifyNames=<?php echo json_encode($book_arr6); ?>;
+        let UserNotifyPics=<?php echo json_encode($book_arr7); ?>;
+        for(let i=0; i<jsBookNotifyId.length;i++){
+            let jsBookNotifyBar=document.getElementById("book-"+i);
+
+            let UserNotifyName=document.getElementById(i+"1Box2");
+            let BookNotifyName=document.getElementById(i+"3Box2");
+            let UserNotifyPic=document.getElementById(i+"0Box2");
+
+            let box2=document.getElementById(i+"Box2");
+
+            jsBookNotifyBar.addEventListener("click",function(event){
+                console.log(i);
+                var viewportWidth = window.innerWidth;
+                var viewportHeight = window.innerHeight;
+                var centerX = viewportWidth / 2;
+                var centerY = viewportHeight / 2;
+
+                content.classList.add('blur');
+                content.style.pointerEvents = 'none';
+                document.body.style.overflow = 'hidden';
+
+                box2.style.display="flex";
+                box2.style.flexDirection="column";
+                box2.style.transform = 'scale(2)';
+                box2.style.position = 'fixed';
+                box2.style.left = centerX - box2.offsetWidth / 2 + 'px';
+                box2.style.top = centerY - box2.offsetHeight / 2 + 'px';
+                UserNotifyName.innerHTML="<h6>"+UserNotifyNames[i]+"</h6>";
+                BookNotifyName.innerHTML="<h6>"+BookNotifyNames[i]+"</h6>";
+                if(jsSmallPhoto[i]!=''){
+                    UserNotifyPic.style.backgroundImage="url('Uploads/"+UserNotifyPics[i]+"')";
+                    UserNotifyPic.style.backgroundSize="80px 80px";
+                }else{
+                    UserNotifyPic.style.backgroundImage="url('Images/ProfileImg.jpg')";
+                    UserNotifyPic.style.backgroundSize="80px 80px";
+            }
+            }); 
+            let BookCloseIcon=document.getElementById("Close"+i);
+            BookCloseIcon.addEventListener("click",function(){
+                box2.style.display="none";
+                content.classList.remove('blur');
+                content.style.pointerEvents = 'auto';
+                document.body.style.overflow = 'auto';
+            });
+        }
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </body>
