@@ -211,20 +211,44 @@
                 contextMenu.classList.add('custom-context-menu');
 
                 contextMenu.innerHTML = `
-                    <div id='delete-user-chat'>
+                    <div id='delete-user-chat' class='context-menu-element'>
                         <p>Delete Chat</p>
                     </div>
-                    <div id='block-user'>
+                    <div id='block-user' class='context-menu-element'>
                         <p>Block User</p>
                     </div>
-                    <div id='follow-user'">
+                    <div id='follow-user' class='context-menu-element' style="margin-bottom:0.5rem;">
                         <p>Follow User</p>
                     </div>
                 `;
+                let style = document.createElement('style');
+                style.textContent = `
+                    .context-menu-element {
+                        color:white;
+                        padding:0.5rem; 
+                        font-size:0.8rem; 
+                        text-align: center; 
+                        font-weight:600;
+                        margin-top:0.5rem;
+                    }
+                    .context-menu-element:hover{
+                        scale: 0.9;
+                        background-color:white;
+                        color:#333333;
+                        font-weight:600;
+                        cursor:pointer;
+                        border-radius: 10%;
+                    }
+                `;
+                document.head.appendChild(style);
 
+                contextMenu.style.borderRadius = '10%';
                 contextMenu.style.position = 'absolute';
                 contextMenu.style.top = `${event.clientY}px`;
                 contextMenu.style.left = `${event.clientX}px`;
+                contextMenu.style.backgroundColor = '#333333';
+                contextMenu.style.border = '1px solid #ccc';
+                contextMenu.style.padding = '5px';
 
                 // Close the context menu when clicking outside of it
                 document.addEventListener('click', function(e) {
