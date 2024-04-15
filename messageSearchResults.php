@@ -310,6 +310,30 @@
                 contextMenu.style.border = '1px solid #ccc';
                 contextMenu.style.padding = '5px';
 
+                // Add click functionality to context menu elements
+                contextMenu.querySelectorAll('div').forEach(function(item) {
+                    item.addEventListener('click', function() {
+                        if (item.id === 'delete-user-chat') {
+                            let jsDelMessageObj={};
+                            jsDelMessageObj.firstuserid=<?php echo json_encode($userid); ?>;
+                            jsDelMessageObj.seconduserid=jsUserIds[i];
+                            console.log('Delete chat clicked'+jsDelMessageObj.firstuserid);
+                            $.ajax({
+                                url:"deleteUserChat.php",
+                                method:"POST",
+                                data:{ jsDelMessageObj: JSON.stringify(jsDelMessageObj)},
+                                success:function(response){
+                                    console.log(response);
+                                }
+                            });
+                            window.location.reload();
+                        }
+            
+                        // Remove the context menu
+                        contextMenu.remove();
+                    });
+                });
+
                 // Close the context menu when clicking outside of it
                 document.addEventListener('click', function(e) {
                     if (!contextMenu.contains(e.target) && e.target !== messagePplList[i]) {
