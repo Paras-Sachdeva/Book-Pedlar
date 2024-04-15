@@ -197,6 +197,40 @@
         let jsUserIds=<?php echo json_encode($arr3); ?>;
         let messagePplList=document.getElementsByClassName("message-ppl-list");
         for(let i=0;i<jsUserIds.length;i++){
+            // Context Menu
+            messagePplList[i].addEventListener('contextmenu', function(event) {
+                event.preventDefault(); // Prevent the default context menu
+            
+                // Create a context menu
+                let contextMenu = document.createElement('div');
+                contextMenu.innerHTML = `
+                    <div id='delete-user-chat'>
+                        <p>Delete Chat</p>
+                    </div>
+                    <div id='block-user'>
+                        <p>Block User</p>
+                    </div>
+                    <div id='follow-user'">
+                        <p>Follow User</p>
+                    </div>
+                `;
+
+                contextMenu.style.position = 'absolute';
+                contextMenu.style.top = `${event.clientY}px`;
+                contextMenu.style.left = `${event.clientX}px`;
+
+                // Close the context menu when clicking outside of it
+                document.addEventListener('click', function(e) {
+                    if (!contextMenu.contains(e.target) && e.target !== messagePplList[i]) {
+                        contextMenu.remove();
+                    }
+                });
+                
+                // Append the context menu to the body
+                document.body.appendChild(contextMenu);
+            });
+
+            // User Click
             messagePplList[i].addEventListener("click",function(){
                 window.location.search = "id=" + encodeURIComponent(jsUserIds[i]);
             });
