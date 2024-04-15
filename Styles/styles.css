@@ -1061,7 +1061,7 @@ label{
 #scroll-messages{
     display: flex;
     flex-direction: column;
-    max-height: 23rem;
+    height: 27rem;
     width: 100%;
     overflow-y: auto;
 }
