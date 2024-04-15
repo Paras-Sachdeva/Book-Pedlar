@@ -961,7 +961,7 @@ label{
     overflow: hidden;
 }
 
-.message-ppl{
+#message-ppl{
     display: flex;
     flex-direction: column;
     width: 25%;

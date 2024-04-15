@@ -114,7 +114,7 @@
         MESSAGES
     </div>   
         <div class="message-container">
-            <div class="message-ppl">
+            <div id="message-ppl">
                 <div class="message-search-ppl">
                     <div class="message-search-container">
                         <div class="message-search-icon"  id="search-chat-icon">
