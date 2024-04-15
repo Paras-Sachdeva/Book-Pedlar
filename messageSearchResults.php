@@ -326,7 +326,19 @@
                                     console.log(response);
                                 }
                             });
-                            window.location.reload();
+                            setTimeout(() => {
+                                let urlParameter = new URLSearchParams(window.location.search);
+                                if (urlParameter.has('id')){
+                                    let idSet = urlParameter.get('id');
+                                    if(idSet==jsUserIds[i]){
+                                        window.location.href="messages.php";
+                                    }else{
+                                        window.location.reload();
+                                    }
+                                }else{
+                                    window.location.reload();
+                                }
+                            }, 1500);
                         }
             
                         // Remove the context menu
