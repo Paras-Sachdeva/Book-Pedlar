@@ -201,8 +201,15 @@
             messagePplList[i].addEventListener('contextmenu', function(event) {
                 event.preventDefault(); // Prevent the default context menu
             
-                // Create a context menu
+                let existingContextMenu = document.querySelector('.custom-context-menu');
+                if (existingContextMenu) {
+                    existingContextMenu.remove();
+                }
+            
+                // Create a custom context menu
                 let contextMenu = document.createElement('div');
+                contextMenu.classList.add('custom-context-menu');
+
                 contextMenu.innerHTML = `
                     <div id='delete-user-chat'>
                         <p>Delete Chat</p>
