@@ -242,10 +242,16 @@
                 `;
                 document.head.appendChild(style);
 
+                // Adjust position based on scroll position
+                let scrollX = window.pageXOffset || document.documentElement.scrollLeft;
+                let scrollY = window.pageYOffset || document.documentElement.scrollTop;
+                let posX = event.clientX + scrollX;
+                let posY = event.clientY + scrollY;
+
                 contextMenu.style.borderRadius = '10%';
                 contextMenu.style.position = 'absolute';
-                contextMenu.style.top = `${event.clientY}px`;
-                contextMenu.style.left = `${event.clientX}px`;
+                contextMenu.style.top = `${posY}px`;
+                contextMenu.style.left = `${posX}px`;
                 contextMenu.style.backgroundColor = '#333333';
                 contextMenu.style.border = '1px solid #ccc';
                 contextMenu.style.padding = '5px';
