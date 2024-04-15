@@ -967,6 +967,8 @@ label{
     width: 25%;
     border-right: 0.1rem solid grey;
     padding: 2rem;
+    height: 37rem;
+    overflow-y: scroll;
 }
 
 /* .message-search-ppl{} */
