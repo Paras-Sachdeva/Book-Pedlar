@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Pedlar - User Profile</title>
     <link rel="icon" href="Images/Icon.png" type="image/x-icon">
-    <link rel="stylesheet" href="Styles/styles.css?v=20">
+    <link rel="stylesheet" href="Styles/styles.css?v=19">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
@@ -51,11 +51,29 @@
                     $sql1 = "SELECT * FROM user_data WHERE id='$userid'";
                     $result1 = mysqli_query($conn,$sql1);
                     $row1 = mysqli_fetch_assoc($result1);
+                    $follow_sql1="SELECT * FROM user_follow WHERE userid=$userid";
+                    $follow_result1=mysqli_query($conn,$follow_sql1);
+                    $follow_count1=mysqli_num_rows($follow_result1);
+                    $follower_sql2="SELECT * FROM user_follow WHERE followingid=$userid";
+                    $follower_result2=mysqli_query($conn,$follower_sql2);
+                    $follower_count2=mysqli_num_rows($follower_result2);
                     $user_name=$row1['username'];
                     $e_mail=$row1['email'];
                     echo("<p style='text-align:center;'>".$user_name."<br>".$e_mail."</p>");
-                    echo("<p id='place-details' style='text-align:center;'></p>");
+                    echo("<p id='place-details' style='text-align:center;'></p><br>");
                     $uploadedFileName=$row1['profileImage'];
+                    echo("<div id='following-stats'>
+                            <div id='followers'>");
+                                if($follower_count2==1){
+                                    echo("<p>$follower_count2 Follower</p>");
+                                }else{
+                                    echo("<p>$follower_count2 Followers</p>");
+                                }
+                    echo("</div>
+                            <div id='following'>
+                                <p>$follow_count1 Following</p>
+                            </div>
+                        </div>");
                 ?>
             </div>
             <div class="pic-form">
