@@ -367,6 +367,26 @@ a{
     z-index: 2;
 }
 
+#following-stats{
+    display: flex;
+    justify-content: center;
+}
+
+#followers:hover, #following:hover{
+    cursor: pointer;
+    scale: 1.1;
+}
+
+#blocked-users{
+    text-align: center;
+    font-weight: 350;
+}
+
+#blocked-users:hover{
+    cursor: pointer;
+    scale: 1.1;
+}
+
 .close-icon:hover{
     cursor: pointer;
 }
