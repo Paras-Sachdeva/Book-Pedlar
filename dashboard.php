@@ -57,6 +57,9 @@
                     $follower_sql2="SELECT * FROM user_follow WHERE followingid=$userid";
                     $follower_result2=mysqli_query($conn,$follower_sql2);
                     $follower_count2=mysqli_num_rows($follower_result2);
+                    $block_sql1="SELECT * FROM user_block WHERE userid=$userid";
+                    $block_result1=mysqli_query($conn,$block_sql1);
+                    $block_count1=mysqli_num_rows($block_result1);
                     $user_name=$row1['username'];
                     $e_mail=$row1['email'];
                     echo("<p style='text-align:center;'>".$user_name."<br>".$e_mail."</p>");
@@ -74,6 +77,12 @@
                                 <p>$follow_count1 Following</p>
                             </div>
                         </div>");
+                    
+                    if($block_count1>0){
+                        echo("<div id='blocked-users'>
+                                <p>$block_count1 Blocked Users</p>    
+                            </div>");
+                    }
                 ?>
             </div>
             <div class="pic-form">
