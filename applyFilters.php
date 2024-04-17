@@ -180,9 +180,39 @@
                         $capitalize_value=ucwords($value);
                         $keywords = explode(' ', $capitalize_value);
 
+                        $block_sql1="SELECT * FROM user_block WHERE blockedid=$userid";
+                        $block_sql2="SELECT * FROM user_block WHERE userid=$userid";
+                        $block_result1=mysqli_query($conn,$block_sql1);
+                        $block_result2=mysqli_query($conn,$block_sql2);
+                        $block_count1=mysqli_num_rows($block_result1);
+                        $block_whereClause1=1;
+                        $block_count2=mysqli_num_rows($block_result2);
+                        $block_whereClause2=1;
+
+                        while($block_row1=mysqli_fetch_assoc($block_result1)){
+                            $block_whereClause1="";
+                            if($block_count1>1){
+                                $block_whereClause1.="userid!=$block_row1[userid] AND ";
+                                $block_count1--;
+                            }else if($block_count1==1){
+                                $block_whereClause1.="userid!=$block_row1[userid]";
+                                $block_count1--;
+                            }
+                        }
+                        while($block_row2=mysqli_fetch_assoc($block_result2)){
+                            $block_whereClause2="";
+                            if($block_count2>1){
+                                $block_whereClause2.="userid!=$block_row2[blockedid] AND ";
+                                $block_count2--;
+                            }else if($block_count2==1){
+                                $block_whereClause2.="userid!=$block_row2[blockedid]";
+                                $block_count2--;
+                            }
+                        }
+
                         if($value==""){
                             $whereClause="userid!=$userid ".$whereConditionFilter;
-                            $sql="SELECT * FROM book_data WHERE $whereClause";
+                            $sql="SELECT * FROM book_data WHERE ($whereClause AND $block_whereClause1 AND $block_whereClause2)";
                         }else if($type=="All"){
                             foreach ($keywords as $keyword) {
                                 $whereConditions[] = "bookname LIKE '%$keyword%'
@@ -190,7 +220,7 @@
                                                      OR publisher LIKE '%$keyword%'";
                             }
                             $whereClause = "(bookname='$capitalize_value' OR author='$capitalize_value' OR publisher='$capitalize_value' OR ".implode(' OR ', $whereConditions).") ".$whereConditionFilter;
-                            $sql = "SELECT * FROM book_data WHERE $whereClause && userid!=$userid ORDER BY
+                            $sql = "SELECT * FROM book_data WHERE ($whereClause AND userid!=$userid) ORDER BY
                             CASE
                                 WHEN (bookname='$capitalize_value') THEN 1
                                 WHEN (author='$capitalize_value') THEN 2
@@ -202,7 +232,7 @@
                                 $whereConditions[] = "bookname LIKE '%$keyword%'";
                             }
                             $whereClause = "(bookname='$capitalize_value' OR ".implode(' OR ', $whereConditions).") ".$whereConditionFilter;
-                            $sql = "SELECT * FROM book_data WHERE $whereClause && userid!='$userid' ORDER BY
+                            $sql = "SELECT * FROM book_data WHERE ($whereClause AND userid!=$userid AND $block_whereClause1 AND $block_whereClause2) ORDER BY
                             CASE
                             WHEN bookname='$capitalize_value' THEN 1 ELSE 2 END";
                         }else if($type=="Author Name"){
@@ -210,7 +240,7 @@
                                 $whereConditions[] = "author LIKE '%$keyword%'";
                             }
                             $whereClause = "(author='$capitalize_value' OR ".implode(' OR ', $whereConditions).") ".$whereConditionFilter;
-                            $sql = "SELECT * FROM book_data WHERE $whereClause && userid!='$userid' ORDER BY
+                            $sql = "SELECT * FROM book_data WHERE ($whereClause AND userid!=$userid AND $block_whereClause1 AND $block_whereClause2) ORDER BY
                             CASE
                             WHEN author='$capitalize_value' THEN 1 else 2 end";
                         }else if($type=="Publisher"){
@@ -218,7 +248,7 @@
                                 $whereConditions[] = "publisher LIKE '%$keyword%'";
                             }
                             $whereClause = "(publisher='$capitalize_value' OR ".implode(' OR ', $whereConditions).") ".$whereConditionFilter;
-                            $sql = "SELECT * FROM book_data WHERE $whereClause && userid!='$userid' ORDER BY
+                            $sql = "SELECT * FROM book_data WHERE ($whereClause AND userid!=$userid AND $block_whereClause1 AND $block_whereClause2) ORDER BY
                             CASE
                             WHEN publisher='$capitalize_value' THEN 1 else 2 end";
                         }
