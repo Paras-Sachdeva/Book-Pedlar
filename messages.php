@@ -113,7 +113,7 @@
     <?php
             $j++;
         }
-        $sql7="SELECT * FROM user_chat WHERE (senderid=(SELECT id FROM user_data WHERE username='$arr2[0]') && recieverid=$userid) || (senderid=$userid && recieverid=(SELECT id FROM user_data WHERE username='$arr2[0]'))";
+        $sql7="SELECT * FROM user_chat WHERE (senderid=(SELECT id FROM user_data WHERE username='$arr2[0]') && recieverid=$userid) OR (senderid=$userid && recieverid=(SELECT id FROM user_data WHERE username='$arr2[0]'))";
         $result7=mysqli_query($conn,$sql7);
     ?>
             </div>
@@ -198,11 +198,11 @@
         let messagePplList=document.getElementsByClassName("message-ppl-list");
         for(let i=0;i<jsUserIds.length;i++){
             // Context Menu
-            messagePplList[i].addEventListener('contextmenu', function(event) {
+            messagePplList[i].addEventListener('contextmenu', function(event){
                 event.preventDefault(); // Prevent the default context menu
             
                 let existingContextMenu = document.querySelector('.custom-context-menu');
-                if (existingContextMenu) {
+                if(existingContextMenu){
                     existingContextMenu.remove();
                 }
             
@@ -257,13 +257,12 @@
                 contextMenu.style.padding = '5px';
 
                 // Add click functionality to context menu elements
-                contextMenu.querySelectorAll('div').forEach(function(item) {
+                contextMenu.querySelectorAll('div').forEach(function(item){
                     item.addEventListener('click', function() {
-                        if (item.id === 'delete-user-chat') {
+                        if(item.id === 'delete-user-chat'){
                             let jsDelMessageObj={};
                             jsDelMessageObj.firstuserid=<?php echo json_encode($userid); ?>;
                             jsDelMessageObj.seconduserid=jsUserIds[i];
-                            console.log('Delete chat clicked'+jsDelMessageObj.firstuserid);
                             $.ajax({
                                 url:"deleteUserChat.php",
                                 method:"POST",
@@ -285,8 +284,43 @@
                                     window.location.reload();
                                 }
                             }, 1500);
-                        }
-            
+                        }else if(item.id === 'block-user'){
+                            let jsDelMessageObj={};
+                            jsDelMessageObj.firstuserid=<?php echo json_encode($userid); ?>;
+                            jsDelMessageObj.seconduserid=jsUserIds[i];
+                            $.ajax({
+                                url:"deleteUserChat.php",
+                                method:"POST",
+                                data:{ jsDelMessageObj: JSON.stringify(jsDelMessageObj)},
+                                success:function(response){
+                                    console.log(response);
+                                }
+                            });
+                            let jsBlockUserObj={};
+                            jsBlockUserObj.userid=<?php echo json_encode($userid); ?>;
+                            jsBlockUserObj.blockedid=jsUserIds[i];
+                            $.ajax({
+                                url:"blockUser.php",
+                                method:"POST",
+                                data:{ jsBlockUserObj: JSON.stringify(jsBlockUserObj)},
+                                success:function(response){
+                                    console.log(response);
+                                }
+                            });
+                            setTimeout(() => {
+                                let urlParameter = new URLSearchParams(window.location.search);
+                                if (urlParameter.has('id')){
+                                    let idSet = urlParameter.get('id');
+                                    if(idSet==jsUserIds[i]){
+                                        window.location.href="messages.php";
+                                    }else{
+                                        window.location.reload();
+                                    }
+                                }else{
+                                    window.location.reload();
+                                }
+                            }, 1500);
+                        }            
                         // Remove the context menu
                         contextMenu.remove();
                     });

@@ -339,8 +339,43 @@
                                     window.location.reload();
                                 }
                             }, 1500);
+                        }else if(item.id === 'block-user'){
+                            let jsDelMessageObj={};
+                            jsDelMessageObj.firstuserid=<?php echo json_encode($userid); ?>;
+                            jsDelMessageObj.seconduserid=jsUserIds[i];
+                            $.ajax({
+                                url:"deleteUserChat.php",
+                                method:"POST",
+                                data:{ jsDelMessageObj: JSON.stringify(jsDelMessageObj)},
+                                success:function(response){
+                                    console.log(response);
+                                }
+                            });
+                            let jsBlockUserObj={};
+                            jsBlockUserObj.userid=<?php echo json_encode($userid); ?>;
+                            jsBlockUserObj.blockedid=jsUserIds[i];
+                            $.ajax({
+                                url:"blockUser.php",
+                                method:"POST",
+                                data:{ jsBlockUserObj: JSON.stringify(jsBlockUserObj)},
+                                success:function(response){
+                                    console.log(response);
+                                }
+                            });
+                            setTimeout(() => {
+                                let urlParameter = new URLSearchParams(window.location.search);
+                                if (urlParameter.has('id')){
+                                    let idSet = urlParameter.get('id');
+                                    if(idSet==jsUserIds[i]){
+                                        window.location.href="messages.php";
+                                    }else{
+                                        window.location.reload();
+                                    }
+                                }else{
+                                    window.location.reload();
+                                }
+                            }, 1500);
                         }
-            
                         // Remove the context menu
                         contextMenu.remove();
                     });
