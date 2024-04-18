@@ -1,5 +1,4 @@
 <?php
-
     session_start();
 
     $host = "localhost";
@@ -9,7 +8,7 @@
 
     $conn = mysqli_connect($host, $username, $password, $database);
     if (!$conn) {
-        die("Connection failed: " . $conn->connect_error);
+        die("Connection failed");
     }
 
     $username = $_POST["signupName"];
@@ -17,13 +16,13 @@
     $hashedPassword=password_hash($password,PASSWORD_DEFAULT);
     $email = $_POST["signupEmail"];
 
-    $sql2 = "SELECT * from user_data where username='$username'";
+    $sql2 = "SELECT * FROM user_data WHERE username='$username'";
     $result2 = mysqli_query($conn,$sql2);
     if(mysqli_num_rows($result2)>0){
         header("Location: signupPage.php?error=UserNameAlreadytaken");
     }
 
-    $sql3 = "SELECT * from user_data where email='$email'";
+    $sql3 = "SELECT * FROM user_data WHERE email='$email'";
     $result3 = mysqli_query($conn,$sql3);
     if(mysqli_num_rows($result3)>0){
         header("Location: signupPage.php?error=EmailAlreadytaken");
@@ -50,3 +49,5 @@
         } 
     }
     validateEmail($email);
+
+    mysqli_close($conn);
