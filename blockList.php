@@ -200,7 +200,7 @@
             ?>
         </div>
 
-        <!-- Blocked Users List -->
+        <!-- User Uploaded Book Section -->
         <div class="user-block-list">
             <div class='block-head'>
                 <p>Blocked Users</p>
@@ -222,12 +222,16 @@
                     <div class="blocked-user" id="<?php echo($b."blocked"); ?>">
                         <div class="block-pic" id="<?php echo($b."block-pic"); ?>"></div>
                         <div class="block-name"><?php echo($block_row2['username']); ?></div>
+                        <div class="block-option" id="<?php echo($b."block-option"); ?>">
+                            <p>UNBLOCK</p>
+                        </div>
                     </div>
                 <?php
                 $b++;
             }
         ?>
         </div>
+
         <?php
             echo("</div>");
             require("./Components/footer.php");

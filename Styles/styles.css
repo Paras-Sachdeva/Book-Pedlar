@@ -1194,3 +1194,12 @@ label{
     font-weight: 700;
     width: 100%;
 }
+
+.block-option{
+    font-size: 1rem;
+}
+
+.block-option:hover{
+    cursor: pointer;
+    scale: 0.9;
+}
