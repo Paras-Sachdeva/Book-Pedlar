@@ -1157,3 +1157,40 @@ label{
     font-weight: 600;
     width: 100%;
 }
+
+/* blockList.php */
+.block-head{
+    background-color: black;
+    height: 3.7rem;
+    width: 65rem;
+    text-align: center;
+    font-size: 2.5rem;
+    color: white;
+    padding: 1rem;
+    margin-bottom: 2rem;
+}
+
+.blocked-user{
+    display: flex;
+    height: 7rem;
+    width: 35rem;
+    border-bottom: 0.1rem solid grey;
+    padding: 1rem;
+    align-items: center;
+    margin-bottom: 2rem;
+    margin-left: 13.5rem;
+}
+
+.block-pic{
+    width: 7rem;
+    height: 7rem;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.block-name{
+    margin-left: 1rem;
+    font-size: 2rem;
+    font-weight: 700;
+    width: 100%;
+}
