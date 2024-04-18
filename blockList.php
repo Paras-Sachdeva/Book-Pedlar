@@ -212,25 +212,30 @@
             $b=0;
             $block_arr1=array();
             $block_arr2=array();
-            while($block_row1=mysqli_fetch_assoc($block_result1)){
-                $block_sql2="SELECT * FROM user_data WHERE id=$block_row1[blockedid]";
-                $block_result2=mysqli_query($conn,$block_sql2);
-                $block_row2=mysqli_fetch_assoc($block_result2);
-                array_push($block_arr1,$block_row2['profileImage']);
-                array_push($block_arr2,$block_row1['blockedid']);
-                ?>
-                    <div class="blocked-user" id="<?php echo($b."blocked"); ?>">
-                        <div class="block-pic" id="<?php echo($b."block-pic"); ?>"></div>
-                        <div class="block-name"><?php echo($block_row2['username']); ?></div>
-                        <div class="block-option" id="<?php echo($b."block-option"); ?>">
-                            <p>UNBLOCK</p>
+            if(mysqli_num_rows($block_result1)>0){
+                while($block_row1=mysqli_fetch_assoc($block_result1)){
+                    $block_sql2="SELECT * FROM user_data WHERE id=$block_row1[blockedid]";
+                    $block_result2=mysqli_query($conn,$block_sql2);
+                    $block_row2=mysqli_fetch_assoc($block_result2);
+                    array_push($block_arr1,$block_row2['profileImage']);
+                    array_push($block_arr2,$block_row1['blockedid']);
+                    ?>
+                        <div class="blocked-user" id="<?php echo($b."blocked"); ?>">
+                            <div class="block-pic" id="<?php echo($b."block-pic"); ?>"></div>
+                            <div class="block-name"><?php echo($block_row2['username']); ?></div>
+                            <div class="block-option" id="<?php echo($b."block-option"); ?>">
+                                <p>UNBLOCK</p>
+                            </div>
                         </div>
-                    </div>
-                <?php
-                $b++;
+                    <?php
+                    $b++;
+                }
+            }else{
+                echo("<p style='font-size: 2rem;text-align: center;'>No Blocked Users Found</p>");
             }
         ?>
         </div>
+
 
         <?php
             echo("</div>");
