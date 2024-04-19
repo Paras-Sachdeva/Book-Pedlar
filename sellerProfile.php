@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Pedlar - Seller Profile</title>
     <link rel="icon" href="Images/Icon.png" type="image/x-icon">
-    <link rel="stylesheet" href="Styles/styles.css?v=8">
+    <link rel="stylesheet" href="Styles/styles.css?v=9">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
@@ -53,6 +53,21 @@
                     echo("<p style='text-align:center;'><br>".$user_name."<br>".$e_mail."</p>");
                     echo("<br><p id='place-details' style='text-align:center;'></p>");
                     $uploadedFileName=$row1['profileImage'];
+                ?>
+            </div>
+            <div class="follow-user">
+                <?php $_SESSION['userid'];
+                    $follow_sql="SELECT * FROM user_follow WHERE userid=$_SESSION[userid] AND followingid=$userid";
+                    $follow_result=mysqli_query($conn, $follow_sql);
+                    if(mysqli_num_rows($follow_result)>0){
+                ?>
+                        <button id="followUnfollow">UNFOLLOW</button>
+                <?php
+                    }else{
+                ?>
+                        <button id="followUnfollow">FOLLOW</button>
+                <?php
+                    }
                 ?>
             </div>
         </div>

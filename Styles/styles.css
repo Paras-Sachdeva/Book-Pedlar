@@ -549,7 +549,7 @@ a{
     margin-top: 2rem;
 }
 
-.add-book button, #submitEditBook{
+.add-book button, .follow-user button, #submitEditBook{
     padding: 0.6rem;
     width: 10rem;
     height: 3rem;
@@ -560,7 +560,7 @@ a{
     cursor: pointer;
     transition: background-color 0.3s;
 }
-.add-book button:hover, #submitEditBook:hover{
+.add-book button:hover, .follow-user button:hover, #submitEditBook:hover{
     background-color: #2980b9;
 }
 
