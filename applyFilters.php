@@ -176,7 +176,10 @@
                             die("Connection failed");}
             
                         $type=$_REQUEST["typeSend"];
-                        $value=$_REQUEST["valueSend"];
+                        // $value=$_REQUEST["valueSend"];
+                        $str=$_REQUEST["valueSend"];
+                        $value = str_replace("'", " ", $str);
+                        // $value=htmlspecialchars($inputText);
                         $capitalize_value=ucwords($value);
                         $keywords = explode(' ', $capitalize_value);
 
@@ -391,7 +394,7 @@
                             <option value="Poor">Poor</option>
                         </select>
                         <input type="hidden" name="typeSend" value="<?php echo($type); ?>">
-                        <input type="hidden" name="valueSend" value="<?php echo($value); ?>">
+                        <input type="hidden" name="valueSend" value="<?php echo($str); ?>">
                         </form>
                     </div>
             </div>   
@@ -536,7 +539,7 @@
         }
 
         // Change Default Values for Search Bar Select
-        let jsValue=<?php echo json_encode($value); ?>;
+        let jsValue=<?php echo json_encode($str); ?>;
         let jsType=<?php echo json_encode($type); ?>;
         let jsSearchType=document.getElementById("searchBy");
         let jsSearchValue=document.getElementById("search");
