@@ -522,11 +522,11 @@
         if(jsSessionDel==0){
             delAccBtn.addEventListener("click",function(){
                 alert("Press Delete Account Again to Confirm");
-                window.location.href="dashboard.php?DelId=1";
+                window.location.href="blockList.php?DelId=1";
             });
         }else{
             setTimeout(() => {
-                window.location.href="dashboard.php?DelId=0";
+                window.location.href="blockList.php?DelId=0";
             }, 25000);
             delAccBtn.addEventListener("click",function(){
                 window.location.href="deleteAccount.php";

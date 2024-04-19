@@ -637,11 +637,6 @@ a{
     cursor: pointer;
 }
 
-/* .apply-filters{
-    display: flex;
-    flex-direction: row;
-} */
-
 .user-books{
     width: 60%;
     display:flex;
@@ -649,7 +644,7 @@ a{
     margin-left: 13rem;
 }
 
-.book-outer{
+.book-outer, .book-outerr{
     width: 35rem;
     height: 20rem;
     margin-left: 1.5rem;
@@ -658,9 +653,12 @@ a{
     border: 0.2rem solid black;
 }
 
+.book-outer:hover, .book-outerr:hover{
+    border:0.2rem solid darkblue;
+}
+
 .book-outer:hover{
     cursor: pointer;
-    border:0.2rem solid darkblue;
 }
 
 .book-inner1{
