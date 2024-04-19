@@ -43,6 +43,12 @@
             </div>
             <div class="user-info">
                 <?php
+                    $follow_sql1="SELECT * FROM user_follow WHERE userid=$userid";
+                    $follow_result1=mysqli_query($conn,$follow_sql1);
+                    $follow_count1=mysqli_num_rows($follow_result1);
+                    $follower_sql2="SELECT * FROM user_follow WHERE followingid=$userid";
+                    $follower_result2=mysqli_query($conn,$follower_sql2);
+                    $follower_count2=mysqli_num_rows($follower_result2);
                     $sql1 = "SELECT * FROM user_data WHERE id='$userid'";
                     $result1 = mysqli_query($conn,$sql1);
                     $row1 = mysqli_fetch_assoc($result1);
@@ -53,10 +59,22 @@
                     echo("<p style='text-align:center;'><br>".$user_name."<br>".$e_mail."</p>");
                     echo("<br><p id='place-details' style='text-align:center;'></p>");
                     $uploadedFileName=$row1['profileImage'];
+                    echo("<div id='following-stats'>
+                            <div id='followers'>");
+                                if($follower_count2==1){
+                                    echo("<p>$follower_count2 Follower</p>");
+                                }else{
+                                    echo("<p>$follower_count2 Followers</p>");
+                                }
+                    echo("</div>
+                            <div id='following'>
+                                <p>$follow_count1 Following</p>
+                            </div>
+                        </div>");
                 ?>
             </div>
             <div class="follow-user">
-                <?php $_SESSION['userid'];
+                <?php 
                     $follow_sql="SELECT * FROM user_follow WHERE userid=$_SESSION[userid] AND followingid=$userid";
                     $follow_result=mysqli_query($conn, $follow_sql);
                     if(mysqli_num_rows($follow_result)>0){
