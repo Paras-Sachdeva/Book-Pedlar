@@ -11,7 +11,7 @@
         die("Connection failed");
     }
 
-    $username = $_POST["signupName"];
+    $username = addslashes($_POST["signupName"]);
     $password = $_POST["signupPassword"];
     $hashedPassword=password_hash($password,PASSWORD_DEFAULT);
     $email = $_POST["signupEmail"];
@@ -27,7 +27,6 @@
     if(mysqli_num_rows($result3)>0){
         header("Location: signupPage.php?error=EmailAlreadytaken");
     }
-
 
     function validateEmail($email) {
         global $username, $conn, $hashedPassword;
