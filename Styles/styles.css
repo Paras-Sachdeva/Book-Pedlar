@@ -551,11 +551,11 @@ a{
 
 .add-book button, .follow-user button, #submitEditBook{
     padding: 0.6rem;
-    width: 10rem;
-    height: 3rem;
+    width: 20rem;
+    height: 3.5rem;
     margin: 2rem;
-    font-weight: 900;
-    font-size: 1rem;
+    font-weight: 800;
+    font-size: 1.5rem;
     border-radius: 15px; 
     cursor: pointer;
     transition: background-color 0.3s;
@@ -623,9 +623,12 @@ a{
 #delete-account button{
     padding: 1rem;
     background-color: #aa6276;
-    width: 7rem;
-    height: 5rem;
-    margin: 2rem;
+    color: #333;
+    width: 11rem;
+    height: 3.5rem;
+    margin-top: 10rem;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
     font-weight: 900;
     font-size: 1rem;
     border-radius: 15px;

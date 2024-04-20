@@ -17,7 +17,7 @@
                     <option value="Author Name">Author Name</option>
                     <option value="Publisher">Publisher</option>
                 </select>
-                <input type="text" id="search" placeholder="     Search a book" name="searchInput">
+                <input type="text" id="search" placeholder="     Search a book" name="searchInput" autocomplete="off">
                 <i class="fa-solid fa-magnifying-glass searchIcon" title="Search" id="searchingIcon"></i>
             </form>
         </div>
