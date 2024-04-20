@@ -491,7 +491,7 @@ a{
     margin-top: 10rem;
 }
 .profile{
-    width: 40%;
+    width: 45%;
     margin-top: rem;
     display: flex;
     flex-direction: column;
@@ -512,15 +512,41 @@ a{
 
 .profile h1{
     text-align: center;
-    margin-top: 1rem;
     color: white;
+    background-color: black;
+    width: 100%;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border-bottom-left-radius: 80%;
+    border-bottom-right-radius: 80%;
+}
+
+.user-info{
+    margin-top: 1.5rem;
+    align-self: flex-start;
+}
+
+.strip{
+    background-color: #F5F5F5;
+    color: black;
+    height: 3rem;
+    width: 28rem;
+    padding: 1rem;
+    display: flex;
+    align-items: center; 
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+    margin-top: 1rem;
 }
 
 .user-info p{
     font-weight: 600;
     margin-left: 1rem;
-    margin-top: 1rem;
-    color: white;
+}
+
+.strip i{
+    margin-left: 2rem;
+    font-size: 2.5rem;
 }
 
 .no-books{
