@@ -63,6 +63,18 @@
                     $block_count1=mysqli_num_rows($block_result1);
                     $user_name=$row1['username'];
                     $e_mail=$row1['email'];
+                    echo("<div id='following-stats'>
+                            <div id='followers'>");
+                                if($follower_count2==1){
+                                    echo("<p>$follower_count2 Follower</p>");
+                                }else{
+                                    echo("<p>$follower_count2 Followers</p>");
+                                }
+                    echo("</div>
+                            <div id='following'>
+                                <p>$follow_count1 Following</p>
+                            </div>
+                        </div>");
                     echo("<div class='strip' id='user-info-name'>
                                 <div id='user-info-name-icon'>
                                     <i class='fa-solid fa-circle-user'></i>
@@ -88,23 +100,15 @@
                                 </div>
                             </div>");
                     $uploadedFileName=$row1['profileImage'];
-                    echo("<div id='following-stats'>
-                            <div id='followers'>");
-                                if($follower_count2==1){
-                                    echo("<p>$follower_count2 Follower</p>");
-                                }else{
-                                    echo("<p>$follower_count2 Followers</p>");
-                                }
-                    echo("</div>
-                            <div id='following'>
-                                <p>$follow_count1 Following</p>
-                            </div>
-                        </div>");
-                    
                     if($block_count1>0){
-                        echo("<div id='blocked-users'>
-                                <p>$block_count1 Blocked Users</p>    
-                            </div>");
+                        echo("<div class='strip' id='user-info-blocked'>
+                                    <div id='user-info-blocked-icon'>
+                                        <i class='fa-solid fa-ban'></i>
+                                    </div>
+                                    <div id='blocked-users'>
+                                    <p>$block_count1 Blocked Users</p>
+                                    </div>
+                                </div>");
                     }
                 ?>
             </div>

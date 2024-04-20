@@ -370,11 +370,22 @@ a{
 #following-stats{
     display: flex;
     justify-content: center;
+    margin-left: 5rem;
 }
 
 #followers:hover, #following:hover{
     cursor: pointer;
     scale: 1.1;
+}
+
+#followers p{
+    font-size: 1.5rem;
+    color: greenyellow;
+}
+
+#following p{
+    font-size: 1.5rem;
+    color: cornflowerblue;
 }
 
 #blocked-users{
@@ -536,7 +547,7 @@ a{
     align-items: center; 
     border-top-right-radius: 50%;
     border-bottom-right-radius: 50%;
-    margin-top: 1rem;
+    margin-top: 1.5rem;
 }
 
 .user-info p{
