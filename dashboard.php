@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Pedlar - User Profile</title>
     <link rel="icon" href="Images/Icon.png" type="image/x-icon">
-    <link rel="stylesheet" href="Styles/styles.css?v=19">
+    <link rel="stylesheet" href="Styles/styles.css?v=30">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
@@ -63,8 +63,30 @@
                     $block_count1=mysqli_num_rows($block_result1);
                     $user_name=$row1['username'];
                     $e_mail=$row1['email'];
-                    echo("<p style='text-align:center;'>".$user_name."<br>".$e_mail."</p>");
-                    echo("<p id='place-details' style='text-align:center;'></p><br>");
+                    echo("<div class='strip' id='user-info-name'>
+                                <div id='user-info-name-icon'>
+                                    <i class='fa-solid fa-circle-user'></i>
+                                </div>
+                                <div id='user-info-name-text'>
+                                    <p style='text-align:center;'>".$user_name."</p>
+                                </div>
+                            </div>
+                            <div class='strip' id='user-info-email'>
+                                <div id='user-info-email-icon'>
+                                    <i class='fa-solid fa-envelope'></i>
+                                </div>
+                                <div id='user-info-email-text'>
+                                    <p style='text-align:center;'>".$e_mail."</p>
+                                </div>
+                            </div>");
+                    echo("<div class='strip' id='user-info-location'>
+                                <div id='user-info-location-icon'>
+                                    <i class='fa-solid fa-location-dot'></i>
+                                </div>
+                                <div id='user-info-location-text'>
+                                    <p id='place-details' style='text-align:center;'></p>
+                                </div>
+                            </div>");
                     $uploadedFileName=$row1['profileImage'];
                     echo("<div id='following-stats'>
                             <div id='followers'>");
@@ -404,9 +426,9 @@
                     const country = data.address.country;
                     let placeDetails = '';
 
-                    if (city) {
-                        placeDetails += `City: ${city}`;
-                    }
+                    // if (city) {
+                    //     placeDetails += `City: ${city}`;
+                    // }
 
                     if (state) {
                         placeDetails += (placeDetails ? ', ' : '') + `State: ${state}`;
@@ -416,7 +438,7 @@
                         placeDetails += (placeDetails ? ', ' : '') + `Country: ${country}`;
                     }
                     //const placeDetails = `City(${city || 'N/A'}), State(${state || 'N/A'}), Country(${country || 'N/A'})`;
-                    placeDetailsDisplay.innerText="Location \n"+placeDetails;
+                    placeDetailsDisplay.innerText=placeDetails;
                 } else {
                     document.getElementById('result').textContent = 'Unable to fetch place details.';
                 }
