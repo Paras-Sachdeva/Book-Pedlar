@@ -56,9 +56,6 @@
                     $longitude=$row1['longitude'];
                     $user_name=$row1['username'];
                     $e_mail=$row1['email'];
-                    echo("<p style='text-align:center;'><br>".$user_name."<br>".$e_mail."</p>");
-                    echo("<br><p id='place-details' style='text-align:center;'></p>");
-                    $uploadedFileName=$row1['profileImage'];
                     echo("<div id='following-stats'>
                             <div id='followers'>");
                                 if($follower_count2==1){
@@ -71,6 +68,31 @@
                                 <p>$follow_count1 Following</p>
                             </div>
                         </div>");
+                    echo("<div class='strip' id='user-info-name'>
+                                <div id='user-info-name-icon'>
+                                    <i class='fa-solid fa-circle-user'></i>
+                                </div>
+                                <div id='user-info-name-text'>
+                                    <p style='text-align:center;'>".$user_name."</p>
+                                </div>
+                            </div>
+                            <div class='strip' id='user-info-email'>
+                                <div id='user-info-email-icon'>
+                                    <i class='fa-solid fa-envelope'></i>
+                                </div>
+                                <div id='user-info-email-text'>
+                                    <p style='text-align:center;'>".$e_mail."</p>
+                                </div>
+                            </div>");
+                    echo("<div class='strip' id='user-info-location'>
+                                <div id='user-info-location-icon'>
+                                    <i class='fa-solid fa-location-dot'></i>
+                                </div>
+                                <div id='user-info-location-text'>
+                                    <p id='place-details' style='text-align:center;'></p>
+                                </div>
+                            </div>");
+                    $uploadedFileName=$row1['profileImage'];
                 ?>
             </div>
             <div class="follow-user">
@@ -212,19 +234,16 @@
                         const country = data.address.country;
                         let placeDetails = '';
 
-                        if (city) {
-                            placeDetails += `City: ${city}`;
-                        }
-
                         if (state) {
                             placeDetails += (placeDetails ? ', ' : '') + `State: ${state}`;
+                        }else if (city) {
+                            placeDetails += `City: ${city}`;
                         }
-
+                        
                         if (country) {
                             placeDetails += (placeDetails ? ', ' : '') + `Country: ${country}`;
                         }
-                        //const placeDetails = `City(${city || 'N/A'}), State(${state || 'N/A'}), Country(${country || 'N/A'})`;
-                        placeDetailsDisplay.innerText="Location \n"+placeDetails;
+                        placeDetailsDisplay.innerText=placeDetails;
                     } else {
                         document.getElementById('result').textContent = 'Unable to fetch place details.';
                     }

@@ -430,18 +430,15 @@
                     const country = data.address.country;
                     let placeDetails = '';
 
-                    // if (city) {
-                    //     placeDetails += `City: ${city}`;
-                    // }
-
                     if (state) {
                         placeDetails += (placeDetails ? ', ' : '') + `State: ${state}`;
+                    }else if (city) {
+                        placeDetails += `City: ${city}`;
                     }
 
                     if (country) {
                         placeDetails += (placeDetails ? ', ' : '') + `Country: ${country}`;
                     }
-                    //const placeDetails = `City(${city || 'N/A'}), State(${state || 'N/A'}), Country(${country || 'N/A'})`;
                     placeDetailsDisplay.innerText=placeDetails;
                 } else {
                     document.getElementById('result').textContent = 'Unable to fetch place details.';
