@@ -113,11 +113,18 @@
                 ?>
             </div>
             <div class="pic-form">
-                <form action="" method="POST" enctype="multipart/form-data" id="uploadForm">
-                    <label for="profilePicture">Upload Profile Picture</label><br>
-                    <input type="file" name="profilePicture" id="profilePicture" accept=".jpg, .jpeg, .png, .gif">
-                    <input type="submit" value="Upload" id="upload-btn">
-                </form>
+                <div class='strip' id='pic-form-strip'>
+                    <div id='pic-form-icon'>
+                        <i class="fa-solid fa-image"></i>
+                    </div>
+                    <div id='pic-form-input'>
+                        <form action="" method="POST" enctype="multipart/form-data" id="uploadForm">
+                            <label for="profilePicture" class="custom-file-upload">Change Profile Picture</label>
+                            <input type="file" name="profilePicture" id="profilePicture" accept=".jpg, .jpeg, .png, .gif">
+                            <input type="submit" value="Upload" id="upload-btn">
+                        </form>
+                    </div>
+                </div>
                 <?php
                     if (isset($_FILES["profilePicture"]) && $_FILES["profilePicture"]["error"] == 0) {
                         $UploadsDirectory = 'Uploads/';
@@ -132,9 +139,6 @@
             </div>
             <div class="add-book">
                 <button id="openPageButton">ADD MY BOOK</button>
-            </div>
-            <div id="delete-account">
-                <button>Delete Account</button>
             </div>
             <?php
                 $sql2 = "SELECT * FROM user_notification WHERE userid='$userid'";
@@ -233,6 +237,9 @@
                 }
                 echo("</div>");
             ?>
+            <div id="delete-account">
+                <button>Delete Account</button>
+            </div>
         </div>
         
         <!-- User Uploaded Book Section -->

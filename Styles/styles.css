@@ -376,7 +376,7 @@ a{
 
 #followers:hover, #following:hover{
     cursor: pointer;
-    scale: 1.1;
+    scale: 0.9;
 }
 
 #followers p{
@@ -408,8 +408,9 @@ a{
 }
 
 .notify-text{
-    padding:1rem;
-    margin-left:7rem;
+    padding-top:1rem;
+    padding-bottom:0.7rem;
+    margin-left:8.5rem;
 }
 
 .notify-close-icon{
@@ -502,6 +503,7 @@ a{
     flex-direction: row;
     margin-top: 10rem;
 }
+
 .profile{
     width: 45%;
     margin-top: rem;
@@ -561,6 +563,38 @@ a{
     font-size: 2.5rem;
 }
 
+.pic-form {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    align-self: flex-start;
+}
+
+#pic-form-input{
+    font-weight: 600;
+    margin-left: 1rem;
+}
+
+#pic-form-strip:hover{
+    background-color: #a6e19294;
+    scale: 1.001;
+}
+  
+.pic-form input[type='file']{
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+}
+
+.custom-file-upload:hover{
+    cursor: pointer;
+}
+
 .no-books{
     margin-left: 10rem;
     margin-top: 13rem;
@@ -578,13 +612,8 @@ a{
 
 #upload-btn:hover{
     cursor: pointer;
-    transform: scale(1.2);
-    border: 0.3rem solid black;
-}
-
-.pic-form{
-    color: white;
-    margin-top: 2rem;
+    transform: scale(0.95);
+    border: 0.1rem solid black;
 }
 
 .add-book button, .follow-user button, #submitEditBook{
@@ -611,6 +640,7 @@ a{
 .notifications{
     color:white;
     text-align: center;
+    margin-top: 2rem;
 }
 
 .notify{
@@ -628,7 +658,7 @@ a{
 }
 
 .notify:hover{
-    scale:1.02;
+    scale:0.95;
     cursor:pointer;
 }
 
