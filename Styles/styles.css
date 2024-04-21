@@ -1092,7 +1092,7 @@ label{
 
 .message-search-icon{
     background-color: #acb5a994;
-    width: 2rem;
+    width: 2.5rem;
     height: 2rem;
     padding: 0.35rem;
     cursor: pointer;
@@ -1242,7 +1242,7 @@ label{
 }
 
 /* blockList.php */
-.block-head{
+.block-head, .follower-head, .following-head{
     background-color: black;
     height: 3.7rem;
     width: 65rem;
@@ -1253,7 +1253,7 @@ label{
     margin-bottom: 2rem;
 }
 
-.blocked-user{
+.blocked-user, .follower-user, .following-user{
     display: flex;
     height: 7rem;
     width: 35rem;
@@ -1264,25 +1264,35 @@ label{
     margin-left: 13.5rem;
 }
 
-.block-pic{
+.block-pic, .follower-pic, .following-pic{
     width: 7rem;
     height: 7rem;
     border-radius: 50%;
     flex-shrink: 0;
 }
 
-.block-name{
+.block-pic:hover, .follower-pic:hover, .following-pic:hover, .block-name:hover, .follower-name:hover, .following-name:hover{
+    cursor: pointer;
+}
+
+.block-name, .follower-name, .following-name{
     margin-left: 1rem;
     font-size: 2rem;
     font-weight: 700;
-    width: 100%;
+    width: 60%;
 }
 
-.block-option{
+.block-option, .follower-option, .following-option{
     font-size: 1rem;
 }
 
-.block-option:hover{
+.block-option:hover, .follower-option:hover, .following-option:hover{
     cursor: pointer;
     scale: 0.9;
+}
+
+/* followList.php */
+.follower-following{
+    display: flex;
+    flex-direction: column;
 }

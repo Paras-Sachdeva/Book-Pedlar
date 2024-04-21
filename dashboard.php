@@ -378,7 +378,6 @@
     <script>
         // Upload Profile Photo
         let jsCheckPhoto = <?php echo json_encode($uploadedFileName); ?>;
-        console.log(jsCheckPhoto);
         if(jsCheckPhoto!=''){    
             let uploading=document.getElementById("picture");
             uploading.style.backgroundImage="url('Uploads/"+jsCheckPhoto+"')";
@@ -621,8 +620,8 @@
         }
 
         // Alert for No Messages
-        var queryParams = new URLSearchParams(window.location.search);
-        var myVariable = queryParams.get('noMessages');
+        let queryParams = new URLSearchParams(window.location.search);
+        let myVariable = queryParams.get('noMessages');
         if(myVariable=='y'){
             alert("You Have No Messages Yet");
             var urlParams = new URLSearchParams(window.location.search);
@@ -738,6 +737,16 @@
         // Blocked Users Click
         document.getElementById("blocked-users").addEventListener("click",function(){
             window.location.href="blockList.php?id="+<?php echo json_encode($userid); ?>;
+        });
+
+        // Follower/Following Click
+        let jsFollower=document.getElementById("followers");
+        jsFollower.addEventListener("click",function(){
+            window.location.href="followList.php?id="+<?php echo json_encode($userid); ?>+"&scroll=No";
+        });
+        let jsFollowing=document.getElementById("following");
+        jsFollowing.addEventListener("click",function(){
+            window.location.href="followList.php?id="+<?php echo json_encode($userid); ?>+"&scroll=Yes";
         });
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>

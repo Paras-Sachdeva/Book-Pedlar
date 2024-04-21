@@ -11,5 +11,8 @@
     if (!$conn) {
         die("Connection failed");}
     
-    $sql="INSERT INTO user_block (userid, blockedid) VALUES ($jsBlockUserObj->userid, $jsBlockUserObj->blockedid)";
-    mysqli_query($conn,$sql);
+    $sql1="INSERT INTO user_block (userid, blockedid) VALUES ($jsBlockUserObj->userid, $jsBlockUserObj->blockedid)";
+    mysqli_query($conn,$sql1);
+
+    $sql2="DELETE FROM user_follow WHERE ((userid=$jsBlockUserObj->userid AND followingid=$jsBlockUserObj->blockedid) OR (userid=$jsBlockUserObj->blockedid AND followingid=$jsBlockUserObj->userid))";
+    mysqli_query($conn,$sql2);

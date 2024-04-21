@@ -11,5 +11,5 @@
     if (!$conn) {
         die("Connection failed");}
     
-    $sql="INSERT INTO user_follow (userid, followingid) VALUES ($jsfollowObject->followingid, $jsfollowObject->followedid)";
-    mysqli_query($conn,$sql);
+    $sql1="INSERT INTO user_follow (userid, followingid) VALUES ($jsfollowObject->followingid, $jsfollowObject->followedid)";
+    mysqli_query($conn,$sql1);
