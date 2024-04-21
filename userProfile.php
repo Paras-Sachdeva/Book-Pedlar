@@ -21,7 +21,7 @@
                     <a href='index.php' class='linkAni'>Home</a>
                     <a href='dashboard.php' class='linkAni'>Profile</a>
                     <a href='messages.php' class='linkAni'>Messages</a>
-                    <a href='about.html' class='linkAni'>About Us</a>
+                    <a href='feed.php' class='linkAni'>Feed</a>
                 </div>");
         echo("</div>");  // Header Div
 
@@ -101,11 +101,11 @@
                     $follow_result=mysqli_query($conn, $follow_sql);
                     if(mysqli_num_rows($follow_result)>0){
                 ?>
-                        <button id="followUnfollow">UNFOLLOW</button>
+                        <button id="followUnfollow" style="margin-left:5rem;">UNFOLLOW</button>
                 <?php
                     }else{
                 ?>
-                        <button id="followUnfollow">FOLLOW</button>
+                        <button id="followUnfollow" style="margin-left:5rem;">FOLLOW</button>
                 <?php
                     }
                 ?>
@@ -169,7 +169,7 @@
                     }
                 } else {
                     echo("<div class='no-books' style='background-color:#f5f5f5'>
-                                Seller has not added any books
+                                User has not added any books
                             </div>");
                 }        
             ?>

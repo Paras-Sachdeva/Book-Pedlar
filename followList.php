@@ -21,7 +21,7 @@
                     <a href='index.php' class='linkAni'>Home</a>
                     <a href='dashboard.php' class='linkAni'>Profile</a>
                     <a href='messages.php' class='linkAni'>Messages</a>
-                    <a href='about.html' class='linkAni'>About Us</a>
+                    <a href='feed.php' class='linkAni'>Feed</a>
                 </div>");
         echo("</div>");  // Header Div
 
@@ -43,7 +43,7 @@
     ?>
         <!-- User Profile Section -->
         <div class="out-profile-books">
-          <div class="profile" style="height:auto;">
+          <div class="profile" style="height:auto; flex-shrink:0.5;">
             <h1>YOUR PROFILE</h1>
             <div class="pic" id="picture">
             </div>
@@ -300,7 +300,7 @@
                     }
                 }else{
                     $following_exist=0;
-                    echo("<p style='font-size: 2rem;margin-left:24.5rem;margin-bottom:2.5rem;'>No Users Followed</p>");
+                    echo("<p style='font-size: 2rem;margin-left:24.5rem;margin-bottom:2.5rem;'>Not Following Any User</p>");
                 }
             ?>
             </div>

@@ -2,7 +2,6 @@
     margin: 0;
     padding: 0;
     border: 0;
-    overflow-x: hidden;
 }
 
 /* Home Page */
@@ -267,8 +266,8 @@ a{
 .slider-books{
     display: flex;
     animation-name: circularAnimation;
-    /* animation-duration: calc(2s * var(--count)); */
-    animation-duration: 15s;
+    animation-duration: calc(1s * var(--count));
+    /* animation-duration: 20s; */
     animation-timing-function: linear;
     animation-iteration-count: infinite;
 }
@@ -281,6 +280,12 @@ a{
     align-items: center;
     margin-right: 3rem;
 }
+
+.slide-img-books:hover{
+    border: 0.2rem solid darkblue;
+    scale: 0.95;
+    cursor: pointer;
+}
   
 .slide-img-books{
     border: 0.2rem solid black;
@@ -292,6 +297,7 @@ a{
     width: 15rem;
     height: 18rem;
     overflow: hidden;
+    text-align: center;
 }
   
 @keyframes circularAnimation{
@@ -506,6 +512,7 @@ a{
 }
 
 .profile{
+    /* flex-shrink: 0.25; */
     width: 45%;
     margin-top: rem;
     display: flex;

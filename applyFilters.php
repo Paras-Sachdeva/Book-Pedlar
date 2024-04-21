@@ -162,7 +162,7 @@
                             <a href='dashboard.php' class='linkAni'>Profile</a>
                             <a href='addBook.php' class='linkAni'>Add Book</a>
                             <a href='messages.php' class='linkAni'>Messages</a>
-                            <a href='about.html' class='linkAni'>About Us</a>
+                            <a href='feed.php' class='linkAni'>Feed</a>
                         </div>");
                 echo("</div>");  // Header Div
                         $host = "localhost";
@@ -261,8 +261,8 @@
                 echo("<div class='navList'>
                             <a href='index.php' class='linkAni'>Home</a>
                             <a href='loginPage.php' class='linkAni'>Create Profile</a>
-                            <a href='loginPage.php' class='linkAni'>Buy/Sell Books</a>
-                            <a href='about.html' class='linkAni'>About Us</a>
+                            <a href='loginPage.php' class='linkAni'>Buy Books</a>
+                            <a href='loginPage.html' class='linkAni'>Sell Books</a>
                         </div>");
                 echo("</div>");  // Header Div
                         $host = "localhost";

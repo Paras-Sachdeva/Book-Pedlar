@@ -21,7 +21,7 @@
                     <a href='index.php' class='linkAni'>Home</a>
                     <a href='dashboard.php' class='linkAni'>Profile</a>
                     <a href='addBook.php' class='linkAni'>Add Book</a>
-                    <a href='about.html' class='linkAni'>About Us</a>
+                    <a href='feed.php' class='linkAni'>Feed</a>
                 </div>");
         echo("</div>");  // Header Div
 

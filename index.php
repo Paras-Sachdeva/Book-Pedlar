@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Pedlar - Home Page</title>
     <link rel="icon" href="Images/Icon.png" type="image/x-icon">
-    <link rel="stylesheet" href="Styles/styles.css">
+    <link rel="stylesheet" href="Styles/styles.css?v=48">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script>
@@ -56,18 +56,20 @@
 
             // <!-- Navigation List -->
             if(isset($_SESSION['userid'])){
+                $sessionOn=1;
                 echo("<div class='navList'>
                     <a href='dashboard.php' class='linkAni'>Profile</a>
                     <a href='addBook.php' class='linkAni'>Add Book</a>
                     <a href='messages.php' class='linkAni'>Messages</a>
-                    <a href='about.html' class='linkAni'>About Us</a>
+                    <a href='feed.php' class='linkAni'>Feed</a>
                 </div>");
             }else{
+                $sessionOn=0;
                 echo("<div class='navList'>
                         <a href='signupPage.php' class='linkAni'>Create Profile</a>
                         <a href='loginPage.php' class='linkAni'>Buy Books</a>
                         <a href='loginPage.php' class='linkAni'>Sell Books</a>
-                        <a href='about.php' class='linkAni'>About Us</a>
+                        <a href='#faqs' class='linkAni'>FAQs</a>
                     </div>");
             }
             echo("</div>");  // Header Div
@@ -120,19 +122,40 @@
             <div class="slider-container-books">
                 <div class="slider-books" id="clickable-slide">
                     <?php
-                        $i=0;
-                        $arr1=array();
-                        while($row3=mysqli_fetch_assoc($result3)){
+                        if(isset($_SESSION['userid'])){
+                            $i=0;
+                            $arr1=array();
+                            while($row3=mysqli_fetch_assoc($result3)){
                     ?>
-                    <div class="slide-content-books" id='<?php echo($i); ?>'>
-                        <div class="slide-img-books" id='<?php echo("Img".$i); ?>'></div>
-                        <div class="slide-name-books" id='<?php echo("Name".$i); ?>'>
-                            <p><b><?php echo($row3['bookname']); ?></b></p>
-                        </div>
-                    </div>
+                                <div class="slide-content-books" id='<?php echo($i); ?>'>
+                                    <a href="FullBookInfo.php?book_id=<?php echo($row3['id']); ?>&again=0">
+                                        <div class="slide-img-books" id='<?php echo("Img".$i); ?>'></div>
+                                    </a>
+                                    <div class="slide-name-books" id='<?php echo("Name".$i); ?>'>
+                                        <p><b><?php echo($row3['bookname']); ?></b></p>
+                                    </div>
+                                </div>
                     <?php
-                            array_push($arr1,$row3['photo']);
-                            $i++;
+                                array_push($arr1,$row3['photo']);
+                                $i++;
+                            }
+                        }else{
+                            $i=0;
+                            $arr1=array();
+                            while($row3=mysqli_fetch_assoc($result3)){
+                    ?>
+                                <div class="slide-content-books" id='<?php echo($i); ?>'>
+                                    <a href="loginPage.php">
+                                        <div class="slide-img-books" id='<?php echo("Img".$i); ?>'></div>
+                                    </a>
+                                    <div class="slide-name-books" id='<?php echo("Name".$i); ?>'>
+                                        <p><b><?php echo($row3['bookname']); ?></b></p>
+                                    </div>
+                                </div>
+                    <?php
+                                array_push($arr1,$row3['photo']);
+                                $i++;
+                            }
                         }
                     ?>
                 </div>
@@ -142,7 +165,7 @@
                     <p>"Your Gateway to Affordable Reading Pleasure"</p>
                 </div>
             </div>
-            <div class="faq">
+            <div class="faq" id="faqs">
                 <div class="faq-head">
                     <h1>FAQs</h1>
                 </div>
@@ -328,14 +351,14 @@
 
         // Counting Animation
         function animateCounterOnScroll() {
-            var counterElements = document.querySelectorAll(".counter");
-            var countersStarted = {};
+            let counterElements = document.querySelectorAll(".counter");
+            let countersStarted = {};
 
             function animateValue(id, start, end, duration) {
-                var range = end - start;
-                var stepTime = Math.abs(Math.floor(duration / range));
-                var currentCount = start;
-                var element = document.getElementById(id);
+                let range = end - start;
+                let stepTime = Math.abs(Math.floor(duration / range));
+                let currentCount = start;
+                let element = document.getElementById(id);
   
                 function animate() {
                     currentCount += 1;
@@ -348,7 +371,7 @@
             }
             // Check if the counter element is visible in the viewport
             function isElementInViewport(el) {
-                var rect = el.getBoundingClientRect();
+                let rect = el.getBoundingClientRect();
                 return (
                   rect.top >= 0 &&
                   rect.left >= 0 &&
@@ -378,7 +401,7 @@
         }
 
         // Change Animation Duration According to Number of Books
-        var count = document.querySelectorAll('.slide-name-books').length;
+        let count = document.querySelectorAll('.slide-name-books').length;
         document.documentElement.style.setProperty('--count', count);
         console.log(count);
 
@@ -398,7 +421,7 @@
                     }
                 });
             });
-        });
+        });      
     </script>
 </body>
 </html>

@@ -23,7 +23,7 @@
                             <a href='dashboard.php' class='linkAni'>Profile</a>
                             <a href='addBook.php' class='linkAni'>Add Book</a>
                             <a href='messages.php' class='linkAni'>Messages</a>
-                            <a href='about.html' class='linkAni'>About Us</a>
+                            <a href='feed.php' class='linkAni'>Feed</a>
                         </div>");
                 echo("</div>");  // Header Div
                         $host = "localhost";
@@ -39,7 +39,6 @@
                         $type=$_REQUEST["selectValue"];
                         $str=$_REQUEST["searchInput"];
                         $value = str_replace("'", " ", $str);
-                        // $value=htmlspecialchars($inputText);
                         $capitalize_value=ucwords($value);
                         $keywords = explode(' ', $capitalize_value);
 
@@ -120,8 +119,8 @@
                 echo("<div class='navList'>
                             <a href='index.php' class='linkAni'>Home</a>
                             <a href='loginPage.php' class='linkAni'>Create Profile</a>
-                            <a href='loginPage.php' class='linkAni'>Buy/Sell Books</a>
-                            <a href='about.html' class='linkAni'>About Us</a>
+                            <a href='loginPage.php' class='linkAni'>Buy Books</a>
+                            <a href='loginPage.php' class='linkAni'>Sell Books</a>
                         </div>");
                         $host = "localhost";
                         $username = "root";

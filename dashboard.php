@@ -21,7 +21,7 @@
                     <a href='index.php' class='linkAni'>Home</a>
                     <a href='addBook.php' class='linkAni'>Add Book</a>
                     <a href='messages.php' class='linkAni'>Messages</a>
-                    <a href='about.html' class='linkAni'>About Us</a>
+                    <a href='feed.php' class='linkAni'>Feed</a>
                 </div>");
         echo("</div>");  // Header Div
 
@@ -101,6 +101,7 @@
                             </div>");
                     $uploadedFileName=$row1['profileImage'];
                     if($block_count1>0){
+                        $block_exist=1;
                         echo("<div class='strip' id='user-info-blocked'>
                                     <div id='user-info-blocked-icon'>
                                         <i class='fa-solid fa-ban'></i>
@@ -109,6 +110,8 @@
                                     <p>$block_count1 Blocked Users</p>
                                     </div>
                                 </div>");
+                    }else{
+                        $block_exist=0;
                     }
                 ?>
             </div>
@@ -629,6 +632,15 @@
             window.history.replaceState({}, '', `${window.location.pathname}?${urlParams}`);
         }  
 
+        // Alert for No Feed
+        let myVariable2 = queryParams.get('noFeed');
+        if(myVariable2=='Y'){
+            alert("You Are Not Following Any User");
+            var urlParams = new URLSearchParams(window.location.search);
+            urlParams.delete('noFeed');
+            window.history.replaceState({}, '', `${window.location.pathname}?${urlParams}`);
+        }
+
         // Delete Account Button
         let jsSessionDel=<?php echo json_encode($delId); ?>;
         let delAccBtn=document.getElementById("delete-account");
@@ -735,9 +747,13 @@
         }
 
         // Blocked Users Click
-        document.getElementById("blocked-users").addEventListener("click",function(){
-            window.location.href="blockList.php?id="+<?php echo json_encode($userid); ?>;
-        });
+        let jsBlockExist = <?php echo json_encode($block_exist); ?>;
+        if(jsBlockExist==1){
+            document.getElementById("blocked-users").addEventListener("click",function(){
+                window.location.href="blockList.php?id="+<?php echo json_encode($userid); ?>;
+            });
+        }
+
 
         // Follower/Following Click
         let jsFollower=document.getElementById("followers");
