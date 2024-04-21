@@ -27,7 +27,7 @@
     ?>
 
     <div class="container">
-        <h2 id="book-h2">Book Details Form</h2>
+        <h2 id="book-h2">Book Details</h2>
         <form action="book_process.php" method="post" enctype="multipart/form-data" id="book-form">
             <!-- Book Picture Input -->
             <label for="bookPicture">Book Picture:</label>

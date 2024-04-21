@@ -401,7 +401,7 @@
             jsupload.style.backgroundImage="url('Uploads/"+jsphoto[i]+"')";
             jsupload.style.backgroundSize="280px 325px";    
             if(jssoldphoto[i]==true){
-                jsupload.innerHTML="<img src='Images/sold-rubber-stamp-free-png.webp' height='320px' width='280px'>";
+                jsupload.innerHTML="<img src='Images/sold-rubber-stamp-free-png.webp' height='320px' width='250px'>";
             }
         }
 

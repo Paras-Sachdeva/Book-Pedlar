@@ -72,6 +72,7 @@
         $arr2=array();
         $arr3=array();
         $arr4=array();
+        $ifFollow_arr=array();
         if(isset($_GET['id'])){
             $sql4="SELECT * FROM user_data WHERE id=$_GET[id]";
             $result4=mysqli_query($conn,$sql4);
@@ -105,6 +106,14 @@
             $row2=mysqli_fetch_assoc($result2);
             array_push($arr1,$row2['profileImage']);
             array_push($arr3,$row2['id']);
+            $ifFollow_sql="SELECT * FROM user_follow WHERE userid=$userid AND followingid=$row2[id]";
+            $ifFollow_result=mysqli_query($conn,$ifFollow_sql);
+            if(mysqli_num_rows($ifFollow_result)>0){
+                array_push($ifFollow_arr,1);
+            }else{
+                array_push($ifFollow_arr,0);
+
+            }
     ?>
                 <div class="message-ppl-list" id="<?php echo($row2['id']); ?>">
                     <div class="message-ppl-pic" id="<?php echo($j.'1'); ?>"></div>
@@ -195,6 +204,7 @@
 
         // User Click
         let jsUserIds=<?php echo json_encode($arr3); ?>;
+        let jsIfFollow=<?php echo json_encode($ifFollow_arr); ?>;
         let messagePplList=document.getElementsByClassName("message-ppl-list");
         for(let i=0;i<jsUserIds.length;i++){
             // Context Menu
@@ -210,7 +220,20 @@
                 let contextMenu = document.createElement('div');
                 contextMenu.classList.add('custom-context-menu');
 
-                contextMenu.innerHTML = `
+                if(jsIfFollow[i]==1){
+                    contextMenu.innerHTML = `
+                    <div id='delete-user-chat' class='context-menu-element'>
+                        <p>Delete Chat</p>
+                    </div>
+                    <div id='block-user' class='context-menu-element'>
+                        <p>Block User</p>
+                    </div>
+                    <div id='unfollow-user' class='context-menu-element' style="margin-bottom:0.5rem;">
+                        <p>Unfollow User</p>
+                    </div>
+                `;
+                }else{
+                    contextMenu.innerHTML = `
                     <div id='delete-user-chat' class='context-menu-element'>
                         <p>Delete Chat</p>
                     </div>
@@ -221,6 +244,8 @@
                         <p>Follow User</p>
                     </div>
                 `;
+                }
+                
                 let style = document.createElement('style');
                 style.textContent = `
                     .context-menu-element {
@@ -320,7 +345,37 @@
                                     window.location.reload();
                                 }
                             }, 1500);
-                        }            
+                        }else if(item.id === 'follow-user'){
+                            let jsfollowObject={};
+                            jsfollowObject.followingid=<?php echo json_encode($userid); ?>;
+                            jsfollowObject.followedid=jsUserIds[i];
+                            $.ajax({
+                                url:"followUser.php",
+                                method:"POST",
+                                data:{ jsfollowObject: JSON.stringify(jsfollowObject)},
+                                success:function(response){
+                                    console.log(response);
+                                }
+                            });
+                            setTimeout(function(){
+                                location.reload();
+                            },1000);
+                        }else if(item.id === 'unfollow-user'){
+                            let jsUnfollowObject={};
+                            jsUnfollowObject.followingid=<?php echo json_encode($userid); ?>;
+                            jsUnfollowObject.followedid=jsUserIds[i];
+                            $.ajax({
+                                url:"unfollowUser.php",
+                                method:"POST",
+                                data:{ jsUnfollowObject: JSON.stringify(jsUnfollowObject)},
+                                success:function(response){
+                                    console.log(response);
+                                }
+                            });
+                            setTimeout(function(){
+                                location.reload();
+                            },1000);
+                        }     
                         // Remove the context menu
                         contextMenu.remove();
                     });

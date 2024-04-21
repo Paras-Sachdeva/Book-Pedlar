@@ -268,6 +268,46 @@
                 urlParams.delete('noMessages');
                 window.history.replaceState({}, '', `${window.location.pathname}?${urlParams}`);
             }  
+
+            // Follow/Unfollow click
+            let followUnfollowBtn=document.getElementById("followUnfollow");
+            let jsfollowingid=<?php echo json_encode($_SESSION['userid']); ?>;
+            let jsfollowedid=<?php echo json_encode($userid); ?>;
+            followUnfollowBtn.addEventListener("click",function(){
+                if(followUnfollowBtn.innerText=="UNFOLLOW"){
+                    let jsUnfollowObject={};
+                    jsUnfollowObject.followingid=jsfollowingid;
+                    jsUnfollowObject.followedid=jsfollowedid;
+                    $.ajax({
+                        url:"unfollowUser.php",
+                        method:"POST",
+                        data:{ jsUnfollowObject: JSON.stringify(jsUnfollowObject)},
+                        success:function(response){
+                            console.log(response);
+                        }
+                    });
+                    setTimeout(function(){
+                        location.reload();
+                        followUnfollowBtn.innerText="FOLLOW";
+                    },1000);
+                }else if(followUnfollowBtn.innerText=="FOLLOW"){
+                    let jsfollowObject={};
+                    jsfollowObject.followingid=jsfollowingid;
+                    jsfollowObject.followedid=jsfollowedid;
+                    $.ajax({
+                        url:"followUser.php",
+                        method:"POST",
+                        data:{ jsfollowObject: JSON.stringify(jsfollowObject)},
+                        success:function(response){
+                            console.log(response);
+                        }
+                    });
+                    setTimeout(function(){
+                        location.reload();
+                        followUnfollowBtn.innerText="UNFOLLOW";
+                    },1000);
+                }
+            });
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </body>

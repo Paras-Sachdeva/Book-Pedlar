@@ -42,7 +42,7 @@
         $bookIdChange=$_GET['id'];
     ?>
 
-    <div class="container" style="display:flex;background-color: #fff;border-radius: 8px;box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);overflow: hidden;width: 60rem;max-width: 90%;padding: 2rem;box-sizing: border-box;justify-content:space-evenly;">
+    <div class="container" style="display:flex;background-color: #fff;border-radius: 8px;box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);overflow: hidden;width: 65rem;max-width: 95%;padding: 2rem;box-sizing: border-box;justify-content:space-evenly;">
         <div class="photo-section" style='margin:2rem; margin-right:6rem; width:30%'>
             <div id='book-photo-alone' style='width: 272px;height:320px;margin-top:2rem;border:0.6rem solid black;'></div>
             <div class="form-section" style="margin-top:2rem;">
