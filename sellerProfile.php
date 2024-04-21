@@ -258,17 +258,6 @@
         <script src="JS/script.js"></script>
 
         <script>
-            // Alert for No Messages
-            var queryParams = new URLSearchParams(window.location.search);
-            var myVariable = queryParams.get('noMessages');
-            console.log(myVariable);   
-            if(myVariable=='y'){
-                alert("You Have No Messages Yet");
-                var urlParams = new URLSearchParams(window.location.search);
-                urlParams.delete('noMessages');
-                window.history.replaceState({}, '', `${window.location.pathname}?${urlParams}`);
-            }  
-
             // Follow/Unfollow click
             let followUnfollowBtn=document.getElementById("followUnfollow");
             let jsfollowingid=<?php echo json_encode($_SESSION['userid']); ?>;
@@ -307,6 +296,16 @@
                         followUnfollowBtn.innerText="UNFOLLOW";
                     },1000);
                 }
+            });
+            
+            // Follower/Following Click
+            let jsFollower=document.getElementById("followers");
+            jsFollower.addEventListener("click",function(){
+                window.location.href="userFollowList.php?id="+<?php echo json_encode($userid); ?>+"&scroll=No";
+            });
+            let jsFollowing=document.getElementById("following");
+            jsFollowing.addEventListener("click",function(){
+                window.location.href="userFollowList.php?id="+<?php echo json_encode($userid); ?>+"&scroll=Yes";
             });
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>

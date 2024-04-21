@@ -222,26 +222,32 @@
 
                 if(jsIfFollow[i]==1){
                     contextMenu.innerHTML = `
-                    <div id='delete-user-chat' class='context-menu-element'>
-                        <p>Delete Chat</p>
-                    </div>
-                    <div id='block-user' class='context-menu-element'>
-                        <p>Block User</p>
+                    <div id='visit-user-profile' class='context-menu-element' style="margin-bottom:0.5rem;">
+                        <p>Visit Profile</p>
                     </div>
                     <div id='unfollow-user' class='context-menu-element' style="margin-bottom:0.5rem;">
                         <p>Unfollow User</p>
                     </div>
-                `;
-                }else{
-                    contextMenu.innerHTML = `
                     <div id='delete-user-chat' class='context-menu-element'>
                         <p>Delete Chat</p>
                     </div>
                     <div id='block-user' class='context-menu-element'>
                         <p>Block User</p>
                     </div>
+                `;
+                }else{
+                    contextMenu.innerHTML = `
+                    <div id='visit-user-profile' class='context-menu-element' style="margin-bottom:0.5rem;">
+                        <p>Visit Profile</p>
+                    </div>
                     <div id='follow-user' class='context-menu-element' style="margin-bottom:0.5rem;">
                         <p>Follow User</p>
+                    </div>
+                    <div id='delete-user-chat' class='context-menu-element'>
+                        <p>Delete Chat</p>
+                    </div>
+                    <div id='block-user' class='context-menu-element'>
+                        <p>Block User</p>
                     </div>
                 `;
                 }
@@ -375,7 +381,9 @@
                             setTimeout(function(){
                                 location.reload();
                             },1000);
-                        }     
+                        }else if(item.id === 'visit-user-profile'){
+                            window.location.href="userProfile.php?id="+jsUserIds[i];
+                        }    
                         // Remove the context menu
                         contextMenu.remove();
                     });

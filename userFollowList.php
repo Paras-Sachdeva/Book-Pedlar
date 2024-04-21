@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Pedlar - User Profile</title>
+    <title>Book Pedlar - User Follow List</title>
     <link rel="icon" href="Images/Icon.png" type="image/x-icon">
-    <link rel="stylesheet" href="Styles/styles.css?v=44">
+    <link rel="stylesheet" href="Styles/styles.css?v=43">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
@@ -111,69 +111,78 @@
                 ?>
             </div>
         </div>
-            
-        <!-- User Uploaded Book Section -->
-        <div class="user-books">
+
+        <div class="follower-following">
+            <!-- Followers List -->
+            <div class="user-follower-list">
+                <div class='follower-head'>
+                    <p>FOLLOWERS</p>
+                </div>
             <?php
-                $sql4 = "SELECT * FROM book_data WHERE userid='$userid'";
-                $result4 = mysqli_query($conn,$sql4);
-
-                $arr1=array();
-                $arr2=array();
-                $arr3=array();
-                $arr4=array();
-                if (mysqli_num_rows($result4) > 0) {
-                    while ($row4=mysqli_fetch_assoc($result4)) {
-                        $book_name4=$row4['bookname'];
-                        $author4=$row4['author'];
-                        $publisher4=$row4['publisher'];
-                        $actual_price4=$row4['actualprice'];
-                        $sell_price4=$row4['sellprice'];
-                        $book_status4=$row4['bookstatus'];
-                        $genre4=$row4['genre'];
-                        $book_condition4=$row4['bookcondition'];
-                        $add_info4=$row4['addinfo'];
-                        $photo4=$row4['photo'];
-                        $book_id4=$row4['id'];
-                        $flag=false;
-                        $discount4=(int)((($actual_price4-$sell_price4)/$actual_price4)*100);
-                        echo("<div class='book-outer'  id='book-outer-$book_id4'>
-                                    <div class='book-inner1' id='book-$book_id4'></div>
-                                    <div class='book-inner2'>
-                                        <div class='heading-book' style='text-align:center;'>
-                                            <b>\"$book_name4\"</b>
-                                        </div>
-                                        <div class='details-book'>
-                                            <h5>Author</h5> $author4<br><br>
-
-                                            <h5>Publisher</h5> $publisher4<br><br>
-                                        
-                                            <h5>Genre</h5> $genre4<br>
-                                        </div>
-                                        <div class='price-book'>
-                                            <h2 style='color:green;text-decoration:none;display:inline;'>&#x20b9;$sell_price4</h2><br>
-                                            <h6 style='color:red;text-decoration:line-through;display:inline;'>&#x20b9;$actual_price4</h6>
-                                            <h4 style='color:green;display:inline;'>$discount4%</h4><h4 style='display:inline;'>off</h4>
-                                        </div>
-                                    </div>
-                                </div>");
-                        if($book_status4=='Sold'){
-                            $flag=true;
-                        }else{
-                            $flage=false;
-                        }
-                        array_push($arr2,$book_id4);
-                        array_push($arr1,$photo4);
-                        array_push($arr3,$flag); 
-                        array_push($arr4,$book_id4); 
+                $MainUserId=$userid;
+                $follow_sql1="SELECT * FROM user_follow WHERE followingid=$MainUserId";
+                $follow_result1=mysqli_query($conn,$follow_sql1);
+                $b=0;
+                $follow_arr1=array();
+                $follow_arr2=array();
+                if(mysqli_num_rows($follow_result1)>0){
+                    $follower_exist=1;
+                    while($follow_row1=mysqli_fetch_assoc($follow_result1)){
+                        $follow_sql2="SELECT * FROM user_data WHERE id=$follow_row1[userid]";
+                        $follow_result2=mysqli_query($conn,$follow_sql2);
+                        $follow_row2=mysqli_fetch_assoc($follow_result2);
+                        array_push($follow_arr1,$follow_row2['profileImage']);
+                        array_push($follow_arr2,$follow_row1['userid']);
+                        ?>
+                            <div class="follower-user" id="<?php echo($b."follower"); ?>">
+                                <div class="follower-pic" id="<?php echo($b."follower-pic"); ?>"></div>
+                                <div class="follower-name"><?php echo($follow_row2['username']); ?></div>
+                            </div>
+                        <?php
+                        $b++;
                     }
-                } else {
-                    echo("<div class='no-books' style='background-color:#f5f5f5'>
-                                Seller has not added any books
-                            </div>");
-                }        
+                }else{
+                    $follower_exist=0;
+                    echo("<p style='font-size: 2rem;margin-left:24.5rem;margin-bottom:2.5rem;'>No Followers Found</p>");
+                }
             ?>
+            </div>
+    
+            <!-- Following List -->
+            <div id="user-following-list">
+                <div class='following-head' id='following-head'>
+                    <p>FOLLOWING</p>
+                </div>
+            <?php
+                $follow_sql3="SELECT * FROM user_follow WHERE userid=$MainUserId";
+                $follow_result3=mysqli_query($conn,$follow_sql3);
+                $c=0;
+                $follow_arr3=array();
+                $follow_arr4=array();
+                if(mysqli_num_rows($follow_result3)>0){
+                    $following_exist=1;
+                    while($follow_row3=mysqli_fetch_assoc($follow_result3)){
+                        $follow_sql4="SELECT * FROM user_data WHERE id=$follow_row3[followingid]";
+                        $follow_result4=mysqli_query($conn,$follow_sql4);
+                        $follow_row4=mysqli_fetch_assoc($follow_result4);
+                        array_push($follow_arr3,$follow_row4['profileImage']);
+                        array_push($follow_arr4,$follow_row3['followingid']);
+                        ?>
+                            <div class="following-user" id="<?php echo($c."following"); ?>">
+                                <div class="following-pic" id="<?php echo($c."following-pic"); ?>"></div>
+                                <div class="following-name"><?php echo($follow_row4['username']); ?></div>
+                            </div>
+                        <?php
+                        $c++;
+                    }
+                }else{
+                    $following_exist=0;
+                    echo("<p style='font-size: 2rem;margin-left:24.5rem;margin-bottom:2.5rem;'>No Users Followed</p>");
+                }
+            ?>
+            </div>
         </div>
+            
         <?php
             echo("</div>");
             require("./Components/footer.php");
@@ -193,30 +202,6 @@
                 let uploading=document.getElementById("picture");
                 uploading.style.backgroundImage="url('Images/ProfileImg.jpg')";
                 uploading.style.backgroundSize="300px 300px";
-            }
-
-            // Upload User Book Photos
-            let jsphoto=<?php echo json_encode($arr1); ?>;
-            let jsphotoid=<?php echo json_encode($arr2); ?>;
-            let jssoldphoto=<?php echo json_encode($arr3); ?>;
-            let jsBookId=<?php echo json_encode($arr4); ?>;
-            console.log(jsphoto);
-            console.log(jsphotoid);
-            for(let i=0;i<jsphoto.length;i++){
-                let jsupload=document.getElementById("book-"+jsphotoid[i]);
-                jsupload.style.backgroundImage="url('Uploads/"+jsphoto[i]+"')";
-                jsupload.style.backgroundSize="280px 325px"; 
-                let clickableDiv=document.getElementById("book-outer-"+jsBookId[i]);
-                if(jssoldphoto[i]==true){
-                    jsupload.innerHTML="<img src='Images/sold-rubber-stamp-free-png.webp' height='320px' width='280px'>";
-                    clickableDiv.addEventListener("click",function(){
-                        alert("Sorry, this book has been sold");
-                    });
-                }else{
-                    clickableDiv.addEventListener("click",function(){
-                        window.location.href = "FullBookInfo.php?book_id="+jsBookId[i]+"&again=1";
-                    });
-                }
             }
 
             // Get User Location Details
@@ -298,11 +283,75 @@
                 }
             });
 
-            // Follower/Following Click
-            let jsFollower=document.getElementById("followers");
-            jsFollower.addEventListener("click",function(){
-                window.location.href="userFollowList.php?id="+<?php echo json_encode($userid); ?>+"&scroll=No";
-            });
+            let jsFollowerExist=<?php echo json_encode($follower_exist); ?>;
+            let jsFollowerIds=<?php echo json_encode($follow_arr2); ?>;
+            if(jsFollowerExist==1){
+                // Upload Follower User Pics
+                let jsFollowerPics=<?php echo json_encode($follow_arr1); ?>;
+                for(let i=0;i<jsFollowerPics.length;i++){
+                    let jsFollowerPicTag=document.getElementById(i+"follower-pic");
+                    if(jsFollowerPics[i]!=''){
+                        jsFollowerPicTag.style.backgroundImage="url('Uploads/"+jsFollowerPics[i]+"')";
+                        jsFollowerPicTag.style.backgroundSize="112px 112px";
+                    }else{
+                        jsFollowerPicTag.style.backgroundImage="url('Images/ProfileImg.jpg')";
+                        jsFollowerPicTag.style.backgroundSize="112px 112px";
+                    }
+                }
+    
+                // Username or Pic Click
+                let followerPics=document.getElementsByClassName("follower-pic");
+                let followerNames=document.getElementsByClassName("follower-name");
+                for(let i=0;i<jsFollowerPics.length;i++){
+                    followerPics[i].addEventListener("click",function(){
+                        window.location.href="userProfile.php?id="+jsFollowerIds[i];
+                    });
+                    followerNames[i].addEventListener("click",function(){
+                        window.location.href="userProfile.php?id="+jsFollowerIds[i];
+                    });
+                }
+            }
+            
+            let jsFollowingExist=<?php echo json_encode($following_exist); ?>;
+            let jsFollowingIds=<?php echo json_encode($follow_arr4); ?>;
+            if(jsFollowingExist==1){
+                // Upload Following User Pics
+                let jsFollowingPics=<?php echo json_encode($follow_arr3); ?>;
+                for(let i=0;i<jsFollowingPics.length;i++){
+                    let jsFollowingPicTag=document.getElementById(i+"following-pic");
+                    if(jsFollowingPics[i]!=''){
+                        jsFollowingPicTag.style.backgroundImage="url('Uploads/"+jsFollowingPics[i]+"')";
+                        jsFollowingPicTag.style.backgroundSize="112px 112px";
+                    }else{
+                        jsFollowingPicTag.style.backgroundImage="url('Images/ProfileImg.jpg')";
+                        jsFollowingPicTag.style.backgroundSize="112px 112px";
+                    }
+                }
+    
+                // Username or Pic Click
+                let followingPics=document.getElementsByClassName("following-pic");
+                let followingNames=document.getElementsByClassName("following-name");
+                for(let i=0;i<jsFollowingPics.length;i++){
+                    followingPics[i].addEventListener("click",function(){
+                        window.location.href="userProfile.php?id="+jsFollowingIds[i];
+                    });
+                    followingNames[i].addEventListener("click",function(){
+                        window.location.href="userProfile.php?id="+jsFollowingIds[i];
+                    });
+                }
+            }
+            
+            let queryParameter = new URLSearchParams(window.location.search);
+            let jsScroll = queryParameter.get('scroll');
+            if(jsScroll=="Yes" && jsFollowerExist==1){
+                let jsFollowerPicsScroll=<?php echo json_encode($follow_arr1); ?>;
+                let followerLength=jsFollowerPicsScroll.length-1;
+                setTimeout(() => {
+                    document.getElementById(followerLength+"follower").scrollIntoView({ behavior: "smooth" });
+                }, 1500);
+            }
+    
+            // Following Click
             let jsFollowing=document.getElementById("following");
             jsFollowing.addEventListener("click",function(){
                 window.location.href="userFollowList.php?id="+<?php echo json_encode($userid); ?>+"&scroll=Yes";
