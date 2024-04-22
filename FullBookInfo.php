@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Pedlar - Book Info</title>
     <link rel="icon" href="Images/Icon.png" type="image/x-icon">
-    <link rel="stylesheet" href="Styles/styles.css?v=5">
+    <link rel="stylesheet" href="Styles/styles.css?v=50">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
@@ -110,6 +110,7 @@
                             </div>
                         </div>");
                         if($_GET['again']==0){
+                            $againIs=0;
                             echo("<div id='book-seller-info'>
                                         <div id='seller-text'>
                                             <h2>Seller</h2>
@@ -128,6 +129,8 @@
                                             <button class='book-info-buttons' id='visit-seller-btn'>Visit Seller Profile</button>
                                         </div>
                                     </div>");                            
+                        }else{
+                            $againIs=1;
                         }
             }
             mysqli_close($conn);
@@ -138,25 +141,28 @@
     ?> 
         <script>
             // Display Seller Book Pic & Profile Pic
+            let jsAgainIs=<?php echo json_encode($againIs); ?>;
             let jsBookId=<?php echo json_encode($selected_bookid); ?>;
             let jsBookPhoto=<?php echo json_encode($photo7); ?>;
             let divPhoto=document.getElementById("book-photo-alone");
             divPhoto.style.backgroundImage="url('"+jsBookPhoto+"')";
             divPhoto.style.backgroundSize="275px 320px";    
 
-            let jsCheckPhoto = <?php echo json_encode($seller_image9); ?>;
-            console.log(jsCheckPhoto);
-            console.log(jsCheckPhoto);
-            if(jsCheckPhoto!=''){    
+            if(jsAgainIs==0){
+                let jsCheckPhoto = <?php echo json_encode($seller_image9); ?>;
+                console.log(jsCheckPhoto);
+                console.log(jsCheckPhoto);
+                if(jsCheckPhoto!=''){    
+                        let uploading=document.getElementById("seller-pic");
+                        uploading.style.backgroundImage="url('uploads/"+jsCheckPhoto+"')";
+                        uploading.style.backgroundSize="140px 140px";
+                }else{
                     let uploading=document.getElementById("seller-pic");
-                    uploading.style.backgroundImage="url('uploads/"+jsCheckPhoto+"')";
+                    uploading.style.backgroundImage="url('Images/ProfileImg.jpg')";
                     uploading.style.backgroundSize="140px 140px";
-            }else{
-                let uploading=document.getElementById("seller-pic");
-                uploading.style.backgroundImage="url('Images/ProfileImg.jpg')";
-                uploading.style.backgroundSize="140px 140px";
-            } 
-
+                } 
+            }
+           
             // Interested Book Button
             let jsSmallPhotos=<?php echo json_encode($selected_bookid); ?>;
             let InterestedBtn=document.getElementById("interested-btn");
@@ -178,10 +184,12 @@
 
             // Visit Seller Profile Button
             let visitSeller=document.getElementById("visit-seller-btn");
-            visitSeller.addEventListener("click",function(){
-                let sellerId=<?php echo json_encode($sellerId); ?>;
-                window.location.href="sellerProfile.php?id="+sellerId;
-            });
+            if(jsAgainIs==0){
+                visitSeller.addEventListener("click",function(){
+                    let sellerId=<?php echo json_encode($sellerId); ?>;
+                    window.location.href="sellerProfile.php?id="+sellerId;
+                });
+            }
         </script>
         <script src="JS/script.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>

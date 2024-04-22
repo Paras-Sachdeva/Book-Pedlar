@@ -39,9 +39,7 @@
             if (!$conn) {
                 die("Connection failed");
             }
-
-            // require("sendMailNotification.php");
-            
+                        
             $sql1="SELECT * FROM user_data";
             $result1=mysqli_query($conn,$sql1);
             $count1=mysqli_num_rows($result1);
