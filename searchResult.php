@@ -51,6 +51,41 @@
                         $block_count2=mysqli_num_rows($block_result2);
                         $block_whereClause2=1;
 
+                        function calculateDistance($lat1, $lon1, $lat2, $lon2) {
+                            $earthRadius = 6371;
+                        
+                            $latFrom = deg2rad($lat1);
+                            $lonFrom = deg2rad($lon1);
+                            $latTo = deg2rad($lat2);
+                            $lonTo = deg2rad($lon2);
+                        
+                            $latDelta = $latTo - $latFrom;
+                            $lonDelta = $lonTo - $lonFrom;
+                        
+                            $angle = 2 * asin(sqrt(pow(sin($latDelta / 2), 2) +
+                                cos($latFrom) * cos($latTo) * pow(sin($lonDelta / 2), 2)));
+                        
+                            $distance = $angle * $earthRadius;
+                        
+                            return $distance;
+                        }
+                        $current_sql="SELECT * FROM user_data WHERE id=$userid";
+                        $current_result=mysqli_query($conn,$current_sql);
+                        $current_row=mysqli_fetch_assoc($current_result);
+                        $near_sql1="SELECT * FROM book_data";
+                        $near_result1=mysqli_query($conn,$near_sql1);
+                        $near_whereClause="(";
+                        while($near_row1=mysqli_fetch_assoc($near_result1)){
+                            $near_sql2="SELECT * FROM user_data WHERE id=$near_row1[userid]";
+                            $near_result2=mysqli_query($conn, $near_sql2);
+                            $near_row2=mysqli_fetch_assoc($near_result2);
+                            $Final_distance=(int)calculateDistance($current_row['latitude'],$current_row['longitude'],$near_row2['latitude'],$near_row2['longitude']);
+                            if($Final_distance<=20){
+                                $near_whereClause.="id=$near_row1[id] OR ";
+                            }
+                        }
+                        $near_whereClause2=substr($near_whereClause, 0, -4).")";
+
                         while($block_row1=mysqli_fetch_assoc($block_result1)){
                             $block_whereClause1="";
                             if($block_count1>1){
@@ -73,7 +108,7 @@
                         }
                         
                         if($value==""){
-                            $sql="SELECT * FROM book_data WHERE (userid!=$userid AND $block_whereClause1 AND $block_whereClause2)";
+                            $sql="SELECT * FROM book_data WHERE (userid!=$userid AND $block_whereClause1 AND $block_whereClause2 AND $near_whereClause2)";
                         }else if($type=="All"){
                             foreach ($keywords as $keyword) {
                                 $whereConditions[] = "bookname LIKE '%$keyword%'
@@ -81,7 +116,7 @@
                                                      OR publisher LIKE '%$keyword%'";
                             }
                             $whereClause = "(bookname='$capitalize_value' OR author='$capitalize_value' OR publisher='$capitalize_value' OR ".implode(' OR ', $whereConditions).")";
-                            $sql = "SELECT * FROM book_data WHERE $whereClause AND $block_whereClause1 AND $block_whereClause2 AND userid!=$userid ORDER BY
+                            $sql = "SELECT * FROM book_data WHERE ($whereClause AND $block_whereClause1 AND $block_whereClause2 AND userid!=$userid AND $near_whereClause2) ORDER BY
                             CASE
                                 WHEN (bookname='$capitalize_value') THEN 1
                                 WHEN (author='$capitalize_value') THEN 2
@@ -93,7 +128,7 @@
                                 $whereConditions[] = "bookname LIKE '%$keyword%'";
                             }
                             $whereClause = "(bookname='$capitalize_value' OR ".implode(' OR ', $whereConditions).")";
-                            $sql = "SELECT * FROM book_data WHERE $whereClause AND $block_whereClause1 AND $block_whereClause2 AND userid!='$userid' ORDER BY
+                            $sql = "SELECT * FROM book_data WHERE ($whereClause AND $block_whereClause1 AND $block_whereClause2 AND userid!='$userid' AND $near_whereClause2) ORDER BY
                         CASE
                             WHEN bookname='$capitalize_value' THEN 1 ELSE 2 END";
                         }else if($type=="Author Name"){
@@ -101,7 +136,7 @@
                                 $whereConditions[] = "author LIKE '%$keyword%'";
                             }
                             $whereClause = "(author='$capitalize_value' OR ".implode(' OR ', $whereConditions).")";
-                            $sql = "SELECT * FROM book_data WHERE $whereClause AND $block_whereClause1 AND $block_whereClause2 AND userid!='$userid' ORDER BY
+                            $sql = "SELECT * FROM book_data WHERE ($whereClause AND $block_whereClause1 AND $block_whereClause2 AND userid!='$userid' AND $near_whereClause2) ORDER BY
                         CASE
                             WHEN author='$capitalize_value' THEN 1 else 2 end";
                         }else if($type=="Publisher"){
@@ -109,7 +144,7 @@
                                 $whereConditions[] = "publisher LIKE '%$keyword%'";
                             }
                             $whereClause = "(publisher='$capitalize_value' OR ".implode(' OR ', $whereConditions).")";
-                            $sql = "SELECT * FROM book_data WHERE $whereClause AND $block_whereClause1 AND $block_whereClause2 AND userid!='$userid' ORDER BY
+                            $sql = "SELECT * FROM book_data WHERE ($whereClause AND $block_whereClause1 AND $block_whereClause2 AND userid!='$userid' AND $near_whereClause2) ORDER BY
                         CASE
                             WHEN publisher='$capitalize_value' THEN 1 else 2 end";
                         }
