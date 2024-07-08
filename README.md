@@ -13,3 +13,10 @@ Book Pedlar is a web platform where users can buy and sell second-hand books. Us
 - **Notifications**: Users receive notifications when a book they are interested in becomes available.
 - **Messaging**: Buyers and sellers can communicate to negotiate prices and arrange the collection.
 - **Responsive Design**: Optimized for various devices.
+
+## Technologies Used
+
+- **Frontend**: HTML, CSS, JavaScript
+- **Backend**: PHP
+- **Database**: MySQL
+- **AJAX**: For asynchronous data loading
