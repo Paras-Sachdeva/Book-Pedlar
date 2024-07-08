@@ -43,3 +43,12 @@ Book Pedlar is a web platform where users can buy and sell second-hand books. Us
 
 5. **Open the project**:
     - Access the project in your web browser at `http://localhost/book-pedlar`.
+
+## Usage
+
+1. **Sign up or log in** to your account.
+2. **Create your profile** and add books for sale.
+3. **Search for books** using the search bar.
+4. **Filter search results** based on price, condition, etc.
+5. **Mark books as interested** and receive notifications when they become available.
+6. **Communicate with sellers** to negotiate and arrange the collection.
