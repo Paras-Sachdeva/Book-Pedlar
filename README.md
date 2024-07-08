@@ -20,3 +20,26 @@ Book Pedlar is a web platform where users can buy and sell second-hand books. Us
 - **Backend**: PHP
 - **Database**: MySQL
 - **AJAX**: For asynchronous data loading
+
+## Setup and Installation
+
+1. **Clone the repository**:
+    ```bash
+    git clone https://github.com/yourusername/book-pedlar.git
+    ```
+
+2. **Navigate to the project directory**:
+    ```bash
+    cd book-pedlar
+    ```
+
+3. **Set up the database**:
+    - Import the `database.sql` file into your MySQL database.
+    - Update the database configuration in `config.php`.
+
+4. **Start the server**:
+    - Use a local server like XAMPP, WAMP, or MAMP to run the project.
+    - Place the project folder in the server's root directory (e.g., `htdocs` for XAMPP).
+
+5. **Open the project**:
+    - Access the project in your web browser at `http://localhost/book-pedlar`.
