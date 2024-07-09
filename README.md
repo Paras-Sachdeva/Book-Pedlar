@@ -60,3 +60,7 @@ Book Pedlar is a web platform where users can buy and sell second-hand books. Us
 - **Advanced Search**: Enhance search functionality with more filters and sorting options.
 - **Rating and Reviews**: Allow users to rate and review books and sellers.
 - **Wishlist**: Enable users to create and manage wishlists for books they want to buy.
+
+## Contributing
+
+Contributions are welcome! Please fork the repository and create a pull request with your changes. For major changes, please open an issue first to discuss what you would like to change.
