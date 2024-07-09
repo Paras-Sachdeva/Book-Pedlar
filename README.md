@@ -64,3 +64,5 @@ Book Pedlar is a web platform where users can buy and sell second-hand books. Us
 ## Contributing
 
 Contributions are welcome! Please fork the repository and create a pull request with your changes. For major changes, please open an issue first to discuss what you would like to change.
+
+---
