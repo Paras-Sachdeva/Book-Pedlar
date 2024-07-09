@@ -53,6 +53,13 @@ Book Pedlar is a web platform where users can buy and sell second-hand books. Us
 5. **Mark books as interested** and receive notifications when they become available.
 6. **Communicate with sellers** to negotiate and arrange the collection.
 
+## Screenshots
+
+![Homepage](screenshots/homepage.png)
+![Profile Page](screenshots/profile.png)
+![Book Listing](screenshots/book-listing.png)
+![Search Results](screenshots/search-results.png)
+
 ## Future Scope
 
 - **Mobile App**: Develop a mobile application for better accessibility.
